@@ -1,0 +1,9 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-k8s-alerts
+  labels:
+    app.kubernetes.io/component: prometheus
+{{ include "netic-oaas.labels" . | indent 4 }}
+spec:
+{{- .Files.Get "files/alerts-k8s.yaml" | nindent 2 }}

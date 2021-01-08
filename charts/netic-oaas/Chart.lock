@@ -1,0 +1,18 @@
+dependencies:
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 6.1.8
+- name: kube-state-metrics
+  repository: file://../kube-state-metrics
+  version: 1.0.2
+- name: prometheus-node-exporter
+  repository: file://../prometheus-node-exporter
+  version: 1.0.0
+- name: prometheus-operator
+  repository: file://../prometheus-operator
+  version: 1.0.1
+- name: vector-agent
+  repository: file://../vector-agent
+  version: 0.11.0
+digest: sha256:ed992fb582b3ad8151e7db0cebc3d57f98c54510965af27faea2a0ae4b7817dc
+generated: "2021-01-08T14:38:19.349133+01:00"

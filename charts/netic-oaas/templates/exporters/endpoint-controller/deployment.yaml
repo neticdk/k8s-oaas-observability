@@ -1,0 +1,28 @@
+{{- if .Values.endpointController.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "endpoint-controller.fullname" . }}
+  labels: {{ include "endpoint-controller.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {{ include "endpoint-controller.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{ include "endpoint-controller.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: endpoint-controller
+          image: "{{ .Values.endpointController.image.repository }}:{{ .Values.endpointController.image.tag }}"
+          imagePullPolicy: "{{ .Values.endpointController.image.pullPolicy }}"
+          args:
+            - '--kube-scheduler-service=kube-system/oaas-kube-scheduler-service'
+            - '--kube-controller-manager-service=kube-system/oaas-kube-controller-manager-service'
+            - '--etcd-service=kube-system/oaas-etcd-service'
+          resources: {{ toYaml .Values.endpointController.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+      serviceAccountName: {{ include "endpoint-controller.fullname" . }}
+{{- end }}

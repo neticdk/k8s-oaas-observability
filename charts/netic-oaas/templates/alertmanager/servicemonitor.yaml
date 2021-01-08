@@ -1,0 +1,28 @@
+{{- if and .Values.alertmanager.enabled .Values.alertmanager.serviceMonitor.selfMonitor }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "alertmanager.fullname" . }}
+  labels:
+{{ include "alertmanager.labels" . | indent 4 }}
+{{- if .Values.global.serviceMonitor.labels }}
+{{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
+{{- end }}
+spec:
+  selector:
+    matchLabels: {{ include "alertmanager.matchLabels" . | nindent 6 }}
+  endpoints:
+  - port: {{ .Values.alertmanager.alertmanagerSpec.portName }}
+    {{- if .Values.alertmanager.serviceMonitor.interval }}
+    interval: {{ .Values.alertmanager.serviceMonitor.interval }}
+    {{- end }}
+    path: "{{ trimSuffix "/" .Values.alertmanager.alertmanagerSpec.routePrefix }}/metrics"
+{{- if .Values.alertmanager.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+{{ tpl (toYaml .Values.alertmanager.serviceMonitor.metricRelabelings | indent 6) . }}
+{{- end }}
+{{- if .Values.alertmanager.serviceMonitor.relabelings }}
+    relabelings:
+{{ toYaml .Values.alertmanager.serviceMonitor.relabelings | indent 6 }}
+{{- end }}
+{{- end }}

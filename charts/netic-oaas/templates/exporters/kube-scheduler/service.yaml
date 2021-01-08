@@ -1,0 +1,24 @@
+{{- if and .Values.kubeScheduler.enabled (not .Values.endpointController.enabled) }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "kube-scheduler.fullname" . }}
+  labels: {{ include "kube-scheduler.labels" . | nindent 4 }}
+  namespace: kube-system
+spec:
+  clusterIP: None
+  ports:
+    - name: http-metrics
+      port: {{ .Values.kubeScheduler.service.port}}
+      protocol: TCP
+      targetPort: {{ .Values.kubeScheduler.service.targetPort}}
+{{- if .Values.kubeScheduler.endpoints }}{{- else }}
+  selector:
+    {{- if .Values.kubeScheduler.service.selector }}
+{{ toYaml .Values.kubeScheduler.service.selector | indent 4 }}
+    {{- else}}
+    component: kube-scheduler
+    {{- end}}
+{{- end }}
+  type: ClusterIP
+{{- end -}}

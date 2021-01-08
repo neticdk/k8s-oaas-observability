@@ -1,0 +1,18 @@
+{{- if .Values.global.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-prometheus
+  labels:
+    app.kubernetes.io/component: prometheus
+{{ include "netic-oaas.labels" . | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ template "netic-oaas.fullname" . }}-prometheus
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "prometheus.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}
+

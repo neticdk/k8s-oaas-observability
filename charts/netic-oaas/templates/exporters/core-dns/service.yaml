@@ -1,0 +1,21 @@
+{{- if .Values.coreDns.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "core-dns.fullname" . }}
+  namespace: kube-system
+  labels: {{ include "core-dns.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  ports:
+    - name: http-metrics
+      port: {{ .Values.coreDns.service.port }}
+      protocol: TCP
+      targetPort: {{ .Values.coreDns.service.targetPort }}
+  selector:
+    {{- if .Values.coreDns.service.selector }}
+{{ toYaml .Values.coreDns.service.selector | indent 4 }}
+    {{- else}}
+    k8s-app: kube-dns
+    {{- end}}
+{{- end }}

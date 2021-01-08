@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/kubernetes-monitoring/kubernetes-mixin.git",
+          "subdir": ""
+        }
+      },
+      "version": "b48b30b908f5dbd283b80803843f07b96ab594f7"
+    },
+    {
+      "source": {
+        "git": {
+           "remote": "https://github.com/etcd-io/etcd.git",
+           "subdir": "Documentation/etcd-mixin"
+        }
+      },
+      "version": "07c15890ab297947569b221c45aff0688bb20263"
+    }
+  ],
+  "legacyImports": true
+}

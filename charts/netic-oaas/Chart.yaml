@@ -1,0 +1,27 @@
+apiVersion: v2
+name: netic-oaas
+type: application
+description: A Helm chart to collect Kubernetes logs with Vector
+home: https://github.com/neticdk/k8s-oaas
+version: "1.1.4"
+maintainers:
+  - name: Thor Anker Kvisgård Lange
+    email: tal@netic.dk
+dependencies:
+  - name: grafana
+    version: 6.1.8
+    repository: https://grafana.github.io/helm-charts
+    condition: grafana.enabled
+  - name: kube-state-metrics
+    version: "*"
+    repository: file://../kube-state-metrics
+  - name: prometheus-node-exporter
+    version: "*"
+    repository: file://../prometheus-node-exporter
+  - name: prometheus-operator
+    version: "*"
+    repository: file://../prometheus-operator
+    condition: prometheus-operator.enabled
+  - name: vector-agent
+    version: "*"
+    repository: file://../vector-agent

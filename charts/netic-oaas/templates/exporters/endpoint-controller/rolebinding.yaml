@@ -1,0 +1,16 @@
+{{- if .Values.endpointController.enabled -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: kube-system
+  name: {{ include "endpoint-controller.fullname" . }}
+  labels: {{ include "endpoint-controller.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "endpoint-controller.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "endpoint-controller.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end -}}

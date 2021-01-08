@@ -1,0 +1,33 @@
+{{- if .Values.nodeExporter.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "node-exporter.fullname" . }}
+  labels:
+{{ include "node-exporter.labels" . | indent 4 }}
+{{- if .Values.global.serviceMonitor.labels }}
+{{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
+{{- end }}
+spec:
+  jobLabel: {{ .Values.nodeExporter.jobLabel }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prometheus-node-exporter
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+  endpoints:
+  - port: metrics
+    {{- if .Values.nodeExporter.serviceMonitor.interval }}
+    interval: {{ .Values.nodeExporter.serviceMonitor.interval }}
+    {{- end }}
+    {{- if .Values.nodeExporter.serviceMonitor.scrapeTimeout }}
+    scrapeTimeout: {{ .Values.nodeExporter.serviceMonitor.scrapeTimeout }}
+    {{- end }}
+{{- if .Values.nodeExporter.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+{{ tpl (toYaml .Values.nodeExporter.serviceMonitor.metricRelabelings | indent 4) . }}
+{{- end }}
+{{- if .Values.nodeExporter.serviceMonitor.relabelings }}
+    relabelings:
+{{ toYaml .Values.nodeExporter.serviceMonitor.relabelings | indent 4 }}
+{{- end }}
+{{- end }}

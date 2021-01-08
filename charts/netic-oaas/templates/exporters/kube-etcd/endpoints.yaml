@@ -1,0 +1,17 @@
+{{- if and .Values.kubeEtcd.enabled .Values.kubeEtcd.endpoints (not .Values.endpointController.enabled) }}
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ template "kube-etcd.fullname" . }}
+  labels: {{ include "kube-etcd.labels" . | nindent 4 }}
+  namespace: kube-system
+subsets:
+  - addresses:
+      {{- range .Values.kubeEtcd.endpoints }}
+      - ip: {{ . }}
+      {{- end }}
+    ports:
+      - name: http-metrics
+        port: {{ .Values.kubeEtcd.service.port }}
+        protocol: TCP
+{{- end }}

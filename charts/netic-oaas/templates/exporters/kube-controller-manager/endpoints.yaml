@@ -1,0 +1,17 @@
+{{- if and .Values.kubeControllerManager.enabled .Values.kubeControllerManager.endpoints (not .Values.endpointController.enabled) }}
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ template "kube-controller-manager.fullname" . }}
+  labels: {{ include "kube-controller-manager.labels" . | nindent 4 }}
+  namespace: kube-system 
+subsets:
+  - addresses:
+      {{- range .Values.kubeControllerManager.endpoints }}
+      - ip: {{ . }}
+      {{- end }}
+    ports:
+      - name: http-metrics
+        port: {{ .Values.kubeControllerManager.service.port }}
+        protocol: TCP
+{{- end }}
