@@ -1,0 +1,20 @@
+{{- if .Values.prometheus.monitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "kube-state-metrics.fullname" . }}
+  namespace: {{ template "kube-state-metrics.namespace" . }}
+  labels: {{ include "kube-state-metrics.labels" . | indent 4 }}
+{{- if .Values.global.serviceMonitor.labels }}
+{{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
+{{- end }}
+spec:
+  jobLabel: app.kubernetes.io/name
+  selector:
+    matchLabels: {{ include "kube-state-metrics.matchLabels" . | nindent 6 }}
+  endpoints:
+    - port: http
+      {{- if .Values.prometheus.monitor.honorLabels }}
+      honorLabels: true
+      {{- end }}
+{{- end }}

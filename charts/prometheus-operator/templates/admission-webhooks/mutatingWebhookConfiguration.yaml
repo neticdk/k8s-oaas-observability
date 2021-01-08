@@ -1,0 +1,31 @@
+{{- if and .Values.prometheusOperator.admissionWebhooks.enabled }}
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name:  {{ template "fullname" . }}-admission
+  labels: {{ include "labels" . | nindent 4 }}
+webhooks:
+  - name: prometheusrulemutate.monitoring.coreos.com
+    {{- if .Values.prometheusOperator.admissionWebhooks.patch.enabled  }}
+    failurePolicy: Ignore
+    {{- else }}
+    failurePolicy: {{ .Values.prometheusOperator.admissionWebhooks.failurePolicy }}
+    {{- end }}
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    rules:
+      - apiGroups:
+          - monitoring.coreos.com
+        apiVersions:
+          - "*"
+        resources:
+          - prometheusrules
+        operations:
+          - CREATE
+          - UPDATE
+    clientConfig:
+      service:
+        namespace: {{ .Release.Namespace }}
+        name: {{ template "fullname" . }}
+        path: /admission-prometheusrules/mutate
+{{- end }}

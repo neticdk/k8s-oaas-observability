@@ -1,0 +1,4 @@
+This chart is a fork from the official Vector chart!!
+
+$ git clone https://git.netic.dk/scm/pd/vector.git
+$ cp -RL distribution/helm/vector-agent <this directory>
