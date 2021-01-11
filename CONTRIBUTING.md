@@ -3,6 +3,8 @@
 This needs to be completed ... in order to help the community get started as we hopefully grow. A few examples of concerns are listed underneath. 
 
 
+# Commit Guideline
+This repository is currently a private repository and thus have no ability to apply rules for commits. Thus everyone is urged to not commit directly to main and use a feature branch instead. The feature branched are names with "feature/\<feature>". Please use a pull-request from the feature branch as the way to merge to main - an appointed person such as tal@netic.dk should be reviewing the contribution targetted for the merge. Please ensure that the code has been proofed and tested before the pre-merge review using the pull-request.
 
 # Styleguides
 
