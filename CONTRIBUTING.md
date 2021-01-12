@@ -1,6 +1,7 @@
 # Contributing to this project
 
-This needs to be completed ... in order to help the community get started as we hopefully grow. A few examples of concerns are listed underneath. 
+In order to help the community get started as we hopefully grow. A few examples of concerns are listed underneath. 
+This needs to be completed as the project evolves. 
 
 # Styleguides
 
