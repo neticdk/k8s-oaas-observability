@@ -2,56 +2,87 @@
 
 The chart installs observability stack to monitor Kubernetes utility cluster.
 
+## To try this out in a local cluster:
+Starting up a kind cluster can be done based on the cluster definition `local/kind-cluster.yaml`.
+
 ## Working Locally
 
 The chart can be tested locally using Kubernetes in Docker (kind) and Docker compose (simulating
 Netic data collection). All the following commands assume current directory is the chart root.
 
-First make sure external rules and dashboards are downloaded. As the external templates are based on
-`jsonnet` this needs to be available.
+### installation requirements
+First make sure that:
+ - external rules and dashboards are downloaded. 
+ - kind is installed
+ - kubectl is installed
+ - helm is installed
+ - jsonnet is installed
+As the external templates are based on `jsonnet` and thus this needs to be available.
 
 ```bash
-# Assuming $GOPATH/bin is in path
+#install kubectl, helm, kind, go
+# and assuming $GOPATH/bin is in path install jsonnet
 $ go get github.com/google/go-jsonnet/cmd/jsonnet
 $ go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
 $ ./ci/update-rules.sh
 ```
-
-Starting up a kind cluster can be done based on the cluster definition `hack/kind-cluster.yaml`.
-
+or using brew:
 ```bash
-$ kind create cluster --name oaas --config hack/kind-cluster.yaml
+brew install kubectl
+brew install helm
+brew install kind
+brew install jsonnet
 ```
 
-Then initialize Helm (if this is first time running this).
+Starting up a local kind cluster on the cluster definition `local/kind-cluster.yaml`.
 
+### Create the local cluster
+```bash
+$ kind create cluster --name oaas --config local/kind-cluster.yaml
+```
+### Access the created local kind cluster
+```bash
+$ kubectl cluster-info --context kind-oaas
+```
+
+### Create the desired namespace in the created local kind cluster
+```bash
+$ kubectl create ns netic-oaas-system
+$ kubectl get ns
+```
+
+### Initialize Helm (if this is first time running this).
 ```bash
 $ helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+### Update Helm dependencies
+```bash
+$ cd charts/netic-oaas
 $ helm dependency update .
 ```
 
-Now it is possible to deploy the chart to the kind cluster.
+### Deploy the chart to the local kind cluster.
 
 ```bash
 $ helm upgrade -i -n netic-oaas-system --create-namespace oaas .
 ```
+### See that the cluster is running with flux
+```bash
+$ kubectl get all -A 
+```
 
-Test charts
+### Test charts
 ```bash
 $ helm template .
 ```
 
-
-To simulate the components receiving data in Netic a `docker-compose` configuration exists. This
-can be started and should then start receiving log and metric events.
-
-```bash
-$ cd hack
-$ docker-compose up hack/docker-compose.yml
-```
-
-Run linting of the charts locally.
-
+### Run linting of the charts locally.
 ```bash
 $ docker run --rm -it -v "$(pwd)/..:/charts" quay.io/helmpack/chart-testing /bin/sh -c "helm repo add grafana https://grafana.github.io/helm-charts;ct lint --all --validate-maintainers=false"
+```
+
+### Delete the created cluster (once you are done with that)
+```bash
+$ kind delete cluster --name=oaas
 ```

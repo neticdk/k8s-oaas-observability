@@ -1,0 +1,39 @@
+version: "3"
+services:
+  vector:
+    container_name: vector
+    image: timberio/vector:nightly-alpine
+    ports:
+    - 9000:9000
+    - 9091:9091
+    volumes:
+    - ./vector:/etc/vector/
+
+  victoriametrics:
+    container_name: victoriametrics
+    image: victoriametrics/victoria-metrics
+    ports:
+    - 8428:8428
+    volumes:
+    - vmdata:/storage
+    command:
+    - '--storageDataPath=/storage'
+    - '--httpListenAddr=:8428'
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:7.1.5
+    depends_on:
+    - "victoriametrics"
+    ports:
+    - 3000:3000
+    volumes:
+    - grafanadata:/var/lib/grafana
+    - ./grafana/provisioning/:/etc/grafana/provisioning/
+    - ../files/dashboards:/etc/grafana/dashboards
+
+volumes:
+  promdata: {}
+  vmdata: {}
+  vmagentdata: {}
+  grafanadata: {}
