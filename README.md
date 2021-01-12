@@ -1,5 +1,5 @@
 # k8s-oaas-observability
-Operations as a Service for kubernetesis a "shift-left" approach for development for security and operations. 
+Operations as a Service for kubernetes is a "shift-left" approach for development for security and operations. 
 Operations as a Service for kubernetes consists of a number of repositories, where this is the foundation because it contains the Observability part that makes operations possible. 
 This repository includes the Observability package, there are other packages under the OaaS umbrella such as:
 
