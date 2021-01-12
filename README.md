@@ -18,7 +18,7 @@ Currently the main concern is to enable observability for kubernetes clusters lo
 
 The package is built on the basis of well-known products like Prometheus, Grafana and Vector, and is installed using Helm.
 
-[installation](charts/kube-state-metrics/README.md) 
+***If you want to try it out in your local cluster [installation](charts/kube-state-metrics/README.md)*** 
 
 # Operations On-Demand
 
@@ -38,4 +38,4 @@ Furthermore this lays the foundation for using Operations On-Demand and change f
 
     * this means your team can do what ever they can overcome and have a good work-life balance and spend time on what is most important and do a real prioritisation between development of features and the continued operations of already available features.
 
-* for more information on the common ingest point - please contact ca@netic.dk and see how that could help you and your team.   
+**...more information on the common ingest point - please contact ca@netic.dk** and see how that could help you and your team.
