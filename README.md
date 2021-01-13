@@ -39,3 +39,11 @@ Furthermore this lays the foundation for using Operations On-Demand and change f
     * this means your team can do what ever they can overcome and have a good work-life balance and spend time on what is most important and do a real prioritisation between development of features and the continued operations of already available features.
 
 **...more information on the common ingest point - please contact ca@netic.dk** and see how that could help you and your team.
+
+# Roadmap
+The Observbillity as it is contains metrics and logs, which means that the most important feature to add is traces. that is currently the next thing on our roadmap. 
+
+# Considerations
+
+## Repository Structural Considerations
+The Charts included are placed at the same level as the oaas itself as they can work on their own, they might move to public repos instead of being included here or they might be bundled with the oaas part if the usage shows that thay are always used together. The timing of that potential structural change will be aligned with a mature replacement of what used to be part of the stable charts. The same goes for the controller in comparison with the work done on an equivalent edition of that.  
