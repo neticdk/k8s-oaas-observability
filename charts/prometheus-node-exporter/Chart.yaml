@@ -9,5 +9,5 @@ keywords:
 - prometheus
 - exporter
 maintainers:
-- name: tal
+- name: langecode
   email: tal@netic.dk
