@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15.6'
       - name: Test
         run: |
           cd controllers/endpoint-controller
@@ -22,9 +25,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Render jsonnet rules
         run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
           go get github.com/google/go-jsonnet/cmd/jsonnet
           go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-          ./charts/netic-oaas/ci/update-rules.sh
+          $GITHUB_WORKSPACE/charts/netic-oaas/ci/update-rules.sh
 
   charts-test:
     runs-on: ubuntu-latest
