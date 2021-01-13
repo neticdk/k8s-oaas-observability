@@ -45,7 +45,7 @@ $ kind create cluster --name oaas --config local/kind-cluster.yaml
 $ kubectl cluster-info --context kind-oaas
 ```
 
-### Create the desired namespace in the created local kind cluster
+### Manually create the desired namespace in the created local kind cluster
 ```bash
 $ kubectl create ns netic-oaas-system
 $ kubectl get ns
@@ -67,11 +67,33 @@ $ helm dependency update .
 ```bash
 $ helm upgrade -i -n netic-oaas-system --create-namespace oaas .
 ```
-### See that the cluster is running with flux
+### See that the cluster is running with the observability package
 ```bash
 $ kubectl get all -A 
 ```
 
+### Emulate recieving data 
+To emulate receiving data, a docker-compose configuration exists. 
+This can be started with e.g. 
+
+```bash
+$ docker-compose up local/docker-compose.yml .
+```
+and should then start receiving log and metric events.
+
+If you experience problems look at the docker-compose processes e.g.
+```bash
+$ cd local
+$ docker-compose ps -a
+```
+Clean up e.g.
+```bash
+$ docker-compose rm <....>
+```
+Try again e.g.
+```bash
+$ docker-compose up 
+```
 ### Test charts
 ```bash
 $ helm template .
@@ -85,4 +107,33 @@ $ docker run --rm -it -v "$(pwd)/..:/charts" quay.io/helmpack/chart-testing /bin
 ### Delete the created cluster (once you are done with that)
 ```bash
 $ kind delete cluster --name=oaas
+```
+
+## Working with your own cluster
+You can use the commands aboce for installing OaaS in another cluster.
+
+### Create the desired namespace in the created local kind cluster
+```bash
+$ kubectl create ns netic-oaas-system
+```
+
+### Potentially initialize Helm (if this is first time running this).
+```bash
+$ helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+### Potentially update Helm dependencies
+```bash
+$ cd charts/netic-oaas
+$ helm dependency update .
+```
+
+### Deploy the chart to the local kind cluster.
+
+```bash
+$ helm upgrade -i -n netic-oaas-system --create-namespace oaas .
+```
+### See that the cluster is running with the observability package
+```bash
+$ kubectl get all -A 
 ```

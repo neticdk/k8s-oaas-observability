@@ -1,4 +1,4 @@
-data_dir = "/tmp/tal-vector"
+data_dir = "/tmp/oaas-vector"
 
 [sources.in]
   type = "vector"
@@ -13,4 +13,4 @@ data_dir = "/tmp/tal-vector"
   inputs    = ["in"]
   type      = "prometheus"
   address   = "0.0.0.0:9091"
-  namespace = "vector"
+  default_namespace = "vector"
