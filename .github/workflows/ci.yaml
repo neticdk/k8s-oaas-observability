@@ -19,6 +19,8 @@ jobs:
   netic-oaas-init:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Render jsonnet rules
         run: ./charts/netic-oaas/ci/update-rules.sh
 
