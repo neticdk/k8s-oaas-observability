@@ -12,7 +12,7 @@ dependencies:
   repository: file://../prometheus-operator
   version: 1.0.1
 - name: vector-agent
-  repository: file://../vector-agent
-  version: 0.11.0
-digest: sha256:ed992fb582b3ad8151e7db0cebc3d57f98c54510965af27faea2a0ae4b7817dc
-generated: "2021-01-08T14:38:19.349133+01:00"
+  repository: https://neticdk.github.io/vector
+  version: 0.11.1
+digest: sha256:3a432cfec764be74d1e2f834946475aa4b1a649d63cad71c6a132f15d83d8f91
+generated: "2021-01-13T12:53:07.004106+01:00"

@@ -5,7 +5,7 @@ description: A Helm chart to collect Kubernetes logs with Vector
 home: https://github.com/neticdk/k8s-oaas
 version: "1.1.4"
 maintainers:
-  - name: Thor Anker Kvisgård Lange
+  - name: langecode
     email: tal@netic.dk
 dependencies:
   - name: grafana
@@ -23,5 +23,5 @@ dependencies:
     repository: file://../prometheus-operator
     condition: prometheus-operator.enabled
   - name: vector-agent
-    version: "*"
-    repository: file://../vector-agent
+    version: 0.11.1
+    repository: https://neticdk.github.io/vector

@@ -6,5 +6,5 @@ home: https://git.netic.dk/projects/PD/repos/charts/browse
 version: "1.0.1"
 appVersion: "0.42.0"
 maintainers:
-- name: Thor Anker Kvisgård Lange
+- name: langecode
   email: tal@netic.dk
