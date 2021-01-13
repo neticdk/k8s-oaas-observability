@@ -16,8 +16,15 @@ jobs:
           cd controllers/endpoint-controller
           bazel test //...
 
+  netic-oaas-init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Render jsonnet rules
+        run: ./charts/netic-oaas/ci/update-rules.sh
+
   charts-test:
     runs-on: ubuntu-latest
+    needs: netic-oaas-init
     steps:
       - uses: actions/checkout@v2
 
