@@ -20,9 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Render jsonnet rules
-        run: ./charts/netic-oaas/ci/update-rules.sh
+        run: |
+          go get github.com/google/go-jsonnet/cmd/jsonnet
+          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+          ./charts/netic-oaas/ci/update-rules.sh
 
   charts-test:
     runs-on: ubuntu-latest
