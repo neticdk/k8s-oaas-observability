@@ -19,22 +19,18 @@ jobs:
           cd controllers/endpoint-controller
           bazel test //...
 
-  netic-oaas-init:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Render jsonnet rules
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          go get github.com/google/go-jsonnet/cmd/jsonnet
-          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-          $GITHUB_WORKSPACE/charts/netic-oaas/ci/update-rules.sh
-
   charts-test:
     runs-on: ubuntu-latest
     needs: netic-oaas-init
     steps:
       - uses: actions/checkout@v2
+
+      - name: Render jsonnet rules for Netic OaaS chart
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          go get github.com/google/go-jsonnet/cmd/jsonnet
+          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+          $GITHUB_WORKSPACE/charts/netic-oaas/ci/update-rules.sh
 
       - name: Set up Helm
         uses: azure/setup-helm@v1
