@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-test
+  labels: {{ include "netic-oaas.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: {{ .Release.Name }}-test
+      image: "shellspec/shellspec:kcov"
+      volumeMounts:
+      - mountPath: /src/spec
+        name: spec
+        readOnly: true
+  volumes:
+  - name: spec
+    configMap:
+      name: {{ template "netic-oaas.fullname" . }}-test
+  restartPolicy: Never
