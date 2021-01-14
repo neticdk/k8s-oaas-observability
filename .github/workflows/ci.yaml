@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - feature/oaas-chart-tests
 
 jobs:
   endpoint-controller-test:
