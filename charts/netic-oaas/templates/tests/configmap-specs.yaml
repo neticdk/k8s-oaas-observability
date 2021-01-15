@@ -13,8 +13,24 @@ data:
         [ "$status" = "success" ]
       }
 
+      It 'scrapes data from self'
+        When call check_prometheus netic-oaas-prometheus
+        The status should be success
+      End
+
       It 'scrapes data from kubelet'
         When call check_prometheus kubelet
         The status should be success
       End
+
+      It 'scrapes data from kube-state-metrics'
+        When call check_prometheus kube-state-metrics
+        The status should be success
+      End
+
+      It 'scrapes data from node-exporter'
+        When call check_prometheus node-exporter
+        The status should be success
+      End
+
     End

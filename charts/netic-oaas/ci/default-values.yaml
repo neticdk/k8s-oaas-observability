@@ -1,0 +1,6 @@
+---
+# Values used by ct for linting and testing
+
+grafana:
+  testFramework:
+    enabled: true
