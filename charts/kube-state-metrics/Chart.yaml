@@ -12,3 +12,5 @@ appVersion: 1.9.7
 maintainers:
 - name: langecode
   email: tal@netic.dk
+sources:
+- https://github.com/kubernetes/kube-state-metrics

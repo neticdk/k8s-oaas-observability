@@ -23,12 +23,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install extra tooling
+        run: |
+          go get github.com/google/go-jsonnet/cmd/jsonnet
+          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+          GO111MODULE=on go get github.com/norwoodj/helm-docs/cmd/helm-docs
+
       - name: Render jsonnet rules for Netic OaaS chart
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
-          go get github.com/google/go-jsonnet/cmd/jsonnet
-          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-          $GITHUB_WORKSPACE/charts/netic-oaas/ci/update-rules.sh
+          $GITHUB_WORKSPACE/charts/netic-oaas/scripts/update-rules.sh
+
+      - name: Render documentation
+        run: helm-docs
 
       - name: Set up Helm
         uses: azure/setup-helm@v1
