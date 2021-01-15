@@ -16,6 +16,7 @@ $ helm install netic-oaas netic-oaas/kube-state-metrics
 ## Source Code
 
 * <https://github.com/kubernetes/kube-state-metrics>
+* <https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics>
 
 ## Configuration
 
