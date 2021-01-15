@@ -1368,6 +1368,8 @@ vector-agent:
 ## see https://github.com/grafana/helm-charts/tree/main/charts/grafana
 grafana:
   enabled: true
+  testFramework:
+    enabled: false
   sidecar:
     dashboards:
       enabled: true

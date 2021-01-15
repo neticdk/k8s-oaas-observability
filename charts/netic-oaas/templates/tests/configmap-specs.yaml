@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-test
+  labels: {{ include "netic-oaas.labels" . | nindent 4 }}
+data:
+  prometheus_spec.sh: |
+    Describe 'Prometheus'
+      check_prometheus() {
+        url="http://{{ template "netic-oaas.fullname" . }}-prometheus:{{ .Values.prometheus.service.port }}/api/v1/query?query=up{job=\"$1\"}"
+        response=$(wget -O - --timeout 10 --tries 1 ${url} 2>&1)
+        status=$(echo $response | sed 's/.*"status":"\([[:alpha:]]*\)".*/\1/')
+        [ "$status" = "success" ]
+      }
+
+      It 'scrapes data from self'
+        When call check_prometheus netic-oaas-prometheus
+        The status should be success
+      End
+
+      It 'scrapes data from kubelet'
+        When call check_prometheus kubelet
+        The status should be success
+      End
+
+      It 'scrapes data from kube-state-metrics'
+        When call check_prometheus kube-state-metrics
+        The status should be success
+      End
+
+      It 'scrapes data from node-exporter'
+        When call check_prometheus node-exporter
+        The status should be success
+      End
+
+    End
