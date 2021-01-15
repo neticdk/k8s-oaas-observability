@@ -1,7 +1,9 @@
 {{ template "chart.header" . }}
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
 {{ template "chart.description" . }}
 
-{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+{{ template "chart.homepageLine" . }}
 
 ## Installing the Chart
 
@@ -9,7 +11,7 @@ To install the chart with the release name `my-release`:
 
 ```bash
 $ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
-$ helm install netic-oaas netic-oaas/{{ template "chart.name" . }}
+$ helm install my-release netic-oaas/{{ template "chart.name" . }}
 ```
 
 {{ template "chart.sourcesSection" . }}

@@ -1,8 +1,12 @@
 # prometheus-node-exporter
 
-A Helm chart for prometheus node-exporter
+# prometheus-node-exporter
 
 ![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+
+A Helm chart for prometheus node-exporter
+
+**Homepage:** <https://github.com/prometheus/node_exporter>
 
 ## TL;DR;
 

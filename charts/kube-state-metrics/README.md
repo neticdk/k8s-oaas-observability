@@ -1,8 +1,10 @@
 # kube-state-metrics
 
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 1.9.7](https://img.shields.io/badge/AppVersion-1.9.7-informational?style=flat-square)
+
 Install kube-state-metrics to generate and expose cluster-level metrics
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 1.9.7](https://img.shields.io/badge/AppVersion-1.9.7-informational?style=flat-square)
+**Homepage:** <https://github.com/kubernetes/kube-state-metrics>
 
 ## Installing the Chart
 
@@ -10,7 +12,7 @@ To install the chart with the release name `my-release`:
 
 ```bash
 $ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
-$ helm install netic-oaas netic-oaas/kube-state-metrics
+$ helm install my-release netic-oaas/kube-state-metrics
 ```
 
 ## Source Code
