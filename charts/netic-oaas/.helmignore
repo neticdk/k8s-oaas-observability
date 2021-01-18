@@ -19,6 +19,8 @@
 .project
 .idea/
 *.tmproj
+
 # Files for development
-ci
-hack
+scripts
+local
+README.md.gotmpl

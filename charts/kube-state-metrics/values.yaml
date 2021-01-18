@@ -1,35 +1,42 @@
 global:
+  # -- Deploy network policy allowing ingress.
   networkPolicyEnabled: false
 
-# Default values for kube-state-metrics.
+# -- Whether or not enable prom scrape
 prometheusScrape: true
+
 image:
+  # -- The image repository to pull from
   repository: quay.io/coreos/kube-state-metrics
+  # -- The image tag to pull
   tag: v1.9.7
+  # -- Image pull policy
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 # - name: "image-pull-secret"
 
-# If set to true, this will deploy kube-state-metrics as a StatefulSet and the data
-# will be automatically sharded across <.Values.replicas> pods using the built-in
-# autodiscovery feature: https://github.com/kubernetes/kube-state-metrics#automated-sharding
-# This is an experimental feature and there are no stability guarantees.
+# -- Set to true to automatically shard data across replicas pods ([Automated Sharding](https://github.com/kubernetes/kube-state-metrics#automated-sharding)). EXPERIMENTAL
 autosharding:
   enabled: false
 
+# -- Number of replicas
 replicas: 1
 
 service:
+  # -- The port of the container
   port: 8080
-  # Default to clusterIP for backward compatibility
+  # -- Service type. Default to clusterIP for backward compatibility.
   type: ClusterIP
   nodePort: 0
   loadBalancerIP: ""
+  # -- Annotations to be added to the service.
   annotations: {}
 
+# -- Custom labels to apply to service, deployment and pods
 customLabels: {}
 
+# -- Whether or not to use the host network
 hostNetwork: false
 
 rbac:
@@ -37,115 +44,154 @@ rbac:
   create: true
 
 serviceAccount:
-  # Specifies whether a ServiceAccount should be created, require rbac true
+  # -- If true, create & use serviceAccount. Require rbac true
   create: true
-  # The name of the ServiceAccount to use.
+  # -- The name of the ServiceAccount to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
-  # Reference to one or more secrets to be used when pulling images
+  # -- Reference to one or more secrets to be used when pulling images
   # ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
   imagePullSecrets: []
-  # ServiceAccount annotations.
+  # -- ServiceAccount annotations.
   # Use case: AWS EKS IAM roles for service accounts
   # ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html
   annotations: {}
 
 prometheus:
   monitor:
+    # -- Set this to true to create ServiceMonitor for Prometheus operator
     enabled: false
+    # -- Additional labels that can be used so ServiceMonitor will be discovered by Prometheus
     additionalLabels: {}
+    # -- Namespace where servicemonitor resource should be created
     namespace: ""
+    # -- Honor metric labels
     honorLabels: false
 
 ## Specify if a Pod Security Policy for kube-state-metrics must be created
 ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
 ##
 podSecurityPolicy:
+  # -- If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`.
   enabled: false
+  # -- Specify pod annotations in the pod security policy
+  # Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
+  # Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
+  # Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
   annotations: {}
-    ## Specify pod annotations
-    ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
-    ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
-    ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
     ##
     # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
     # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
     # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
 
+  # -- Specify allowed volumes in the pod security policy (`secret` is always allowed)
   additionalVolumes: []
 
 securityContext:
+  # -- Enable security context
   enabled: true
+  # -- Group ID for the container
   runAsGroup: 65534
+  # -- User ID for the container
   runAsUser: 65534
+  # -- Group ID for the filesystem
   fsGroup: 65534
 
-## Node labels for pod assignment
-## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+# -- Node labels for pod assignment
+# Ref: https://kubernetes.io/docs/user-guide/node-selection/
 nodeSelector: {}
 
-## Affinity settings for pod assignment
-## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+# -- Affinity settings for pod assignment
+# Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
 affinity: {}
 
-## Tolerations for pod assignment
-## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+# -- Tolerations for pod assignment
+# Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 tolerations: []
 
-# Annotations to be added to the pod
+# -- Annotations to be added to the pod
 podAnnotations: {}
 
-## Assign a PriorityClassName to pods if set
-# priorityClassName: ""
+# -- Name of Priority Class to assign pods
+priorityClassName:
 
+# -- Optional PodDisruptionBudget
 # Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
 podDisruptionBudget: {}
 
-# Available collectors for kube-state-metrics. By default all available
-# collectors are enabled.
 collectors:
+  # -- Enable the certificatesigningrequests collector.
   certificatesigningrequests: true
+  # -- Enable the configmaps collector.
   configmaps: true
+  # -- Enable the cronjobs collector.
   cronjobs: true
+  # -- Enable the daemonsets collector.
   daemonsets: true
+  # -- Enable the deployments collector.
   deployments: true
+  # -- Enable the endpoints collector.
   endpoints: true
+  # -- Enable the horizontalpodautoscalers collector.
   horizontalpodautoscalers: true
+  # -- Enable the ingresses collector.
   ingresses: true
+  # -- Enable the jobs collector.
   jobs: true
+  # -- Enable the limitranges collector.
   limitranges: true
+  # -- Enable the mutatingwebhookconfigurations collector.
   mutatingwebhookconfigurations: true
+  # -- Enable the namespaces collector.
   namespaces: true
+  # -- Enable the networkpolicies collector.
   networkpolicies: true
+  # -- Enable the nodes collector.
   nodes: true
+  # -- Enable the persistentvolumeclaims collector.
   persistentvolumeclaims: true
+  # -- Enable the persistentvolumes collector.
   persistentvolumes: true
+  # -- Enable the poddisruptionbudgets collector.
   poddisruptionbudgets: true
+  # -- Enable the pods collector.
   pods: true
+  # -- Enable the replicasets collector.
   replicasets: true
+  # -- Enable the replicationcontrollers collector.
   replicationcontrollers: true
+  # -- Enable the resourcequotas collector.
   resourcequotas: true
+  # -- Enable the secrets collector.
   secrets: true
+  # -- Enable the services collector.
   services: true
+  # -- Enable the statefulsets collector.
   statefulsets: true
+  # -- Enable the storageclasses collector.
   storageclasses: true
+  # -- Enable the validatingwebhookconfigurations collector.
   validatingwebhookconfigurations: true
+  # -- Enable the verticalpodautoscalers collector.
   verticalpodautoscalers: false
+  # -- Enable the volumeattachments collector.
   volumeattachments: true
 
 # Enabling kubeconfig will pass the --kubeconfig argument to the container
 kubeconfig:
+  # -- Adds --kubeconfig arg to container at startup
   enabled: false
-  # base64 encoded kube-config file
+  # -- base64 encoded kube-config file
   secret:
 
 # Namespace to be enabled for collecting resources. By default all namespaces are collected.
 # namespace: ""
 
-## Override the deployment namespace
-##
+# -- Override the deployment namespace
+# @default will be set to `.Release.Namespace` if it is not set
 namespaceOverride: ""
 
+# -- kube-state-metrics resource requests and limits
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -158,7 +204,6 @@ resources: {}
   #  cpu: 10m
   #  memory: 32Mi
 
-## Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role.
-## For example: kubeTargetVersionOverride: 1.14.9
-##
+# -- Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role.
+# For example: kubeTargetVersionOverride: 1.14.9
 kubeTargetVersionOverride: ""

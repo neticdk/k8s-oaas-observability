@@ -2,34 +2,48 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 image:
+  # -- Image repository
   repository: quay.io/prometheus/node-exporter
+  # -- Image tag
   tag: v1.0.1
+  # -- Image pull policy
   pullPolicy: IfNotPresent
 
 service:
+  # -- Service type
   type: ClusterIP
+  # -- The service port
   port: 9100
+  # -- The target port of the container
   targetPort: 9100
+  # -- The node port of the service
   nodePort:
+  # -- If true, listen on all interfaces using IP `0.0.0.0`. Else listen on the IP address pod has been assigned by Kubernetes.
   listenOnAllInterfaces: true
+  # -- Kubernetes service annotations
   annotations:
     prometheus.io/scrape: "true"
 
 prometheus:
   monitor:
+    # -- Set this to `true` to create ServiceMonitor for Prometheus operator
     enabled: false
+    # -- Additional labels that can be used so ServiceMonitor will be discovered by Prometheus
     additionalLabels: {}
+    # -- namespace where servicemonitor resource should be created
     namespace: ""
-
+    # -- Relabelings that should be applied on the ServerMonitor
     relabelings: []
+    # -- Timeout after which the scrape is ended
     scrapeTimeout: 10s
 
-## Customize the updateStrategy if set
+# -- Configure a custom update strategy for the daemonset
 updateStrategy:
   type: RollingUpdate
   rollingUpdate:
     maxUnavailable: 1
 
+# -- CPU/Memory resource requests/limits
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -43,13 +57,14 @@ resources: {}
   #   memory: 30Mi
 
 serviceAccount:
-  # Specifies whether a ServiceAccount should be created
+  # -- Specifies whether a ServiceAccount should be created
   create: true
-  # The name of the ServiceAccount to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # -- Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template
   name:
+  # -- Specify image pull secrets
   imagePullSecrets: []
 
+# -- SecurityContext
 securityContext:
   fsGroup: 65534
   runAsGroup: 65534
@@ -57,22 +72,19 @@ securityContext:
   runAsUser: 65534
 
 rbac:
-  ## If true, create & use RBAC resources
-  ##
+  # -- If true, create & use RBAC resources
   create: true
-  ## If true, create & use Pod Security Policy resources
-  ## https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+  # -- Specifies whether a PodSecurityPolicy should be created.
+  # https://kubernetes.io/docs/concepts/policy/pod-security-policy/
   pspEnabled: true
 
-# for deployments that have node_exporter deployed outside of the cluster, list
-# their addresses here
+# -- list of addresses that have node exporter deployed outside of the cluster
 endpoints: []
 
-# Expose the service to the host network
+# -- Whether to expose the service to the host network
 hostNetwork: true
 
-## Assign a group of affinity scheduling rules
-##
+# -- A group of affinity scheduling rules for pod assignment
 affinity: {}
 #   nodeAffinity:
 #     requiredDuringSchedulingIgnoredDuringExecution:
@@ -83,33 +95,31 @@ affinity: {}
 #               values:
 #                 - target-host-name
 
-# Annotations to be added to node exporter pods
+# -- Annotations to be added to node exporter pods
 podAnnotations: {}
 
-# Extra labels to be added to node exporter pods
+# -- Additional labels to be added to pods
 podLabels: {}
 
-## Assign a nodeSelector if operating a hybrid cluster
-##
+# -- Node labels for pod assignment
 nodeSelector: {}
 #   beta.kubernetes.io/arch: amd64
 #   beta.kubernetes.io/os: linux
 
+# -- List of node taints to tolerate
 tolerations:
   - effect: NoSchedule
     operator: Exists
 
-## Assign a PriorityClassName to pods if set
-# priorityClassName: ""
+# -- Name of Priority Class to assign pods
+priorityClassName:
 
-## Additional container arguments
-##
+# -- Additional container arguments
 extraArgs: []
 #   - --collector.diskstats.ignored-devices=^(ram|loop|fd|(h|s|v)d[a-z]|nvme\\d+n\\d+p)\\d+$
 #   - --collector.textfile.directory=/run/prometheus
 
-## Additional mounts from the host
-##
+# -- Additional mounts from the host
 extraHostVolumeMounts: []
 #  - name: <mountName>
 #    hostPath: <hostPath>
@@ -117,24 +127,21 @@ extraHostVolumeMounts: []
 #    readOnly: true|false
 #    mountPropagation: None|HostToContainer|Bidirectional
 
-## Additional configmaps to be mounted.
-##
+# -- Allow mounting additional configmaps.
 configmaps: []
 # - name: <configMapName>
 #   mountPath: <mountPath>
 
-## Override the deployment namespace
-##
+# -- Override the deployment namespace
+# @default will be set to `.Release.Namespace` if not set
 namespaceOverride: ""
 
-## Additional containers for export metrics to text file
-##
+# -- Additional containers for export metrics to text file
 sidecars: []
 ##  - name: nvidia-dcgm-exporter
 ##    image: nvidia/dcgm-exporter:1.4.3
 
-## Volume for sidecar containers
-##
+# -- Volume for sidecar containers
 sidecarVolumeMount: []
 ##  - name: collector-textfiles
 ##    mountPath: /run/prometheus

@@ -1,84 +1,97 @@
-# kube-state-metrics Helm Chart
+# kube-state-metrics
 
-* Installs the [kube-state-metrics agent](https://github.com/kubernetes/kube-state-metrics).
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 1.9.7](https://img.shields.io/badge/AppVersion-1.9.7-informational?style=flat-square)
 
-_Note_ This is a clone from the deprecated Helm Chart stable repository: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+Install kube-state-metrics to generate and expose cluster-level metrics
+
+**Homepage:** <https://github.com/kubernetes/kube-state-metrics>
 
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm install stable/kube-state-metrics
+$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm install my-release netic-oaas/kube-state-metrics
 ```
+
+## Source Code
+
+* <https://github.com/kubernetes/kube-state-metrics>
+* <https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics>
 
 ## Configuration
 
-| Parameter                                    | Description                                                                           | Default                                    |
-|:---------------------------------------------|:--------------------------------------------------------------------------------------|:-------------------------------------------|
-| `image.repository`                           | The image repository to pull from                                                     | `quay.io/coreos/kube-state-metrics`        |
-| `image.tag`                                  | The image tag to pull from                                                            | `v1.9.7`                                   |
-| `image.pullPolicy`                           | Image pull policy                                                                     | `IfNotPresent`                             |
-| `imagePullSecrets`                           | List of container registry secrets                                                    | `[]`                                       |
-| `replicas`                                   | Number of replicas                                                                    | `1`                                        |
-| `autosharding.enabled`                       | Set to `true` to automatically shard data across `replicas` pods. EXPERIMENTAL        | `false`                                    |
-| `service.port`                               | The port of the container                                                             | `8080`                                     |
-| `service.annotations`                        | Annotations to be added to the service                                                | `{}`                                       |
-| `customLabels`                               | Custom labels to apply to service, deployment and pods                                | `{}`                                       |
-| `hostNetwork`                                | Whether or not to use the host network                                                | `false`                                    |
-| `prometheusScrape`                           | Whether or not enable prom scrape                                                     | `true`                                     |
-| `rbac.create`                                | If true, create & use RBAC resources                                                  | `true`                                     |
-| `serviceAccount.create`                      | If true, create & use serviceAccount                                                  | `true`                                     |
-| `serviceAccount.name`                        | If not set & create is true, use template fullname                                    |                                            |
-| `serviceAccount.imagePullSecrets`            | Specify image pull secrets field                                                      | `[]`                                       |
-| `serviceAccount.annotations`                 | Annotations to be added to the serviceAccount                                         | `{}`                                       |
-| `podSecurityPolicy.enabled`                  | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. | `false` |
-| `podSecurityPolicy.annotations`              | Specify pod annotations in the pod security policy                                    | `{}`                                       |
-| `podSecurityPolicy.additionalVolumes`        | Specify allowed volumes in the pod security policy (`secret` is always allowed)       | `[]`                                       |
-| `securityContext.enabled`                    | Enable security context                                                               | `true`                                     |
-| `securityContext.fsGroup`                    | Group ID for the filesystem                                                           | `65534`                                    |
-| `securityContext.runAsGroup`                 | Group ID for the container                                                            | `65534`                                    |
-| `securityContext.runAsUser`                  | User ID for the container                                                             | `65534`                                    |
-| `priorityClassName`                          | Name of Priority Class to assign pods                                                 | `nil`                                      |
-| `nodeSelector`                               | Node labels for pod assignment                                                        | `{}`                                       |
-| `affinity`                                   | Affinity settings for pod assignment                                                  | `{}`                                       |
-| `tolerations`                                | Tolerations for pod assignment                                                        | `[]`                                       |
-| `podAnnotations`                             | Annotations to be added to the pod                                                    | `{}`                                       |
-| `podDisruptionBudget`                        | Optional PodDisruptionBudget                                                          | `{}`                                       |
-| `resources`                                  | kube-state-metrics resource requests and limits                                       | `{}`                                       |
-| `collectors.certificatesigningrequests`      | Enable the certificatesigningrequests collector.                                      | `true`                                     |
-| `collectors.configmaps`                      | Enable the configmaps collector.                                                      | `true`                                     |
-| `collectors.cronjobs`                        | Enable the cronjobs collector.                                                        | `true`                                     |
-| `collectors.daemonsets`                      | Enable the daemonsets collector.                                                      | `true`                                     |
-| `collectors.deployments`                     | Enable the deployments collector.                                                     | `true`                                     |
-| `collectors.endpoints`                       | Enable the endpoints collector.                                                       | `true`                                     |
-| `collectors.horizontalpodautoscalers`        | Enable the horizontalpodautoscalers collector.                                        | `true`                                     |
-| `collectors.ingresses`                       | Enable the ingresses collector.                                                       | `true`                                     |
-| `collectors.jobs`                            | Enable the jobs collector.                                                            | `true`                                     |
-| `collectors.limitranges`                     | Enable the limitranges collector.                                                     | `true`                                     |
-| `collectors.mutatingwebhookconfigurations`   | Enable the mutatingwebhookconfigurations collector.                                   | `true`                                     |
-| `collectors.namespaces`                      | Enable the namespaces collector.                                                      | `true`                                     |
-| `collectors.networkpolicies`                 | Enable the networkpolicies collector.                                                 | `true`                                     |
-| `collectors.nodes`                           | Enable the nodes collector.                                                           | `true`                                     |
-| `collectors.persistentvolumeclaims`          | Enable the persistentvolumeclaims collector.                                          | `true`                                     |
-| `collectors.persistentvolumes`               | Enable the persistentvolumes collector.                                               | `true`                                     |
-| `collectors.poddisruptionbudgets`            | Enable the poddisruptionbudgets collector.                                            | `true`                                     |
-| `collectors.pods`                            | Enable the pods collector.                                                            | `true`                                     |
-| `collectors.replicasets`                     | Enable the replicasets collector.                                                     | `true`                                     |
-| `collectors.replicationcontrollers`          | Enable the replicationcontrollers collector.                                          | `true`                                     |
-| `collectors.resourcequotas`                  | Enable the resourcequotas collector.                                                  | `true`                                     |
-| `collectors.secrets`                         | Enable the secrets collector.                                                         | `true`                                     |
-| `collectors.services`                        | Enable the services collector.                                                        | `true`                                     |
-| `collectors.statefulsets`                    | Enable the statefulsets collector.                                                    | `true`                                     |
-| `collectors.storageclasses`                  | Enable the storageclasses collector.                                                  | `true`                                     |
-| `collectors.validatingwebhookconfigurations` | Enable the validatingwebhookconfigurations collector.                                 | `true`                                     |
-| `collectors.verticalpodautoscalers`          | Enable the verticalpodautoscalers collector.                                          | `true`                                     |
-| `collectors.volumeattachments`               | Enable the volumeattachments collector.                                               | `true`                                     |
-| `prometheus.monitor.enabled`                 | Set this to `true` to create ServiceMonitor for Prometheus operator                   | `false`                                    |
-| `prometheus.monitor.additionalLabels`        | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus | `{}`                                       |
-| `prometheus.monitor.namespace`               | Namespace where servicemonitor resource should be created                             | `the same namespace as kube-state-metrics` |
-| `prometheus.monitor.honorLabels`             | Honor metric labels                                                                   | `false`                                    |
-| `namespaceOverride`                          | Override the deployment namespace                                                     | `""` (`Release.Namespace`)                 |
-| `kubeTargetVersionOverride`                  | Override the k8s version of the target cluster                                        | `""`                                       |
-| `kubeconfig.enabled`                         | Adds --kubeconfig arg to container at startup                                         | `""`                                       |
-| `kubeconfig.secret`                          | Base64 encoded kubeconfig file                                                        | `""`                                       |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity settings for pod assignment Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |
+| autosharding | object | `{"enabled":false}` | Set to true to automatically shard data across replicas pods ([Automated Sharding](https://github.com/kubernetes/kube-state-metrics#automated-sharding)). EXPERIMENTAL |
+| collectors.certificatesigningrequests | bool | `true` | Enable the certificatesigningrequests collector. |
+| collectors.configmaps | bool | `true` | Enable the configmaps collector. |
+| collectors.cronjobs | bool | `true` | Enable the cronjobs collector. |
+| collectors.daemonsets | bool | `true` | Enable the daemonsets collector. |
+| collectors.deployments | bool | `true` | Enable the deployments collector. |
+| collectors.endpoints | bool | `true` | Enable the endpoints collector. |
+| collectors.horizontalpodautoscalers | bool | `true` | Enable the horizontalpodautoscalers collector. |
+| collectors.ingresses | bool | `true` | Enable the ingresses collector. |
+| collectors.jobs | bool | `true` | Enable the jobs collector. |
+| collectors.limitranges | bool | `true` | Enable the limitranges collector. |
+| collectors.mutatingwebhookconfigurations | bool | `true` | Enable the mutatingwebhookconfigurations collector. |
+| collectors.namespaces | bool | `true` | Enable the namespaces collector. |
+| collectors.networkpolicies | bool | `true` | Enable the networkpolicies collector. |
+| collectors.nodes | bool | `true` | Enable the nodes collector. |
+| collectors.persistentvolumeclaims | bool | `true` | Enable the persistentvolumeclaims collector. |
+| collectors.persistentvolumes | bool | `true` | Enable the persistentvolumes collector. |
+| collectors.poddisruptionbudgets | bool | `true` | Enable the poddisruptionbudgets collector. |
+| collectors.pods | bool | `true` | Enable the pods collector. |
+| collectors.replicasets | bool | `true` | Enable the replicasets collector. |
+| collectors.replicationcontrollers | bool | `true` | Enable the replicationcontrollers collector. |
+| collectors.resourcequotas | bool | `true` | Enable the resourcequotas collector. |
+| collectors.secrets | bool | `true` | Enable the secrets collector. |
+| collectors.services | bool | `true` | Enable the services collector. |
+| collectors.statefulsets | bool | `true` | Enable the statefulsets collector. |
+| collectors.storageclasses | bool | `true` | Enable the storageclasses collector. |
+| collectors.validatingwebhookconfigurations | bool | `true` | Enable the validatingwebhookconfigurations collector. |
+| collectors.verticalpodautoscalers | bool | `false` | Enable the verticalpodautoscalers collector. |
+| collectors.volumeattachments | bool | `true` | Enable the volumeattachments collector. |
+| customLabels | object | `{}` | Custom labels to apply to service, deployment and pods |
+| global.networkPolicyEnabled | bool | `false` | Deploy network policy allowing ingress. |
+| hostNetwork | bool | `false` | Whether or not to use the host network |
+| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.repository | string | `"quay.io/coreos/kube-state-metrics"` | The image repository to pull from |
+| image.tag | string | `"v1.9.7"` | The image tag to pull |
+| imagePullSecrets | list | `[]` |  |
+| kubeTargetVersionOverride | string | `""` | Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role. For example: kubeTargetVersionOverride: 1.14.9 |
+| kubeconfig.enabled | bool | `false` |  |
+| kubeconfig.secret | string | `nil` | base64 encoded kube-config file |
+| namespaceOverride | string | `""` |  |
+| nodeSelector | object | `{}` | Node labels for pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/ |
+| podAnnotations | object | `{}` | Annotations to be added to the pod |
+| podDisruptionBudget | object | `{}` | Optional PodDisruptionBudget Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/ |
+| podSecurityPolicy.additionalVolumes | list | `[]` | Specify allowed volumes in the pod security policy (`secret` is always allowed) |
+| podSecurityPolicy.annotations | object | `{}` | Specify pod annotations in the pod security policy Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl |
+| podSecurityPolicy.enabled | bool | `false` | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. |
+| priorityClassName | string | `nil` | Name of Priority Class to assign pods |
+| prometheus.monitor.additionalLabels | object | `{}` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus |
+| prometheus.monitor.enabled | bool | `false` | Set this to true to create ServiceMonitor for Prometheus operator |
+| prometheus.monitor.honorLabels | bool | `false` | Honor metric labels |
+| prometheus.monitor.namespace | string | `""` | Namespace where servicemonitor resource should be created |
+| prometheusScrape | bool | `true` | Whether or not enable prom scrape |
+| rbac.create | bool | `true` |  |
+| replicas | int | `1` | Number of replicas |
+| resources | object | `{}` | kube-state-metrics resource requests and limits |
+| securityContext.enabled | bool | `true` | Enable security context |
+| securityContext.fsGroup | int | `65534` | Group ID for the filesystem |
+| securityContext.runAsGroup | int | `65534` | Group ID for the container |
+| securityContext.runAsUser | int | `65534` | User ID for the container |
+| service.annotations | object | `{}` | Annotations to be added to the service. |
+| service.loadBalancerIP | string | `""` |  |
+| service.nodePort | int | `0` |  |
+| service.port | int | `8080` | The port of the container |
+| service.type | string | `"ClusterIP"` | Service type. Default to clusterIP for backward compatibility. |
+| serviceAccount.annotations | object | `{}` | ServiceAccount annotations. Use case: AWS EKS IAM roles for service accounts ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html |
+| serviceAccount.create | bool | `true` | If true, create & use serviceAccount. Require rbac true |
+| serviceAccount.imagePullSecrets | list | `[]` | Reference to one or more secrets to be used when pulling images ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
+| serviceAccount.name | string | `nil` | The name of the ServiceAccount to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[]` | Tolerations for pod assignment Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ |
+

@@ -2,9 +2,12 @@ apiVersion: v2
 name: prometheus-operator
 type: application
 description: A Helm chart to install Prometheus Operator
-home: https://git.netic.dk/projects/PD/repos/charts/browse
+home: https://github.com/prometheus-operator/prometheus-operator
 version: "1.0.1"
 appVersion: "0.42.0"
 maintainers:
 - name: langecode
   email: tal@netic.dk
+sources:
+- https://github.com/prometheus-operator/prometheus-operator
+- https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-operator
