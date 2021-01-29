@@ -18,7 +18,7 @@ Currently the main concern is to enable observability for kubernetes clusters lo
 
 The package is built on the basis of well-known products like Prometheus, Grafana and Vector, and is installed using Helm.
 
-***If you want to try it out in a local cluster see [Deploying Locally](DEVELOPMEND.md)***
+***If you want to try it out in a local cluster see [Deploying Locally](DEVELOPMENT.md)***
 
 # Operations On-Demand
 
