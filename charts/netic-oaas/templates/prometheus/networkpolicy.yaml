@@ -11,9 +11,7 @@ spec:
   - Ingress
   - Egress
   ingress:
-  - from:
-    - podSelector: {}
-    ports:
+  - ports:
     - protocol: TCP
       port: 9090
   egress:
