@@ -32,7 +32,7 @@ jobs:
       - name: Render jsonnet rules for Netic OaaS chart
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
-          $GITHUB_WORKSPACE/charts/netic-oaas/scripts/update-rules.sh
+          $GITHUB_WORKSPACE/charts/oaas-observability/scripts/update-rules.sh
 
       - name: Render documentation
         run: |
