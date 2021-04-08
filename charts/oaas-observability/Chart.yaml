@@ -1,7 +1,7 @@
 apiVersion: v2
-name: netic-oaas
+name: oaas-observability
 type: application
-description: A Helm chart to collect Kubernetes logs with Vector
+description: A Helm chart to deploy obeservability stack on Kubernetes
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability

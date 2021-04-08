@@ -2,10 +2,8 @@
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus
-  labels:
-    app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.labels" . | indent 4 }}
+  name: {{ template "prometheus.fullname" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
   {{- if .Values.prometheus.podDisruptionBudget.minAvailable }}
   minAvailable: {{ .Values.prometheus.podDisruptionBudget.minAvailable }}
@@ -14,6 +12,5 @@ spec:
   maxUnavailable: {{ .Values.prometheus.podDisruptionBudget.maxUnavailable }}
   {{- end  }}
   selector:
-    matchLabels: {{ include "netic-oaas.matchLabels" . | nindent 6 }}
-      app.kubernetes.io/component: prometheus
+    matchLabels: {{ include "prometheus.matchLabels" . | nindent 6 }}
 {{- end }}

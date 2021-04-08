@@ -2,10 +2,8 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus
-  labels:
-    app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.labels" . | indent 4 }}
+  name: {{ template "prometheus.fullname" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 {{- if .Values.global.rbac.pspAnnotations }}
   annotations:
 {{ toYaml .Values.global.rbac.pspAnnotations | indent 4 }}

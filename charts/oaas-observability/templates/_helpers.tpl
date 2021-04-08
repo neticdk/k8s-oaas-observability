@@ -57,30 +57,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "netic-oaas.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{/*
-Prometheus common labels
-*/}}
-{{- define "prometheus.labels" -}}
-{{ include "prometheus.matchLabels" . }}
-{{ include "netic-oaas.metaLabels" . }}
-{{- end -}}
-
-{{/*
-Prometheus selector labels
-*/}}
-{{- define "prometheus.matchLabels" -}}
-app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.matchLabels" . }}
-{{- end -}}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "prometheus.serviceAccountName" -}}
-{{- if .Values.prometheus.serviceAccount.create -}}
-{{ default (include "netic-oaas.fullname" .) .Values.prometheus.serviceAccount.name }}
-{{- else -}}
-{{ default "default" .Values.prometheus.serviceAccount.name }}
-{{- end -}}
-{{- end -}}

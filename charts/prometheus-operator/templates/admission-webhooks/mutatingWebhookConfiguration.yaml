@@ -2,7 +2,7 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name:  {{ template "fullname" . }}-admission
+  name:  {{ template "prometheus-operator.admission.fullname" . }}
   labels: {{ include "labels" . | nindent 4 }}
 webhooks:
   - name: prometheusrulemutate.monitoring.coreos.com

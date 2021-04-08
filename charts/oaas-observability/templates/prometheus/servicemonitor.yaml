@@ -2,10 +2,8 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus
-  labels:
-    app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.labels" . | indent 4 }}
+  name: {{ template "prometheus.fullname" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 {{- if .Values.global.serviceMonitor.labels }}
 {{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
 {{- end }}

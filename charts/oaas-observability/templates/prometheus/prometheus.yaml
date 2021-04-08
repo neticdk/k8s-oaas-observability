@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus
+  name: {{ template "prometheus.resource-fullname" . }}
   labels: {{ include "prometheus.labels" . | nindent 4 }}
 {{- if .Values.prometheus.annotations }}
   annotations:
@@ -14,7 +14,7 @@ spec:
 {{ toYaml .Values.prometheus.prometheusSpec.alertingEndpoints | indent 6 }}
 {{- else if .Values.alertmanager.enabled }}
       - namespace: {{ .Release.Namespace }}
-        name: {{ template "netic-oaas.fullname" . }}-alertmanager
+        name: {{ template "alertmanager.fullname" . }}
         port: {{ .Values.alertmanager.alertmanagerSpec.portName }}
         {{- if .Values.alertmanager.alertmanagerSpec.routePrefix }}
         pathPrefix: "{{ .Values.alertmanager.alertmanagerSpec.routePrefix }}"
