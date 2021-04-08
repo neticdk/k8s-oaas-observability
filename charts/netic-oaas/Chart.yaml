@@ -5,13 +5,13 @@ description: A Helm chart to collect Kubernetes logs with Vector
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: "1.1.5"
+version: "1.1.6"
 maintainers:
   - name: langecode
     email: tal@netic.dk
 dependencies:
   - name: grafana
-    version: 6.1.8
+    version: 6.7.3
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
   - name: kube-state-metrics
@@ -25,5 +25,5 @@ dependencies:
     repository: file://../prometheus-operator
     condition: prometheus-operator.enabled
   - name: vector-agent
-    version: 0.11.1
-    repository: https://neticdk.github.io/vector
+    version: 0.12.2
+    repository: https://packages.timber.io/helm/latest
