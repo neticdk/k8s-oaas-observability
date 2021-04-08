@@ -1356,6 +1356,8 @@ vector-agent:
     enabled: false
   hostMetricsSource:
     enabled: false
+  prometheusSink:
+    enabled: false
   kubernetesLogsSource:
     rawConfig: |
       annotation_fields.container_image = "image"
