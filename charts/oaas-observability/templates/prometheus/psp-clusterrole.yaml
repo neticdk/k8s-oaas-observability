@@ -2,10 +2,8 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus-psp
-  labels:
-    app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.labels" . | indent 4 }}
+  name: {{ template "prometheus.fullname" . }}-psp
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 rules:
 {{- $kubeTargetVersion := default .Capabilities.KubeVersion.GitVersion .Values.kubeTargetVersionOverride }}
 {{- if semverCompare "> 1.15.0-0" $kubeTargetVersion }}
@@ -16,5 +14,5 @@ rules:
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - {{ template "netic-oaas.fullname" . }}-prometheus
+  - {{ template "prometheus.fullname" . }}
 {{- end }}

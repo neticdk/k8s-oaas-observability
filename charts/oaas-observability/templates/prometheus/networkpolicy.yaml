@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus
+  name: {{ template "prometheus.fullname" . }}
   labels: {{ include "prometheus.labels" . | nindent 4 }}
 spec:
   podSelector:

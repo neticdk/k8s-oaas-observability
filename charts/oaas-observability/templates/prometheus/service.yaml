@@ -1,10 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "netic-oaas.fullname" . }}-prometheus
-  labels:
-    app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.labels" . | indent 4 }}
+  name: {{ template "prometheus.fullname" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 {{- if .Values.prometheus.service.labels }}
 {{ toYaml .Values.prometheus.service.labels | indent 4 }}
 {{- end }}

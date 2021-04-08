@@ -16,9 +16,7 @@ metadata:
 {{- end }}
   name: {{ $serviceName }}
   namespace: {{ .Release.Namespace }}
-  labels:
-    app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.labels" . | indent 4 }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
 {{- if .Values.prometheus.ingress.labels }}
 {{ toYaml .Values.prometheus.ingress.labels | indent 4 }}
 {{- end }}

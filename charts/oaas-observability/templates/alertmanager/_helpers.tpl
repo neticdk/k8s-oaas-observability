@@ -1,5 +1,5 @@
 {{/*
-Create a fully qualified alertmanager name.
+Create a fully qualified name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
 {{- define "alertmanager.fullname" -}}
@@ -14,6 +14,24 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create a fully qualified name.
+We truncate at 39 chars because Prometheus Operator will add prefixes.
+*/}}
+{{- define "alertmanager.resource-fullname" -}}
+{{- if .Values.alertmanager.fullnameOverride -}}
+{{- .Values.alertmanager.fullnameOverride | trunc 39 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 39 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 39 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 
 {{/*
 alertmanager common labels
