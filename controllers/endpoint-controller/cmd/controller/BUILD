@@ -32,9 +32,9 @@ container_image(
 
 container_push(
     name = "publish",
-    image = ":docker_image",
     format = "Docker",
-    registry = "registry.jysk.com",
-    repository = "netic/endpoint-controller",
-    tag = "v1.0.1"
+    image = ":docker_image",
+    registry = "ghcr.io",
+    repository = "neticdk/endpoint-controller",
+    tag = "$(version)",
 )

@@ -1,0 +1,57 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_helm_chart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      #
+      # Generated files
+      #
+      - name: Install extra tooling
+        run: |
+          go get github.com/google/go-jsonnet/cmd/jsonnet
+          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+          GO111MODULE=on go get github.com/norwoodj/helm-docs/cmd/helm-docs
+
+      - name: Render jsonnet rules for Netic OaaS chart
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          $GITHUB_WORKSPACE/charts/oaas-observability/scripts/update-rules.sh
+
+      - name: Render documentation
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          helm-docs
+
+      #
+      # Deploy
+      #
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.5.3
+
+      - name: Add dependency chart repos
+        run: |
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo add vector https://packages.timber.io/helm/latest
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
