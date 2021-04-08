@@ -10,9 +10,9 @@ dependencies:
   version: 1.0.0
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.1
+  version: 1.0.2
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.12.2
-digest: sha256:5d569f58d414c9f10d9cfa37e20783e207204426d224349276604fd034ba94b4
-generated: "2021-04-08T08:06:33.496812+02:00"
+digest: sha256:1664bba08f66fe4d8c848fcc267fba2abf8c85f24f7e8fc07890415ad235ae9b
+generated: "2021-04-08T10:14:57.597488+02:00"
