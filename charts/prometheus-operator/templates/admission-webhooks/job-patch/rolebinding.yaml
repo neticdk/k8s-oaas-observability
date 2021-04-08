@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ template "fullname" . }}-admission
+  name: {{ template "prometheus-operator.admission.fullname" . }}
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade,post-install,post-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
@@ -10,9 +10,9 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "fullname" . }}-admission
+  name: {{ template "prometheus-operator.admission.fullname" . }}
 subjects:
   - kind: ServiceAccount
-    name: {{ template "fullname" . }}-admission
+    name: {{ template "prometheus-operator.admission.fullname" . }}
     namespace: {{ .Release.Namespace }}
 {{- end }}

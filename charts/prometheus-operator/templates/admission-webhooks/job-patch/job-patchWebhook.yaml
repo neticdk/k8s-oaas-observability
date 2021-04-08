@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name:  {{ template "fullname" . }}-admission-patch
+  name:  {{ template "prometheus-operator.patch-job.fullname" . }}
   annotations:
     "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
@@ -14,7 +14,7 @@ spec:
   {{- end }}
   template:
     metadata:
-      name:  {{ template "fullname" . }}-admission-patch
+      name:  {{ template "prometheus-operator.patch-job.fullname" . }}
 {{- with .Values.prometheusOperator.admissionWebhooks.patch.podAnnotations }}
       annotations:
 {{ toYaml .  | indent 8 }}
@@ -34,14 +34,14 @@ spec:
           imagePullPolicy: {{ .Values.prometheusOperator.admissionWebhooks.patch.image.pullPolicy }}
           args:
             - patch
-            - --webhook-name={{ template "fullname" . }}-admission
+            - --webhook-name={{ template "prometheus-operator.admission.fullname" . }}
             - --namespace={{ .Release.Namespace }}
-            - --secret-name={{ template "fullname" . }}-admission
+            - --secret-name={{ template "prometheus-operator.admission.fullname" . }}
             - --patch-failure-policy={{ .Values.prometheusOperator.admissionWebhooks.failurePolicy }}
           resources:
 {{ toYaml .Values.prometheusOperator.admissionWebhooks.patch.resources | indent 12 }}
       restartPolicy: OnFailure
-      serviceAccountName: {{ template "fullname" . }}-admission
+      serviceAccountName: {{ template "prometheus-operator.admission.fullname" . }}
       {{- with .Values.prometheusOperator.admissionWebhooks.patch.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
