@@ -1,8 +1,8 @@
-# netic-oaas
+# oaas-observability
 
-![Version: 1.1.5](https://img.shields.io/badge/Version-1.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.7](https://img.shields.io/badge/Version-1.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
-A Helm chart to collect Kubernetes logs with Vector
+A Helm chart to deploy obeservability stack on Kubernetes
 
 **Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
 
@@ -12,7 +12,7 @@ To install the chart with the release name `my-release`:
 
 ```bash
 $ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
-$ helm install my-release netic-oaas/netic-oaas
+$ helm install my-release netic-oaas/oaas-observability
 ```
 
 ## Source Code
@@ -26,8 +26,8 @@ $ helm install my-release netic-oaas/netic-oaas
 | file://../kube-state-metrics | kube-state-metrics | * |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 6.1.8 |
-| https://neticdk.github.io/vector | vector-agent | 0.11.1 |
+| https://grafana.github.io/helm-charts | grafana | 6.7.3 |
+| https://packages.timber.io/helm/latest | vector-agent | 0.12.2 |
 
 ## Configuration
 
@@ -327,7 +327,9 @@ $ helm install my-release netic-oaas/netic-oaas
 | prometheus.serviceMonitor.scheme | string | `""` |  |
 | prometheus.serviceMonitor.selfMonitor | bool | `true` |  |
 | prometheus.serviceMonitor.tlsConfig | object | `{}` |  |
+| vector-agent.hostMetricsSource.enabled | bool | `false` |  |
 | vector-agent.kubernetesLogsSource.rawConfig | string | `"annotation_fields.container_image = \"image\"\nannotation_fields.container_name = \"container\"\nannotation_fields.pod_labels = \"labels\"\nannotation_fields.pod_name = \"pod\"\nannotation_fields.pod_namespace = \"namespace\"\nannotation_fields.pod_node_name = \"node\"\nannotation_fields.pod_uid = \"name\"\n"` |  |
+| vector-agent.prometheusSink.enabled | bool | `false` |  |
 | vector-agent.psp.enabled | bool | `true` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.vectorSink.enabled | bool | `false` |  |
