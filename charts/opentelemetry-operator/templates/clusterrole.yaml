@@ -4,7 +4,7 @@ kind: ClusterRole
 metadata:
   creationTimestamp: null
   name: {{ include "opentelemetry-operator.fullname" . }}-manager-role
-  labels: {{ include "opentelemetry-operator.labels" . | indent 4 }}
+  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
   - ""
@@ -122,7 +122,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ include "opentelemetry-operator.fullname" . }}-metrics-reader
-  labels: {{ include "opentelemetry-operator.labels" . | indent 4 }}
+  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
 rules:
 - nonResourceURLs:
   - /metrics
@@ -133,7 +133,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ include "opentelemetry-operator.fullname" . }}-proxy-role
-  labels: {{ include "opentelemetry-operator.labels" . | indent 4 }}
+  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
   - authentication.k8s.io

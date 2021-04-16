@@ -34,10 +34,11 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "opentelemetry-operator.labels" -}}
-app.kubernetes.io/name: {{ include "opentelemetry-operator.name" . }}
 helm.sh/chart: {{ include "opentelemetry-operator.chart" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
 {{ include "opentelemetry-operator.selectorLabels" . }}
+{{- if .Values.podLabels}}
+{{ toYaml .Values.podLabels }}
+{{- end }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -49,6 +50,14 @@ Selector labels
 */}}
 {{- define "opentelemetry-operator.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "opentelemetry-operator.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
+Match labels
+*/}}
+{{- define "opentelemetry-operator.matchLabels" }}
+app.kubernetes.io/name: {{ template "opentelemetry-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 

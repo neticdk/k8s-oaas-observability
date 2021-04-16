@@ -49,6 +49,15 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+controllerManagerMetricsService:
+  port: 8443
+  annotations: {}
+
+webhookService:
+  port: 443
+  annotations: {}
+
+podLabels: {}
 podAnnotations: {}
 
 service:

@@ -3,7 +3,7 @@ kind: Certificate
 metadata:
   name: {{ include "opentelemetry-operator.fullname" . }}-serving-cert
   namespace: {{ .Release.Namespace }}
-  labels: {{ include "opentelemetry-operator.labels" . | indent 4 }}
+  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
 spec:
   dnsNames:
   - {{ include "opentelemetry-operator.fullname" . }}-webhook-service.{{ include "opentelemetry-operator.fullname" . }}-system.svc

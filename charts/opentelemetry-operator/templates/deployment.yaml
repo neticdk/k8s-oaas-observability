@@ -9,13 +9,10 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      control-plane: controller-manager
+    matchLabels: {{ include "opentelemetry-operator.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      labels:
-        control-plane: controller-manager
-{{ include "opentelemetry-operator.labels" . | indent 8 }}
+      labels: {{ include "opentelemetry-operator.matchLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
