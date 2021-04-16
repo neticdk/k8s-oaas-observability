@@ -24,10 +24,6 @@ $ helm install my-release netic-oaas/opentelemetry-operator
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| autoscaling.enabled | bool | `false` |  |
-| autoscaling.maxReplicas | int | `100` |  |
-| autoscaling.minReplicas | int | `1` |  |
-| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | controllerManagerMetricsService.annotations | object | `{}` |  |
 | controllerManagerMetricsService.port | int | `8443` |  |
 | fullnameOverride | string | `""` |  |
@@ -56,8 +52,6 @@ $ helm install my-release netic-oaas/opentelemetry-operator
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| service.port | int | `80` |  |
-| service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |

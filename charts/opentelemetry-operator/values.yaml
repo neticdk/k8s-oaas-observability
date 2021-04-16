@@ -59,14 +59,3 @@ webhookService:
 
 podLabels: {}
 podAnnotations: {}
-
-service:
-  type: ClusterIP
-  port: 80
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
