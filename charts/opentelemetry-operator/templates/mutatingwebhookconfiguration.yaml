@@ -1,0 +1,52 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "opentelemetry-operator.fullname" . }}-serving-cert
+  name: {{ include "opentelemetry-operator.fullname" . }}-mutating-webhook-configuration
+  labels: {{ include "opentelemetry-operator.labels" . | indent 4 }}
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    caBundle: Cg==
+    service:
+      name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /mutate-opentelemetry-io-v1alpha1-opentelemetrycollector
+  failurePolicy: Fail
+  name: mopentelemetrycollector.kb.io
+  rules:
+  - apiGroups:
+    - opentelemetry.io
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - opentelemetrycollectors
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    caBundle: Cg==
+    service:
+      name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /mutate-v1-pod
+  failurePolicy: Ignore
+  name: mpod.kb.io
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - pods
+  sideEffects: None

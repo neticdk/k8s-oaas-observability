@@ -1,0 +1,31 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "opentelemetry-operator.fullname" . }}-serving-cert
+  name: {{ include "opentelemetry-operator.fullname" . }}-validating-webhook-configuration
+  labels: {{ include "opentelemetry-operator.labels" . | indent 4 }}
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    caBundle: Cg==
+    service:
+      name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validate-opentelemetry-io-v1alpha1-opentelemetrycollector
+  failurePolicy: Fail
+  name: vopentelemetrycollector.kb.io
+  rules:
+  - apiGroups:
+    - opentelemetry.io
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    - DELETE
+    resources:
+    - opentelemetrycollectors
+  sideEffects: None

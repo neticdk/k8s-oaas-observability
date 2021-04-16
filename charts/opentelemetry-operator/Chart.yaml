@@ -1,0 +1,12 @@
+apiVersion: v2
+name: opentelemetry-operator
+type: application
+description: Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
+home: https://github.com/neticdk/k8s-oaas-observability
+sources:
+  - https://github.com/neticdk/k8s-oaas-observability
+version: 0.1.0
+appVersion: 0.23.0
+maintainers:
+  - name: KimNorgaard
+    email: kn@netic.dk

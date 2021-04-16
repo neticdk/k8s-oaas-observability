@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    control-plane: controller-manager
+{{ include "opentelemetry-operator.labels" . | indent 4 }}
+  name: {{ include "opentelemetry-operator.fullname" . }}-controller-manager
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+{{ include "opentelemetry-operator.labels" . | indent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ template "opentelemetry-operator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - args:
+        - --metrics-addr={{ .Values.manager.args.metricsaddr }}
+        - --enable-leader-election
+        command:
+        - /manager
+        image: "{{ .Values.manager.image.repository }}:{{ .Values.manager.image.tag }}"
+        imagePullPolicy: {{ .Values.manager.image.pullPolicy }}
+        name: manager
+        securityContext:
+          {{- toYaml .Values.manager.securityContext | nindent 12 }}
+        ports:
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
+        resources:
+          {{- toYaml .Values.manager.resources | nindent 12 }}
+        volumeMounts:
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+          readOnly: true
+      - args:
+        - --secure-listen-address={{ .Values.kubeRbacProxy.args.securelistenaddress }}
+        - --upstream={{ .Values.kubeRbacProxy.args.upstream }}
+        - --logtostderr={{ .Values.kubeRbacProxy.args.logtostderr }}
+        - --v={{ .Values.kubeRbacProxy.args.v }}
+        image: "{{ .Values.kubeRbacProxy.image.repository }}:{{ .Values.kubeRbacProxy.image.tag }}"
+        imagePullPolicy: {{ .Values.kubeRbacProxy.image.pullPolicy }}
+        name: kube-rbac-proxy
+        securityContext:
+          {{- toYaml .Values.kubeRbacProxy.securityContext | nindent 12 }}
+        ports:
+        - containerPort: 8443
+          name: https
+        resources:
+          {{- toYaml .Values.kubeRbacProxy.resources | nindent 12 }}
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: opentelemetry-operator-controller-manager-service-cert
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
