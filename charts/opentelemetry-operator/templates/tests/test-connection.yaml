@@ -8,8 +8,12 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
+    - name: wget-webhook
       image: busybox
       command: ['wget']
-      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.webhookService.port }}']
+    - name: wget-controller-manager
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.controllerManagerMetricsService.port }}']
   restartPolicy: Never
