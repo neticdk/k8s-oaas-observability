@@ -36,8 +36,8 @@ Common labels
 {{- define "opentelemetry-operator.labels" -}}
 helm.sh/chart: {{ include "opentelemetry-operator.chart" . }}
 {{ include "opentelemetry-operator.selectorLabels" . }}
-{{- if .Values.podLabels}}
-{{ toYaml .Values.podLabels }}
+{{- if .Values.opentelemetryOperator.podLabels}}
+{{ toYaml .Values.opentelemetryOperator.podLabels }}
 {{- end }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
@@ -56,7 +56,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{/*
 Match labels
 */}}
-{{- define "opentelemetry-operator.matchLabels" }}
+{{- define "opentelemetry-operator.matchLabels" -}}
 app.kubernetes.io/name: {{ template "opentelemetry-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
@@ -65,9 +65,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "opentelemetry-operator.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "opentelemetry-operator.fullname" .) .Values.serviceAccount.name }}
+{{- if .Values.opentelemetryOperator.serviceAccount.create }}
+{{- default (include "opentelemetry-operator.fullname" .) .Values.opentelemetryOperator.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- default "default" .Values.opentelemetryOperator.serviceAccount.name }}
 {{- end }}
 {{- end }}

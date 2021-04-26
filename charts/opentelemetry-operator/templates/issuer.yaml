@@ -1,3 +1,4 @@
+{{- if .Values.opentelemetryOperator.enabled }}
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
 metadata:
@@ -6,3 +7,4 @@ metadata:
   labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
 spec:
   selfSigned: {}
+{{- end }}

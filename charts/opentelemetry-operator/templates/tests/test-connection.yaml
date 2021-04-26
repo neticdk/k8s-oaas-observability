@@ -1,3 +1,4 @@
+{{- if .Values.opentelemetryOperator.enabled }}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,9 +12,10 @@ spec:
     - name: wget-webhook
       image: busybox
       command: ['wget']
-      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.webhookService.port }}']
+      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.opentelemetryOperator.webhookService.port }}']
     - name: wget-controller-manager
       image: busybox
       command: ['wget']
-      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.controllerManagerMetricsService.port }}']
+      args: ['{{ include "opentelemetry-operator.fullname" . }}:{{ .Values.opentelemetryOperator.controllerManagerMetricsService.port }}']
   restartPolicy: Never
+{{- end }}

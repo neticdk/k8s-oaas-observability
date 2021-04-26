@@ -1,3 +1,5 @@
+{{- if .Values.opentelemetryOperator.enabled }}
+{{- if .Values.opentelemetryOperator.controllerManagerMetricsService.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -6,16 +8,18 @@ metadata:
 {{ include "opentelemetry-operator.labels" . | indent 4 }}
   name: {{ include "opentelemetry-operator.fullname" . }}-controller-manager-metrics-service
   namespace: {{ .Release.Namespace }}
+{{- if .Values.opentelemetryOperator.controllerManagerMetricsService.annotations }}
   annotations:
-    {{- if .Values.controllerManagerMetricsService.annotations }}
-    {{- toYaml .Values.controllerManagerMetricsService.annotations | nindent 4 }}
-    {{- end }}
+{{ toYaml .Values.opentelemetryOperator.controllerManagerMetricsService.annotations | indent 4 }}
+{{- end }}
 spec:
   ports:
   - name: https
-    port: {{ .Values.controllerManagerMetricsService.port }}
+    port: {{ .Values.opentelemetryOperator.controllerManagerMetricsService.port }}
     targetPort: https
   selector: {{ include "opentelemetry-operator.matchLabels" . | nindent 4 }}
+{{- end }}
+{{- if .Values.opentelemetryOperator.webhookService.enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -23,12 +27,14 @@ metadata:
   labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
   name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
   namespace: {{ .Release.Namespace }}
+{{- if .Values.opentelemetryOperator.webhookService.annotations }}
   annotations:
-    {{- if .Values.webhookService.annotations }}
-    {{- toYaml .Values.webhookService.annotations | nindent 4 }}
-    {{- end }}
+{{ toYaml .Values.opentelemetryOperator.webhookService.annotations | indent 4 }}
+{{- end }}
 spec:
   ports:
-  - port: {{ .Values.webhookService.port }}
+  - port: {{ .Values.opentelemetryOperator.webhookService.port }}
     targetPort: 9443
   selector: {{ include "opentelemetry-operator.matchLabels" . | nindent 4 }}
+{{- end }}
+{{- end }}

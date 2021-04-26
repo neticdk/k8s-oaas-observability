@@ -1381,3 +1381,12 @@ grafana:
     datasources:
       enabled: true
       label: netic_grafana_datasource
+
+## Values for included opentelemetry-operator chart
+##
+opentelemetry-operator:
+  enabled: true
+  manager:
+    enabled: true
+  kubeRbacProxy:
+    enabled: true

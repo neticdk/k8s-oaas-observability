@@ -1,3 +1,4 @@
+{{- if .Values.opentelemetryOperator.enabled }}
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
@@ -7,8 +8,10 @@ metadata:
 spec:
   dnsNames:
   - {{ include "opentelemetry-operator.fullname" . }}-webhook-service.{{ include "opentelemetry-operator.fullname" . }}-system.svc
+  - {{ include "opentelemetry-operator.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc
   - {{ include "opentelemetry-operator.fullname" . }}-webhook-service.{{ include "opentelemetry-operator.fullname" . }}-system.svc.cluster.local
   issuerRef:
     kind: Issuer
     name: {{ include "opentelemetry-operator.fullname" . }}-selfsigned-issuer
   secretName: {{ include "opentelemetry-operator.fullname" . }}-controller-manager-service-cert
+{{- end }}

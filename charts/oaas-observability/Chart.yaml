@@ -24,6 +24,10 @@ dependencies:
     version: "*"
     repository: file://../prometheus-operator
     condition: prometheus-operator.enabled
+  - name: opentelemetry-operator
+    version: "*"
+    repository: file://../opentelemetry-operator
+    condition: opentelemetry-operator.enabled
   - name: vector-agent
     version: 0.12.2
     repository: https://packages.timber.io/helm/latest
