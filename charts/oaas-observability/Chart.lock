@@ -7,18 +7,18 @@ dependencies:
   version: v1.3.1
 - name: kube-state-metrics
   repository: file://../kube-state-metrics
-  version: 1.0.2
+  version: 1.0.3
 - name: prometheus-node-exporter
   repository: file://../prometheus-node-exporter
-  version: 1.0.0
+  version: 1.0.1
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.3
+  version: 1.0.4
 - name: opentelemetry-operator
   repository: file://../opentelemetry-operator
   version: 0.1.0
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.12.2
-digest: sha256:22ebed10460276304bcd063f5c8532a74d8d3a12b992f4d0f7b329f3bb06ca7a
-generated: "2021-04-27T10:25:54.823479264+02:00"
+digest: sha256:17a428a76e30db98014a34a7bb27d31747ad62dc763b6c75b9afc0cba8500615
+generated: "2021-04-27T10:42:01.312056081+02:00"
