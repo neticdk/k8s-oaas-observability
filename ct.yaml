@@ -2,3 +2,4 @@ target-branch: main
 chart-repos:
   - grafana=https://grafana.github.io/helm-charts
   - vector=https://packages.timber.io/helm/latest
+  - cert-manager=https://charts.jetstack.io
