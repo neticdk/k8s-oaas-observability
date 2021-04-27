@@ -27,6 +27,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../opentelemetry-operator | opentelemetry-operator | * |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
+| https://charts.jetstack.io | cert-manager | v1.3.1 |
 | https://grafana.github.io/helm-charts | grafana | 6.7.3 |
 | https://packages.timber.io/helm/latest | vector-agent | 0.12.2 |
 
@@ -119,6 +120,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.servicePerReplica.type | string | `"ClusterIP"` |  |
 | alertmanager.templateFiles | object | `{}` |  |
 | alertmanager.tplConfig | bool | `false` |  |
+| cert-manager.enabled | bool | `false` |  |
+| cert-manager.installCRDs | bool | `true` |  |
 | coreDns.enabled | bool | `false` |  |
 | coreDns.service.port | int | `9153` |  |
 | coreDns.service.targetPort | int | `9153` |  |
