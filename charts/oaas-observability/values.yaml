@@ -1382,17 +1382,11 @@ grafana:
       enabled: true
       label: netic_grafana_datasource
 
-# Configuration for (optional) cert-manager
-# see https://github.com/jetstack/cert-manager/tree/master/deploy/charts/cert-manager
-cert-manager:
-  enabled: false
-  installCRDs: true
-
 ## Values for included opentelemetry-operator chart
 ##
 opentelemetry-operator:
   enabled: true
-  manager:
-    enabled: true
-  kubeRbacProxy:
-    enabled: true
+
+  cert-manager:
+    enabled: false
+    installCRDs: true

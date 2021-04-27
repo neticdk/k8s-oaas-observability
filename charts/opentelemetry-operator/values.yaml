@@ -6,6 +6,12 @@ global:
 nameOverride: ""
 fullnameOverride: ""
 
+# Configuration for (optional) cert-manager
+# see https://github.com/jetstack/cert-manager/tree/master/deploy/charts/cert-manager
+cert-manager:
+  enabled: false
+  installCRDs: true
+
 opentelemetryOperator:
   enabled: true
 

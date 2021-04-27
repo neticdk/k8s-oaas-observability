@@ -4,3 +4,7 @@
 grafana:
   testFramework:
     enabled: true
+
+opentelemetry-operator:
+  cert-manager:
+    enabled: true

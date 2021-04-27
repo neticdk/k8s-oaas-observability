@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 1.1.9](https://img.shields.io/badge/Version-1.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.10](https://img.shields.io/badge/Version-1.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -27,7 +27,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../opentelemetry-operator | opentelemetry-operator | * |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://charts.jetstack.io | cert-manager | v1.3.1 |
 | https://grafana.github.io/helm-charts | grafana | 6.7.3 |
 | https://packages.timber.io/helm/latest | vector-agent | 0.12.2 |
 
@@ -120,8 +119,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.servicePerReplica.type | string | `"ClusterIP"` |  |
 | alertmanager.templateFiles | object | `{}` |  |
 | alertmanager.tplConfig | bool | `false` |  |
-| cert-manager.enabled | bool | `false` |  |
-| cert-manager.installCRDs | bool | `true` |  |
 | coreDns.enabled | bool | `false` |  |
 | coreDns.service.port | int | `9153` |  |
 | coreDns.service.targetPort | int | `9153` |  |
@@ -242,9 +239,9 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
+| opentelemetry-operator.cert-manager.enabled | bool | `false` |  |
+| opentelemetry-operator.cert-manager.installCRDs | bool | `true` |  |
 | opentelemetry-operator.enabled | bool | `true` |  |
-| opentelemetry-operator.kubeRbacProxy.enabled | bool | `true` |  |
-| opentelemetry-operator.manager.enabled | bool | `true` |  |
 | prometheus-operator.enabled | bool | `true` |  |
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |

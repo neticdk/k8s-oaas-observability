@@ -2,9 +2,6 @@ dependencies:
 - name: grafana
   repository: https://grafana.github.io/helm-charts
   version: 6.7.3
-- name: cert-manager
-  repository: https://charts.jetstack.io
-  version: v1.3.1
 - name: kube-state-metrics
   repository: file://../kube-state-metrics
   version: 1.0.3
@@ -16,9 +13,9 @@ dependencies:
   version: 1.0.4
 - name: opentelemetry-operator
   repository: file://../opentelemetry-operator
-  version: 0.1.0
+  version: 0.1.1
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.12.2
-digest: sha256:17a428a76e30db98014a34a7bb27d31747ad62dc763b6c75b9afc0cba8500615
-generated: "2021-04-27T10:42:01.312056081+02:00"
+digest: sha256:4e39e984df52ace6069b03679463834e80da50c9f8b25ad05675aeeaa7c23a0f
+generated: "2021-04-27T11:10:35.823827107+02:00"
