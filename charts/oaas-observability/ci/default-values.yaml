@@ -5,6 +5,6 @@ grafana:
   testFramework:
     enabled: true
 
-opentelemetry-operator:
+otel-operator:
   cert-manager:
     enabled: true

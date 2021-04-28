@@ -1,0 +1,17 @@
+{{- if .Values.opentelemetryOperator.enabled }}
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ include "otel-operator.fullname" . }}-serving-cert
+  namespace: {{ .Release.Namespace }}
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
+spec:
+  dnsNames:
+  - {{ include "otel-operator.fullname" . }}-webhook-service.{{ include "otel-operator.fullname" . }}-system.svc
+  - {{ include "otel-operator.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc
+  - {{ include "otel-operator.fullname" . }}-webhook-service.{{ include "otel-operator.fullname" . }}-system.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: {{ include "otel-operator.fullname" . }}-selfsigned-issuer
+  secretName: {{ include "otel-operator.fullname" . }}-controller-manager-service-cert
+{{- end }}

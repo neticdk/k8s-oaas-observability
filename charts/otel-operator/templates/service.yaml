@@ -5,8 +5,8 @@ kind: Service
 metadata:
   labels:
     control-plane: controller-manager
-{{ include "opentelemetry-operator.labels" . | indent 4 }}
-  name: {{ include "opentelemetry-operator.fullname" . }}-controller-manager-metrics-service
+{{ include "otel-operator.labels" . | indent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-controller-manager-metrics-service
   namespace: {{ .Release.Namespace }}
 {{- if .Values.opentelemetryOperator.controllerManagerMetricsService.annotations }}
   annotations:
@@ -17,15 +17,15 @@ spec:
   - name: https
     port: {{ .Values.opentelemetryOperator.controllerManagerMetricsService.port }}
     targetPort: https
-  selector: {{ include "opentelemetry-operator.matchLabels" . | nindent 4 }}
+  selector: {{ include "otel-operator.matchLabels" . | nindent 4 }}
 {{- end }}
 {{- if .Values.opentelemetryOperator.webhookService.enabled }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
-  name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-webhook-service
   namespace: {{ .Release.Namespace }}
 {{- if .Values.opentelemetryOperator.webhookService.annotations }}
   annotations:
@@ -35,6 +35,6 @@ spec:
   ports:
   - port: {{ .Values.opentelemetryOperator.webhookService.port }}
     targetPort: 9443
-  selector: {{ include "opentelemetry-operator.matchLabels" . | nindent 4 }}
+  selector: {{ include "otel-operator.matchLabels" . | nindent 4 }}
 {{- end }}
 {{- end }}

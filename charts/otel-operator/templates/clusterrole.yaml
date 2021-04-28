@@ -5,8 +5,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   creationTimestamp: null
-  name: {{ include "opentelemetry-operator.fullname" . }}-manager-role
-  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-manager-role
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
   - ""
@@ -124,8 +124,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "opentelemetry-operator.fullname" . }}-metrics-reader
-  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-metrics-reader
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
 rules:
 - nonResourceURLs:
   - /metrics
@@ -136,8 +136,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "opentelemetry-operator.fullname" . }}-proxy-role
-  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-proxy-role
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
   - authentication.k8s.io

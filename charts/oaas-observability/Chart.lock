@@ -11,11 +11,11 @@ dependencies:
 - name: prometheus-operator
   repository: file://../prometheus-operator
   version: 1.0.4
-- name: opentelemetry-operator
-  repository: file://../opentelemetry-operator
+- name: otel-operator
+  repository: file://../otel-operator
   version: 0.1.2
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.12.2
-digest: sha256:b83b557bfdc734170594375839e333b1480b28fbb96845f8fac8b9e7f8caa4ab
-generated: "2021-04-28T10:42:18.6821823+02:00"
+digest: sha256:4885d29cddd9492f2d859ddb11e04bce07e512ea05152f22fba33a47bb233b07
+generated: "2021-04-28T11:12:10.532197288+02:00"

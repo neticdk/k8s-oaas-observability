@@ -1382,11 +1382,11 @@ grafana:
       enabled: true
       label: netic_grafana_datasource
 
-## Values for included opentelemetry-operator chart
+## Values for included otel-operator chart
 ##
-opentelemetry-operator:
+otel-operator:
   enabled: true
 
   cert-manager:
     enabled: false
-    installCRDs: true
+    installCRDs: false

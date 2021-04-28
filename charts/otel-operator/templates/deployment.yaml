@@ -4,22 +4,22 @@ kind: Deployment
 metadata:
   labels:
     control-plane: controller-manager
-{{ include "opentelemetry-operator.labels" . | indent 4 }}
-  name: {{ include "opentelemetry-operator.fullname" . }}-controller-manager
+{{ include "otel-operator.labels" . | indent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-controller-manager
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
-    matchLabels: {{ include "opentelemetry-operator.matchLabels" . | nindent 6 }}
+    matchLabels: {{ include "otel-operator.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      labels: {{ include "opentelemetry-operator.matchLabels" . | nindent 8 }}
+      labels: {{ include "otel-operator.matchLabels" . | nindent 8 }}
     spec:
     {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ template "opentelemetry-operator.serviceAccountName" . }}
+      serviceAccountName: {{ template "otel-operator.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.opentelemetryOperator.podSecurityContext | nindent 8 }}
       containers:
@@ -67,7 +67,7 @@ spec:
       - name: cert
         secret:
           defaultMode: 420
-          secretName: opentelemetry-operator-controller-manager-service-cert
+          secretName: otel-operator-controller-manager-service-cert
       {{- with .Values.opentelemetryOperator.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

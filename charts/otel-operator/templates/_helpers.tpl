@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "opentelemetry-operator.name" -}}
+{{- define "otel-operator.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "opentelemetry-operator.fullname" -}}
+{{- define "otel-operator.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "opentelemetry-operator.chart" -}}
+{{- define "otel-operator.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "opentelemetry-operator.labels" -}}
-helm.sh/chart: {{ include "opentelemetry-operator.chart" . }}
-{{ include "opentelemetry-operator.selectorLabels" . }}
+{{- define "otel-operator.labels" -}}
+helm.sh/chart: {{ include "otel-operator.chart" . }}
+{{ include "otel-operator.selectorLabels" . }}
 {{- if .Values.opentelemetryOperator.podLabels}}
 {{ toYaml .Values.opentelemetryOperator.podLabels }}
 {{- end }}
@@ -48,25 +48,25 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "opentelemetry-operator.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "opentelemetry-operator.name" . }}
+{{- define "otel-operator.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "otel-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Match labels
 */}}
-{{- define "opentelemetry-operator.matchLabels" -}}
-app.kubernetes.io/name: {{ template "opentelemetry-operator.name" . }}
+{{- define "otel-operator.matchLabels" -}}
+app.kubernetes.io/name: {{ template "otel-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "opentelemetry-operator.serviceAccountName" -}}
+{{- define "otel-operator.serviceAccountName" -}}
 {{- if .Values.opentelemetryOperator.serviceAccount.create }}
-{{- default (include "opentelemetry-operator.fullname" .) .Values.opentelemetryOperator.serviceAccount.name }}
+{{- default (include "otel-operator.fullname" .) .Values.opentelemetryOperator.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.opentelemetryOperator.serviceAccount.name }}
 {{- end }}

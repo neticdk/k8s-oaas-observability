@@ -3,9 +3,9 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   annotations:
-    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "opentelemetry-operator.fullname" . }}-serving-cert
-  name: {{ include "opentelemetry-operator.fullname" . }}-mutating-webhook-configuration
-  labels: {{ include "opentelemetry-operator.labels" . | nindent 4 }}
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "otel-operator.fullname" . }}-serving-cert
+  name: {{ include "otel-operator.fullname" . }}-mutating-webhook-configuration
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
 webhooks:
 - admissionReviewVersions:
   - v1
@@ -13,7 +13,7 @@ webhooks:
   clientConfig:
     caBundle: Cg==
     service:
-      name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
+      name: {{ include "otel-operator.fullname" . }}-webhook-service
       namespace: {{ .Release.Namespace }}
       path: /mutate-opentelemetry-io-v1alpha1-opentelemetrycollector
   failurePolicy: Fail
@@ -35,7 +35,7 @@ webhooks:
   clientConfig:
     caBundle: Cg==
     service:
-      name: {{ include "opentelemetry-operator.fullname" . }}-webhook-service
+      name: {{ include "otel-operator.fullname" . }}-webhook-service
       namespace: {{ .Release.Namespace }}
       path: /mutate-v1-pod
   failurePolicy: Ignore
