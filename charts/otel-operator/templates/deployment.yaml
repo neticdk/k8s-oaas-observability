@@ -67,7 +67,7 @@ spec:
       - name: cert
         secret:
           defaultMode: 420
-          secretName: otel-operator-controller-manager-service-cert
+          secretName: {{ include "otel-operator.fullname" . }}-controller-manager-service-cert
       {{- with .Values.opentelemetryOperator.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

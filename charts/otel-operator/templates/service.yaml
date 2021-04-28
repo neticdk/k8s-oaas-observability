@@ -6,7 +6,7 @@ metadata:
   labels:
     control-plane: controller-manager
 {{ include "otel-operator.labels" . | indent 4 }}
-  name: {{ include "otel-operator.fullname" . }}-controller-manager-metrics-service
+  name: {{ include "otel-operator.fullname" . }}-ctrl-mgmt-metr-svc
   namespace: {{ .Release.Namespace }}
 {{- if .Values.opentelemetryOperator.controllerManagerMetricsService.annotations }}
   annotations:
