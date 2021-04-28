@@ -1,6 +1,6 @@
 # opentelemetry-operator
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -23,6 +23,7 @@ $ helm install my-release netic-oaas/opentelemetry-operator
 
 | Repository | Name | Version |
 |------------|------|---------|
+| file://../cert-manager-crds | cert-manager-crds | * |
 | https://charts.jetstack.io | cert-manager | v1.3.1 |
 
 ## Configuration
@@ -30,7 +31,7 @@ $ helm install my-release netic-oaas/opentelemetry-operator
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | cert-manager.enabled | bool | `false` |  |
-| cert-manager.installCRDs | bool | `true` |  |
+| cert-manager.installCRDs | bool | `false` |  |
 | fullnameOverride | string | `""` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | global.rbac.create | bool | `true` |  |
