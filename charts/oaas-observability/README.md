@@ -1,10 +1,17 @@
 # oaas-observability
 
-![Version: 1.1.7](https://img.shields.io/badge/Version-1.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.13](https://img.shields.io/badge/Version-1.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
 **Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
+
+## A note on cert-manager
+
+oaas-observability depends on cert-manager version 1.3.x. A cert-manager chart
+is included but not enabled by default. It can be enabled by setting the value
+`cert-manager.enabled` to `true`. Otherwise it is assumed that cert-manager has
+been installed.
 
 ## Installing the Chart
 
@@ -24,6 +31,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | Repository | Name | Version |
 |------------|------|---------|
 | file://../kube-state-metrics | kube-state-metrics | * |
+| file://../otel-operator | otel-operator | * |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
 | https://grafana.github.io/helm-charts | grafana | 6.7.3 |
@@ -238,6 +246,9 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
+| otel-operator.cert-manager.enabled | bool | `false` |  |
+| otel-operator.cert-manager.installCRDs | bool | `false` |  |
+| otel-operator.enabled | bool | `true` |  |
 | prometheus-operator.enabled | bool | `true` |  |
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |

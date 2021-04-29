@@ -1,6 +1,6 @@
 # prometheus-operator
 
-![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.42.0](https://img.shields.io/badge/AppVersion-0.42.0-informational?style=flat-square)
+![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.42.0](https://img.shields.io/badge/AppVersion-0.42.0-informational?style=flat-square)
 
 A Helm chart to install Prometheus Operator
 
@@ -86,4 +86,3 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.tlsProxy.image.tag | string | `"v1.5.2"` |  |
 | prometheusOperator.tlsProxy.resources | object | `{}` |  |
 | prometheusOperator.tolerations | list | `[]` | Tolerations for use with node taints ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ |
-

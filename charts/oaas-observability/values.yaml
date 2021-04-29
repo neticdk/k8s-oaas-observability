@@ -1381,3 +1381,12 @@ grafana:
     datasources:
       enabled: true
       label: netic_grafana_datasource
+
+## Values for included otel-operator chart
+##
+otel-operator:
+  enabled: true
+
+  cert-manager:
+    enabled: false
+    installCRDs: false

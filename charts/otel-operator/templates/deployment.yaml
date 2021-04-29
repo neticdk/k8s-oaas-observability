@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    control-plane: controller-manager
+{{ include "otel-operator.labels" . | indent 4 }}
+  name: {{ include "otel-operator.fullname" . }}-ctrl-mgr
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {{ include "otel-operator.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{ include "otel-operator.labels" . | nindent 8 }}
+    spec:
+    {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets: {{ toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ template "otel-operator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.opentelemetryOperator.podSecurityContext | nindent 8 }}
+      containers:
+{{- if .Values.opentelemetryOperator.manager.enabled }}
+      - args:
+        - --metrics-addr={{ .Values.opentelemetryOperator.manager.args.metricsaddr }}
+        - --enable-leader-election
+        command:
+        - /manager
+        image: "{{ .Values.opentelemetryOperator.manager.image.repository }}:{{ .Values.opentelemetryOperator.manager.image.tag }}"
+        imagePullPolicy: {{ .Values.opentelemetryOperator.manager.image.pullPolicy }}
+        name: manager
+        securityContext:
+          {{- toYaml .Values.opentelemetryOperator.manager.securityContext | nindent 12 }}
+        ports:
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
+        resources:
+          {{- toYaml .Values.opentelemetryOperator.manager.resources | nindent 12 }}
+        volumeMounts:
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+          readOnly: true
+{{- end }}
+{{- if .Values.opentelemetryOperator.kubeRbacProxy.enabled }}
+      - args:
+        - --secure-listen-address={{ .Values.opentelemetryOperator.kubeRbacProxy.args.securelistenaddress }}
+        - --upstream={{ .Values.opentelemetryOperator.kubeRbacProxy.args.upstream }}
+        - --logtostderr={{ .Values.opentelemetryOperator.kubeRbacProxy.args.logtostderr }}
+        - --v={{ .Values.opentelemetryOperator.kubeRbacProxy.args.v }}
+        image: "{{ .Values.opentelemetryOperator.kubeRbacProxy.image.repository }}:{{ .Values.opentelemetryOperator.kubeRbacProxy.image.tag }}"
+        imagePullPolicy: {{ .Values.opentelemetryOperator.kubeRbacProxy.image.pullPolicy }}
+        name: kube-rbac-proxy
+        securityContext:
+          {{- toYaml .Values.opentelemetryOperator.kubeRbacProxy.securityContext | nindent 12 }}
+        ports:
+        - containerPort: 8443
+          name: https
+        resources:
+          {{- toYaml .Values.opentelemetryOperator.kubeRbacProxy.resources | nindent 12 }}
+{{- end }}
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: {{ include "otel-operator.servingCertSecretName" . }}
+      {{- with .Values.opentelemetryOperator.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.opentelemetryOperator.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.opentelemetryOperator.tolerations }}
+      tolerations: {{ toYaml . | nindent 8 }}
+      {{- end }}

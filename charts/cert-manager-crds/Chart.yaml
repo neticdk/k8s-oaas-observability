@@ -1,0 +1,16 @@
+apiVersion: v2
+name: cert-manager-crds
+type: application
+description: |
+  Install the CRDs needed by cert-manager. This chart is used by the
+  otel-operator chart. Helm does not handle installing templated CRDs
+  before the resources using the CRDs and so we need to put them in a separate
+  crds directory.
+home: https://cert-manager.io/docs/installation/kubernetes/
+sources:
+  - https://github.com/jetstack/cert-manager
+version: 0.1.2
+appVersion: 1.3.1
+maintainers:
+  - name: KimNorgaard
+    email: kn@netic.dk

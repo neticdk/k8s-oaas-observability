@@ -1,0 +1,77 @@
+global:
+  rbac:
+    create: true
+    imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Configuration for (optional) cert-manager
+# see https://github.com/jetstack/cert-manager/tree/master/deploy/charts/cert-manager
+cert-manager:
+  enabled: false
+  installCRDs: false
+
+opentelemetryOperator:
+  enabled: true
+
+  podSecurityContext: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  podLabels: {}
+
+  manager:
+    enabled: true
+    rbac:
+      create: true
+    image:
+      repository: quay.io/opentelemetry/opentelemetry-operator
+      pullPolicy: IfNotPresent
+      tag: 0.23.0
+    securityContext: {}
+    resources:
+      limits:
+        cpu: 100m
+        memory: 30Mi
+      requests:
+        cpu: 100m
+        memory: 20Mi
+    args:
+      metricsaddr: 127.0.0.1:8080
+
+  kubeRbacProxy:
+    enabled: true
+    rbac:
+      create: true
+    image:
+      repository: gcr.io/kubebuilder/kube-rbac-proxy
+      pullPolicy: IfNotPresent
+      tag: v0.5.0
+    securityContext: {}
+    resources: {}
+    args:
+      securelistenaddress: 0.0.0.0:8443
+      upstream: http://127.0.0.1:8080/
+      logtostderr: true
+      v: 10
+
+  controllerManagerMetricsService:
+    enabled: true
+    port: 8443
+    annotations: {}
+
+  webhookService:
+    enabled: true
+    port: 443
+    annotations: {}
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""

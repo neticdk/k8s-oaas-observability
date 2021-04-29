@@ -4,3 +4,7 @@
 grafana:
   testFramework:
     enabled: true
+
+otel-operator:
+  cert-manager:
+    enabled: true
