@@ -1,10 +1,8 @@
-{{- if .Values.opentelemetryOperator.enabled }}
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
 metadata:
-  name: {{ include "otel-operator.fullname" . }}-selfsigned-issuer
+  name: {{ include "otel-operator.issuerName" . }}
   namespace: {{ .Release.Namespace }}
   labels: {{ include "otel-operator.labels" . | nindent 4 }}
 spec:
   selfSigned: {}
-{{- end }}

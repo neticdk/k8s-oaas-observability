@@ -35,7 +35,7 @@ Common labels
 */}}
 {{- define "otel-operator.labels" -}}
 helm.sh/chart: {{ include "otel-operator.chart" . }}
-{{ include "otel-operator.selectorLabels" . }}
+{{ include "otel-operator.matchLabels" . }}
 {{- if .Values.opentelemetryOperator.podLabels}}
 {{ toYaml .Values.opentelemetryOperator.podLabels }}
 {{- end }}
@@ -43,14 +43,6 @@ helm.sh/chart: {{ include "otel-operator.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels
-*/}}
-{{- define "otel-operator.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "otel-operator.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
@@ -70,4 +62,39 @@ Create the name of the service account to use
 {{- else }}
 {{- default "default" .Values.opentelemetryOperator.serviceAccount.name }}
 {{- end }}
+{{- end }}
+
+{{/*
+Cert name
+*/}}
+{{- define "otel-operator.servingCertName" -}}
+{{- printf "%s-serving-cert" (include "otel-operator.fullname" .) | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Issuer name
+*/}}
+{{- define "otel-operator.issuerName" -}}
+{{- printf "%s-selfsigned-issuer" (include "otel-operator.fullname" .) | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Controller manager service cert secret name
+*/}}
+{{- define "otel-operator.servingCertSecretName" -}}
+{{- printf "%s-ctrl-mgr-svc-crt" (include "otel-operator.fullname" .) | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Webhook service name
+*/}}
+{{- define "otel-operator.webhookServiceName" -}}
+{{- printf "%s-webhook-svc" (include "otel-operator.fullname" .) | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Controllre manager metrics service name
+*/}}
+{{- define "otel-operator.controllerManagerMetricsServiceName" -}}
+{{- printf "%s-ctrl-mgr-metr-svc" (include "otel-operator.fullname" .) | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}

@@ -5,6 +5,13 @@
 
 {{ template "chart.homepageLine" . }}
 
+## A note on cert-manager
+
+oaas-observability depends on cert-manager version 1.3.x. A cert-manager chart
+is included but not enabled by default. It can be enabled by setting the value
+`cert-manager.enabled` to `true`. Otherwise it is assumed that cert-manager has
+been installed.
+
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:

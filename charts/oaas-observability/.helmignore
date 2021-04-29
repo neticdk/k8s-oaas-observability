@@ -21,6 +21,6 @@
 *.tmproj
 
 # Files for development
-scripts
-local
+bin/
+ci/
 README.md.gotmpl

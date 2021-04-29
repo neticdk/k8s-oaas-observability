@@ -1,10 +1,9 @@
-{{- if .Values.opentelemetryOperator.enabled }}
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
-    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "otel-operator.fullname" . }}-serving-cert
-  name: {{ include "otel-operator.fullname" . }}-validating-webhook-configuration
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "otel-operator.servingCertName" . }}
+  name: {{ include "otel-operator.fullname" . }}-validating-webhook-cfg
   labels: {{ include "otel-operator.labels" . | nindent 4 }}
 webhooks:
 - admissionReviewVersions:
@@ -13,7 +12,7 @@ webhooks:
   clientConfig:
     caBundle: Cg==
     service:
-      name: {{ include "otel-operator.fullname" . }}-webhook-service
+      name: {{ include "otel-operator.webhookServiceName" . }}
       namespace: {{ .Release.Namespace }}
       path: /validate-opentelemetry-io-v1alpha1-opentelemetrycollector
   failurePolicy: Fail
@@ -30,4 +29,3 @@ webhooks:
     resources:
     - opentelemetrycollectors
   sideEffects: None
-{{- end }}

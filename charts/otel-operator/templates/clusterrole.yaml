@@ -1,11 +1,10 @@
-{{- if .Values.opentelemetryOperator.enabled }}
 {{- if .Values.global.rbac.create }}
 {{- if .Values.opentelemetryOperator.manager.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   creationTimestamp: null
-  name: {{ include "otel-operator.fullname" . }}-manager-role
+  name: {{ include "otel-operator.fullname" . }}-mgr-role
   labels: {{ include "otel-operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
@@ -151,6 +150,5 @@ rules:
   - subjectaccessreviews
   verbs:
   - create
-{{- end }}
 {{- end }}
 {{- end }}

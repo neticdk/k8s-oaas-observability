@@ -13,9 +13,9 @@ dependencies:
   version: 1.0.4
 - name: otel-operator
   repository: file://../otel-operator
-  version: 0.1.4
+  version: 0.1.5
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.12.2
-digest: sha256:5eb4a568c3d60e5f527ba3e846799513802a9bbbf51f4e1939c69558cf2cab2c
-generated: "2021-04-28T13:38:26.881459225+02:00"
+digest: sha256:511031cebc87be44c230c56a800e45f57d0ea5a1b6eedd9ad53285ab7c166b22
+generated: "2021-04-29T10:46:18.590896613+02:00"

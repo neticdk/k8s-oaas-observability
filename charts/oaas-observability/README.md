@@ -1,10 +1,17 @@
 # oaas-observability
 
-![Version: 1.1.12](https://img.shields.io/badge/Version-1.1.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.13](https://img.shields.io/badge/Version-1.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
 **Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
+
+## A note on cert-manager
+
+oaas-observability depends on cert-manager version 1.3.x. A cert-manager chart
+is included but not enabled by default. It can be enabled by setting the value
+`cert-manager.enabled` to `true`. Otherwise it is assumed that cert-manager has
+been installed.
 
 ## Installing the Chart
 

@@ -1,15 +1,14 @@
-{{- if .Values.opentelemetryOperator.enabled }}
 {{- if .Values.global.rbac.create }}
 {{- if .Values.opentelemetryOperator.manager.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ include "otel-operator.fullname" . }}-manager-rolebinding
+  name: {{ include "otel-operator.fullname" . }}-mgr-rolebinding
   labels: {{ include "otel-operator.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "otel-operator.fullname" . }}-manager-role
+  name: {{ include "otel-operator.fullname" . }}-mgr-role
 subjects:
 - kind: ServiceAccount
   name: {{ include "otel-operator.serviceAccountName" . }}
@@ -30,6 +29,5 @@ subjects:
 - kind: ServiceAccount
   name: {{ include "otel-operator.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
-{{- end }}
 {{- end }}
 {{- end }}
