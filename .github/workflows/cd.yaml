@@ -50,6 +50,7 @@ jobs:
         run: |
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo add vector https://packages.timber.io/helm/latest
+          helm repo add cert-manager https://charts.jetstack.io
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.0
