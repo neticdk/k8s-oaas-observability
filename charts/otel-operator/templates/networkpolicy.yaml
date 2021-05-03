@@ -1,0 +1,17 @@
+{{- if .Values.global.networkPolicyEnabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "otel-operator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  egress:
+    - ports:
+      - port: {{ .Values.opentelemetryOperator.webhookService.port }}
+        protocol: TCP
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "otel-operator.name" . }}
+{{- end }}

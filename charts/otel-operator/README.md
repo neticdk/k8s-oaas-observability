@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
+![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -33,6 +33,7 @@ $ helm install my-release netic-oaas/otel-operator
 | cert-manager.enabled | bool | `false` |  |
 | cert-manager.installCRDs | bool | `false` |  |
 | fullnameOverride | string | `""` |  |
+| global.networkPolicyEnabled | bool | `true` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |

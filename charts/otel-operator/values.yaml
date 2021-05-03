@@ -3,6 +3,8 @@ global:
     create: true
     imagePullSecrets: []
 
+  networkPolicyEnabled: true
+
 nameOverride: ""
 fullnameOverride: ""
 
