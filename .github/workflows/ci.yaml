@@ -71,5 +71,17 @@ jobs:
         uses: helm/kind-action@v1.1.0
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install cert-manager
+        uses: deliverybot/helm@v1
+        with:
+          release: cert-manager
+          namespace: cert-manager
+          chart: jetstack/cert-manager
+          repo: https://charts.jetstack.io
+          repo-alias: jetstack
+          chart_version: v1.3.1
+          values: |
+            installCRDs: true
+
       - name: Run chart-testing (install)
         run: ct install --config ct.yaml
