@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 1.1.17](https://img.shields.io/badge/Version-1.1.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.18](https://img.shields.io/badge/Version-1.1.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -8,10 +8,23 @@ A Helm chart to deploy obeservability stack on Kubernetes
 
 ## A note on cert-manager
 
-oaas-observability depends on cert-manager version 1.3.x. A cert-manager chart
-is included but not enabled by default. It can be enabled by setting the value
-`cert-manager.enabled` to `true`. Otherwise it is assumed that cert-manager has
-been installed.
+oaas-observability depends on cert-manager version 1.3.x.
+
+Due to the way helm and the cert-manager helm chart handles CRDs, cert-manager
+needs to be installed before installing this chart.
+
+To this this, run:
+
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.3.1 \
+  --set installCRDs=true
+```
 
 ## Installing the Chart
 

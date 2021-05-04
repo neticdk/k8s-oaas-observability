@@ -5,7 +5,7 @@ description: A Helm chart to deploy obeservability stack on Kubernetes
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: "1.1.17"
+version: "1.1.18"
 maintainers:
   - name: langecode
     email: tal@netic.dk
