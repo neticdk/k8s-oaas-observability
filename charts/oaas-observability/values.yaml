@@ -1386,7 +1386,3 @@ grafana:
 ##
 otel-operator:
   enabled: true
-
-  cert-manager:
-    enabled: false
-    installCRDs: false

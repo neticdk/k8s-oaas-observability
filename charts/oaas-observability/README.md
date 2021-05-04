@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 1.1.14](https://img.shields.io/badge/Version-1.1.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.17](https://img.shields.io/badge/Version-1.1.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -246,8 +246,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
-| otel-operator.cert-manager.enabled | bool | `false` |  |
-| otel-operator.cert-manager.installCRDs | bool | `false` |  |
 | otel-operator.enabled | bool | `true` |  |
 | prometheus-operator.enabled | bool | `true` |  |
 | prometheus.annotations | object | `{}` |  |

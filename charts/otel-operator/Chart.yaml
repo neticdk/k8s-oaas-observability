@@ -5,17 +5,8 @@ description: Install the OpenTelemetry Operator to create OpenTelemetry Collecto
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: 0.1.6
+version: 0.1.9
 appVersion: 0.23.0
 maintainers:
   - name: KimNorgaard
     email: kn@netic.dk
-dependencies:
-  - name: cert-manager-crds
-    version: "*"
-    repository: file://../cert-manager-crds
-    condition: cert-manager.enabled
-  - name: cert-manager
-    version: v1.3.1
-    repository: https://charts.jetstack.io
-    condition: cert-manager.enabled

@@ -1,12 +1,14 @@
 # otel-operator
 
-![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
+![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
 **Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
 
 ## Installing the Chart
+
+**NB**: This chart needs cert-manager. See [oaas-obvervability](../oaas-observability/README.md).
 
 To install the chart with the release name `my-release`:
 
@@ -19,19 +21,10 @@ $ helm install my-release netic-oaas/otel-operator
 
 * <https://github.com/neticdk/k8s-oaas-observability>
 
-## Requirements
-
-| Repository | Name | Version |
-|------------|------|---------|
-| file://../cert-manager-crds | cert-manager-crds | * |
-| https://charts.jetstack.io | cert-manager | v1.3.1 |
-
 ## Configuration
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| cert-manager.enabled | bool | `false` |  |
-| cert-manager.installCRDs | bool | `false` |  |
 | fullnameOverride | string | `""` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.rbac.create | bool | `true` |  |

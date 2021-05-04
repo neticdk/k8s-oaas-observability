@@ -1,5 +1,0 @@
----
-# Values used by ct for linting and testing
-
-cert-manager:
-  enabled: true

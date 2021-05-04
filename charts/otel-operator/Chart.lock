@@ -1,9 +1,0 @@
-dependencies:
-- name: cert-manager-crds
-  repository: file://../cert-manager-crds
-  version: 0.1.2
-- name: cert-manager
-  repository: https://charts.jetstack.io
-  version: v1.3.1
-digest: sha256:a7d910859bea732978704d9ecc07591ac377be4a843d29db53cc52cc0bd52982
-generated: "2021-04-29T10:45:49.664368586+02:00"
