@@ -9,6 +9,8 @@ spec:
     - ports:
       - port: {{ .Values.opentelemetryOperator.webhookService.port }}
         protocol: TCP
+      - port: 6443
+        protocol: TCP
   policyTypes:
     - Egress
   podSelector:
