@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   oaas-observability:
   - apiVersion: v2
-    created: "2021-05-04T09:42:01.579852154Z"
+    created: "2021-05-05T08:58:56.73528945Z"
     dependencies:
     - condition: grafana.enabled
       name: grafana
@@ -26,7 +26,7 @@ entries:
       repository: https://packages.timber.io/helm/latest
       version: 0.12.2
     description: A Helm chart to deploy obeservability stack on Kubernetes
-    digest: 1d0c6cb9c800a8cd3fb4162c1b717aa30c31f8e1d67ddc64dfb7f1904b36b87d
+    digest: 00c597a22657d3284b6d171948102b7dde749ef2ff836463f68140173558dd18
     home: https://github.com/neticdk/k8s-oaas-observability
     maintainers:
     - email: tal@netic.dk
@@ -36,15 +36,15 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability
     type: application
     urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-1.1.17/oaas-observability-1.1.17.tgz
-    version: 1.1.17
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-1.1.18/oaas-observability-1.1.18.tgz
+    version: 1.1.18
   otel-operator:
   - apiVersion: v2
     appVersion: 0.23.0
-    created: "2021-05-04T09:42:01.946991627Z"
+    created: "2021-05-05T08:58:57.001976956Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
       instances
-    digest: 1377434d9495ec11613a5f330bfa84facdf995f673dbff31638e06390d779e1c
+    digest: 8fac3b28d6f32ccba76fc5b122470687837028fee08a04c2433801fbfe086b78
     home: https://github.com/neticdk/k8s-oaas-observability
     maintainers:
     - email: kn@netic.dk
@@ -54,6 +54,6 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability
     type: application
     urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.9/otel-operator-0.1.9.tgz
-    version: 0.1.9
-generated: "2021-05-04T09:42:01.947003927Z"
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.10/otel-operator-0.1.10.tgz
+    version: 0.1.10
+generated: "2021-05-05T08:58:57.001998857Z"
