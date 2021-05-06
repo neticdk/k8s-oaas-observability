@@ -12,6 +12,7 @@ spec:
       - port: 6443
         protocol: TCP
   ingress:
+    - ports:
       - port: webhook-server
         protocol: TCP
   policyTypes:
