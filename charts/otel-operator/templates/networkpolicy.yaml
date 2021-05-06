@@ -11,8 +11,12 @@ spec:
         protocol: TCP
       - port: 6443
         protocol: TCP
+  ingress:
+      - port: webhook-server
+        protocol: TCP
   policyTypes:
     - Egress
+    - Ingress
   podSelector:
     matchLabels:
       app.kubernetes.io/name: {{ template "otel-operator.name" . }}
