@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   oaas-observability:
   - apiVersion: v2
-    created: "2021-05-06T12:08:56.367245219Z"
+    created: "2021-05-06T12:58:50.632606464Z"
     dependencies:
     - condition: grafana.enabled
       name: grafana
@@ -26,7 +26,7 @@ entries:
       repository: https://packages.timber.io/helm/latest
       version: 0.12.2
     description: A Helm chart to deploy obeservability stack on Kubernetes
-    digest: 4543acfe30310a73390fb86169b06ff94d2638bb914d11a1449e1b7afdf15d55
+    digest: c012765d8743d7e529265e4c80a4afbe183cdd5f5829b8e161dc2bffe6ee4878
     home: https://github.com/neticdk/k8s-oaas-observability
     maintainers:
     - email: tal@netic.dk
@@ -36,15 +36,15 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability
     type: application
     urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-1.1.19/oaas-observability-1.1.19.tgz
-    version: 1.1.19
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-1.1.20/oaas-observability-1.1.20.tgz
+    version: 1.1.20
   otel-operator:
   - apiVersion: v2
     appVersion: 0.23.0
-    created: "2021-05-06T12:08:56.632893194Z"
+    created: "2021-05-06T12:58:50.743553684Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
       instances
-    digest: 5c7a63cc4ec0312b9ff39272dd13b27df1b6d8d1aa7211fd583a085e10ef5267
+    digest: f781a85ca679a4a4855f880d02363981c508ce4d5669bc2b29eca00f8a7f70f1
     home: https://github.com/neticdk/k8s-oaas-observability
     maintainers:
     - email: kn@netic.dk
@@ -54,6 +54,6 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability
     type: application
     urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.11/otel-operator-0.1.11.tgz
-    version: 0.1.11
-generated: "2021-05-06T12:08:56.632899994Z"
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.12/otel-operator-0.1.12.tgz
+    version: 0.1.12
+generated: "2021-05-06T12:58:50.743560684Z"
