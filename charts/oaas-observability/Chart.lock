@@ -10,12 +10,12 @@ dependencies:
   version: 1.0.1
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.4
+  version: 1.0.5
 - name: otel-operator
   repository: file://../otel-operator
   version: 0.1.12
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.13.1
-digest: sha256:89cd87364fc0fc418b3424b13b2661683058335e3fdde4db680432e6f6f8dd30
-generated: "2021-05-11T09:27:23.147658+02:00"
+digest: sha256:8dd8ad333434b9e394105b3406575b3a98a7a9f66ba0f75e1115e856b56aa026
+generated: "2021-05-11T10:32:59.272209+02:00"
