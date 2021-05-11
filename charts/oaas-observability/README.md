@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 1.1.20](https://img.shields.io/badge/Version-1.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.1.21](https://img.shields.io/badge/Version-1.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -35,7 +35,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
 | https://grafana.github.io/helm-charts | grafana | 6.7.3 |
-| https://packages.timber.io/helm/latest | vector-agent | 0.12.2 |
+| https://packages.timber.io/helm/latest | vector-agent | 0.13.1 |
 
 ## Configuration
 
@@ -234,7 +234,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.relabelings[0].targetLabel | string | `"metrics_path"` |  |
 | kubelet.serviceMonitor.resource | bool | `true` |  |
-| kubelet.serviceMonitor.resourcePath | string | `"/metrics/resource/v1alpha1"` |  |
+| kubelet.serviceMonitor.resourcePath | string | `"/metrics/resource"` |  |
 | kubelet.serviceMonitor.resourceRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.resourceRelabelings[0].targetLabel | string | `"metrics_path"` |  |
 | nodeExporter.enabled | bool | `true` |  |
@@ -336,9 +336,12 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.serviceMonitor.scheme | string | `""` |  |
 | prometheus.serviceMonitor.selfMonitor | bool | `true` |  |
 | prometheus.serviceMonitor.tlsConfig | object | `{}` |  |
+| vector-agent.enabled | bool | `true` |  |
 | vector-agent.hostMetricsSource.enabled | bool | `false` |  |
 | vector-agent.kubernetesLogsSource.rawConfig | string | `"annotation_fields.container_image = \"image\"\nannotation_fields.container_name = \"container\"\nannotation_fields.pod_labels = \"labels\"\nannotation_fields.pod_name = \"pod\"\nannotation_fields.pod_namespace = \"namespace\"\nannotation_fields.pod_node_name = \"node\"\nannotation_fields.pod_uid = \"name\"\n"` |  |
-| vector-agent.prometheusSink.enabled | bool | `false` |  |
+| vector-agent.prometheusSink.enabled | bool | `true` |  |
+| vector-agent.prometheusSink.listenPort | int | `9090` |  |
+| vector-agent.prometheusSink.podMonitor.enabled | bool | `false` |  |
 | vector-agent.psp.enabled | bool | `true` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.vectorSink.enabled | bool | `false` |  |
