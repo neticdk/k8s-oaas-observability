@@ -50,20 +50,15 @@ spec:
           {{- end }}
             - --namespaces={{ $ns | join "," }}
           {{- end }}
-            - --logtostderr=true
-            - --localhost=127.0.0.1
-            {{- if .Values.prometheusOperator.prometheusConfigReloaderImage.sha }}
+          {{- if .Values.prometheusOperator.prometheusConfigReloaderImage.sha }}
             - --prometheus-config-reloader={{ .Values.prometheusOperator.prometheusConfigReloaderImage.repository }}:{{ include "prometheusConfigReloaderImage.imageTag" . }}@sha256:{{ .Values.prometheusOperator.prometheusConfigReloaderImage.sha }}
-            {{- else }}
+          {{- else }}
             - --prometheus-config-reloader={{ .Values.prometheusOperator.prometheusConfigReloaderImage.repository }}:{{ include "prometheusConfigReloaderImage.imageTag" . }}
-            {{- end }}
-            {{- if .Values.prometheusOperator.configmapReloadImage.sha }}
-            - --config-reloader-image={{ .Values.prometheusOperator.configmapReloadImage.repository }}:{{ .Values.prometheusOperator.configmapReloadImage.tag }}@sha256:{{ .Values.prometheusOperator.configmapReloadImage.sha }}
-            {{- else }}
-            - --config-reloader-image={{ .Values.prometheusOperator.configmapReloadImage.repository }}:{{ .Values.prometheusOperator.configmapReloadImage.tag }}
-            {{- end }}
-            - --config-reloader-cpu={{ .Values.prometheusOperator.configReloaderCpu }}
-            - --config-reloader-memory={{ .Values.prometheusOperator.configReloaderMemory }}
+          {{- end }}
+            - --config-reloader-cpu-request={{ .Values.prometheusOperator.configReloaderCpu }}
+            - --config-reloader-cpu-limit={{ .Values.prometheusOperator.configReloaderCpu }}
+            - --config-reloader-memory-request={{ .Values.prometheusOperator.configReloaderMemory }}
+            - --config-reloader-memory-limit={{ .Values.prometheusOperator.configReloaderMemory }}
           ports:
             - containerPort: 8080
               name: http
