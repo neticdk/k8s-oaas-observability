@@ -377,7 +377,7 @@ kubelet:
     ##
     resource: true
     # From kubernetes 1.18, /metrics/resource/v1alpha1 renamed to /metrics/resource
-    resourcePath: "/metrics/resource/v1alpha1"
+    resourcePath: "/metrics/resource"
     ## Metric relabellings to apply to samples before ingestion
     ##
     cAdvisorMetricRelabelings: []
@@ -1348,6 +1348,7 @@ prometheus-operator:
 ## Configuration for Vector
 ##
 vector-agent:
+  enabled: true
   psp:
     enabled: true
   rbac:
@@ -1357,7 +1358,10 @@ vector-agent:
   hostMetricsSource:
     enabled: false
   prometheusSink:
-    enabled: false
+    enabled: true
+    listenPort: 9090
+    podMonitor:
+      enabled: false
   kubernetesLogsSource:
     rawConfig: |
       annotation_fields.container_image = "image"

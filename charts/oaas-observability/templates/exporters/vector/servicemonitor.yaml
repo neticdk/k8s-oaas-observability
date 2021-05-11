@@ -1,0 +1,23 @@
+{{- if and (index .Values "vector-agent" "enabled") (index .Values "vector-agent" "prometheusSink").enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "netic-oaas.vector.fullname" . }}
+  labels:
+{{ include "netic-oaas.vector.labels" . | indent 4 }}
+{{- if .Values.global.serviceMonitor.labels }}
+{{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
+{{- end }}
+spec:
+  selector:
+    matchLabels: {{ include "netic-oaas.vector.matchLabels" . | nindent 6 }}
+  endpoints:
+  - port: metrics
+    relabelings:
+    - action: labeldrop
+      regex: __meta_kubernetes_pod_label_skaffold_dev.*
+    - action: labeldrop
+      regex: __meta_kubernetes_pod_label_pod_template_hash.*
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+{{- end }}

@@ -23,4 +23,6 @@
 # Files for development
 bin/
 ci/
+local/
 README.md.gotmpl
+scripts/

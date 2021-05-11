@@ -1,0 +1,17 @@
+{{- if and (index .Values "vector-agent" "enabled") (index .Values "vector-agent" "prometheusSink").enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "netic-oaas.vector.fullname" . }}
+  labels: {{ include "netic-oaas.vector.labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: metrics
+      port: {{ (index .Values "vector-agent" "prometheusSink").listenPort }}
+      protocol: TCP
+      targetPort: {{ (index .Values "vector-agent" "prometheusSink").listenPort }}
+  selector:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: vector-agent
+  type: ClusterIP
+{{- end -}}
