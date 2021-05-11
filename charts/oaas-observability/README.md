@@ -270,7 +270,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
 | prometheus.prometheusSpec.image.repository | string | `"quay.io/prometheus/prometheus"` |  |
-| prometheus.prometheusSpec.image.tag | string | `"v2.21.0"` |  |
+| prometheus.prometheusSpec.image.tag | string | `"v2.26.0"` |  |
 | prometheus.prometheusSpec.initContainers | list | `[]` |  |
 | prometheus.prometheusSpec.listenLocal | bool | `false` |  |
 | prometheus.prometheusSpec.logFormat | string | `"logfmt"` |  |
@@ -312,7 +312,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheus.prometheusSpec.thanos | object | `{}` |  |
 | prometheus.prometheusSpec.tolerations | list | `[]` |  |
-| prometheus.prometheusSpec.version | string | `"v2.21.0"` |  |
+| prometheus.prometheusSpec.version | string | `"v2.26.0"` |  |
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |

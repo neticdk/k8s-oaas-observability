@@ -1,6 +1,6 @@
 # prometheus-operator
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.42.0](https://img.shields.io/badge/AppVersion-0.42.0-informational?style=flat-square)
+![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.47.1](https://img.shields.io/badge/AppVersion-0.47.1-informational?style=flat-square)
 
 A Helm chart to install Prometheus Operator
 
@@ -45,13 +45,12 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.cleanupCustomResource | bool | `false` | Attempt to clean up CRDs created by Prometheus Operator. |
 | prometheusOperator.configReloaderCpu | string | `"100m"` | Set the prometheus config reloader side-car CPU limit |
 | prometheusOperator.configReloaderMemory | string | `"25Mi"` | Set the prometheus config reloader side-car memory limit |
-| prometheusOperator.configmapReloadImage | object | `{"repository":"docker.io/jimmidyson/configmap-reload","sha":"","tag":"v0.3.0"}` | Configmap-reload image to use for reloading configmaps |
 | prometheusOperator.createCustomResource | bool | `true` | Deploy CRDs used by Prometheus Operator. |
 | prometheusOperator.denyNamespaces | list | `[]` | Namespaces not to scope the interaction of the Prometheus Operator (deny list). |
 | prometheusOperator.enabled | bool | `true` |  |
 | prometheusOperator.hostNetwork | bool | `false` | Required for use in managed kubernetes clusters (such as AWS EKS) with custom CNI (such as calico), because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working |
 | prometheusOperator.hyperkubeImage | object | `{"pullPolicy":"IfNotPresent","repository":"k8s.gcr.io/hyperkube","sha":"","tag":"v1.16.12"}` | Hyperkube image to use when cleaning up |
-| prometheusOperator.image | object | `{"pullPolicy":"IfNotPresent","repository":"quay.io/coreos/prometheus-operator","sha":"","tag":""}` | Prometheus-operator image |
+| prometheusOperator.image | object | `{"pullPolicy":"IfNotPresent","repository":"quay.io/prometheus-operator/prometheus-operator","sha":"","tag":""}` | Prometheus-operator image |
 | prometheusOperator.kubeletService.enabled | bool | `true` |  |
 | prometheusOperator.kubeletService.namespace | string | `"kube-system"` |  |
 | prometheusOperator.logFormat | string | `"logfmt"` | Define Log Format Use logfmt (default) or json-formatted logging |
@@ -61,7 +60,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.podAnnotations | object | `{}` | Annotations to add to the operator pod |
 | prometheusOperator.podLabels | object | `{}` | Labels to add to the operator pod |
 | prometheusOperator.priorityClassName | string | `nil` | Assign a PriorityClassName to pods if set |
-| prometheusOperator.prometheusConfigReloaderImage | object | `{"repository":"quay.io/coreos/prometheus-config-reloader","sha":"","tag":""}` | Prometheus-config-reloader image to use for config and rule reloading |
+| prometheusOperator.prometheusConfigReloaderImage | object | `{"repository":"quay.io/prometheus-operator/prometheus-config-reloader","sha":"","tag":""}` | Prometheus-config-reloader image to use for config and rule reloading |
 | prometheusOperator.resources | object | `{}` | Resource limits & requests |
 | prometheusOperator.securityContext.fsGroup | int | `65534` |  |
 | prometheusOperator.securityContext.runAsGroup | int | `65534` |  |
