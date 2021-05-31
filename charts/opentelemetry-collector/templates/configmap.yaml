@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "otel-collector.fullname" . }}
+  labels: {{- include "otel-collector.labels" . | nindent 4 }}
+data:
+  otel-collector-config.yaml: |
+    receivers: {{ .Values.config.receivers | toYaml | nindent 6 }}
+    processors:
+      batch:
+      memory_limiter:
+        ballast_size_mib: {{ include "otel-collector.getMemBallastSizeMib" .Values.resources.limits.memory }}
+        limit_mib: {{ include "otel-collector.getMemLimitMib" .Values.resources.limits.memory }}
+        spike_limit_mib: {{ include "otel-collector.getMemSpikeLimitMib" .Values.resources.limits.memory }}
+        check_interval: 5s
+    extensions: {{ .Values.config.extensions | toYaml | nindent 6 }}
+    exporters: {{ .Values.config.exporters | toYaml | nindent 6 }}
+    service:
+      extensions: {{ .Values.config.service.extensions | toYaml | nindent 8 }}
+      pipelines: {{ .Values.config.service.pipelines | toYaml | nindent 8 }}
