@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "otel-collector.fullname" . }}
+  labels: {{- include "otel-collector.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "otel-collector.matchLabels" . | nindent 6 }}
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels: {{- include "otel-collector.labels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: otel-collector
+        image: {{ .Values.image.repository }}:{{ include "otel-collector.imageTag"  . }}
+        imagePullPolicy: {{ default "IfNotPresent" .Values.image.pullPolicy }}
+        args:
+          - "--config=/conf/otel-collector-config.yaml"
+          - "--metrics-addr=0.0.0.0:8888"
+          - "--mem-ballast-size-mib={{ include "otel-collector.getMemBallastSizeMib" .Values.resources.limits.memory }}"
+        resources: {{ .Values.resources | toYaml | nindent 10 }}
+        ports:
+        - name: grpc
+          containerPort: {{ mustRegexReplaceAll ".*:([0-9])" .Values.config.receivers.otlp.protocols.grpc.endpoint "${1}" }}
+        - name: http
+          containerPort: {{ mustRegexReplaceAll ".*:([0-9])" .Values.config.receivers.otlp.protocols.http.endpoint "${1}" }}
+        - name: metrics
+          containerPort: 8888  # Default endpoint for querying metrics.
+        volumeMounts:
+        - name: otel-collector-config-vol
+          mountPath: /conf
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.config.extensions.health_check.port }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.config.extensions.health_check.port }}
+      volumes:
+        - name: otel-collector-config-vol
+          configMap:
+            name: {{ template "otel-collector.fullname" . }}

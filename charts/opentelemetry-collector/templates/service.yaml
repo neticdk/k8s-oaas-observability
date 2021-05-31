@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "otel-collector.fullname" . }}
+  labels: {{- include "otel-collector.labels" . | nindent 4 }}
+spec:
+{{- $serviceType := .Values.service.type }}
+  type: {{ $serviceType }}
+  ports:
+{{- range $name, $data := .Values.service.ports }}
+    - name: {{ $name }}
+      port: {{ $data.port }}
+      protocol: TCP
+      targetPort: {{ $name }}
+{{- if and (eq $serviceType "NodePort") $data.nodePort }}
+      nodePort: {{ $data.nodePort }}
+{{- end }}
+{{- end }}
+  selector: {{ include "otel-collector.matchLabels" . | nindent 4 }}

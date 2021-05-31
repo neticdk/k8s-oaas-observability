@@ -1,0 +1,42 @@
+config:
+  # receivers are present to allow for the port number to be used in configuring the deployment
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:55681
+  exporters: {}
+  extensions:
+    health_check:
+      port: 13133
+    zpages:
+      endpoint: localhost:55679
+  service:
+    extensions: [health_check, zpages]
+    pipelines: {}
+
+replicaCount: 1
+
+image:
+  repository: otel/opentelemetry-collector
+  # repository: otel/opentelemetry-collector-contrib
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+resources:
+  limits:
+    cpu: 1
+    memory: 2Gi
+  requests:
+    cpu: 200m
+    memory: 400Mi
+
+service:
+  type: ClusterIP
+  ports:
+    grpc:
+      port: 4317
+      nodePort: 30317
