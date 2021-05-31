@@ -6,5 +6,5 @@ config:
     pipelines:
       traces:
         receivers: [otlp]
-        processors: [memory_limiter,batch]
+        processors: [memory_limiter, batch]
         exporters: [logging]
