@@ -1390,3 +1390,7 @@ grafana:
 ##
 otel-operator:
   enabled: true
+
+## Promtail is alternative to Vector for log ingestion
+promtail:
+  enabled: false
