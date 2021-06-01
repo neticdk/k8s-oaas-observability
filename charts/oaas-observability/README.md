@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 1.1.23](https://img.shields.io/badge/Version-1.1.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -34,7 +34,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../otel-operator | otel-operator | * |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 6.7.3 |
+| https://grafana.github.io/helm-charts | grafana | 6.9.2 |
 | https://grafana.github.io/helm-charts | promtail | 3.5.1 |
 | https://packages.timber.io/helm/latest | vector-agent | 0.13.1 |
 
@@ -166,8 +166,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeApiServer.tlsConfig.serverName | string | `"kubernetes"` |  |
 | kubeControllerManager.enabled | bool | `true` |  |
 | kubeControllerManager.endpoints | list | `[]` |  |
-| kubeControllerManager.service.port | int | `10257` |  |
-| kubeControllerManager.service.targetPort | int | `10257` |  |
+| kubeControllerManager.service.port | int | `10252` |  |
+| kubeControllerManager.service.targetPort | int | `10252` |  |
 | kubeControllerManager.serviceMonitor.https | bool | `true` |  |
 | kubeControllerManager.serviceMonitor.insecureSkipVerify | bool | `true` |  |
 | kubeControllerManager.serviceMonitor.interval | string | `""` |  |
@@ -207,8 +207,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeProxy.serviceMonitor.relabelings | list | `[]` |  |
 | kubeScheduler.enabled | bool | `true` |  |
 | kubeScheduler.endpoints | list | `[]` |  |
-| kubeScheduler.service.port | int | `10259` |  |
-| kubeScheduler.service.targetPort | int | `10259` |  |
+| kubeScheduler.service.port | int | `10251` |  |
+| kubeScheduler.service.targetPort | int | `10251` |  |
 | kubeScheduler.serviceMonitor.https | bool | `true` |  |
 | kubeScheduler.serviceMonitor.insecureSkipVerify | bool | `true` |  |
 | kubeScheduler.serviceMonitor.interval | string | `""` |  |
