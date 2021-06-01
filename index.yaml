@@ -2,6 +2,50 @@ apiVersion: v1
 entries:
   oaas-observability:
   - apiVersion: v2
+    created: "2021-06-01T13:31:26.997366832Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.7.3
+    - name: kube-state-metrics
+      repository: file://../kube-state-metrics
+      version: '*'
+    - name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: otel-operator.enabled
+      name: otel-operator
+      repository: file://../otel-operator
+      version: '*'
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://packages.timber.io/helm/latest
+      version: 0.13.1
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 3.5.1
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: 0e1fc7fdcef5efa2241925e49b075aba9f30ac9be8048734d5a236ae8403af32
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-1.1.23/oaas-observability-1.1.23.tgz
+    version: 1.1.23
+  - apiVersion: v2
     created: "2021-05-11T09:06:08.463476207Z"
     dependencies:
     - condition: grafana.enabled
@@ -73,4 +117,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2021-05-31T08:26:53.875960295Z"
+generated: "2021-06-01T13:31:26.997397332Z"
