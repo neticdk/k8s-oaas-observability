@@ -1391,6 +1391,11 @@ grafana:
 otel-operator:
   enabled: true
 
-## Promtail is alternative to Vector for log ingestion
+## Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
+##
 promtail:
   enabled: false
+  serviceMonitor:
+    enabled: true
+    labels:
+      netic.dk/monitoring: "true"

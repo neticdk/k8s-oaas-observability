@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.1](https://img.shields.io/badge/Version-2.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -338,6 +338,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.serviceMonitor.selfMonitor | bool | `true` |  |
 | prometheus.serviceMonitor.tlsConfig | object | `{}` |  |
 | promtail.enabled | bool | `false` |  |
+| promtail.serviceMonitor.enabled | bool | `true` |  |
+| promtail.serviceMonitor.labels."netic.dk/monitoring" | string | `"true"` |  |
 | vector-agent.enabled | bool | `true` |  |
 | vector-agent.hostMetricsSource.enabled | bool | `false` |  |
 | vector-agent.kubernetesLogsSource.rawConfig | string | `"annotation_fields.container_image = \"image\"\nannotation_fields.container_name = \"container\"\nannotation_fields.pod_labels = \"labels\"\nannotation_fields.pod_name = \"pod\"\nannotation_fields.pod_namespace = \"namespace\"\nannotation_fields.pod_node_name = \"node\"\nannotation_fields.pod_uid = \"name\"\n"` |  |
