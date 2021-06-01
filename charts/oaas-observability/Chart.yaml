@@ -5,7 +5,7 @@ description: A Helm chart to deploy obeservability stack on Kubernetes
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: "1.1.22"
+version: "1.1.23"
 maintainers:
   - name: langecode
     email: tal@netic.dk
@@ -34,3 +34,7 @@ dependencies:
     version: 0.13.1
     repository: https://packages.timber.io/helm/latest
     condition: vector-agent.enabled
+  - name: promtail
+    version: 3.5.1
+    repository: https://grafana.github.io/helm-charts
+    condition: promtail.enabled
