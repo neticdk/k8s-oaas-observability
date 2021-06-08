@@ -1,5 +1,4 @@
 {{- if .Values.global.rbac.create }}
-{{- if .Values.opentelemetryOperator.manager.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -82,6 +81,18 @@ rules:
   - update
   - watch
 - apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - coordination.k8s.io
   resources:
   - leases
@@ -118,7 +129,6 @@ rules:
   - get
   - patch
   - update
-{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -130,7 +140,7 @@ rules:
   - /metrics
   verbs:
   - get
-{{- if .Values.opentelemetryOperator.kubeRbacProxy.rbac.create }}
+{{- if .Values.opentelemetryOperator.kubeRbacProxy.enabled }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

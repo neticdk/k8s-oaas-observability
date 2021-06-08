@@ -4,7 +4,7 @@ metadata:
   labels:
     control-plane: controller-manager
 {{ include "otel-operator.labels" . | indent 4 }}
-  name: {{ include "otel-operator.fullname" . }}-ctrl-mgr
+  name: {{ include "otel-operator.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
@@ -21,17 +21,15 @@ spec:
       securityContext:
         {{- toYaml .Values.opentelemetryOperator.podSecurityContext | nindent 8 }}
       containers:
-{{- if .Values.opentelemetryOperator.manager.enabled }}
       - args:
         - --metrics-addr={{ .Values.opentelemetryOperator.manager.args.metricsaddr }}
         - --enable-leader-election
         command:
         - /manager
-        image: "{{ .Values.opentelemetryOperator.manager.image.repository }}:{{ .Values.opentelemetryOperator.manager.image.tag }}"
+        image: "{{ .Values.opentelemetryOperator.manager.image.repository }}:{{ include "otel-operator.imageTag"  . }}"
         imagePullPolicy: {{ .Values.opentelemetryOperator.manager.image.pullPolicy }}
         name: manager
-        securityContext:
-          {{- toYaml .Values.opentelemetryOperator.manager.securityContext | nindent 12 }}
+        securityContext: {{ toYaml .Values.opentelemetryOperator.manager.securityContext | nindent 12 }}
         ports:
         - containerPort: 9443
           name: webhook-server
@@ -42,7 +40,6 @@ spec:
         - mountPath: /tmp/k8s-webhook-server/serving-certs
           name: cert
           readOnly: true
-{{- end }}
 {{- if .Values.opentelemetryOperator.kubeRbacProxy.enabled }}
       - args:
         - --secure-listen-address={{ .Values.opentelemetryOperator.kubeRbacProxy.args.securelistenaddress }}
@@ -52,13 +49,11 @@ spec:
         image: "{{ .Values.opentelemetryOperator.kubeRbacProxy.image.repository }}:{{ .Values.opentelemetryOperator.kubeRbacProxy.image.tag }}"
         imagePullPolicy: {{ .Values.opentelemetryOperator.kubeRbacProxy.image.pullPolicy }}
         name: kube-rbac-proxy
-        securityContext:
-          {{- toYaml .Values.opentelemetryOperator.kubeRbacProxy.securityContext | nindent 12 }}
+        securityContext: {{ toYaml .Values.opentelemetryOperator.kubeRbacProxy.securityContext | nindent 12 }}
         ports:
         - containerPort: 8443
           name: https
-        resources:
-          {{- toYaml .Values.opentelemetryOperator.kubeRbacProxy.resources | nindent 12 }}
+        resources: {{ toYaml .Values.opentelemetryOperator.kubeRbacProxy.resources | nindent 12 }}
 {{- end }}
       terminationGracePeriodSeconds: 10
       volumes:

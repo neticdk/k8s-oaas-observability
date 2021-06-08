@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.1.12](https://img.shields.io/badge/Version-0.1.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.23.0](https://img.shields.io/badge/AppVersion-0.23.0-informational?style=flat-square)
+![Version: 0.1.14](https://img.shields.io/badge/Version-0.1.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.27.0](https://img.shields.io/badge/AppVersion-v0.27.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -27,6 +27,7 @@ $ helm install my-release netic-oaas/otel-operator
 |-----|------|---------|-------------|
 | fullnameOverride | string | `""` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
+| global.podSecurityPolicy.enabled | bool | `false` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
@@ -43,23 +44,24 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.image.pullPolicy | string | `"IfNotPresent"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.repository | string | `"gcr.io/kubebuilder/kube-rbac-proxy"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.tag | string | `"v0.5.0"` |  |
-| opentelemetryOperator.kubeRbacProxy.rbac.create | bool | `true` |  |
 | opentelemetryOperator.kubeRbacProxy.resources | object | `{}` |  |
-| opentelemetryOperator.kubeRbacProxy.securityContext | object | `{}` |  |
+| opentelemetryOperator.kubeRbacProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| opentelemetryOperator.kubeRbacProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetryOperator.manager.args.metricsaddr | string | `"127.0.0.1:8080"` |  |
-| opentelemetryOperator.manager.enabled | bool | `true` |  |
 | opentelemetryOperator.manager.image.pullPolicy | string | `"IfNotPresent"` |  |
 | opentelemetryOperator.manager.image.repository | string | `"quay.io/opentelemetry/opentelemetry-operator"` |  |
-| opentelemetryOperator.manager.image.tag | string | `"0.23.0"` |  |
-| opentelemetryOperator.manager.rbac.create | bool | `true` |  |
+| opentelemetryOperator.manager.image.tag | string | `nil` |  |
 | opentelemetryOperator.manager.resources.limits.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.limits.memory | string | `"30Mi"` |  |
 | opentelemetryOperator.manager.resources.requests.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.requests.memory | string | `"20Mi"` |  |
-| opentelemetryOperator.manager.securityContext | object | `{}` |  |
+| opentelemetryOperator.manager.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| opentelemetryOperator.manager.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetryOperator.nodeSelector | object | `{}` |  |
 | opentelemetryOperator.podLabels | object | `{}` |  |
-| opentelemetryOperator.podSecurityContext | object | `{}` |  |
+| opentelemetryOperator.podSecurityContext.fsGroup | int | `1` |  |
+| opentelemetryOperator.podSecurityContext.runAsUser | int | `65532` |  |
+| opentelemetryOperator.podSecurityContext.supplementalGroups[0] | int | `1` |  |
 | opentelemetryOperator.serviceAccount.annotations | object | `{}` |  |
 | opentelemetryOperator.serviceAccount.create | bool | `true` |  |
 | opentelemetryOperator.serviceAccount.name | string | `""` |  |

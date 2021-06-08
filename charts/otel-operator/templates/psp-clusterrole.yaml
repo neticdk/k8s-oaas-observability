@@ -1,0 +1,13 @@
+{{- if and .Values.global.podSecurityPolicy.enabled .Values.global.rbac.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "otel-operator.fullname" . }}-psp
+  labels: {{ include "otel-operator.labels" . | nindent 4 }}
+rules:
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - {{ include "otel-operator.fullname" . }}
+{{- end }}
