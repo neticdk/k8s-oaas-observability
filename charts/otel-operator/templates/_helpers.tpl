@@ -65,6 +65,14 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
+Resolve the actual image tag to use.
+*/}}
+{{- define "otel-operator.imageTag" -}}
+{{- $tag := default .Chart.AppVersion .Values.opentelemetryOperator.manager.image.tag -}}
+{{- $tag -}}
+{{- end }}
+
+{{/*
 Cert name
 */}}
 {{- define "otel-operator.servingCertName" -}}

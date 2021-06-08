@@ -1,4 +1,6 @@
 global:
+  podSecurityPolicy:
+    enabled: false
   rbac:
     create: true
     imagePullSecrets: []
@@ -11,7 +13,11 @@ fullnameOverride: ""
 opentelemetryOperator:
   enabled: true
 
-  podSecurityContext: {}
+  podSecurityContext:
+    fsGroup: 1
+    runAsUser: 65532
+    supplementalGroups:
+      - 1
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -19,14 +25,15 @@ opentelemetryOperator:
   podLabels: {}
 
   manager:
-    enabled: true
-    rbac:
-      create: true
     image:
       repository: quay.io/opentelemetry/opentelemetry-operator
       pullPolicy: IfNotPresent
-      tag: 0.23.0
-    securityContext: {}
+      tag:  # Default is appVersion
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
     resources:
       limits:
         cpu: 100m
@@ -39,13 +46,15 @@ opentelemetryOperator:
 
   kubeRbacProxy:
     enabled: true
-    rbac:
-      create: true
     image:
       repository: gcr.io/kubebuilder/kube-rbac-proxy
       pullPolicy: IfNotPresent
       tag: v0.5.0
-    securityContext: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
     resources: {}
     args:
       securelistenaddress: 0.0.0.0:8443
