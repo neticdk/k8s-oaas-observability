@@ -45,7 +45,8 @@ Prometheus selector labels
 */}}
 {{- define "prometheus.matchLabels" -}}
 app.kubernetes.io/component: prometheus
-{{ include "netic-oaas.matchLabels" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/name: prometheus
 {{- end -}}
 
 {{/*
