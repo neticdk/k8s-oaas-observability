@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.1.14](https://img.shields.io/badge/Version-0.1.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.27.0](https://img.shields.io/badge/AppVersion-v0.27.0-informational?style=flat-square)
+![Version: 0.1.15](https://img.shields.io/badge/Version-0.1.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.27.0](https://img.shields.io/badge/AppVersion-v0.27.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -64,7 +64,7 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.podSecurityContext.supplementalGroups[0] | int | `1` |  |
 | opentelemetryOperator.serviceAccount.annotations | object | `{}` |  |
 | opentelemetryOperator.serviceAccount.create | bool | `true` |  |
-| opentelemetryOperator.serviceAccount.name | string | `""` |  |
+| opentelemetryOperator.serviceAccount.name | string | `""` |  If not set and create is true, a name is generated using the fullname template |
 | opentelemetryOperator.tolerations | list | `[]` |  |
 | opentelemetryOperator.webhookService.annotations | object | `{}` |  |
 | opentelemetryOperator.webhookService.enabled | bool | `true` |  |

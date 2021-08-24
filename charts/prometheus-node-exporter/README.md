@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 A Helm chart for prometheus node-exporter
 
@@ -57,6 +57,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
+| image | object | `{"pullPolicy":"IfNotPresent","repository":"quay.io/prometheus/node-exporter","tag":"v1.0.1"}` |  This is a YAML-formatted file. Declare variables to be passed into your templates. |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.repository | string | `"quay.io/prometheus/node-exporter"` | Image repository |
 | image.tag | string | `"v1.0.1"` | Image tag |
