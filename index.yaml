@@ -1,6 +1,72 @@
 apiVersion: v1
 entries:
+  kube-state-metrics:
+  - apiVersion: v1
+    appVersion: 1.9.7
+    created: "2021-08-24T07:07:45.209061678Z"
+    description: Install kube-state-metrics to generate and expose cluster-level metrics
+    digest: 439f2be0cab8502c653063c4c0862995f30edc4f844488a3ae792fa790c7d78d
+    home: https://github.com/kubernetes/kube-state-metrics
+    keywords:
+    - metric
+    - monitoring
+    - prometheus
+    - kubernetes
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: kube-state-metrics
+    sources:
+    - https://github.com/kubernetes/kube-state-metrics
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/kube-state-metrics-1.0.4/kube-state-metrics-1.0.4.tgz
+    version: 1.0.4
   oaas-observability:
+  - apiVersion: v2
+    created: "2021-08-24T07:07:45.386690733Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.9.2
+    - name: kube-state-metrics
+      repository: file://../kube-state-metrics
+      version: '*'
+    - name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: otel-operator.enabled
+      name: otel-operator
+      repository: file://../otel-operator
+      version: '*'
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://packages.timber.io/helm/latest
+      version: 0.13.1
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 3.5.1
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: d903f04650cad07999fc9eb55cf29424f75d6e7b8b3bcfcaa7076e671d1080e3
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.0.4/oaas-observability-2.0.4.tgz
+    version: 2.0.4
   - apiVersion: v2
     created: "2021-06-08T12:30:20.459664993Z"
     dependencies:
@@ -234,6 +300,23 @@ entries:
   otel-operator:
   - apiVersion: v2
     appVersion: v0.27.0
+    created: "2021-08-24T07:07:45.519056588Z"
+    description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
+      instances
+    digest: fd1ac14c4695b07a317d5a47acbe250b089df19da5e3631ff22449df31183a28
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: otel-operator
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.15/otel-operator-0.1.15.tgz
+    version: 0.1.15
+  - apiVersion: v2
+    appVersion: v0.27.0
     created: "2021-06-08T12:30:20.579740881Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
       instances
@@ -249,7 +332,45 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.14/otel-operator-0.1.14.tgz
     version: 0.1.14
+  prometheus-node-exporter:
+  - apiVersion: v1
+    appVersion: 1.0.1
+    created: "2021-08-24T07:07:45.7689192Z"
+    description: A Helm chart for prometheus node-exporter
+    digest: e307e553d23e20567f1a1c5eb5e4a583a3a99ca13fc616021965f5b55a2e8c42
+    home: https://github.com/prometheus/node_exporter
+    keywords:
+    - node-exporter
+    - prometheus
+    - exporter
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: prometheus-node-exporter
+    sources:
+    - https://github.com/prometheus/node_exporter
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-node-exporter
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-node-exporter-1.0.2/prometheus-node-exporter-1.0.2.tgz
+    version: 1.0.2
   prometheus-operator:
+  - apiVersion: v2
+    appVersion: 0.47.1
+    created: "2021-08-24T07:07:45.879622167Z"
+    description: A Helm chart to install Prometheus Operator
+    digest: f9692f92f4b3cac75d212f33a2b54e9ac531dbd6c7b10bbda18a889d654d16c7
+    home: https://github.com/prometheus-operator/prometheus-operator
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: prometheus-operator
+    sources:
+    - https://github.com/prometheus-operator/prometheus-operator
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-operator
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.6/prometheus-operator-1.0.6.tgz
+    version: 1.0.6
   - apiVersion: v2
     appVersion: 0.47.1
     created: "2021-05-11T09:06:08.774119291Z"
@@ -267,4 +388,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2021-06-08T12:30:20.580015884Z"
+generated: "2021-08-24T07:07:45.879698768Z"
