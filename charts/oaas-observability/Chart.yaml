@@ -22,6 +22,7 @@ dependencies:
   - name: prometheus-node-exporter
     version: "*"
     repository: file://../prometheus-node-exporter
+    condition: nodeExporter.enabled
   - name: prometheus-operator
     version: "*"
     repository: file://../prometheus-operator
