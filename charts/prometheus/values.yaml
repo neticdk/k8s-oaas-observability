@@ -1,0 +1,31 @@
+# global options
+global:
+  networkPolicyEnabled: true
+  imagePullSecrets: []
+
+# serviceAccount options
+serviceAccount:
+  create: true
+
+# prometheusSpec will define the Prometheus instance using the Prometheus Operator CRD
+prometheusSpec:
+  replicas: 2
+  image: quay.io/prometheus/prometheus:v2.30.0
+  version: v2.30.0
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  resources: {}
+  externalLabels: {}
+  remoteWrite: []
+  alerting: {}
+  storage: {}
+  retention: 10d
+  retentionSize: ""
+  routePrefix: /
+
+ingress:
+  enabled: false

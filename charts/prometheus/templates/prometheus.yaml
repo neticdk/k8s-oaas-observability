@@ -1,0 +1,39 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: {{ template "prometheus.fullname" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.prometheusSpec.replicas }}
+  serviceAccountName: "{{ include "prometheus.serviceAccountName" . }}"
+  serviceMonitorNamespaceSelector: {{ .Values.prometheusSpec.serviceMonitorNamespaceSelector | toYaml | nindent 4 }}
+  serviceMonitorSelector: {{ .Values.prometheusSpec.serviceMonitorSelector | toYaml | nindent 4 }}
+  ruleNamespaceSelector: {{ .Values.prometheusSpec.ruleNamespaceSelector | toYaml | nindent 4 }}
+  ruleSelector: {{ .Values.prometheusSpec.ruleSelector | toYaml | nindent 4 }}
+  podMonitorNamespaceSelector: {{ .Values.prometheusSpec.podMonitorNamespaceSelector | toYaml | nindent 4 }}
+  podMonitorSelector: {{ .Values.prometheusSpec.podMonitorSelector | toYaml | nindent 4 }}
+  image: {{ .Values.prometheusSpec.image }}
+  version: {{ .Values.prometheusSpec.version | quote }}
+  resources: {{ .Values.prometheusSpec.resources | toYaml | nindent 4 }}
+  externalLabels: {{ .Values.prometheusSpec.externalLabels | toYaml | nindent 4 }}
+  remoteWrite: {{ .Values.prometheusSpec.remoteWrite | toYaml | nindent 4 }}
+  {{- if .Values.prometheusSpec.alerting }}
+  alerting: {{ .Values.prometheusSpec.alerting | toYaml | nindent 4 }}
+  {{- end }}
+  routePrefix: {{ .Values.prometheusSpec.routePrefix | quote }}
+  externalUrl: {{ .Values.prometheusSpec.externalUrl | quote }}
+  podMetadata:
+    labels: {{ include "prometheus.labels" . | nindent 6 }}
+  {{- if .Values.prometheusSpec.storage }}
+  storage: {{ .Values.prometheusSpec.storage | toYaml | nindent 4 }}
+  {{- end }}
+  retention: {{ .Values.prometheusSpec.retention | quote  }}
+  {{- if .Values.prometheusSpec.retentionSize }}
+  retentionSize: {{ .Values.prometheusSpec.retentionSize | quote }}
+  {{- end }}
+  portName: web
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 2000
+    fsGroup: 2000
