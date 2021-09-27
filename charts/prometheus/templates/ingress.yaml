@@ -1,0 +1,20 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "prometheus.fullname" . }}
+  labels: {{ include "prometheus.labels" . | nindent 4 }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ template "prometheus.fullname" . }}
+          servicePort: web
+        path: {{ .Values.prometheusSpec.routePrefix | quote }}
+  {{- if .Values.ingress.tls }}
+  tls:
+{{ toYaml .Values.ingress.tls | indent 4 }}
+  {{- end -}}
+{{- end -}}
