@@ -2,3 +2,5 @@ target-branch: main
 chart-repos:
   - grafana=https://grafana.github.io/helm-charts
   - vector=https://packages.timber.io/helm/latest
+excluded-charts:
+  - prometheus
