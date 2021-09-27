@@ -377,6 +377,26 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.14/otel-operator-0.1.14.tgz
     version: 0.1.14
+  prometheus:
+  - apiVersion: v2
+    appVersion: 2.30.0
+    created: "2021-09-27T09:27:45.264363918Z"
+    description: A Helm chart to install Prometheus based on Prometheus Operator
+    digest: 184117dd2913cd46e27242df2bb4501a8f190c8cc64a09e91bacc6591018c1df
+    home: https://prometheus.io/
+    keywords:
+    - prometheus
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: prometheus
+    sources:
+    - https://github.com/prometheus/prometheus
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-2.0.6/prometheus-2.0.6.tgz
+    version: 2.0.6
   prometheus-node-exporter:
   - apiVersion: v1
     appVersion: 1.0.1
@@ -433,4 +453,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2021-09-20T06:16:15.651316386Z"
+generated: "2021-09-27T09:27:45.264394418Z"
