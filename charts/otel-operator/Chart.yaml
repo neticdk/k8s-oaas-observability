@@ -5,8 +5,8 @@ description: Install the OpenTelemetry Operator to create OpenTelemetry Collecto
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: 0.1.15
-appVersion: v0.27.0
+version: 0.1.16
+appVersion: v0.34.0
 maintainers:
   - name: KimNorgaard
     email: kn@netic.dk
