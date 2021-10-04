@@ -26,6 +26,7 @@ prometheusSpec:
   retention: 10d
   retentionSize: ""
   routePrefix: /
+  secrets: []
 
 ingress:
   enabled: false

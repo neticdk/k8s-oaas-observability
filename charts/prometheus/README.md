@@ -2,7 +2,7 @@
 
 # prometheus
 
-![Version: 2.0.6](https://img.shields.io/badge/Version-2.0.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.30.0](https://img.shields.io/badge/AppVersion-2.30.0-informational?style=flat-square)
+![Version: 2.0.7](https://img.shields.io/badge/Version-2.0.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.30.0](https://img.shields.io/badge/AppVersion-2.30.0-informational?style=flat-square)
 
 A Helm chart to install Prometheus based on Prometheus Operator
 
@@ -68,6 +68,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheusSpec.routePrefix | string | `"/"` |  |
 | prometheusSpec.ruleNamespaceSelector | object | `{}` |  |
 | prometheusSpec.ruleSelector | object | `{}` |  |
+| prometheusSpec.secrets | list | `[]` |  |
 | prometheusSpec.serviceMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.serviceMonitorSelector | object | `{}` |  |
 | prometheusSpec.storage | object | `{}` |  |

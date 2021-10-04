@@ -32,6 +32,7 @@ spec:
   retentionSize: {{ .Values.prometheusSpec.retentionSize | quote }}
   {{- end }}
   portName: web
+  secrets: {{ .Values.prometheusSpec.secrets | toYaml | nindent 4 }}
   securityContext:
     runAsNonRoot: true
     runAsUser: 1000
