@@ -1,7 +1,7 @@
 apiVersion: v2
 name: prometheus
 type: application
-version: "2.0.6"
+version: "2.0.7"
 appVersion: "2.30.0"
 description: A Helm chart to install Prometheus based on Prometheus Operator
 home: https://prometheus.io/
