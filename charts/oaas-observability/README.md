@@ -36,7 +36,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../prometheus-operator | prometheus-operator | * |
 | https://grafana.github.io/helm-charts | grafana | 6.9.2 |
 | https://grafana.github.io/helm-charts | promtail | 3.5.1 |
-| https://packages.timber.io/helm/latest | vector-agent | 0.13.1 |
+| https://packages.timber.io/helm/latest | vector-agent | 0.17.0 |
 
 ## Configuration
 

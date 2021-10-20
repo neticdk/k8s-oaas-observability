@@ -32,7 +32,7 @@ dependencies:
     repository: file://../otel-operator
     condition: otel-operator.enabled
   - name: vector-agent
-    version: 0.13.1
+    version: 0.17.0
     repository: https://packages.timber.io/helm/latest
     condition: vector-agent.enabled
   - name: promtail
