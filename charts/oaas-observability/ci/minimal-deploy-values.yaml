@@ -1,0 +1,16 @@
+---
+# Values used by ct for linting and testing
+
+grafana:
+  enabled: false
+  testFramework:
+    enabled: false
+
+vector:
+  enabled: false
+
+alerts:
+  enabled: false
+
+alertmanager:
+  enabled: false

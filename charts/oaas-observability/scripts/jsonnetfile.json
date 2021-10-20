@@ -8,16 +8,16 @@
           "subdir": ""
         }
       },
-      "version": "ff4641bcd83314c955150bea6b147df9ca335c4a"
+      "version": "06d00e40b43e4e618afbebe8e453b5650c659015"
     },
     {
       "source": {
         "git": {
            "remote": "https://github.com/etcd-io/etcd.git",
-           "subdir": "Documentation/etcd-mixin"
+           "subdir": "contrib/mixin"
         }
       },
-      "version": "07c15890ab297947569b221c45aff0688bb20263"
+      "version": "v3.5.1"
     }
   ],
   "legacyImports": true

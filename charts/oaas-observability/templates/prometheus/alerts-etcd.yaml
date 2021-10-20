@@ -1,3 +1,4 @@
+{{- if and $.Values.alerts.enabled $.Values.kubeEtcd.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -7,3 +8,4 @@ metadata:
 {{ include "netic-oaas.labels" . | indent 4 }}
 spec:
 {{- .Files.Get "files/alerts-etcd.yaml" | nindent 2 }}
+{{- end }}

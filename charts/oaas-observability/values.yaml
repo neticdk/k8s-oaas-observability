@@ -18,6 +18,11 @@ global:
     labels:
       netic.dk/monitoring: "true"
 
+## Configuration for alerts
+alerts:
+  ## Should alerting rules be enabled
+  enabled: true
+
 #
 # Configuration for exporters
 #
@@ -1345,7 +1350,7 @@ kube-state-metrics:
 prometheus-operator:
   enabled: true
 
-## Configuration for Vector
+## Configuration for Vector chart
 ##
 vector-agent:
   enabled: true

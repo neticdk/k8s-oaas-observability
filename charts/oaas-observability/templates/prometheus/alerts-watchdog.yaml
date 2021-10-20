@@ -1,3 +1,4 @@
+{{- if $.Values.alerts.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -32,3 +33,4 @@ spec:
       expr: vector(1)
       labels:
         severity: none
+{{- end }}
