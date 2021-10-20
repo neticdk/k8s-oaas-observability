@@ -32,13 +32,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "kube-state-metrics.metaLabels" }}
 helm.sh/chart: {{ template "kube-state-metrics.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
 {{- if .Values.podLabels}}
 {{ toYaml .Values.podLabels }}
 {{- end }}
 {{- end }}
 
 {{- define "kube-state-metrics.labels" -}}
-{{ include "kube-state-metrics.matchLabels" . }}
+{{ include "kube-state-metrics.matchLabels" . -}}
 {{ include "kube-state-metrics.metaLabels" . }}
 {{- end -}}
 
@@ -71,3 +72,11 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
     {{- .Release.Namespace -}}
   {{- end -}}
 {{- end -}}
+
+{{/*
+Resolve the actual image tag to use.
+*/}}
+{{- define "kube-state-metrics.imageTag" -}}
+{{- $tag := default .Chart.AppVersion .Values.image.tag -}}
+{{- $tag -}}
+{{- end }}

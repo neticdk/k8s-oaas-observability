@@ -7,8 +7,8 @@ keywords:
 - monitoring
 - prometheus
 - kubernetes
-version: 1.0.4
-appVersion: 1.9.7
+version: 1.0.5
+appVersion: v2.2.3
 maintainers:
 - name: langecode
   email: tal@netic.dk
