@@ -1050,8 +1050,8 @@ prometheus:
     ##
     image:
       repository: quay.io/prometheus/prometheus
-      tag: v2.26.0
-    version: v2.26.0
+      tag: v2.30.3
+    version: v2.30.3
 
     ## Tolerations for use with node taints
     ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
