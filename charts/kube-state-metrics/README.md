@@ -1,6 +1,6 @@
 # kube-state-metrics
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![AppVersion: 1.9.7](https://img.shields.io/badge/AppVersion-1.9.7-informational?style=flat-square)
+![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: v2.2.3](https://img.shields.io/badge/AppVersion-v2.2.3-informational?style=flat-square)
 
 Install kube-state-metrics to generate and expose cluster-level metrics
 
@@ -26,40 +26,13 @@ $ helm install my-release netic-oaas/kube-state-metrics
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |
 | autosharding | object | `{"enabled":false}` | Set to true to automatically shard data across replicas pods ([Automated Sharding](https://github.com/kubernetes/kube-state-metrics#automated-sharding)). EXPERIMENTAL |
-| collectors.certificatesigningrequests | bool | `true` | Enable the certificatesigningrequests collector. |
-| collectors.configmaps | bool | `true` | Enable the configmaps collector. |
-| collectors.cronjobs | bool | `true` | Enable the cronjobs collector. |
-| collectors.daemonsets | bool | `true` | Enable the daemonsets collector. |
-| collectors.deployments | bool | `true` | Enable the deployments collector. |
-| collectors.endpoints | bool | `true` | Enable the endpoints collector. |
-| collectors.horizontalpodautoscalers | bool | `true` | Enable the horizontalpodautoscalers collector. |
-| collectors.ingresses | bool | `true` | Enable the ingresses collector. |
-| collectors.jobs | bool | `true` | Enable the jobs collector. |
-| collectors.limitranges | bool | `true` | Enable the limitranges collector. |
-| collectors.mutatingwebhookconfigurations | bool | `true` | Enable the mutatingwebhookconfigurations collector. |
-| collectors.namespaces | bool | `true` | Enable the namespaces collector. |
-| collectors.networkpolicies | bool | `true` | Enable the networkpolicies collector. |
-| collectors.nodes | bool | `true` | Enable the nodes collector. |
-| collectors.persistentvolumeclaims | bool | `true` | Enable the persistentvolumeclaims collector. |
-| collectors.persistentvolumes | bool | `true` | Enable the persistentvolumes collector. |
-| collectors.poddisruptionbudgets | bool | `true` | Enable the poddisruptionbudgets collector. |
-| collectors.pods | bool | `true` | Enable the pods collector. |
-| collectors.replicasets | bool | `true` | Enable the replicasets collector. |
-| collectors.replicationcontrollers | bool | `true` | Enable the replicationcontrollers collector. |
-| collectors.resourcequotas | bool | `true` | Enable the resourcequotas collector. |
-| collectors.secrets | bool | `true` | Enable the secrets collector. |
-| collectors.services | bool | `true` | Enable the services collector. |
-| collectors.statefulsets | bool | `true` | Enable the statefulsets collector. |
-| collectors.storageclasses | bool | `true` | Enable the storageclasses collector. |
-| collectors.validatingwebhookconfigurations | bool | `true` | Enable the validatingwebhookconfigurations collector. |
-| collectors.verticalpodautoscalers | bool | `false` | Enable the verticalpodautoscalers collector. |
-| collectors.volumeattachments | bool | `true` | Enable the volumeattachments collector. |
+| collectors | list | `["certificatesigningrequests","configmaps","cronjobs","daemonsets","deployments","endpoints","horizontalpodautoscalers","ingresses","jobs","limitranges","mutatingwebhookconfigurations","namespaces","networkpolicies","nodes","persistentvolumeclaims","persistentvolumes","poddisruptionbudgets","pods","replicasets","replicationcontrollers","resourcequotas","secrets","services","statefulsets","storageclasses","validatingwebhookconfigurations","volumeattachments"]` | Available collectors for kube-state-metrics |
 | customLabels | object | `{}` | Custom labels to apply to service, deployment and pods |
 | global.networkPolicyEnabled | bool | `false` | Deploy network policy allowing ingress. |
 | hostNetwork | bool | `false` | Whether or not to use the host network |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
-| image.repository | string | `"quay.io/coreos/kube-state-metrics"` | The image repository to pull from |
-| image.tag | string | `"v1.9.7"` | The image tag to pull |
+| image.repository | string | `"k8s.gcr.io/kube-state-metrics/kube-state-metrics"` | The image repository to pull from |
+| image.tag | string | `nil` | The image tag to pull - default is version from Chart.yaml |
 | imagePullSecrets | list | `[]` |  |
 | kubeTargetVersionOverride | string | `""` | Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role. For example: kubeTargetVersionOverride: 1.14.9 |
 | kubeconfig.enabled | bool | `false` |  |
