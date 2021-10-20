@@ -7,9 +7,9 @@ prometheusScrape: true
 
 image:
   # -- The image repository to pull from
-  repository: quay.io/coreos/kube-state-metrics
-  # -- The image tag to pull
-  tag: v1.9.7
+  repository: k8s.gcr.io/kube-state-metrics/kube-state-metrics
+  # -- The image tag to pull - default is version from Chart.yaml
+  tag:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
@@ -119,63 +119,36 @@ priorityClassName:
 # Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
 podDisruptionBudget: {}
 
+# -- Available collectors for kube-state-metrics
 collectors:
-  # -- Enable the certificatesigningrequests collector.
-  certificatesigningrequests: true
-  # -- Enable the configmaps collector.
-  configmaps: true
-  # -- Enable the cronjobs collector.
-  cronjobs: true
-  # -- Enable the daemonsets collector.
-  daemonsets: true
-  # -- Enable the deployments collector.
-  deployments: true
-  # -- Enable the endpoints collector.
-  endpoints: true
-  # -- Enable the horizontalpodautoscalers collector.
-  horizontalpodautoscalers: true
-  # -- Enable the ingresses collector.
-  ingresses: true
-  # -- Enable the jobs collector.
-  jobs: true
-  # -- Enable the limitranges collector.
-  limitranges: true
-  # -- Enable the mutatingwebhookconfigurations collector.
-  mutatingwebhookconfigurations: true
-  # -- Enable the namespaces collector.
-  namespaces: true
-  # -- Enable the networkpolicies collector.
-  networkpolicies: true
-  # -- Enable the nodes collector.
-  nodes: true
-  # -- Enable the persistentvolumeclaims collector.
-  persistentvolumeclaims: true
-  # -- Enable the persistentvolumes collector.
-  persistentvolumes: true
-  # -- Enable the poddisruptionbudgets collector.
-  poddisruptionbudgets: true
-  # -- Enable the pods collector.
-  pods: true
-  # -- Enable the replicasets collector.
-  replicasets: true
-  # -- Enable the replicationcontrollers collector.
-  replicationcontrollers: true
-  # -- Enable the resourcequotas collector.
-  resourcequotas: true
-  # -- Enable the secrets collector.
-  secrets: true
-  # -- Enable the services collector.
-  services: true
-  # -- Enable the statefulsets collector.
-  statefulsets: true
-  # -- Enable the storageclasses collector.
-  storageclasses: true
-  # -- Enable the validatingwebhookconfigurations collector.
-  validatingwebhookconfigurations: true
-  # -- Enable the verticalpodautoscalers collector.
-  verticalpodautoscalers: false
-  # -- Enable the volumeattachments collector.
-  volumeattachments: true
+  - certificatesigningrequests
+  - configmaps
+  - cronjobs
+  - daemonsets
+  - deployments
+  - endpoints
+  - horizontalpodautoscalers
+  - ingresses
+  - jobs
+  - limitranges
+  - mutatingwebhookconfigurations
+  - namespaces
+  - networkpolicies
+  - nodes
+  - persistentvolumeclaims
+  - persistentvolumes
+  - poddisruptionbudgets
+  - pods
+  - replicasets
+  - replicationcontrollers
+  - resourcequotas
+  - secrets
+  - services
+  - statefulsets
+  - storageclasses
+  - validatingwebhookconfigurations
+  - volumeattachments
+  # - verticalpodautoscalers # not a default resource, see also: https://github.com/kubernetes/kube-state-metrics#enabling-verticalpodautoscalers
 
 # Enabling kubeconfig will pass the --kubeconfig argument to the container
 kubeconfig:
