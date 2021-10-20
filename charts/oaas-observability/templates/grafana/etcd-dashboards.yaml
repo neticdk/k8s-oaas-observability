@@ -1,4 +1,4 @@
-{{- if $.Values.grafana.enabled }}
+{{- if and $.Values.grafana.enabled $.Values.kubeEtcd.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

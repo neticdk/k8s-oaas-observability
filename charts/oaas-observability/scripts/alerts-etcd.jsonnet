@@ -1,1 +1,1 @@
-std.manifestYamlDoc((import 'github.com/etcd-io/etcd/Documentation/etcd-mixin/mixin.libsonnet').prometheusAlerts)
+std.manifestYamlDoc((import 'github.com/etcd-io/etcd/contrib/mixin/mixin.libsonnet').prometheusAlerts)

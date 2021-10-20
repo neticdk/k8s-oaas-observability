@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.7](https://img.shields.io/badge/Version-2.0.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.8](https://img.shields.io/badge/Version-2.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -127,6 +127,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.servicePerReplica.type | string | `"ClusterIP"` |  |
 | alertmanager.templateFiles | object | `{}` |  |
 | alertmanager.tplConfig | bool | `false` |  |
+| alerts.enabled | bool | `true` |  |
 | coreDns | object | `{"enabled":false,"service":{"port":9153,"targetPort":9153},"serviceMonitor":{"interval":"","metricRelabelings":[],"relabelings":[]}}` |  Configuration for exporters |
 | endpointController.enabled | bool | `false` |  |
 | endpointController.image.pullPolicy | string | `"IfNotPresent"` |  |

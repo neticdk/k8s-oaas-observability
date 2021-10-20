@@ -5,11 +5,11 @@
       "source": {
         "git": {
           "remote": "https://github.com/etcd-io/etcd.git",
-          "subdir": "Documentation/etcd-mixin"
+          "subdir": "contrib/mixin"
         }
       },
-      "version": "07c15890ab297947569b221c45aff0688bb20263",
-      "sum": "bLqTqEr0jky9zz5MV/7ucn6H5mph2NlXas0TVnGNB1Y="
+      "version": "c89197da0f5beda38891a61589de657ab5079f69",
+      "sum": "W/Azptf1PoqjyMwJON96UY69MFugDA4IAYiKURscryc="
     },
     {
       "source": {
@@ -18,7 +18,7 @@
           "subdir": "grafonnet"
         }
       },
-      "version": "19b27b272abf4263af1365ec485784c49815a332",
+      "version": "3626fc4dc2326931c530861ac5bebe39444f6cbf",
       "sum": "gF8foHByYcB25jcUOBqP6jxk0OPifQMjPvKY0HaCk6w="
     },
     {
@@ -28,8 +28,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "9631fe778e87213bed195fcdc8d79da4eecb7431",
-      "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
+      "version": "2ed138b205717af721af57b572bc7cd63bda62fd",
+      "sum": "U34Nd1ViO2LZ3D8IzygPPRfUcy6zOgCnTMVHZ+9O/QE="
     },
     {
       "source": {
@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "ff4641bcd83314c955150bea6b147df9ca335c4a",
-      "sum": "oUVGwcCbmdH8qz9B+lbRawI9s23GY9HeW7MwYZRbZ/0="
+      "version": "06d00e40b43e4e618afbebe8e453b5650c659015",
+      "sum": "oT6Vw714HjoFtnay2WFzzRk/TP2McDaYIEHI2GqNuWY="
     }
   ],
   "legacyImports": false
