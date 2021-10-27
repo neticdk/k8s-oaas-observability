@@ -10,15 +10,15 @@ dependencies:
   version: 1.0.2
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.6
+  version: 1.0.7
 - name: otel-operator
   repository: file://../otel-operator
-  version: 0.1.16
+  version: 0.1.17
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.17.0
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 3.5.1
-digest: sha256:e3ccac59b55264e29af59457a6cc4f94d3e59362f4aab24bcbe5b8d04466906c
-generated: "2021-10-20T09:32:50.667184+02:00"
+digest: sha256:f75c3e84cedf33ed3560f140828227a5b8d2c17a59ad27dc820d8c0cc5d1f4c1
+generated: "2021-10-27T09:13:26.148358+02:00"
