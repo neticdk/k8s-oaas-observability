@@ -17,10 +17,14 @@ spec:
           image: "{{ .Values.endpointController.image.repository }}:{{ .Values.endpointController.image.tag }}"
           imagePullPolicy: "{{ .Values.endpointController.image.pullPolicy }}"
           args:
+{{- if .Values.endpointController.kubeServices }}
             - '--kube-scheduler-service=kube-system/oaas-kube-scheduler-service'
             - '--kube-controller-manager-service=kube-system/oaas-kube-controller-manager-service'
+{{- end }}
+{{- if .Values.endpointController.etcdService }}
             - '--etcd-service=kube-system/oaas-etcd-service'
-{{- if .Values.endpointController.windowsExporter }}
+{{- end }}
+{{- if .Values.endpointController.windowsExporterService }}
             - '--windows-exporter-service=kube-system/windows-exporter'
 {{- end }}
           resources: {{ toYaml .Values.endpointController.resources | nindent 12 }}

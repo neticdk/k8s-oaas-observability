@@ -1333,7 +1333,9 @@ endpointController:
     repository: ghcr.io/neticdk/endpoint-controller
     tag: v1.0.3
     pullPolicy: IfNotPresent
-  windowsExporter: false
+  kubeServices: true
+  etcdService: true
+  windowsExporterService: false
   nodeSelector:
   resources: {}
 
