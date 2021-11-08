@@ -168,7 +168,7 @@ func (c *Controller) syncHandler(key string) error {
 	}
 
 	if os, ok := labels[osLabel]; ok && os == "windows" && len(c.osKey) > 0 {
-		svcNs, svcName, _ := cache.SplitMetaNamespaceKey(c.kubeCMKey)
+		svcNs, svcName, _ := cache.SplitMetaNamespaceKey(c.osKey)
 		err = c.syncObjects(ctx, svcNs, svcName, exporterPort, "windows-exporter", osLabel, os)
 		if err != nil {
 			return err
