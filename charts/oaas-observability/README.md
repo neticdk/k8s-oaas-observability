@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.11](https://img.shields.io/badge/Version-2.0.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.12](https://img.shields.io/badge/Version-2.0.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -130,10 +130,14 @@ $ helm install my-release netic-oaas/oaas-observability
 | alerts.enabled | bool | `true` |  |
 | coreDns | object | `{"enabled":false,"service":{"port":9153,"targetPort":9153},"serviceMonitor":{"interval":"","metricRelabelings":[],"relabelings":[]}}` |  Configuration for exporters |
 | endpointController.enabled | bool | `false` |  |
+| endpointController.etcdService | bool | `true` |  |
 | endpointController.image.pullPolicy | string | `"IfNotPresent"` |  |
-| endpointController.image.repository | string | `"registry.netic.dk/endpoint-controller"` |  |
-| endpointController.image.tag | string | `"latest"` |  |
+| endpointController.image.repository | string | `"ghcr.io/neticdk/endpoint-controller"` |  |
+| endpointController.image.tag | string | `"v1.0.3"` |  |
+| endpointController.kubeServices | bool | `true` |  |
+| endpointController.nodeSelector | string | `nil` |  |
 | endpointController.resources | object | `{}` |  |
+| endpointController.windowsExporterService | bool | `false` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.pspAnnotations | object | `{}` |  |
