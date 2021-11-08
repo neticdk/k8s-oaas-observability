@@ -40,7 +40,8 @@ func (f *fixture) newController() *Controller {
 		i.Core().V1().Nodes(),
 		"kube-system/kube-scheduler",
 		"kube-system/kube-controller-manager",
-		"kube-system/etcd")
+		"kube-system/etcd",
+		"kube-system/windows-exporter")
 	c.nodesSynced = alwaysReady
 	for _, n := range f.nodes {
 		i.Core().V1().Nodes().Informer().GetIndexer().Add(n)
@@ -94,6 +95,37 @@ func TestCreateEtcdEndpoints(t *testing.T) {
 			Name: "node-name",
 			Labels: map[string]string{
 				"node-role.kubernetes.io/etcd": "true",
+			},
+		},
+		Spec: corev1.NodeSpec{},
+		Status: corev1.NodeStatus{
+			Addresses: []corev1.NodeAddress{
+				{
+					Type:    corev1.NodeInternalIP,
+					Address: "10.10.10.10",
+				},
+			},
+		},
+	}
+	f.nodes = append(f.nodes, n)
+	f.objects = append(f.objects, n)
+
+	f.run("node-name")
+
+	assert.Len(t, f.client.Actions(), 5)
+	a := f.client.Actions()
+	assert.IsType(t, clienttesting.CreateActionImpl{}, a[2]) // Create Endpoint
+	assert.IsType(t, clienttesting.CreateActionImpl{}, a[4]) // Create Service
+}
+
+func TestCreateWindowsExporterEndpoints(t *testing.T) {
+	f := newFixture(t)
+
+	n := &corev1.Node{
+		ObjectMeta: metav1.ObjectMeta{
+			Name: "node-name",
+			Labels: map[string]string{
+				"kubernetes.io/os": "windows",
 			},
 		},
 		Spec: corev1.NodeSpec{},

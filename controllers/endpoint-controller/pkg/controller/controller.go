@@ -28,6 +28,9 @@ const (
 
 	etcdLabel = "node-role.kubernetes.io/etcd"
 	etcdPort  = 2381
+
+	osLabel      = "kubernetes.io/os"
+	exporterPort = 9100
 )
 
 // Controller is the controller implementation
@@ -39,10 +42,11 @@ type Controller struct {
 	kubeSchedulerKey string
 	kubeCMKey        string
 	etcdKey          string
+	osKey            string
 }
 
 // NewController returns a new controller instance
-func NewController(clientset kubernetes.Interface, nodes informers.NodeInformer, kubeSchedulerKey string, kubeCMKey, etcdKey string) *Controller {
+func NewController(clientset kubernetes.Interface, nodes informers.NodeInformer, kubeSchedulerKey, kubeCMKey, etcdKey, osKey string) *Controller {
 	c := &Controller{
 		clientset:        clientset,
 		nodes:            nodes.Lister(),
@@ -51,6 +55,7 @@ func NewController(clientset kubernetes.Interface, nodes informers.NodeInformer,
 		kubeSchedulerKey: kubeSchedulerKey,
 		kubeCMKey:        kubeCMKey,
 		etcdKey:          etcdKey,
+		osKey:            osKey,
 	}
 
 	nodes.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
@@ -138,7 +143,7 @@ func (c *Controller) syncHandler(key string) error {
 	labels := node.GetLabels()
 	if _, ok := labels[etcdLabel]; ok && len(c.etcdKey) > 0 {
 		svcNs, svcName, _ := cache.SplitMetaNamespaceKey(c.etcdKey)
-		err := c.syncObjects(ctx, svcNs, svcName, etcdPort, "kube-etcd", etcdLabel)
+		err := c.syncObjects(ctx, svcNs, svcName, etcdPort, "kube-etcd", etcdLabel, "true")
 		if err != nil {
 			return err
 		}
@@ -147,7 +152,7 @@ func (c *Controller) syncHandler(key string) error {
 	if _, ok := labels[controlplaneLabel]; ok {
 		if len(c.kubeSchedulerKey) > 0 {
 			svcNs, svcName, _ := cache.SplitMetaNamespaceKey(c.kubeSchedulerKey)
-			err := c.syncObjects(ctx, svcNs, svcName, kubeSchedulerPort, "kube-scheduler", controlplaneLabel)
+			err := c.syncObjects(ctx, svcNs, svcName, kubeSchedulerPort, "kube-scheduler", controlplaneLabel, "true")
 			if err != nil {
 				return err
 			}
@@ -155,22 +160,30 @@ func (c *Controller) syncHandler(key string) error {
 
 		if len(c.kubeCMKey) > 0 {
 			svcNs, svcName, _ := cache.SplitMetaNamespaceKey(c.kubeCMKey)
-			err = c.syncObjects(ctx, svcNs, svcName, kubeCMPort, "kube-controller-manager", controlplaneLabel)
+			err = c.syncObjects(ctx, svcNs, svcName, kubeCMPort, "kube-controller-manager", controlplaneLabel, "true")
 			if err != nil {
 				return err
 			}
 		}
 	}
 
+	if os, ok := labels[osLabel]; ok && os == "windows" && len(c.osKey) > 0 {
+		svcNs, svcName, _ := cache.SplitMetaNamespaceKey(c.kubeCMKey)
+		err = c.syncObjects(ctx, svcNs, svcName, exporterPort, "windows-exporter", osLabel, os)
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
-func (c *Controller) syncObjects(ctx context.Context, svcNs string, svcName string, port int32, component string, nodeLabel string) error {
+func (c *Controller) syncObjects(ctx context.Context, svcNs string, svcName string, port int32, component string, nodeLabel, labelValue string) error {
 	list, err := c.clientset.CoreV1().Nodes().List(ctx, metav1.ListOptions{
-		LabelSelector: fmt.Sprintf("%s=true", nodeLabel),
+		LabelSelector: fmt.Sprintf("%s=%s", nodeLabel, labelValue),
 	})
 	if err != nil {
-		utilruntime.HandleError(fmt.Errorf("unable to list nodes with label: %s", nodeLabel))
+		utilruntime.HandleError(fmt.Errorf("unable to list nodes with label: %s and value: %s", nodeLabel, labelValue))
 		return err
 	}
 
