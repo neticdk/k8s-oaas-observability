@@ -1330,9 +1330,11 @@ prometheus:
 endpointController:
   enabled: false
   image:
-    repository: registry.netic.dk/endpoint-controller
-    tag: latest
+    repository: ghcr.io/neticdk/endpoint-controller
+    tag: v1.0.3
     pullPolicy: IfNotPresent
+  windowsExporter: false
+  nodeSelector:
   resources: {}
 
 ## Values for included kube-state-metrics chart

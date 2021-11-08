@@ -20,9 +20,16 @@ spec:
             - '--kube-scheduler-service=kube-system/oaas-kube-scheduler-service'
             - '--kube-controller-manager-service=kube-system/oaas-kube-controller-manager-service'
             - '--etcd-service=kube-system/oaas-etcd-service'
+{{- if .Values.endpointController.windowsExporter }}
+            - '--windows-exporter-service=kube-system/windows-exporter'
+{{- end }}
           resources: {{ toYaml .Values.endpointController.resources | nindent 12 }}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
       serviceAccountName: {{ include "endpoint-controller.fullname" . }}
+{{- with .Values.endpointController.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+{{- end }}
 {{- end }}
