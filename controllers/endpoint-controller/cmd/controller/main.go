@@ -18,6 +18,7 @@ var (
 	kubeSchedulerKey string
 	kubeCMKey        string
 	etcdKey          string
+	osKey            string
 )
 
 func main() {
@@ -37,7 +38,7 @@ func main() {
 	}
 
 	informerFactory := informers.NewSharedInformerFactory(kubeClient, time.Second*30)
-	controller := controller.NewController(kubeClient, informerFactory.Core().V1().Nodes(), kubeSchedulerKey, kubeCMKey, etcdKey)
+	controller := controller.NewController(kubeClient, informerFactory.Core().V1().Nodes(), kubeSchedulerKey, kubeCMKey, etcdKey, osKey)
 
 	informerFactory.Start(stopCh)
 	controller.Run(2, stopCh)
@@ -49,4 +50,5 @@ func init() {
 	flag.StringVar(&kubeSchedulerKey, "kube-scheduler-service", "", "Service/Endpoints object to write for kube-scheduler in format \"namespace/name\"")
 	flag.StringVar(&kubeCMKey, "kube-controller-manager-service", "", "Service/Endpoints object to write for kube-controller-manager in format \"namespace/name\"")
 	flag.StringVar(&etcdKey, "etcd-service", "", "Service/Endpoints object to write for etcd in format \"namespace/name\"")
+	flag.StringVar(&osKey, "windows-exporter-service", "", "Service/Endpoints object to write for windows-exporter in format \"namespace/name\"")
 }
