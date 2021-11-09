@@ -14,21 +14,22 @@ global:
       # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
       # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
   serviceMonitor:
-    # Labels to add to all service monitors
+    # -- Labels to add to all service monitors
     labels:
       netic.dk/monitoring: "true"
 
 ## Configuration for alerts
 alerts:
-  ## Should alerting rules be enabled
+  # -- Should alerting rules be enabled
   enabled: true
 
-#
-# Configuration for exporters
-#
-#
+##
+## Configuration for exporters
+##
+##
 
 coreDns:
+  # -- Should coreDns be scraped
   enabled: false
   service:
     port: 9153
@@ -60,6 +61,7 @@ coreDns:
 ## Component scraping the kube api server
 ##
 kubeApiServer:
+  # -- Should api server be scraped
   enabled: true
   tlsConfig:
     serverName: kubernetes
@@ -206,15 +208,13 @@ kubeDns:
 kubeEtcd:
   enabled: true
 
-  ## If your etcd is not deployed as a pod, specify IPs it can be found on
-  ##
+  # -- If your etcd is not deployed as a pod, specify IPs it can be found on
   endpoints: []
   # - 10.141.4.22
   # - 10.141.4.23
   # - 10.141.4.24
 
-  ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
-  ##
+  # -- Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
   service:
     port: 2381        # default 2379
     targetPort: 2381  # default 2379
@@ -307,15 +307,13 @@ kubeProxy:
 kubeScheduler:
   enabled: true
 
-  ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
-  ##
+  # -- If your kube scheduler is not deployed as a pod, specify IPs it can be found on
   endpoints: []
   # - 10.141.4.22
   # - 10.141.4.23
   # - 10.141.4.24
 
-  ## If using kubeScheduler.endpoints only the port and targetPort are used
-  ##
+  # -- If using kubeScheduler.endpoints only the port and targetPort are used
   service:
     port: 10251
     targetPort: 10251
@@ -476,6 +474,7 @@ kubelet:
 ## Deploy node exporter as a daemonset to all nodes
 ##
 nodeExporter:
+  # -- Deploy node exporter as a daemonset to all nodes
   enabled: true
 
   ## Use the value configured in prometheus-node-exporter.podLabels
@@ -518,18 +517,15 @@ nodeExporter:
 
 ## Configuration for alertmanager
 ## ref: https://prometheus.io/docs/alerting/alertmanager/
-##
 alertmanager:
 
-  ## Deploy alertmanager
-  ##
+  # -- Deploy alertmanager
   enabled: true
 
-  ## Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2
-  ##
+  # -- Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2
   apiVersion: v2
 
-  ## Service account for Alertmanager to use.
+  # -- Service account for Alertmanager to use.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
   ##
   serviceAccount:
@@ -537,7 +533,7 @@ alertmanager:
     name: ""
     annotations: {}
 
-  ## Configure pod disruption budgets for Alertmanager
+  # -- Configure pod disruption budgets for Alertmanager
   ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
   ## This configuration is immutable once created and will require the PDB to be deleted to be changed
   ## https://github.com/kubernetes/kubernetes/issues/45398
@@ -547,7 +543,7 @@ alertmanager:
     minAvailable: 1
     maxUnavailable: ""
 
-  ## Alertmanager configuration directives
+  # -- Alertmanager configuration directives
   ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file
   ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
   ##
@@ -774,8 +770,8 @@ alertmanager:
     ##
     # configSecret:
 
-    ## Define Log Format
-    # Use logfmt (default) or json-formatted logging
+    # -- Define Log Format
+    # Use 'logfmt' (default) or 'json-formatted' logging
     logFormat: logfmt
 
     ## Log level for Alertmanager to be configured with.
@@ -1328,19 +1324,22 @@ prometheus:
     portName: "web"
 
 endpointController:
+  # -- Enable endpoint controller to expose external endpoints
   enabled: false
   image:
     repository: ghcr.io/neticdk/endpoint-controller
-    tag: v1.0.3
+    tag: v1.0.4
     pullPolicy: IfNotPresent
+  # -- Expose controller and scheduler based on node labels
   kubeServices: true
+  # -- Expose etcd on nodes based on labels
   etcdService: true
+  # -- Expose windows hosts based on labels
   windowsExporterService: false
   nodeSelector:
   resources: {}
 
-## Values for included kube-state-metrics chart
-##
+# -- Values for included kube-state-metrics chart
 kube-state-metrics:
   podSecurityPolicy:
     enabled: true
@@ -1349,8 +1348,7 @@ kube-state-metrics:
       enabled: true
       honorLabels: true
 
-## Values for included prometheus-operator chart
-##
+# -- Values for included prometheus-operator chart
 prometheus-operator:
   enabled: true
 
@@ -1395,13 +1393,11 @@ grafana:
       enabled: true
       label: netic_grafana_datasource
 
-## Values for included otel-operator chart
-##
+# -- Values for included otel-operator chart
 otel-operator:
   enabled: true
 
-## Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
-##
+# -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
 promtail:
   enabled: false
   serviceMonitor:
