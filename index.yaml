@@ -45,6 +45,51 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2021-11-09T07:22:00.289299173Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.9.2
+    - name: kube-state-metrics
+      repository: file://../kube-state-metrics
+      version: '*'
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: otel-operator.enabled
+      name: otel-operator
+      repository: file://../otel-operator
+      version: '*'
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://packages.timber.io/helm/latest
+      version: 0.17.0
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 3.5.1
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: 9b0e7fa5dd41fbdecfbcdf2668291a095c3796fd8b1d913a4aaecf67cbe14de4
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.0.14/oaas-observability-2.0.14.tgz
+    version: 2.0.14
+  - apiVersion: v2
     created: "2021-10-28T17:15:31.249723966Z"
     dependencies:
     - condition: grafana.enabled
@@ -831,4 +876,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2021-10-28T17:15:31.443457061Z"
+generated: "2021-11-09T07:22:00.28941238Z"
