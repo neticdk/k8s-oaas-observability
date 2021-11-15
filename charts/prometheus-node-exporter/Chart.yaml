@@ -3,7 +3,7 @@ appVersion: 1.0.1
 description: A Helm chart for prometheus node-exporter
 name: prometheus-node-exporter
 home: https://github.com/prometheus/node_exporter
-version: 1.0.2
+version: 1.0.3
 sources:
 - https://github.com/prometheus/node_exporter
 - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-node-exporter
