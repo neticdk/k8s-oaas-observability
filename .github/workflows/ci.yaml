@@ -25,9 +25,9 @@ jobs:
 
       - name: Install extra tooling
         run: |
-          go get github.com/google/go-jsonnet/cmd/jsonnet
-          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-          GO111MODULE=on go get github.com/norwoodj/helm-docs/cmd/helm-docs
+          go install github.com/google/go-jsonnet/cmd/jsonnet@latest
+          go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.5.0
 
       - name: Render jsonnet rules for Netic OaaS chart
         run: |
