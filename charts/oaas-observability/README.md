@@ -52,7 +52,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.image.repository | string | `"quay.io/prometheus/alertmanager"` |  |
 | alertmanager.alertmanagerSpec.image.tag | string | `"v0.23.0"` |  |
 | alertmanager.alertmanagerSpec.listenLocal | bool | `false` |  |
-| alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` | Define Log Format Use 'logfmt' (default) or 'json-formatted' logging |
+| alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` |  |
 | alertmanager.alertmanagerSpec.logLevel | string | `"info"` | Log level for Alertmanager to be configured with. |
 | alertmanager.alertmanagerSpec.nodeSelector | object | `{}` |  |
 | alertmanager.alertmanagerSpec.paused | bool | `false` |  |
@@ -172,7 +172,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeDns.service.dnsmasq.targetPort | int | `10054` |  |
 | kubeDns.service.skydns.port | int | `10055` |  |
 | kubeDns.service.skydns.targetPort | int | `10055` |  |
-| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |    separator: ;   regex: ^(.*)$   targetLabel: nodename   replacement: $1   action: replace |
+| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.dnsmasqRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.interval | string | `""` |  |
 | kubeDns.serviceMonitor.metricRelabelings | list | `[]` |  |
@@ -210,7 +210,12 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.namespace | string | `"kube-system"` |  |
 | kubelet.serviceMonitor.cAdvisor | bool | `true` |  |
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings | list | `[]` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"},{"action":"replace","replacement":"cadvisor","sourceLabels":["job"],"targetLabel":"job"}]` |    metrics_path is required to match upstream rules and charts |
+| kubelet.serviceMonitor.cAdvisorRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[0].targetLabel | string | `"metrics_path"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].action | string | `"replace"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].replacement | string | `"cadvisor"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].sourceLabels[0] | string | `"job"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].targetLabel | string | `"job"` |  |
 | kubelet.serviceMonitor.https | bool | `true` |  |
 | kubelet.serviceMonitor.interval | string | `""` |  |
 | kubelet.serviceMonitor.metricRelabelings | list | `[]` |  |
@@ -218,7 +223,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.probesMetricRelabelings | list | `[]` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].targetLabel | string | `"metrics_path"` |  |
-| kubelet.serviceMonitor.relabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"}]` |    metrics_path is required to match upstream rules and charts |
+| kubelet.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
+| kubelet.serviceMonitor.relabelings[0].targetLabel | string | `"metrics_path"` |  |
 | kubelet.serviceMonitor.resource | bool | `true` |  |
 | kubelet.serviceMonitor.resourcePath | string | `"/metrics/resource"` |  |
 | kubelet.serviceMonitor.resourceRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
@@ -237,7 +243,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
 | prometheus.ingress.enabled | bool | `false` |  |
-| prometheus.ingress.hosts | list | `[]` |  hosts:   - prometheus.domain.com |
+| prometheus.ingress.hosts | list | `[]` |  |
 | prometheus.ingress.labels | object | `{}` |  |
 | prometheus.ingress.paths | list | `[]` |  |
 | prometheus.ingress.tls | list | `[]` |  |

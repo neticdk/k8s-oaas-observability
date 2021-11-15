@@ -51,9 +51,10 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.hostNetwork | bool | `false` | Required for use in managed kubernetes clusters (such as AWS EKS) with custom CNI (such as calico), because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working |
 | prometheusOperator.hyperkubeImage | object | `{"pullPolicy":"IfNotPresent","repository":"k8s.gcr.io/hyperkube","sha":"","tag":"v1.16.12"}` | Hyperkube image to use when cleaning up |
 | prometheusOperator.image | object | `{"pullPolicy":"IfNotPresent","repository":"quay.io/prometheus-operator/prometheus-operator","sha":"","tag":""}` | Prometheus-operator image |
-| prometheusOperator.kubeletService | object | `{"enabled":true,"namespace":"kube-system"}` | If true, the operator will create and maintain a service for scraping kubelets ref: https://github.com/coreos/prometheus-operator/blob/master/helm/prometheus-operator/README.md |
+| prometheusOperator.kubeletService.enabled | bool | `true` |  |
+| prometheusOperator.kubeletService.namespace | string | `"kube-system"` |  |
 | prometheusOperator.logFormat | string | `"logfmt"` | Define Log Format Use logfmt (default) or json-formatted logging |
-| prometheusOperator.manageCrds | bool | `true` |  Only for prometheusOperator.image.tag < v0.39.0 |
+| prometheusOperator.manageCrds | bool | `true` |  |
 | prometheusOperator.namespaces | object | `{}` | Namespaces to scope the interaction of the Prometheus Operator and the apiserver (allow list). This is mutually exclusive with denyNamespaces. Setting this to an empty object will disable the configuration |
 | prometheusOperator.nodeSelector | object | `{}` | Define which Nodes the Pods are scheduled on. ref: https://kubernetes.io/docs/user-guide/node-selection/ |
 | prometheusOperator.podAnnotations | object | `{}` | Annotations to add to the operator pod |
