@@ -747,23 +747,28 @@ alertmanager:
     ##
     image:
       repository: quay.io/prometheus/alertmanager
-      tag: v0.21.0
-    version: v0.21.0
+      tag: v0.23.0
+    version: v0.23.0
 
-    ## If true then the user will be responsible to provide a secret with alertmanager configuration
-    ## So when true the config part will be ignored (including templateFiles) and the one in the secret will be used
-    ##
+    # -- If true then the user will be responsible to provide a secret with alertmanager configuration
+    # So when true the config part will be ignored (including templateFiles) and the one in the secret will be used
     useExistingSecret: false
 
-    ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
-    ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
-    ##
+    # -- Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
+    # Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
     secrets: []
 
-    ## ConfigMaps is a list of ConfigMaps in the same namespace as the Alertmanager object, which shall be mounted into the Alertmanager Pods.
-    ## The ConfigMaps are mounted into /etc/alertmanager/configmaps/.
-    ##
+    # -- ConfigMaps is a list of ConfigMaps in the same namespace as the Alertmanager object, which shall be mounted into the Alertmanager Pods.
+    # The ConfigMaps are mounted into /etc/alertmanager/configmaps/.
     configMaps: []
+
+    # -- AlertmanagerConfigs to be selected for to merge and configure Alertmanager with.
+    alertmanagerConfigSelector:
+      matchLabels:
+        netic.dk/monitoring: "true"
+
+    # -- Namespaces to be selected for AlertmanagerConfig discovery. If nil, only check own namespace.
+    alertmanagerConfigNamespaceSelector: {}
 
     ## ConfigSecret is the name of a Kubernetes Secret in the same namespace as the Alertmanager object, which contains configuration for
     ## this Alertmanager instance. Defaults to 'alertmanager-' The secret is mounted into /etc/alertmanager/config.
@@ -774,22 +779,19 @@ alertmanager:
     # Use 'logfmt' (default) or 'json-formatted' logging
     logFormat: logfmt
 
-    ## Log level for Alertmanager to be configured with.
-    ##
+    # -- Log level for Alertmanager to be configured with.
     logLevel: info
 
-    ## Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
-    ## running cluster equal to the expected size.
+    # -- Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
+    # running cluster equal to the expected size.
     replicas: 1
 
-    ## Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
-    ## [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
-    ##
+    # -- Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
+    # [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
     retention: 120h
 
-    ## Storage is the definition of how storage will be used by the Alertmanager instances.
-    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
-    ##
+    # -- Storage is the definition of how storage will be used by the Alertmanager instances.
+    # ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
     storage: {}
     # volumeClaimTemplate:
     #   spec:
