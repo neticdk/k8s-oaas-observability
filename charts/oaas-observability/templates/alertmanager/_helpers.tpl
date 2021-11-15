@@ -46,7 +46,8 @@ alertmanager selector labels
 */}}
 {{- define "alertmanager.matchLabels" -}}
 app.kubernetes.io/component: alertmanager
-{{ include "netic-oaas.matchLabels" . }}
+app.kubernetes.io/instance: oaas-observability
+app.kubernetes.io/name: alertmanager
 {{- end -}}
 
 {{/*
