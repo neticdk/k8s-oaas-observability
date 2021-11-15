@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.14](https://img.shields.io/badge/Version-2.0.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.15](https://img.shields.io/badge/Version-2.0.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -44,33 +44,35 @@ $ helm install my-release netic-oaas/oaas-observability
 |-----|------|---------|-------------|
 | alertmanager.alertmanagerSpec.additionalPeers | list | `[]` |  |
 | alertmanager.alertmanagerSpec.affinity | object | `{}` |  |
-| alertmanager.alertmanagerSpec.configMaps | list | `[]` |  |
+| alertmanager.alertmanagerSpec.alertmanagerConfigNamespaceSelector | object | `{}` | Namespaces to be selected for AlertmanagerConfig discovery. If nil, only check own namespace. |
+| alertmanager.alertmanagerSpec.alertmanagerConfigSelector | object | `{"matchLabels":{"netic.dk/monitoring":"true"}}` | AlertmanagerConfigs to be selected for to merge and configure Alertmanager with. |
+| alertmanager.alertmanagerSpec.configMaps | list | `[]` | ConfigMaps is a list of ConfigMaps in the same namespace as the Alertmanager object, which shall be mounted into the Alertmanager Pods. The ConfigMaps are mounted into /etc/alertmanager/configmaps/. |
 | alertmanager.alertmanagerSpec.containers | list | `[]` |  |
 | alertmanager.alertmanagerSpec.externalUrl | string | `nil` |  |
 | alertmanager.alertmanagerSpec.image.repository | string | `"quay.io/prometheus/alertmanager"` |  |
-| alertmanager.alertmanagerSpec.image.tag | string | `"v0.21.0"` |  |
+| alertmanager.alertmanagerSpec.image.tag | string | `"v0.23.0"` |  |
 | alertmanager.alertmanagerSpec.listenLocal | bool | `false` |  |
-| alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` | Define Log Format Use 'logfmt' (default) or 'json-formatted' logging |
-| alertmanager.alertmanagerSpec.logLevel | string | `"info"` |  |
+| alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` |  |
+| alertmanager.alertmanagerSpec.logLevel | string | `"info"` | Log level for Alertmanager to be configured with. |
 | alertmanager.alertmanagerSpec.nodeSelector | object | `{}` |  |
 | alertmanager.alertmanagerSpec.paused | bool | `false` |  |
 | alertmanager.alertmanagerSpec.podAntiAffinity | string | `""` |  |
 | alertmanager.alertmanagerSpec.podAntiAffinityTopologyKey | string | `"kubernetes.io/hostname"` |  |
 | alertmanager.alertmanagerSpec.portName | string | `"web"` |  |
 | alertmanager.alertmanagerSpec.priorityClassName | string | `""` |  |
-| alertmanager.alertmanagerSpec.replicas | int | `1` |  |
+| alertmanager.alertmanagerSpec.replicas | int | `1` | Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the running cluster equal to the expected size. |
 | alertmanager.alertmanagerSpec.resources | object | `{}` |  |
-| alertmanager.alertmanagerSpec.retention | string | `"120h"` |  |
+| alertmanager.alertmanagerSpec.retention | string | `"120h"` | Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours). |
 | alertmanager.alertmanagerSpec.routePrefix | string | `"/"` |  |
-| alertmanager.alertmanagerSpec.secrets | list | `[]` |  |
+| alertmanager.alertmanagerSpec.secrets | list | `[]` | Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/. |
 | alertmanager.alertmanagerSpec.securityContext.fsGroup | int | `2000` |  |
 | alertmanager.alertmanagerSpec.securityContext.runAsGroup | int | `2000` |  |
 | alertmanager.alertmanagerSpec.securityContext.runAsNonRoot | bool | `true` |  |
 | alertmanager.alertmanagerSpec.securityContext.runAsUser | int | `1000` |  |
-| alertmanager.alertmanagerSpec.storage | object | `{}` |  |
+| alertmanager.alertmanagerSpec.storage | object | `{}` | Storage is the definition of how storage will be used by the Alertmanager instances. ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md |
 | alertmanager.alertmanagerSpec.tolerations | list | `[]` |  |
-| alertmanager.alertmanagerSpec.useExistingSecret | bool | `false` |  |
-| alertmanager.alertmanagerSpec.version | string | `"v0.21.0"` |  |
+| alertmanager.alertmanagerSpec.useExistingSecret | bool | `false` | If true then the user will be responsible to provide a secret with alertmanager configuration So when true the config part will be ignored (including templateFiles) and the one in the secret will be used |
+| alertmanager.alertmanagerSpec.version | string | `"v0.23.0"` |  |
 | alertmanager.apiVersion | string | `"v2"` | Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2 |
 | alertmanager.config | object | `{"global":{"resolve_timeout":"5m"},"receivers":[{"name":"null"}],"route":{"group_by":["job"],"group_interval":"5m","group_wait":"30s","receiver":"null","repeat_interval":"12h","routes":[{"match":{"alertname":"Watchdog"},"receiver":"null"}]}}` | Alertmanager configuration directives |
 | alertmanager.enabled | bool | `true` | Deploy alertmanager |
@@ -170,7 +172,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeDns.service.dnsmasq.targetPort | int | `10054` |  |
 | kubeDns.service.skydns.port | int | `10055` |  |
 | kubeDns.service.skydns.targetPort | int | `10055` |  |
-| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |    separator: ;   regex: ^(.*)$   targetLabel: nodename   replacement: $1   action: replace |
+| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.dnsmasqRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.interval | string | `""` |  |
 | kubeDns.serviceMonitor.metricRelabelings | list | `[]` |  |
@@ -208,7 +210,12 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.namespace | string | `"kube-system"` |  |
 | kubelet.serviceMonitor.cAdvisor | bool | `true` |  |
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings | list | `[]` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"},{"action":"replace","replacement":"cadvisor","sourceLabels":["job"],"targetLabel":"job"}]` |    metrics_path is required to match upstream rules and charts |
+| kubelet.serviceMonitor.cAdvisorRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[0].targetLabel | string | `"metrics_path"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].action | string | `"replace"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].replacement | string | `"cadvisor"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].sourceLabels[0] | string | `"job"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].targetLabel | string | `"job"` |  |
 | kubelet.serviceMonitor.https | bool | `true` |  |
 | kubelet.serviceMonitor.interval | string | `""` |  |
 | kubelet.serviceMonitor.metricRelabelings | list | `[]` |  |
@@ -216,7 +223,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.probesMetricRelabelings | list | `[]` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].targetLabel | string | `"metrics_path"` |  |
-| kubelet.serviceMonitor.relabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"}]` |    metrics_path is required to match upstream rules and charts |
+| kubelet.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
+| kubelet.serviceMonitor.relabelings[0].targetLabel | string | `"metrics_path"` |  |
 | kubelet.serviceMonitor.resource | bool | `true` |  |
 | kubelet.serviceMonitor.resourcePath | string | `"/metrics/resource"` |  |
 | kubelet.serviceMonitor.resourceRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
@@ -235,7 +243,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
 | prometheus.ingress.enabled | bool | `false` |  |
-| prometheus.ingress.hosts | list | `[]` |  hosts:   - prometheus.domain.com |
+| prometheus.ingress.hosts | list | `[]` |  |
 | prometheus.ingress.labels | object | `{}` |  |
 | prometheus.ingress.paths | list | `[]` |  |
 | prometheus.ingress.tls | list | `[]` |  |
