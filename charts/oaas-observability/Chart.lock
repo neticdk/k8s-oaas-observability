@@ -4,21 +4,21 @@ dependencies:
   version: 6.9.2
 - name: kube-state-metrics
   repository: file://../kube-state-metrics
-  version: 1.0.5
+  version: 1.0.7
 - name: prometheus-node-exporter
   repository: file://../prometheus-node-exporter
-  version: 1.0.2
+  version: 1.0.3
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.7
+  version: 1.0.8
 - name: otel-operator
   repository: file://../otel-operator
-  version: 0.1.18
+  version: 0.1.19
 - name: vector-agent
   repository: https://packages.timber.io/helm/latest
   version: 0.17.0
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 3.5.1
-digest: sha256:a922f9a22f2e2653f9051225e8e2b4ad7d350dce55ae3ebc4fe2cd6052fe8168
-generated: "2021-10-28T19:06:23.245596+02:00"
+digest: sha256:3e6c1f54eee523e779a0f11049ee2b1fa93a2e94f1f3b642df2c2a8edbd5e1bd
+generated: "2021-11-15T08:57:11.517267+01:00"
