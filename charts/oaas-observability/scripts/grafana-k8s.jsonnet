@@ -3,7 +3,7 @@ local mixin = (import 'github.com/kubernetes-monitoring/kubernetes-mixin/mixin.l
     grafanaK8s: {
       dashboardNamePrefix: 'Netic OaaS / ',
       dashboardTags: ['netic-oaas','kubernetes-mixin'],
-      linkPrefix: '.',
+      linkPrefix: '',
       refresh: '10s',
       minimumTimeInterval: '1m',
       grafanaTimezone: 'browser',
