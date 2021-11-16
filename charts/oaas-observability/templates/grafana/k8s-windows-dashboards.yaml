@@ -1,0 +1,14 @@
+{{- if and .Values.endpointController.enabled .Values.endpointController.windowsExporterService .Values.grafana.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-k8s-windows-dashboards
+  labels:
+    app.kubernetes.io/component: grafana
+{{- if $.Values.grafana.sidecar.dashboards.label }}
+    {{ $.Values.grafana.sidecar.dashboards.label }}: "1"
+{{- end }}
+{{ include "netic-oaas.labels" . | indent 4 }}
+data:
+{{ (.Files.Glob "files/dashboards/k8s-windows-mixin/*.json").AsConfig | indent 2 }}
+{{- end }}

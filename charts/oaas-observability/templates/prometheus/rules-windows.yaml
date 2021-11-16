@@ -1,0 +1,11 @@
+{{- if and .Values.endpointController.enabled .Values.endpointController.windowsExporterService }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-prom-windows-rules
+  labels:
+    app.kubernetes.io/component: prometheus
+{{ include "netic-oaas.labels" . | indent 4 }}
+spec:
+{{- .Files.Get "files/windows-rules.yaml" | nindent 2 }}
+{{- end }}
