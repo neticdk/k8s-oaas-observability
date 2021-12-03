@@ -1383,6 +1383,7 @@ vector-agent:
 
 # -- Configuration for monitoring of Vector
 vectorMonitor:
+  # -- Relabellings for Vector
   relabelings:
     - action: labeldrop
       regex: __meta_kubernetes_pod_label_skaffold_dev.*
@@ -1390,6 +1391,8 @@ vectorMonitor:
       regex: __meta_kubernetes_pod_label_pod_template_hash.*
     - action: labelmap
       regex: __meta_kubernetes_pod_label_(.+)
+  # -- Metrics relabelling for Vector
+  metricRelabelings:
 
 ## Configuration for (optional) Grafana
 ## see https://github.com/grafana/helm-charts/tree/main/charts/grafana

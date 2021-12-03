@@ -14,4 +14,7 @@ spec:
   endpoints:
   - port: metrics
     relabelings: {{ toYaml .Values.vectorMonitor.relabelings | nindent 4 }}
+{{- with .Values.vectorMonitor.metricRelabelings }}
+    metricRelabelings: {{ toYaml . | nindent 4 }}
+{{- end }}
 {{- end }}
