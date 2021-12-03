@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.18](https://img.shields.io/badge/Version-2.0.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.19](https://img.shields.io/badge/Version-2.0.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -338,6 +338,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.psp.enabled | bool | `true` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.vectorSink.enabled | bool | `false` |  |
+| vectorMonitor | object | `{"relabelings":[{"action":"labeldrop","regex":"__meta_kubernetes_pod_label_skaffold_dev.*"},{"action":"labeldrop","regex":"__meta_kubernetes_pod_label_pod_template_hash.*"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"}]}` | Configuration for monitoring of Vector |
 
 ## Development
 
