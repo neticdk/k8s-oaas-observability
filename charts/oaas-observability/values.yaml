@@ -1381,6 +1381,16 @@ vector-agent:
       annotation_fields.pod_node_name = "node"
       annotation_fields.pod_uid = "name"
 
+# -- Configuration for monitoring of Vector
+vectorMonitor:
+  relabelings:
+    - action: labeldrop
+      regex: __meta_kubernetes_pod_label_skaffold_dev.*
+    - action: labeldrop
+      regex: __meta_kubernetes_pod_label_pod_template_hash.*
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+
 ## Configuration for (optional) Grafana
 ## see https://github.com/grafana/helm-charts/tree/main/charts/grafana
 grafana:
