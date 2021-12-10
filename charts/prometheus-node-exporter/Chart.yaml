@@ -15,6 +15,3 @@ keywords:
 - node-exporter
 - prometheus
 - exporter
-maintainers:
-- name: langecode
-  email: tal@netic.dk
