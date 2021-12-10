@@ -84,6 +84,9 @@ endpoints: []
 # -- Whether to expose the service to the host network
 hostNetwork: true
 
+# -- If true, node-exporter pods mounts host / at /host/root
+hostRootFsMount: true
+
 # -- A group of affinity scheduling rules for pod assignment
 affinity: {}
 #   nodeAffinity:
