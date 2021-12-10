@@ -17,13 +17,11 @@ dependencies:
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
   - name: kube-state-metrics
-    version: "*"
-    repository: file://../kube-state-metrics
+    version: 4.1.1
+    repository: https://prometheus-community.github.io/helm-charts
   - name: prometheus-node-exporter
     version: 2.3.0
     repository: https://prometheus-community.github.io/helm-charts
-#    version: "*"
-#    repository: file://../prometheus-node-exporter
     condition: nodeExporter.enabled
   - name: prometheus-operator
     version: "*"
