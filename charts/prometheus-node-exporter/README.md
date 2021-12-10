@@ -2,11 +2,9 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
 
-A Helm chart for prometheus node-exporter. Since this is now part of the Prometheus community
-Helm charts this has been deprecated and wont be maintained.
-See https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-node-exporter
+A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
 **Homepage:** <https://github.com/prometheus/node_exporter>
 
@@ -61,7 +59,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.repository | string | `"quay.io/prometheus/node-exporter"` | Image repository |
-| image.tag | string | `"v1.0.1"` | Image tag |
+| image.tag | string | `nil` | Image tag - default to version in Chart.yaml |
 | namespaceOverride | string | `""` | Override the deployment namespace @default will be set to `.Release.Namespace` if not set |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to node exporter pods |
