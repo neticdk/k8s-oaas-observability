@@ -3,6 +3,27 @@ entries:
   kube-state-metrics:
   - apiVersion: v1
     appVersion: v2.2.3
+    created: "2021-12-10T07:34:53.777915898Z"
+    deprecated: true
+    description: 'Install kube-state-metrics to generate and expose cluster-level
+      metrics. Since this is now part of the Prometheus community Helm charts this
+      has been deprecated and wont be maintained. See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics '
+    digest: a1defaa89757fc409fd5d62c7c7a09ff48247d0d53ae1b812102122b7c7f0feb
+    home: https://github.com/kubernetes/kube-state-metrics
+    keywords:
+    - metric
+    - monitoring
+    - prometheus
+    - kubernetes
+    name: kube-state-metrics
+    sources:
+    - https://github.com/kubernetes/kube-state-metrics
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/kube-state-metrics-1.0.8/kube-state-metrics-1.0.8.tgz
+    version: 1.0.8
+  - apiVersion: v1
+    appVersion: v2.2.3
     created: "2021-11-15T08:12:37.764134615Z"
     description: Install kube-state-metrics to generate and expose cluster-level metrics
     digest: 51f0fea749fd362088baa1f0793c9fd5a8ae3550c6046571957beca9f79ab0e8
@@ -65,6 +86,51 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/kube-state-metrics-1.0.4/kube-state-metrics-1.0.4.tgz
     version: 1.0.4
   oaas-observability:
+  - apiVersion: v2
+    created: "2021-12-10T07:34:53.986331018Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.18.2
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 4.1.1
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 2.3.0
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: otel-operator.enabled
+      name: otel-operator
+      repository: file://../otel-operator
+      version: '*'
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://packages.timber.io/helm/latest
+      version: 0.17.0
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 3.5.1
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: 0251a2890537423daba1a11745a74f560e38fdeaffbfcb12dc3f956edec3c9d0
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.0.21/oaas-observability-2.0.21.tgz
+    version: 2.0.21
   - apiVersion: v2
     created: "2021-12-03T14:05:25.601918681Z"
     dependencies:
@@ -1114,6 +1180,26 @@ entries:
   prometheus-node-exporter:
   - apiVersion: v1
     appVersion: 1.0.1
+    created: "2021-12-10T07:34:54.140004754Z"
+    deprecated: true
+    description: 'A Helm chart for prometheus node-exporter. Since this is now part
+      of the Prometheus community Helm charts this has been deprecated and wont be
+      maintained. See https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-node-exporter '
+    digest: eaaf2956c2a7a6b4da567dfdebababb2e9bfd0dc9ef62333d36fa76567276a33
+    home: https://github.com/prometheus/node_exporter
+    keywords:
+    - node-exporter
+    - prometheus
+    - exporter
+    name: prometheus-node-exporter
+    sources:
+    - https://github.com/prometheus/node_exporter
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-node-exporter
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-node-exporter-1.0.4/prometheus-node-exporter-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v1
+    appVersion: 1.0.1
     created: "2021-11-15T08:12:38.5332917Z"
     description: A Helm chart for prometheus node-exporter
     digest: 72361c0c1b626372afc3fdefe3097ae83f99bc845bda32b0e56aec982b725745
@@ -1221,4 +1307,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2021-12-03T14:05:27.223686278Z"
+generated: "2021-12-10T07:34:54.140442455Z"
