@@ -58,7 +58,7 @@ jobs:
       - name: Add dependency chart repos
         run: |
           helm repo add grafana https://grafana.github.io/helm-charts
-          helm repo add vector https://packages.timber.io/helm/latest
+          helm repo add vector https://helm.vector.dev
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           helm repo add cert-manager https://charts.jetstack.io
 

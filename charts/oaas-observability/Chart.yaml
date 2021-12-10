@@ -32,8 +32,8 @@ dependencies:
     repository: file://../otel-operator
     condition: otel-operator.enabled
   - name: vector-agent
-    version: 0.17.0
-    repository: https://packages.timber.io/helm/latest
+    version: 0.18.1
+    repository: https://helm.vector.dev
     condition: vector-agent.enabled
   - name: promtail
     version: 3.5.1
