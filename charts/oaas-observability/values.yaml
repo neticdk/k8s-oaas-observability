@@ -1349,6 +1349,9 @@ kube-state-metrics:
     monitor:
       enabled: true
       honorLabels: true
+      additionalLabels:
+        netic.dk/monitoring: "true"
+
 
 # -- Values for included prometheus-operator chart
 prometheus-operator:
