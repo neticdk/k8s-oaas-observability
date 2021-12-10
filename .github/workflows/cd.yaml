@@ -14,11 +14,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug ct error
+      - name: Debug cr issue I
         run: |
           git fetch --tags
           git describe --tags --abbrev=0
           git diff --find-renames --name-only oaas-observability-2.0.20 -- charts
+          git log -n 50
 
       #
       # Generated files
@@ -50,7 +51,7 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.5.3
+          version: v3.7.2
 
       - name: Add dependency chart repos
         run: |
@@ -58,6 +59,13 @@ jobs:
           helm repo add vector https://packages.timber.io/helm/latest
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           helm repo add cert-manager https://charts.jetstack.io
+
+      - name: Debug cr issue II
+        run: |
+          git fetch --tags
+          git describe --tags --abbrev=0
+          git diff --find-renames --name-only oaas-observability-2.0.20 -- charts
+          git log -n 50
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
