@@ -1,17 +1,18 @@
 apiVersion: v1
 name: kube-state-metrics
-description: Install kube-state-metrics to generate and expose cluster-level metrics
+description: |
+  Install kube-state-metrics to generate and expose cluster-level metrics. Since this is now part of the Prometheus community
+  Helm charts this has been deprecated and wont be maintained.
+  See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
 home: https://github.com/kubernetes/kube-state-metrics
 keywords:
 - metric
 - monitoring
 - prometheus
 - kubernetes
-version: 1.0.7
+version: 1.0.8
 appVersion: v2.2.3
-maintainers:
-- name: langecode
-  email: tal@netic.dk
+deprecated: true
 sources:
 - https://github.com/kubernetes/kube-state-metrics
 - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
