@@ -13,9 +13,6 @@ keywords:
 version: 1.0.8
 appVersion: v2.2.3
 deprecated: true
-maintainers:
-- name: langecode
-  email: tal@netic.dk
 sources:
 - https://github.com/kubernetes/kube-state-metrics
 - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
