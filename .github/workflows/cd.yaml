@@ -14,6 +14,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Debug ct error
+        run: |
+          git fetch --tags
+          git describe --tags --abbrev=0
+          git diff --find-renames --name-only oaas-observability-2.0.20 -- charts
+
       #
       # Generated files
       #
