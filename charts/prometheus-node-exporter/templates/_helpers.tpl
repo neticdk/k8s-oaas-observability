@@ -33,6 +33,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "prometheus-node-exporter.metaLabels" }}
 helm.sh/chart: {{ template "prometheus-node-exporter.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
 {{- if .Values.podLabels}}
 {{ toYaml .Values.podLabels }}
 {{- end }}
@@ -72,3 +75,14 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
     {{- .Release.Namespace -}}
   {{- end -}}
 {{- end -}}
+
+{{/*
+Resolve the actual image tag to use.
+*/}}
+{{- define "prometheus-node-exporter.imageTag" -}}
+{{- if .Values.image.tag }}
+{{- .Values.image.tag }}
+{{- else }}
+{{- printf "v%s" .Chart.AppVersion }}
+{{- end }}
+{{- end }}

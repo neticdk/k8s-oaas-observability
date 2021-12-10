@@ -4,8 +4,8 @@
 image:
   # -- Image repository
   repository: quay.io/prometheus/node-exporter
-  # -- Image tag
-  tag: v1.0.1
+  # -- Image tag - default to version in Chart.yaml
+  tag:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
