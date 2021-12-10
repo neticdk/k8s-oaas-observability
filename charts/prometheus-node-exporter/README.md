@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 1.0.6](https://img.shields.io/badge/Version-1.0.6-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -57,6 +57,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
+| hostRootFsMount | bool | `true` | If true, node-exporter pods mounts host / at /host/root |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.repository | string | `"quay.io/prometheus/node-exporter"` | Image repository |
 | image.tag | string | `nil` | Image tag - default to version in Chart.yaml |
