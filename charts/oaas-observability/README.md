@@ -144,7 +144,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.datasources.enabled | bool | `true` |  |
 | grafana.sidecar.datasources.label | string | `"netic_grafana_datasource"` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"enabled":true,"honorLabels":true}}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
