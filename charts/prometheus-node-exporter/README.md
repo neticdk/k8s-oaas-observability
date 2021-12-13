@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.6](https://img.shields.io/badge/Version-1.0.6-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -53,6 +53,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 |-----|------|---------|-------------|
 | affinity | object | `{}` | A group of affinity scheduling rules for pod assignment |
 | configmaps | list | `[]` | Allow mounting additional configmaps. |
+| containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}` | SecurityContext for container |
 | endpoints | list | `[]` | list of addresses that have node exporter deployed outside of the cluster |
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |

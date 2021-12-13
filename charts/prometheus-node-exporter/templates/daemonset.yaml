@@ -68,6 +68,10 @@ spec:
               port: {{ .Values.service.targetPort }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+{{- if .Values.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.containerSecurityContext | indent 12 }}
+{{- end }}
           volumeMounts:
             - name: proc
               mountPath: /host/proc

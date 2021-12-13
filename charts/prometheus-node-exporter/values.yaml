@@ -71,6 +71,13 @@ securityContext:
   runAsNonRoot: true
   runAsUser: 65534
 
+# -- SecurityContext for container
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+  readOnlyRootFilesystem: true
+
 rbac:
   # -- If true, create & use RBAC resources
   create: true
