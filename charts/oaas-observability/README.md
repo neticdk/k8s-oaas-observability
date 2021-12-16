@@ -160,7 +160,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"48Mi"},"requests":{"cpu":"25m","memory":"48Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
@@ -371,11 +371,11 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.enabled | bool | `true` |  |
 | vector-agent.image.pullPolicy | string | `"Always"` |  |
 | vector-agent.livenessProbe.httpGet.path | string | `"/health"` |  |
-| vector-agent.livenessProbe.httpGet.port | string | `"api"` |  |
+| vector-agent.livenessProbe.httpGet.port | int | `8686` |  |
 | vector-agent.psp.enabled | bool | `true` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.readinessProbe.httpGet.path | string | `"/health"` |  |
-| vector-agent.readinessProbe.httpGet.port | string | `"api"` |  |
+| vector-agent.readinessProbe.httpGet.port | int | `8686` |  |
 | vector-agent.resources.limits.cpu | string | `"150m"` |  |
 | vector-agent.resources.limits.memory | string | `"64Mi"` |  |
 | vector-agent.resources.requests.cpu | string | `"150m"` |  |

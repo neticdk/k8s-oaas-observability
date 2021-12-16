@@ -1352,10 +1352,10 @@ kube-state-metrics:
   resources:
     limits:
       cpu: 25m
-      memory: 48Mi
+      memory: 64Mi
     requests:
       cpu: 25m
-      memory: 48Mi
+      memory: 64Mi
   containerSecurityContext:
     capabilities:
       drop:
@@ -1411,11 +1411,11 @@ vector-agent:
   livenessProbe:
     httpGet:
       path: /health
-      port: api
+      port: 8686
   readinessProbe:
     httpGet:
       path: /health
-      port: api
+      port: 8686
   customConfig:
     data_dir: "/vector-data-dir"
     api:
