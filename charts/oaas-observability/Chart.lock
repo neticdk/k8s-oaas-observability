@@ -16,9 +16,9 @@ dependencies:
   version: 0.1.19
 - name: vector-agent
   repository: https://helm.vector.dev
-  version: 0.18.1
+  version: 0.19.1
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 3.5.1
-digest: sha256:7dcd5fff31a88723a2a3df7e4d3ef5f087fd1fdc0d2661a96842a9943c32a4cb
-generated: "2021-12-14T07:34:20.567475+01:00"
+digest: sha256:6a94ff84236bff67d7a4f0c952ea8f2b5507b792eedbd38159dc643e4c619af8
+generated: "2021-12-16T15:06:18.0341+01:00"

@@ -1345,6 +1345,23 @@ endpointController:
 kube-state-metrics:
   podSecurityPolicy:
     enabled: true
+  securityContext:
+    enabled: true
+  image:
+    pullPolicy: Always
+  resources:
+    limits:
+      cpu: 25m
+      memory: 48Mi
+    requests:
+      cpu: 25m
+      memory: 48Mi
+  containerSecurityContext:
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
   prometheus:
     monitor:
       enabled: true
@@ -1356,33 +1373,85 @@ kube-state-metrics:
 # -- Values for included prometheus-operator chart
 prometheus-operator:
   enabled: true
+  prometheusOperator:
+    image:
+      pullPolicy: Always
+    resources:
+      limits:
+        cpu: 25m
+        memory: 80Mi
+      requests:
+        cpu: 25m
+        memory: 80Mi
+
 
 ## Configuration for Vector chart
 ##
 vector-agent:
   enabled: true
+  image:
+    pullPolicy: Always
   psp:
     enabled: true
   rbac:
     enabled: true
-  vectorSink:
-    enabled: false
-  hostMetricsSource:
-    enabled: false
-  prometheusSink:
-    enabled: true
-    listenPort: 9090
-    podMonitor:
-      enabled: false
-  kubernetesLogsSource:
-    rawConfig: |
-      annotation_fields.container_image = "image"
-      annotation_fields.container_name = "container"
-      annotation_fields.pod_labels = "labels"
-      annotation_fields.pod_name = "pod"
-      annotation_fields.pod_namespace = "namespace"
-      annotation_fields.pod_node_name = "node"
-      annotation_fields.pod_uid = "name"
+  resources:
+    limits:
+      cpu: 150m
+      memory: 64Mi
+    requests:
+      cpu: 150m
+      memory: 64Mi
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: api
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: api
+  customConfig:
+    data_dir: "/vector-data-dir"
+    api:
+      enabled: true
+      address: "0.0.0.0:8686"
+      playground: false
+    log_schema:
+      host_key: node
+      message_key: message
+      source_type_key: source_type
+      timestamp_key: timestamp
+    sources:
+      kubernetes_logs:
+        type: kubernetes_logs
+        pod_annotation_fields:
+          container_image: "image"
+          container_name: "container"
+          pod_labels: "labels"
+          pod_name: "pod"
+          pod_namespace: "namespace"
+          pod_node_name: "node"
+          pod_uid: "name"
+      internal_metrics:
+        type: "internal_metrics"
+    transforms:
+      metric_cardinality:
+        type: tag_cardinality_limit
+        inputs:
+          - internal_metrics
+        mode: exact
+    sinks:
+      prometheus_sink:
+        type: "prometheus"
+        address: "0.0.0.0:9090"
+        inputs:
+          - metric_cardinality
 
 # -- Configuration for monitoring of Vector
 vectorMonitor:
@@ -1401,9 +1470,36 @@ vectorMonitor:
 ## see https://github.com/grafana/helm-charts/tree/main/charts/grafana
 grafana:
   enabled: true
+  image:
+    pullPolicy: Always
   testFramework:
     enabled: false
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: ["ALL"]
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
   sidecar:
+    imagePullPolicy: Always
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop: ["ALL"]
+    resources:
+      limits:
+        cpu: 25m
+        memory: 32Mi
+      requests:
+        cpu: 25m
+        memory: 32Mi
     dashboards:
       enabled: true
       label: netic_grafana_dashboard

@@ -6,4 +6,4 @@ chart-repos:
 excluded-charts:
   - prometheus
 additional-commands:
-  - polaris audit --set-exit-code-below-score 90 --format pretty --helm-chart {{ .Path }}
+  - polaris audit --set-exit-code-below-score 90 --format pretty --config polaris.yaml --helm-chart {{ .Path }}

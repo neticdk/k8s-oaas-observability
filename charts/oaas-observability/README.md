@@ -35,7 +35,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../prometheus-operator | prometheus-operator | * |
 | https://grafana.github.io/helm-charts | grafana | 6.18.2 |
 | https://grafana.github.io/helm-charts | promtail | 3.5.1 |
-| https://helm.vector.dev | vector-agent | 0.18.1 |
+| https://helm.vector.dev | vector-agent | 0.19.1 |
 | https://prometheus-community.github.io/helm-charts | kube-state-metrics | 4.1.1 |
 
 ## Configuration
@@ -138,13 +138,29 @@ $ helm install my-release netic-oaas/oaas-observability
 | global.rbac.pspAnnotations | object | `{}` |  |
 | global.rbac.pspEnabled | bool | `true` |  |
 | global.serviceMonitor.labels | object | `{"netic.dk/monitoring":"true"}` | Labels to add to all service monitors |
+| grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| grafana.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| grafana.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.enabled | bool | `true` |  |
+| grafana.image.pullPolicy | string | `"Always"` |  |
+| grafana.resources.limits.cpu | string | `"100m"` |  |
+| grafana.resources.limits.memory | string | `"128Mi"` |  |
+| grafana.resources.requests.cpu | string | `"100m"` |  |
+| grafana.resources.requests.memory | string | `"128Mi"` |  |
 | grafana.sidecar.dashboards.enabled | bool | `true` |  |
 | grafana.sidecar.dashboards.label | string | `"netic_grafana_dashboard"` |  |
 | grafana.sidecar.datasources.enabled | bool | `true` |  |
 | grafana.sidecar.datasources.label | string | `"netic_grafana_datasource"` |  |
+| grafana.sidecar.imagePullPolicy | string | `"Always"` |  |
+| grafana.sidecar.resources.limits.cpu | string | `"25m"` |  |
+| grafana.sidecar.resources.limits.memory | string | `"32Mi"` |  |
+| grafana.sidecar.resources.requests.cpu | string | `"25m"` |  |
+| grafana.sidecar.resources.requests.memory | string | `"32Mi"` |  |
+| grafana.sidecar.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"48Mi"},"requests":{"cpu":"25m","memory":"48Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
@@ -239,7 +255,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
 | otel-operator | object | `{"enabled":true}` | Values for included otel-operator chart |
-| prometheus-operator | object | `{"enabled":true}` | Values for included prometheus-operator chart |
+| prometheus-operator | object | `{"enabled":true,"prometheusOperator":{"image":{"pullPolicy":"Always"},"resources":{"limits":{"cpu":"25m","memory":"80Mi"},"requests":{"cpu":"25m","memory":"80Mi"}}}}` | Values for included prometheus-operator chart |
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
 | prometheus.ingress.enabled | bool | `false` |  |
@@ -329,15 +345,44 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.serviceMonitor.selfMonitor | bool | `true` |  |
 | prometheus.serviceMonitor.tlsConfig | object | `{}` |  |
 | promtail | object | `{"enabled":false,"serviceMonitor":{"enabled":true,"labels":{"netic.dk/monitoring":"true"}}}` | Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion |
+| vector-agent.customConfig.api.address | string | `"0.0.0.0:8686"` |  |
+| vector-agent.customConfig.api.enabled | bool | `true` |  |
+| vector-agent.customConfig.api.playground | bool | `false` |  |
+| vector-agent.customConfig.data_dir | string | `"/vector-data-dir"` |  |
+| vector-agent.customConfig.log_schema.host_key | string | `"node"` |  |
+| vector-agent.customConfig.log_schema.message_key | string | `"message"` |  |
+| vector-agent.customConfig.log_schema.source_type_key | string | `"source_type"` |  |
+| vector-agent.customConfig.log_schema.timestamp_key | string | `"timestamp"` |  |
+| vector-agent.customConfig.sinks.prometheus_sink.address | string | `"0.0.0.0:9090"` |  |
+| vector-agent.customConfig.sinks.prometheus_sink.inputs[0] | string | `"metric_cardinality"` |  |
+| vector-agent.customConfig.sinks.prometheus_sink.type | string | `"prometheus"` |  |
+| vector-agent.customConfig.sources.internal_metrics.type | string | `"internal_metrics"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.container_image | string | `"image"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.container_name | string | `"container"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.pod_labels | string | `"labels"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.pod_name | string | `"pod"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.pod_namespace | string | `"namespace"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.pod_node_name | string | `"node"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.pod_annotation_fields.pod_uid | string | `"name"` |  |
+| vector-agent.customConfig.sources.kubernetes_logs.type | string | `"kubernetes_logs"` |  |
+| vector-agent.customConfig.transforms.metric_cardinality.inputs[0] | string | `"internal_metrics"` |  |
+| vector-agent.customConfig.transforms.metric_cardinality.mode | string | `"exact"` |  |
+| vector-agent.customConfig.transforms.metric_cardinality.type | string | `"tag_cardinality_limit"` |  |
 | vector-agent.enabled | bool | `true` |  |
-| vector-agent.hostMetricsSource.enabled | bool | `false` |  |
-| vector-agent.kubernetesLogsSource.rawConfig | string | `"annotation_fields.container_image = \"image\"\nannotation_fields.container_name = \"container\"\nannotation_fields.pod_labels = \"labels\"\nannotation_fields.pod_name = \"pod\"\nannotation_fields.pod_namespace = \"namespace\"\nannotation_fields.pod_node_name = \"node\"\nannotation_fields.pod_uid = \"name\"\n"` |  |
-| vector-agent.prometheusSink.enabled | bool | `true` |  |
-| vector-agent.prometheusSink.listenPort | int | `9090` |  |
-| vector-agent.prometheusSink.podMonitor.enabled | bool | `false` |  |
+| vector-agent.image.pullPolicy | string | `"Always"` |  |
+| vector-agent.livenessProbe.httpGet.path | string | `"/health"` |  |
+| vector-agent.livenessProbe.httpGet.port | string | `"api"` |  |
 | vector-agent.psp.enabled | bool | `true` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
-| vector-agent.vectorSink.enabled | bool | `false` |  |
+| vector-agent.readinessProbe.httpGet.path | string | `"/health"` |  |
+| vector-agent.readinessProbe.httpGet.port | string | `"api"` |  |
+| vector-agent.resources.limits.cpu | string | `"150m"` |  |
+| vector-agent.resources.limits.memory | string | `"64Mi"` |  |
+| vector-agent.resources.requests.cpu | string | `"150m"` |  |
+| vector-agent.resources.requests.memory | string | `"64Mi"` |  |
+| vector-agent.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| vector-agent.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| vector-agent.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | vectorMonitor | object | `{"metricRelabelings":null,"relabelings":[{"action":"labeldrop","regex":"__meta_kubernetes_pod_label_skaffold_dev.*"},{"action":"labeldrop","regex":"__meta_kubernetes_pod_label_pod_template_hash.*"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"}]}` | Configuration for monitoring of Vector |
 | vectorMonitor.metricRelabelings | string | `nil` | Metrics relabelling for Vector |
 | vectorMonitor.relabelings | list | `[{"action":"labeldrop","regex":"__meta_kubernetes_pod_label_skaffold_dev.*"},{"action":"labeldrop","regex":"__meta_kubernetes_pod_label_pod_template_hash.*"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"}]` | Relabellings for Vector |
