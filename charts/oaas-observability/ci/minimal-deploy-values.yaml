@@ -18,3 +18,6 @@ alertmanager:
 prometheus-operator:
   prometheusOperator:
     resources: {}
+
+otel-operator:
+  enabled: false
