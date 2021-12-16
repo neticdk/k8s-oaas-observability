@@ -61,7 +61,7 @@ jobs:
         uses: helm/chart-testing-action@v2.0.1
 
       - name: Setup polaris
-        uses: fairwindsops/polaris@master
+        uses: fairwindsops/polaris/.github/actions/setup-polaris@master
         with:
           version: 4.2.0
 
