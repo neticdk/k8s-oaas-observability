@@ -4,3 +4,7 @@
 grafana:
   testFramework:
     enabled: true
+
+prometheus-operator:
+  prometheusOperator:
+    resources: {}

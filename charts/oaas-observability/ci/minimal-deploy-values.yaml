@@ -14,3 +14,7 @@ alerts:
 
 alertmanager:
   enabled: false
+
+prometheus-operator:
+  prometheusOperator:
+    resources: {}

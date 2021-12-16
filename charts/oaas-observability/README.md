@@ -254,7 +254,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
-| otel-operator | object | `{"enabled":true}` | Values for included otel-operator chart |
+| otel-operator | object | `{"enabled":true,"global":{"podSecurityPolicy":{"enabled":true}},"opentelemetryOperator":{"kubeRbacProxy":{"resources":{"limits":{"cpu":"10m","memory":"16Mi"},"requests":{"cpu":"10m","memory":"16Mi"}}},"manager":{"resources":{"limits":{"cpu":"100m","memory":"64Mi"},"requests":{"cpu":"100m","memory":"64Mi"}}}}}` | Values for included otel-operator chart |
 | prometheus-operator | object | `{"enabled":true,"prometheusOperator":{"image":{"pullPolicy":"Always"},"resources":{"limits":{"cpu":"25m","memory":"80Mi"},"requests":{"cpu":"25m","memory":"80Mi"}}}}` | Values for included prometheus-operator chart |
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
