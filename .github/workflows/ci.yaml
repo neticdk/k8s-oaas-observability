@@ -60,6 +60,11 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.0.1
 
+      - name: Setup polaris
+        uses: fairwindsops/polaris@master
+        with:
+          version: 4.2.0
+
       - name: Run chart-testing (lint)
         run: ct lint --config ct.yaml
 

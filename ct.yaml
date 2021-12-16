@@ -5,3 +5,5 @@ chart-repos:
   - vector=https://helm.vector.dev
 excluded-charts:
   - prometheus
+additional-commands:
+  - helm template {{ .Path }} | polaris audit --audit-path -
