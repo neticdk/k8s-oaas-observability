@@ -6,4 +6,4 @@ chart-repos:
 excluded-charts:
   - prometheus
 additional-commands:
-  - helm template {{ .Path }} | polaris audit --audit-path -
+  - polaris audit --helm-chart {{ .Path }}
