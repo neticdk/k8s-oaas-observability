@@ -2,9 +2,27 @@
 # Values used by ct for linting and testing
 
 grafana:
+  resources: {}
+  sidecar:
+    resources: {}
   testFramework:
     enabled: true
+
+kube-state-metrics:
+  resources: {}
+
+vector-agent:
+  resources: {}
 
 prometheus-operator:
   prometheusOperator:
     resources: {}
+
+otel-operator:
+  opentelemetryOperator:
+    resources: {}
+  kubeRbacProxy:
+    resources: {}
+
+prometheus-node-exporter:
+  resources: {}
