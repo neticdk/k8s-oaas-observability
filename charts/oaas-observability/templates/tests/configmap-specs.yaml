@@ -8,7 +8,7 @@ data:
     Describe 'Prometheus'
       check_prometheus() {
         url="http://{{ template "netic-oaas.fullname" . }}-prometheus:{{ .Values.prometheus.service.port }}/api/v1/query?query=up{job=\"$1\"}"
-        while true; do; wget --timeout 10 ${url} -O - && break; done
+        while true; do wget --timeout 10 ${url} -O - && break; done
         response=$(wget -O - --timeout 10 --tries 3 --waitretry 5 ${url} 2>&1)
         status=$(echo $response | sed 's/.*"status":"\([[:alpha:]]*\)".*/\1/')
         [ "$status" = "success" ]
