@@ -1481,11 +1481,11 @@ grafana:
       drop: ["ALL"]
   resources:
     limits:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 200m
+      memory: 196Mi
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 200m
+      memory: 196Mi
   sidecar:
     imagePullPolicy: Always
     securityContext:
@@ -1495,10 +1495,10 @@ grafana:
         drop: ["ALL"]
     resources:
       limits:
-        cpu: 25m
+        cpu: 50m
         memory: 32Mi
       requests:
-        cpu: 25m
+        cpu: 50m
         memory: 32Mi
     dashboards:
       enabled: true
