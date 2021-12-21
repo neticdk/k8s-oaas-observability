@@ -5,3 +5,5 @@ chart-repos:
   - vector=https://helm.vector.dev
 excluded-charts:
   - prometheus
+additional-commands:
+  - polaris audit --set-exit-code-below-score 90 --format pretty --config polaris.yaml --helm-chart {{ .Path }}

@@ -6,6 +6,9 @@ grafana:
   testFramework:
     enabled: false
 
+kube-state-metrics:
+  resources: {}
+
 vector:
   enabled: false
 
@@ -13,4 +16,14 @@ alerts:
   enabled: false
 
 alertmanager:
+  enabled: false
+
+prometheus-node-exporter:
+  resources: {}
+
+prometheus-operator:
+  prometheusOperator:
+    resources: {}
+
+otel-operator:
   enabled: false
