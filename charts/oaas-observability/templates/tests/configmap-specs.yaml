@@ -8,15 +8,19 @@ data:
     Describe 'Prometheus'
       check_prometheus() {
         url="http://{{ template "netic-oaas.fullname" . }}-prometheus:{{ .Values.prometheus.service.port }}/api/v1/query?query=up{job=\"$1\"}"
-        response=$(wget -O - --timeout 10 --tries 1 ${url} 2>&1)
-        status=$(echo $response | sed 's/.*"status":"\([[:alpha:]]*\)".*/\1/')
-        [ "$status" = "success" ]
+        n=0
+        while [ "$n" -le 5 ]; do
+          response=$(wget -O - --timeout 10 --tries 3 ${url} 2>&1)
+          status=$(echo $response | sed 's/.*"status":"\([[:alpha:]]*\)".*/\1/')
+          if [ "$status" = "success" ]; then
+            return 0
+          fi
+          n=$(( n + 1 ))
+          sleep 2
+        done
+        %logger Finished $1 without success
+        return 1
       }
-
-      It 'scrapes data from self'
-        When call check_prometheus netic-oaas-prometheus
-        The status should be success
-      End
 
       It 'scrapes data from kubelet'
         When call check_prometheus kubelet

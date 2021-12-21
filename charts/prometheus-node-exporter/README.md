@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.6](https://img.shields.io/badge/Version-1.0.6-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -53,12 +53,13 @@ The following table lists the configurable parameters of the Node Exporter chart
 |-----|------|---------|-------------|
 | affinity | object | `{}` | A group of affinity scheduling rules for pod assignment |
 | configmaps | list | `[]` | Allow mounting additional configmaps. |
+| containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}` | SecurityContext for container |
 | endpoints | list | `[]` | list of addresses that have node exporter deployed outside of the cluster |
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
 | hostRootFsMount | bool | `true` | If true, node-exporter pods mounts host / at /host/root |
-| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.pullPolicy | string | `"Always"` | Image pull policy. For security reasons set to "Always" |
 | image.repository | string | `"quay.io/prometheus/node-exporter"` | Image repository |
 | image.tag | string | `nil` | Image tag - default to version in Chart.yaml |
 | namespaceOverride | string | `""` | Override the deployment namespace @default will be set to `.Release.Namespace` if not set |
@@ -73,7 +74,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheus.monitor.scrapeTimeout | string | `"10s"` | Timeout after which the scrape is ended |
 | rbac.create | bool | `true` | If true, create & use RBAC resources |
 | rbac.pspEnabled | bool | `true` | Specifies whether a PodSecurityPolicy should be created. https://kubernetes.io/docs/concepts/policy/pod-security-policy/ |
-| resources | object | `{}` | CPU/Memory resource requests/limits |
+| resources | object | `{"limits":{"cpu":"300m","memory":"50Mi"},"requests":{"cpu":"10m","memory":"30Mi"}}` | CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context. |
 | securityContext | object | `{"fsGroup":65534,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534}` | SecurityContext |
 | service.annotations | object | `{"prometheus.io/scrape":"true"}` | Kubernetes service annotations |
 | service.listenOnAllInterfaces | bool | `true` | If true, listen on all interfaces using IP `0.0.0.0`. Else listen on the IP address pod has been assigned by Kubernetes. |

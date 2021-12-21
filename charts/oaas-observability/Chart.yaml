@@ -5,7 +5,7 @@ description: A Helm chart to deploy obeservability stack on Kubernetes
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: "2.0.24"
+version: "2.0.25"
 maintainers:
   - name: langecode
     email: tal@netic.dk
@@ -32,7 +32,7 @@ dependencies:
     repository: file://../otel-operator
     condition: otel-operator.enabled
   - name: vector-agent
-    version: 0.18.1
+    version: 0.19.1
     repository: https://helm.vector.dev
     condition: vector-agent.enabled
   - name: promtail
