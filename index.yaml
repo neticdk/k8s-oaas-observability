@@ -87,6 +87,51 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2022-01-03T13:06:21.170589811Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.18.2
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 4.1.1
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: otel-operator.enabled
+      name: otel-operator
+      repository: file://../otel-operator
+      version: '*'
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://helm.vector.dev
+      version: 0.19.1
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 3.5.1
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: d7e5ff8148388e0ea3f6767b2793a0c7baa98c3d0c4005d9ff9916e75fc91085
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.0.26/oaas-observability-2.0.26.tgz
+    version: 2.0.26
+  - apiVersion: v2
     created: "2021-12-21T06:07:02.918708286Z"
     dependencies:
     - condition: grafana.enabled
@@ -1550,4 +1595,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2021-12-21T06:07:03.140375346Z"
+generated: "2022-01-03T13:06:21.170861014Z"
