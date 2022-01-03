@@ -37,10 +37,7 @@ spec:
 {{- if .Values.prometheus.service.additionalPorts }}
 {{ toYaml .Values.prometheus.service.additionalPorts | indent 2 }}
 {{- end }}
-  selector:
-    app.kubernetes.io/name: prometheus
-    app.kubernetes.io/component: prometheus
-    app.kubernetes.io/instance: {{ .Release.Name }}
+  selector: {{ include "prometheus.matchLabels" . | nindent 4 }}
 {{- if .Values.prometheus.service.sessionAffinity }}
   sessionAffinity: {{ .Values.prometheus.service.sessionAffinity }}
 {{- end }}
