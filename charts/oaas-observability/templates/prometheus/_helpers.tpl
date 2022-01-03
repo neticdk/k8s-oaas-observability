@@ -41,11 +41,12 @@ Prometheus common labels
 {{- end -}}
 
 {{/*
-Prometheus selector labels
+Prometheus selector labels.
+The instance label is created to match that of the Prometheus Operator (which overrides labels given in Prometheus CRD)
 */}}
 {{- define "prometheus.matchLabels" -}}
 app.kubernetes.io/component: prometheus
-app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/instance: {{ include "prometheus.resource-fullname" . }}
 app.kubernetes.io/name: prometheus
 {{- end -}}
 

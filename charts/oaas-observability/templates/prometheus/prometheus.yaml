@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: {{ template "prometheus.resource-fullname" . }}
+  name: {{ include "prometheus.resource-fullname" . }}
   labels: {{ include "prometheus.labels" . | nindent 4 }}
 {{- if .Values.prometheus.annotations }}
   annotations:
