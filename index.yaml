@@ -87,6 +87,51 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2022-01-05T13:42:34.276935714Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.18.2
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 4.1.1
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: otel-operator.enabled
+      name: otel-operator
+      repository: file://../otel-operator
+      version: '*'
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://helm.vector.dev
+      version: 0.19.1
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 3.5.1
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: 6a0c9f0757147b9cd98b28198a4020cea860ce1e6ef374745be67a3b7ca5bb46
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.0.27/oaas-observability-2.0.27.tgz
+    version: 2.0.27
+  - apiVersion: v2
     created: "2022-01-03T13:06:21.170589811Z"
     dependencies:
     - condition: grafana.enabled
@@ -1263,6 +1308,23 @@ entries:
   otel-operator:
   - apiVersion: v2
     appVersion: v0.37.0
+    created: "2022-01-05T13:42:34.411716992Z"
+    description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
+      instances
+    digest: c759fae49ab86c4721e5ee15e5f5ffddae98a1a9039858cb798ae9cdfd14f921
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: otel-operator
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.20/otel-operator-0.1.20.tgz
+    version: 0.1.20
+  - apiVersion: v2
+    appVersion: v0.37.0
     created: "2021-11-15T08:12:38.247111085Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
       instances
@@ -1595,4 +1657,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2022-01-03T13:06:21.170861014Z"
+generated: "2022-01-05T13:42:34.417977836Z"
