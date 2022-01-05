@@ -27,7 +27,7 @@ opentelemetryOperator:
   manager:
     image:
       repository: quay.io/opentelemetry/opentelemetry-operator
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
       tag:  # Default is appVersion
     securityContext:
       allowPrivilegeEscalation: false
@@ -37,10 +37,10 @@ opentelemetryOperator:
     resources:
       limits:
         cpu: 100m
-        memory: 30Mi
+        memory: 64Mi
       requests:
         cpu: 100m
-        memory: 20Mi
+        memory: 64Mi
     args:
       metricsaddr: 127.0.0.1:8080
 
@@ -48,14 +48,20 @@ opentelemetryOperator:
     enabled: true
     image:
       repository: gcr.io/kubebuilder/kube-rbac-proxy
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
       tag: v0.5.0
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
           - ALL
-    resources: {}
+    resources:
+      limits:
+        cpu: 10m
+        memory: 16Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
     args:
       securelistenaddress: 0.0.0.0:8443
       upstream: http://127.0.0.1:8080/
