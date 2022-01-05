@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.1.19](https://img.shields.io/badge/Version-0.1.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.37.0](https://img.shields.io/badge/AppVersion-v0.37.0-informational?style=flat-square)
+![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.37.0](https://img.shields.io/badge/AppVersion-v0.37.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -41,20 +41,23 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.args.upstream | string | `"http://127.0.0.1:8080/"` |  |
 | opentelemetryOperator.kubeRbacProxy.args.v | int | `10` |  |
 | opentelemetryOperator.kubeRbacProxy.enabled | bool | `true` |  |
-| opentelemetryOperator.kubeRbacProxy.image.pullPolicy | string | `"IfNotPresent"` |  |
+| opentelemetryOperator.kubeRbacProxy.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.repository | string | `"gcr.io/kubebuilder/kube-rbac-proxy"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.tag | string | `"v0.5.0"` |  |
-| opentelemetryOperator.kubeRbacProxy.resources | object | `{}` |  |
+| opentelemetryOperator.kubeRbacProxy.resources.limits.cpu | string | `"10m"` |  |
+| opentelemetryOperator.kubeRbacProxy.resources.limits.memory | string | `"16Mi"` |  |
+| opentelemetryOperator.kubeRbacProxy.resources.requests.cpu | string | `"10m"` |  |
+| opentelemetryOperator.kubeRbacProxy.resources.requests.memory | string | `"16Mi"` |  |
 | opentelemetryOperator.kubeRbacProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetryOperator.kubeRbacProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetryOperator.manager.args.metricsaddr | string | `"127.0.0.1:8080"` |  |
-| opentelemetryOperator.manager.image.pullPolicy | string | `"IfNotPresent"` |  |
+| opentelemetryOperator.manager.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.manager.image.repository | string | `"quay.io/opentelemetry/opentelemetry-operator"` |  |
 | opentelemetryOperator.manager.image.tag | string | `nil` |  |
 | opentelemetryOperator.manager.resources.limits.cpu | string | `"100m"` |  |
-| opentelemetryOperator.manager.resources.limits.memory | string | `"30Mi"` |  |
+| opentelemetryOperator.manager.resources.limits.memory | string | `"64Mi"` |  |
 | opentelemetryOperator.manager.resources.requests.cpu | string | `"100m"` |  |
-| opentelemetryOperator.manager.resources.requests.memory | string | `"20Mi"` |  |
+| opentelemetryOperator.manager.resources.requests.memory | string | `"64Mi"` |  |
 | opentelemetryOperator.manager.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetryOperator.manager.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetryOperator.nodeSelector | object | `{}` |  |
