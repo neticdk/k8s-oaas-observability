@@ -1496,10 +1496,10 @@ grafana:
     resources:
       limits:
         cpu: 50m
-        memory: 32Mi
+        memory: 96Mi
       requests:
         cpu: 50m
-        memory: 32Mi
+        memory: 96Mi
     dashboards:
       enabled: true
       label: netic_grafana_dashboard
