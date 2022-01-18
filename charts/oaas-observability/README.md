@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.27](https://img.shields.io/badge/Version-2.0.27-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.28](https://img.shields.io/badge/Version-2.0.28-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -33,7 +33,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../otel-operator | otel-operator | * |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 6.18.2 |
+| https://grafana.github.io/helm-charts | grafana | 6.20.5 |
 | https://grafana.github.io/helm-charts | promtail | 3.5.1 |
 | https://helm.vector.dev | vector-agent | 0.19.1 |
 | https://prometheus-community.github.io/helm-charts | kube-state-metrics | 4.1.1 |
@@ -153,9 +153,9 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.datasources.label | string | `"netic_grafana_datasource"` |  |
 | grafana.sidecar.imagePullPolicy | string | `"Always"` |  |
 | grafana.sidecar.resources.limits.cpu | string | `"50m"` |  |
-| grafana.sidecar.resources.limits.memory | string | `"32Mi"` |  |
+| grafana.sidecar.resources.limits.memory | string | `"96Mi"` |  |
 | grafana.sidecar.resources.requests.cpu | string | `"50m"` |  |
-| grafana.sidecar.resources.requests.memory | string | `"32Mi"` |  |
+| grafana.sidecar.resources.requests.memory | string | `"96Mi"` |  |
 | grafana.sidecar.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
