@@ -187,6 +187,11 @@ spec:
   imagePullSecrets:
 {{ toYaml .Values.global.imagePullSecrets | indent 4 }}
 {{- end }}
+{{- if .Values.prometheus.prometheusSpec.additionalScrapeConfigs }}
+  additionalScrapeConfigs:
+    name: {{ template "netic-oaas.fullname" . }}-prometheus-scrape-confg
+    key: additional-scrape-configs.yaml
+{{- end }}
 {{- if .Values.prometheus.prometheusSpec.containers }}
   containers:
 {{ toYaml .Values.prometheus.prometheusSpec.containers | indent 4 }}

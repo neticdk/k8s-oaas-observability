@@ -1,0 +1,12 @@
+{{- if .Values.prometheus.prometheusSpec.additionalScrapeConfigs }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ template "netic-oaas.fullname" . }}-prometheus-scrape-confg
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "netic-oaas.name" . }}-prometheus-scrape-confg
+{{ include "netic-oaas.labels" . | indent 4 }}
+data:
+  additional-scrape-configs.yaml: {{ tpl (toYaml .Values.prometheus.prometheusSpec.additionalScrapeConfigs) $ | b64enc | quote }}
+{{- end }}

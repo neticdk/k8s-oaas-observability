@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.29](https://img.shields.io/badge/Version-2.0.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.30](https://img.shields.io/badge/Version-2.0.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -267,6 +267,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.podDisruptionBudget.maxUnavailable | string | `""` |  |
 | prometheus.podDisruptionBudget.minAvailable | int | `1` |  |
 | prometheus.podSecurityPolicy.allowedCapabilities | list | `[]` |  |
+| prometheus.prometheusSpec.additionalScrapeConfigs | list | `[]` |  |
 | prometheus.prometheusSpec.affinity | object | `{}` |  |
 | prometheus.prometheusSpec.alertingEndpoints | list | `[]` |  |
 | prometheus.prometheusSpec.apiserverConfig | object | `{}` |  |
