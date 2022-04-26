@@ -27,7 +27,7 @@ container_image(
     base = "@alpine_linux_amd64//image",
     entrypoint = ["/controller"],
     files = [":controller"],
-    user = "65534"
+    user = "65534",
 )
 
 container_push(
