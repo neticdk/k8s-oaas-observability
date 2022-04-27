@@ -12,3 +12,5 @@ require (
 	k8s.io/client-go v0.19.2
 	k8s.io/klog v1.0.0
 )
+
+replace github.com/gogo/protobuf v1.3.1 => github.com/gogo/protobuf v1.3.2
