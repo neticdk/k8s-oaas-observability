@@ -16,7 +16,7 @@ data:
             return 0
           fi
           n=$(( n + 1 ))
-          sleep 2
+          sleep 3
         done
         %logger Finished $1 without success
         return 1
