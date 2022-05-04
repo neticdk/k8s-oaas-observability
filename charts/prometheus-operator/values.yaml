@@ -50,8 +50,8 @@ prometheusOperator:
     patch:
       enabled: true
       image:
-        repository: jettech/kube-webhook-certgen
-        tag: v1.2.1
+        repository: rpkatz/kube-webhook-certgen
+        tag: v1.5.2
         sha: ""
         pullPolicy: Always
       resources:
