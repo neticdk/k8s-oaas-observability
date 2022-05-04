@@ -1154,8 +1154,8 @@ prometheus:
     ##
     image:
       repository: quay.io/prometheus/prometheus
-      tag: v2.30.3
-    version: v2.30.3
+      tag: v2.35.0
+    version: v2.35.0
 
     ## additionalScrapeConfigs for adding scape configs (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config).
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusspec
