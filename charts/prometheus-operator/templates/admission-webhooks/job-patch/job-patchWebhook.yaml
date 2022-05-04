@@ -40,7 +40,6 @@ spec:
             - --patch-failure-policy={{ .Values.prometheusOperator.admissionWebhooks.failurePolicy }}
           securityContext:
             allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
             capabilities:
               drop: ['ALL']
           resources:
