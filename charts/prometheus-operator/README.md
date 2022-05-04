@@ -39,7 +39,10 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.admissionWebhooks.patch.nodeSelector | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.podAnnotations | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.priorityClassName | string | `""` | Provide a priority class name to the webhook patching job |
-| prometheusOperator.admissionWebhooks.patch.resources | object | `{}` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.limits.cpu | string | `"100m"` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.limits.memory | string | `"64Mi"` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.requests.cpu | string | `"100m"` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.requests.memory | string | `"64Mi"` |  |
 | prometheusOperator.admissionWebhooks.patch.tolerations | list | `[]` |  |
 | prometheusOperator.affinity | object | `{}` | Assign custom affinity rules to the prometheus operator ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |
 | prometheusOperator.cleanupCustomResource | bool | `false` | Attempt to clean up CRDs created by Prometheus Operator. |
@@ -83,5 +86,8 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.tlsProxy.image.repository | string | `"squareup/ghostunnel"` |  |
 | prometheusOperator.tlsProxy.image.sha | string | `""` |  |
 | prometheusOperator.tlsProxy.image.tag | string | `"v1.5.2"` |  |
-| prometheusOperator.tlsProxy.resources | object | `{}` |  |
+| prometheusOperator.tlsProxy.resources.limits.cpu | string | `"50m"` |  |
+| prometheusOperator.tlsProxy.resources.limits.memory | string | `"48Mi"` |  |
+| prometheusOperator.tlsProxy.resources.requests.cpu | string | `"50m"` |  |
+| prometheusOperator.tlsProxy.resources.requests.memory | string | `"48Mi"` |  |
 | prometheusOperator.tolerations | list | `[]` | Tolerations for use with node taints ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ |

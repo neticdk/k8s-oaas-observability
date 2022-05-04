@@ -30,7 +30,13 @@ prometheusOperator:
       tag: v1.5.2
       sha: ""
       pullPolicy: Always
-    resources: {}
+    resources:
+      limits:
+        cpu: 50m
+        memory: 48Mi
+      requests:
+        cpu: 50m
+        memory: 48Mi
 
   ## Admission webhook support for PrometheusRules resources added in Prometheus Operator 0.30 can be enabled to prevent incorrectly formatted
   ## rules from making their way into prometheus and potentially preventing the container from starting
@@ -48,7 +54,13 @@ prometheusOperator:
         tag: v1.2.1
         sha: ""
         pullPolicy: Always
-      resources: {}
+      resources:
+        limits:
+          cpu: 100m
+          memory: 64Mi
+        requests:
+          cpu: 100m
+          memory: 64Mi
       # -- Provide a priority class name to the webhook patching job
       priorityClassName: ""
       podAnnotations: {}
