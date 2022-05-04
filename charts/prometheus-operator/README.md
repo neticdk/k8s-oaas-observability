@@ -33,9 +33,9 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.admissionWebhooks.patch.affinity | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.enabled | bool | `true` |  |
 | prometheusOperator.admissionWebhooks.patch.image.pullPolicy | string | `"Always"` |  |
-| prometheusOperator.admissionWebhooks.patch.image.repository | string | `"jettech/kube-webhook-certgen"` |  |
+| prometheusOperator.admissionWebhooks.patch.image.repository | string | `"rpkatz/kube-webhook-certgen"` |  |
 | prometheusOperator.admissionWebhooks.patch.image.sha | string | `""` |  |
-| prometheusOperator.admissionWebhooks.patch.image.tag | string | `"v1.2.1"` |  |
+| prometheusOperator.admissionWebhooks.patch.image.tag | string | `"v1.5.2"` |  |
 | prometheusOperator.admissionWebhooks.patch.nodeSelector | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.podAnnotations | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.priorityClassName | string | `""` | Provide a priority class name to the webhook patching job |
