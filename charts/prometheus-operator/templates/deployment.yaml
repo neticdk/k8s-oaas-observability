@@ -67,6 +67,8 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+            capabilities:
+              drop: ['ALL']
         {{- if .Values.prometheusOperator.tlsProxy.enabled }}
         - name: tls-proxy
           {{- if .Values.prometheusOperator.tlsProxy.image.sha }}
@@ -94,6 +96,8 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+            capabilities:
+              drop: ['ALL']
         {{- end }}
 {{- if .Values.prometheusOperator.tlsProxy.enabled }}
       volumes:
