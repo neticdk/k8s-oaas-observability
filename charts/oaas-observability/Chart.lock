@@ -10,7 +10,7 @@ dependencies:
   version: 1.0.7
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.8
+  version: 1.0.9
 - name: otel-operator
   repository: file://../otel-operator
   version: 0.1.20
@@ -20,5 +20,5 @@ dependencies:
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 3.10.0
-digest: sha256:83a97e9a5a7427d4afc9ea7936ee753a249d48478f67dd5dbc75a9b97fba3c50
-generated: "2022-01-18T14:31:50.615676+01:00"
+digest: sha256:cd7754df6626c42bee2f68be13554bb1ef96763bf01ef4a5c70d693c594f78c8
+generated: "2022-05-04T12:29:58.072388+02:00"

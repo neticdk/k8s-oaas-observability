@@ -29,8 +29,14 @@ prometheusOperator:
       repository: squareup/ghostunnel
       tag: v1.5.2
       sha: ""
-      pullPolicy: IfNotPresent
-    resources: {}
+      pullPolicy: Always
+    resources:
+      limits:
+        cpu: 50m
+        memory: 48Mi
+      requests:
+        cpu: 50m
+        memory: 48Mi
 
   ## Admission webhook support for PrometheusRules resources added in Prometheus Operator 0.30 can be enabled to prevent incorrectly formatted
   ## rules from making their way into prometheus and potentially preventing the container from starting
@@ -44,11 +50,17 @@ prometheusOperator:
     patch:
       enabled: true
       image:
-        repository: jettech/kube-webhook-certgen
-        tag: v1.2.1
+        repository: rpkatz/kube-webhook-certgen
+        tag: v1.5.2
         sha: ""
-        pullPolicy: IfNotPresent
-      resources: {}
+        pullPolicy: Always
+      resources:
+        limits:
+          cpu: 100m
+          memory: 64Mi
+        requests:
+          cpu: 100m
+          memory: 64Mi
       # -- Provide a priority class name to the webhook patching job
       priorityClassName: ""
       podAnnotations: {}
@@ -153,13 +165,13 @@ prometheusOperator:
     #   action: replace
 
   # -- Resource limits & requests
-  resources: {}
-  # limits:
-  #   cpu: 200m
-  #   memory: 200Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 100Mi
+  resources:
+    limits:
+      cpu: 150m
+      memory: 192Mi
+    requests:
+      cpu: 150m
+      memory: 192Mi
 
   # -- Required for use in managed kubernetes clusters (such as AWS EKS) with custom CNI (such as calico),
   # because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working
@@ -201,7 +213,7 @@ prometheusOperator:
     repository: quay.io/prometheus-operator/prometheus-operator
     tag: ""
     sha: ""
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   # -- Prometheus-config-reloader image to use for config and rule reloading
   prometheusConfigReloaderImage:
@@ -220,4 +232,4 @@ prometheusOperator:
     repository: k8s.gcr.io/hyperkube
     tag: v1.16.12
     sha: ""
-    pullPolicy: IfNotPresent
+    pullPolicy: Always

@@ -1,6 +1,6 @@
 # prometheus-operator
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.51.2](https://img.shields.io/badge/AppVersion-0.51.2-informational?style=flat-square)
+![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.56.1](https://img.shields.io/badge/AppVersion-0.56.1-informational?style=flat-square)
 
 A Helm chart to install Prometheus Operator
 
@@ -32,14 +32,17 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.admissionWebhooks.failurePolicy | string | `"Fail"` |  |
 | prometheusOperator.admissionWebhooks.patch.affinity | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.enabled | bool | `true` |  |
-| prometheusOperator.admissionWebhooks.patch.image.pullPolicy | string | `"IfNotPresent"` |  |
-| prometheusOperator.admissionWebhooks.patch.image.repository | string | `"jettech/kube-webhook-certgen"` |  |
+| prometheusOperator.admissionWebhooks.patch.image.pullPolicy | string | `"Always"` |  |
+| prometheusOperator.admissionWebhooks.patch.image.repository | string | `"rpkatz/kube-webhook-certgen"` |  |
 | prometheusOperator.admissionWebhooks.patch.image.sha | string | `""` |  |
-| prometheusOperator.admissionWebhooks.patch.image.tag | string | `"v1.2.1"` |  |
+| prometheusOperator.admissionWebhooks.patch.image.tag | string | `"v1.5.2"` |  |
 | prometheusOperator.admissionWebhooks.patch.nodeSelector | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.podAnnotations | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.priorityClassName | string | `""` | Provide a priority class name to the webhook patching job |
-| prometheusOperator.admissionWebhooks.patch.resources | object | `{}` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.limits.cpu | string | `"100m"` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.limits.memory | string | `"64Mi"` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.requests.cpu | string | `"100m"` |  |
+| prometheusOperator.admissionWebhooks.patch.resources.requests.memory | string | `"64Mi"` |  |
 | prometheusOperator.admissionWebhooks.patch.tolerations | list | `[]` |  |
 | prometheusOperator.affinity | object | `{}` | Assign custom affinity rules to the prometheus operator ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |
 | prometheusOperator.cleanupCustomResource | bool | `false` | Attempt to clean up CRDs created by Prometheus Operator. |
@@ -49,8 +52,8 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.denyNamespaces | list | `[]` | Namespaces not to scope the interaction of the Prometheus Operator (deny list). |
 | prometheusOperator.enabled | bool | `true` |  |
 | prometheusOperator.hostNetwork | bool | `false` | Required for use in managed kubernetes clusters (such as AWS EKS) with custom CNI (such as calico), because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working |
-| prometheusOperator.hyperkubeImage | object | `{"pullPolicy":"IfNotPresent","repository":"k8s.gcr.io/hyperkube","sha":"","tag":"v1.16.12"}` | Hyperkube image to use when cleaning up |
-| prometheusOperator.image | object | `{"pullPolicy":"IfNotPresent","repository":"quay.io/prometheus-operator/prometheus-operator","sha":"","tag":""}` | Prometheus-operator image |
+| prometheusOperator.hyperkubeImage | object | `{"pullPolicy":"Always","repository":"k8s.gcr.io/hyperkube","sha":"","tag":"v1.16.12"}` | Hyperkube image to use when cleaning up |
+| prometheusOperator.image | object | `{"pullPolicy":"Always","repository":"quay.io/prometheus-operator/prometheus-operator","sha":"","tag":""}` | Prometheus-operator image |
 | prometheusOperator.kubeletService.enabled | bool | `true` |  |
 | prometheusOperator.kubeletService.namespace | string | `"kube-system"` |  |
 | prometheusOperator.logFormat | string | `"logfmt"` | Define Log Format Use logfmt (default) or json-formatted logging |
@@ -61,7 +64,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.podLabels | object | `{}` | Labels to add to the operator pod |
 | prometheusOperator.priorityClassName | string | `nil` | Assign a PriorityClassName to pods if set |
 | prometheusOperator.prometheusConfigReloaderImage | object | `{"repository":"quay.io/prometheus-operator/prometheus-config-reloader","sha":"","tag":""}` | Prometheus-config-reloader image to use for config and rule reloading |
-| prometheusOperator.resources | object | `{}` | Resource limits & requests |
+| prometheusOperator.resources | object | `{"limits":{"cpu":"150m","memory":"192Mi"},"requests":{"cpu":"150m","memory":"192Mi"}}` | Resource limits & requests |
 | prometheusOperator.securityContext.fsGroup | int | `65534` |  |
 | prometheusOperator.securityContext.runAsGroup | int | `65534` |  |
 | prometheusOperator.securityContext.runAsNonRoot | bool | `true` |  |
@@ -79,9 +82,12 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.serviceMonitor.relabelings | list | `[]` | relabel configs to apply to samples before ingestion. |
 | prometheusOperator.serviceMonitor.scrapeTimeout | string | `""` | Scrape timeout. If not set, the Prometheus default scrape timeout is used. |
 | prometheusOperator.tlsProxy.enabled | bool | `true` |  |
-| prometheusOperator.tlsProxy.image.pullPolicy | string | `"IfNotPresent"` |  |
+| prometheusOperator.tlsProxy.image.pullPolicy | string | `"Always"` |  |
 | prometheusOperator.tlsProxy.image.repository | string | `"squareup/ghostunnel"` |  |
 | prometheusOperator.tlsProxy.image.sha | string | `""` |  |
 | prometheusOperator.tlsProxy.image.tag | string | `"v1.5.2"` |  |
-| prometheusOperator.tlsProxy.resources | object | `{}` |  |
+| prometheusOperator.tlsProxy.resources.limits.cpu | string | `"50m"` |  |
+| prometheusOperator.tlsProxy.resources.limits.memory | string | `"48Mi"` |  |
+| prometheusOperator.tlsProxy.resources.requests.cpu | string | `"50m"` |  |
+| prometheusOperator.tlsProxy.resources.requests.memory | string | `"48Mi"` |  |
 | prometheusOperator.tolerations | list | `[]` | Tolerations for use with node taints ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ |

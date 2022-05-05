@@ -3,8 +3,8 @@ name: prometheus-operator
 type: application
 description: A Helm chart to install Prometheus Operator
 home: https://github.com/prometheus-operator/prometheus-operator
-version: "1.0.8"
-appVersion: "0.51.2"
+version: "1.0.9"
+appVersion: "0.56.1"
 maintainers:
 - name: langecode
   email: tal@netic.dk
