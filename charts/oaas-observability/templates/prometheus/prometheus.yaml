@@ -8,6 +8,7 @@ metadata:
 {{ toYaml .Values.prometheus.annotations | indent 4 }}
 {{- end }}
 spec:
+{{- if not .Values.prometheus.agent }}
   alerting:
     alertmanagers:
 {{- if .Values.prometheus.prometheusSpec.alertingEndpoints }}
@@ -22,6 +23,7 @@ spec:
         apiVersion: {{ .Values.alertmanager.apiVersion }}
 {{- else }}
       []
+{{- end }}
 {{- end }}
 {{- if .Values.prometheus.prometheusSpec.apiserverConfig }}
   apiserverConfig:
@@ -133,6 +135,7 @@ spec:
   securityContext:
 {{ toYaml .Values.prometheus.prometheusSpec.securityContext | indent 4 }}
 {{- end }}
+{{- if not .Values.prometheus.agent }}
 {{- if .Values.prometheus.prometheusSpec.ruleNamespaceSelector }}
   ruleNamespaceSelector:
 {{ toYaml .Values.prometheus.prometheusSpec.ruleNamespaceSelector | indent 4 }}
@@ -147,6 +150,7 @@ spec:
     matchLabels: {{ include "netic-oaas.matchLabels" . | nindent 6 }}
 {{ else }}
   ruleSelector: {}
+{{- end }}
 {{- end }}
 {{- if .Values.prometheus.prometheusSpec.storageSpec }}
   storage:
