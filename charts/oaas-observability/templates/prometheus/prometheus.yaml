@@ -192,8 +192,16 @@ spec:
     name: {{ template "netic-oaas.fullname" . }}-prometheus-scrape-confg
     key: additional-scrape-configs.yaml
 {{- end }}
-{{- if .Values.prometheus.prometheusSpec.containers }}
+{{- if or .Values.prometheus.prometheusSpec.containers .Values.prometheus.agent }}
   containers:
+{{- if .Values.prometheus.agent }}
+    - name: prometheus
+      args:
+        - --storage.agent.path=/prometheus
+        - --enable-feature=agent
+        - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
+        - --web.enable-lifecycle
+{{- end }}
 {{ toYaml .Values.prometheus.prometheusSpec.containers | indent 4 }}
 {{- end }}
 {{- if .Values.prometheus.prometheusSpec.initContainers }}

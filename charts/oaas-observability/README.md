@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.32](https://img.shields.io/badge/Version-2.0.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.33](https://img.shields.io/badge/Version-2.0.33-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -36,7 +36,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | https://grafana.github.io/helm-charts | grafana | 6.20.5 |
 | https://grafana.github.io/helm-charts | promtail | 3.10.0 |
 | https://helm.vector.dev | vector-agent | 0.19.1 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 4.1.1 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 4.9.2 |
 
 ## Configuration
 
@@ -352,6 +352,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
 | otel-operator | object | `{"enabled":true,"global":{"podSecurityPolicy":{"enabled":true}},"opentelemetryOperator":{"kubeRbacProxy":{"resources":{"limits":{"cpu":"10m","memory":"16Mi"},"requests":{"cpu":"10m","memory":"16Mi"}}},"manager":{"resources":{"limits":{"cpu":"100m","memory":"64Mi"},"requests":{"cpu":"100m","memory":"64Mi"}}}}}` | Values for included otel-operator chart |
 | prometheus-operator | object | `{"enabled":true,"prometheusOperator":{"image":{"pullPolicy":"Always"},"resources":{"limits":{"cpu":"25m","memory":"80Mi"},"requests":{"cpu":"25m","memory":"80Mi"}}}}` | Values for included prometheus-operator chart |
+| prometheus.agent | bool | `false` | Sets up Prometheus to run in agent mode only running discovery, scrape and remote write |
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
 | prometheus.ingress.enabled | bool | `false` |  |
@@ -375,7 +376,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
 | prometheus.prometheusSpec.image.repository | string | `"quay.io/prometheus/prometheus"` |  |
-| prometheus.prometheusSpec.image.tag | string | `"v2.35.0"` |  |
+| prometheus.prometheusSpec.image.tag | string | `"v2.36.2"` |  |
 | prometheus.prometheusSpec.initContainers | list | `[]` |  |
 | prometheus.prometheusSpec.listenLocal | bool | `false` |  |
 | prometheus.prometheusSpec.logFormat | string | `"logfmt"` |  |
@@ -417,7 +418,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheus.prometheusSpec.thanos | object | `{}` |  |
 | prometheus.prometheusSpec.tolerations | list | `[]` |  |
-| prometheus.prometheusSpec.version | string | `"v2.35.0"` |  |
+| prometheus.prometheusSpec.version | string | `"v2.36.2"` |  |
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |
