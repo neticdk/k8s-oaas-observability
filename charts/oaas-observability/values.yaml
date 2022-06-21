@@ -1007,6 +1007,9 @@ prometheus:
   ##
   annotations: {}
 
+  # -- Sets up Prometheus to run in agent mode only running discovery, scrape and remote write
+  agent: false
+
   ## Service account for Prometheuses to use.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
   ##
@@ -1154,8 +1157,8 @@ prometheus:
     ##
     image:
       repository: quay.io/prometheus/prometheus
-      tag: v2.35.0
-    version: v2.35.0
+      tag: v2.36.2
+    version: v2.36.2
 
     ## additionalScrapeConfigs for adding scape configs (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config).
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusspec
