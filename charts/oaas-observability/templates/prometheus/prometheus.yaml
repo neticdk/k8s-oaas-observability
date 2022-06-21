@@ -197,12 +197,14 @@ spec:
 {{- if .Values.prometheus.agent }}
     - name: prometheus
       args:
-        - --storage.agent.path=/prometheus
         - --enable-feature=agent
+        - --storage.agent.path=/prometheus
         - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
         - --web.enable-lifecycle
 {{- end }}
+{{- if .Values.prometheus.prometheusSpec.containers }}
 {{ toYaml .Values.prometheus.prometheusSpec.containers | indent 4 }}
+{{- end }}
 {{- end }}
 {{- if .Values.prometheus.prometheusSpec.initContainers }}
   initContainers:
