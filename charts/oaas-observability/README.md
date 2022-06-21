@@ -1,10 +1,6 @@
 # oaas-observability
 
-<<<<<<< HEAD
 ![Version: 2.0.35](https://img.shields.io/badge/Version-2.0.35-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-=======
-![Version: 2.0.34](https://img.shields.io/badge/Version-2.0.34-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
->>>>>>> origin/main
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
