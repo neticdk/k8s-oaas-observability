@@ -9,7 +9,7 @@ metadata:
 {{- end }}
 spec:
   selector:
-    matchLabels: {{ include "netic-oaas.prometheus.matchLabels" . | nindent 6 }}
+    matchLabels: {{ include "prometheus.matchLabels" . | nindent 6 }}
   namespaceSelector:
     matchNames:
       - {{ .Release.Namespace | quote }}
