@@ -3,6 +3,7 @@ chart-repos:
   - grafana=https://grafana.github.io/helm-charts
   - prometheus-community=https://prometheus-community.github.io/helm-charts
   - vector=https://helm.vector.dev
+  - open-telemetry=https://open-telemetry.github.io/opentelemetry-helm-charts
 excluded-charts:
   - prometheus
 additional-commands:
