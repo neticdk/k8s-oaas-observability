@@ -1,6 +1,8 @@
 # otel-operator
 
-![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.37.0](https://img.shields.io/badge/AppVersion-v0.37.0-informational?style=flat-square)
+![Version: 0.1.21](https://img.shields.io/badge/Version-0.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.37.0](https://img.shields.io/badge/AppVersion-v0.37.0-informational?style=flat-square)
+
+**DEPRECATED** We recommend using: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
