@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.37.0](https://img.shields.io/badge/AppVersion-v0.37.0-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -52,7 +52,7 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetryOperator.manager.args.metricsaddr | string | `"127.0.0.1:8080"` |  |
 | opentelemetryOperator.manager.image.pullPolicy | string | `"Always"` |  |
-| opentelemetryOperator.manager.image.repository | string | `"quay.io/opentelemetry/opentelemetry-operator"` |  |
+| opentelemetryOperator.manager.image.repository | string | `"ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator"` |  |
 | opentelemetryOperator.manager.image.tag | string | `nil` |  |
 | opentelemetryOperator.manager.resources.limits.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.limits.memory | string | `"64Mi"` |  |

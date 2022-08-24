@@ -60,18 +60,8 @@ rules:
   - apps
   resources:
   - daemonsets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - apps
-  resources:
   - deployments
+  - statefulsets
   verbs:
   - create
   - delete
@@ -81,9 +71,9 @@ rules:
   - update
   - watch
 - apiGroups:
-  - apps
+  - autoscaling
   resources:
-  - statefulsets
+  - horizontalpodautoscalers
   verbs:
   - create
   - delete
@@ -105,6 +95,7 @@ rules:
   - opentelemetry.io
   resources:
   - opentelemetrycollectors
+  - instrumentations
   verbs:
   - create
   - delete
@@ -117,14 +108,9 @@ rules:
   - opentelemetry.io
   resources:
   - opentelemetrycollectors/finalizers
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - opentelemetry.io
-  resources:
   - opentelemetrycollectors/status
+  - instrumentations/finalizers
+  - instrumentations/status
   verbs:
   - get
   - patch

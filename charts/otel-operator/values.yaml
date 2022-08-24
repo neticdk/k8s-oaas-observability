@@ -26,7 +26,7 @@ opentelemetryOperator:
 
   manager:
     image:
-      repository: quay.io/opentelemetry/opentelemetry-operator
+      repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
       pullPolicy: Always
       tag:  # Default is appVersion
     securityContext:
