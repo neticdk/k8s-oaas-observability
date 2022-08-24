@@ -13,12 +13,12 @@ dependencies:
   version: 1.0.9
 - name: otel-operator
   repository: file://../otel-operator
-  version: 0.2.0
+  version: 0.2.1
 - name: vector-agent
   repository: https://helm.vector.dev
   version: 0.19.1
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.3.0
-digest: sha256:950b9dbc1597252c02b51ef8c1e76e97b980841c2a1d52b71790622b829ab52b
-generated: "2022-08-24T11:32:48.509526+02:00"
+digest: sha256:cef2ab056967b6a7c887b87b74648c49d78bb44f26b7ade465101a45046ead5b
+generated: "2022-08-24T12:41:09.919276+02:00"
