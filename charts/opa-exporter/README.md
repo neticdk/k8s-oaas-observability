@@ -48,7 +48,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | replicaCount | int | `1` | Count of Pod replicas |
 | resources | object | `{}` | Resources for the Agent container |
 | securityContext | object | `{}` | Security context for the Agent container |
-| service.port | int | `80` | Service port |
+| service.port | int | `8080` | Service port |
 | service.type | string | `"ClusterIP"` | Service type |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Whether to create the Service Account used by the Pod |
