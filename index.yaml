@@ -1831,6 +1831,18 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-1.1.22/oaas-observability-1.1.22.tgz
     version: 1.1.22
+  opa-exporter:
+  - apiVersion: v2
+    appVersion: 0.0.4
+    created: "2022-09-27T12:13:24.436045138Z"
+    description: Prometheus exporter for OPA Gatekeeper.
+    digest: 8a2de624dbfc1a55fc47c7e9ce2d65b7b8bfacef9a0b3f1d910b160bd15728c3
+    home: https://github.com/mcelep/opa-scorecard
+    name: opa-exporter
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/opa-exporter-0.1.1/opa-exporter-0.1.1.tgz
+    version: 0.1.1
   opentelemetry-collector:
   - apiVersion: v2
     appVersion: 0.27.0
@@ -2248,4 +2260,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2022-08-24T11:04:55.152144067Z"
+generated: "2022-09-27T12:13:24.436295838Z"
