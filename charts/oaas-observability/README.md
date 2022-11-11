@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.39](https://img.shields.io/badge/Version-2.0.39-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.40](https://img.shields.io/badge/Version-2.0.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -468,12 +468,22 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.customConfig.transforms.metric_cardinality.type | string | `"tag_cardinality_limit"` |  |
 | vector-agent.enabled | bool | `true` |  |
 | vector-agent.image.pullPolicy | string | `"Always"` |  |
+| vector-agent.livenessProbe.failureThreshold | int | `3` |  |
 | vector-agent.livenessProbe.httpGet.path | string | `"/health"` |  |
 | vector-agent.livenessProbe.httpGet.port | int | `8686` |  |
+| vector-agent.livenessProbe.httpGet.scheme | string | `"HTTP"` |  |
+| vector-agent.livenessProbe.initialDelaySeconds | int | `10` |  |
+| vector-agent.livenessProbe.periodSeconds | int | `30` |  |
+| vector-agent.livenessProbe.timeoutSeconds | int | `5` |  |
 | vector-agent.psp.enabled | bool | `true` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
+| vector-agent.readinessProbe.failureThreshold | int | `3` |  |
 | vector-agent.readinessProbe.httpGet.path | string | `"/health"` |  |
 | vector-agent.readinessProbe.httpGet.port | int | `8686` |  |
+| vector-agent.readinessProbe.httpGet.scheme | string | `"HTTP"` |  |
+| vector-agent.readinessProbe.initialDelaySeconds | int | `10` |  |
+| vector-agent.readinessProbe.periodSeconds | int | `30` |  |
+| vector-agent.readinessProbe.timeoutSeconds | int | `5` |  |
 | vector-agent.resources.limits.cpu | string | `"150m"` |  |
 | vector-agent.resources.limits.memory | string | `"64Mi"` |  |
 | vector-agent.resources.requests.cpu | string | `"150m"` |  |
