@@ -5,8 +5,7 @@ metadata:
   name: {{ template "alertmanager.fullname" . }}
   labels: {{ include "alertmanager.labels" . | nindent 4 }}
 rules:
-{{- $kubeTargetVersion := default .Capabilities.KubeVersion.GitVersion .Values.kubeTargetVersionOverride }}
-{{- if semverCompare "> 1.15.0-0" $kubeTargetVersion }}
+{{- if semverCompare "> 1.15.0-0" (include "netic-oaas.kubeVersion" .) }}
 - apiGroups: ['policy']
 {{- else }}
 - apiGroups: ['extensions']
