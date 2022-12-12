@@ -38,14 +38,14 @@ jobs:
             exit 0
           fi
 
-          echo Bumping versions
           yq '.appVersion=strenv(latest_version)' -i charts/kube-state-metrics/Chart.yaml
-          yq '.version=strenv(next_chart_version)' -i charts/kube-state-metrics/Chart.yaml
-          helm-docs
 
           echo Creating PR - if necressary
           git update-index -q --really-refresh
           if [ -n "$(git diff-index --name-only HEAD --)" ]; then
+            yq '.version=strenv(next_chart_version)' -i charts/kube-state-metrics/Chart.yaml
+            helm-docs
+
             git config user.email "support@netic.dk"
             git config user.name "Upgrade Automation"
             git add charts/kube-state-metrics
@@ -94,16 +94,16 @@ jobs:
             exit 0
           fi
 
-          echo Bumping versions
           yq '.appVersion=strenv(latest_version)' -i charts/prometheus-node-exporter/Chart.yaml
-          yq '.version=strenv(next_chart_version)' -i charts/prometheus-node-exporter/Chart.yaml
-          yq '.version=strenv(next_oaas_version)' -i charts/oaas-observability/Chart.yaml
-          helm dependency update charts/oaas-observability
-          helm-docs
 
           echo Creating PR - if necressary
           git update-index -q --really-refresh
           if [ -n "$(git diff-index --name-only HEAD --)" ]; then
+            yq '.version=strenv(next_chart_version)' -i charts/prometheus-node-exporter/Chart.yaml
+            yq '.version=strenv(next_oaas_version)' -i charts/oaas-observability/Chart.yaml
+            helm dependency update charts/oaas-observability
+            helm-docs
+
             git config user.email "support@netic.dk"
             git config user.name "Upgrade Automation"
             git add charts/prometheus-node-exporter
@@ -150,13 +150,13 @@ jobs:
           kube_state_metrics_version=$(helm search repo kube-state-metrics -ojson | jq -r '.[0].version'); export kube_state_metrics_version
           yq '.dependencies.[] |= (select(.name=="kube-state-metrics") | .version = strenv(kube_state_metrics_version))' -i charts/oaas-observability/Chart.yaml
 
-          yq '.version=strenv(next_oaas_version)' -i charts/oaas-observability/Chart.yaml
-          helm dependency update charts/oaas-observability
-          helm-docs
-
           echo Creating PR - if necressary
           git update-index -q --really-refresh
           if [ -n "$(git diff-index --name-only HEAD --)" ]; then
+            yq '.version=strenv(next_oaas_version)' -i charts/oaas-observability/Chart.yaml
+            helm dependency update charts/oaas-observability
+            helm-docs
+
             git config user.email "support@netic.dk"
             git config user.name "Upgrade Automation"
             git add charts/oaas-observability
