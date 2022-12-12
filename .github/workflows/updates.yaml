@@ -2,10 +2,7 @@ name: updates
 
 on:
   schedule:
-    - cron: '42 0 * * *' # every day at 00:42..
-  push:
-    branches:
-      - feature/automated-upgrades
+    - cron: '42 0 * * *' # every day at 00:42
 
 jobs:
   kube-state-metrics:
