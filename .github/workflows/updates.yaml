@@ -29,6 +29,7 @@ jobs:
           next_chart_version=$(yq '.version' charts/kube-state-metrics/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_chart_version
 
           current_version=$(yq '.appVersion' charts/kube-state-metrics/Chart.yaml)
+          echo "Comparing $current_version == $latest_version"
           if [ "$current_version" == "$latest_version" ]; then
             echo "Upgrade already present"
             exit 0
@@ -83,6 +84,7 @@ jobs:
           next_oaas_version=$(yq '.version' charts/oaas-observability/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_oaas_version
 
           current_version=$(yq '.appVersion' charts/prometheus-node-exporter/Chart.yaml)
+          echo "Comparing $current_version == $latest_version"
           if [ "$current_version" == "$latest_version" ]; then
             echo "Upgrade already present"
             exit 0
@@ -101,6 +103,7 @@ jobs:
             git config user.email "support@netic.dk"
             git config user.name "Upgrade Automation"
             git add charts/prometheus-node-exporter
+            git add charts/oaas-observability
             git commit -m "feat(prometheus-node-exporter): Upgrade prometheus-node-exporter image to $latest_version"
             git push --set-upstream origin feature/upgrade-prometheus-node-exporter-$latest_version
             gh pr create --base main --title "feat(prometheus-node-exporter): Upgrade prometheus-node-exporter image to $latest_version" --body "Upgrade prometheus-node-exporter image version to $latest_version"
