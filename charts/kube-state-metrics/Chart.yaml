@@ -6,13 +6,13 @@ description: |
   See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
 home: https://github.com/kubernetes/kube-state-metrics
 keywords:
-- metric
-- monitoring
-- prometheus
-- kubernetes
-version: 1.0.8
-appVersion: v2.2.3
+  - metric
+  - monitoring
+  - prometheus
+  - kubernetes
+version: 1.0.9
+appVersion: v2.7.0
 deprecated: true
 sources:
-- https://github.com/kubernetes/kube-state-metrics
-- https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
+  - https://github.com/kubernetes/kube-state-metrics
+  - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
