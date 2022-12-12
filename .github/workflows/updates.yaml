@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - feature/automated-upgrades
+  schedule:
+    - cron: "0 42 * * *" # every day at 00:42
 
 jobs:
   kube-state-metrics:
