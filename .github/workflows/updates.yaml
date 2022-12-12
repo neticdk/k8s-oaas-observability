@@ -36,6 +36,8 @@ jobs:
           echo Creating PR - if necressary
           git update-index -q --really-refresh
           if [ -n "$(git diff-index --name-only HEAD --)" ]; then
+            git config user.email "support@netic.dk"
+            git config user.name "Upgrade Automation"
             git add charts/kube-state-metrics
             git commit -m "feat(kube-state-metrics): Upgrade kube-state-metrics image to $latest_version"
             git push --set-upstream origin feature/upgrade-kube-state-metrics-$latest_version
