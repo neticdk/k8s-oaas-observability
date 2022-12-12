@@ -20,14 +20,20 @@ jobs:
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
 
+          echo Fetching image ref
           image_ref=$(yq '.image.repository' charts/kube-state-metrics/values.yaml)
           latest_version=$(skopeo skopeo list-tags docker://$image_ref | jq -r '.Tags | map(. | select(. | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort | last')
-          yq '.appVersion=strenv(latest_version)' -i charts/kube-state-metrics/Chart.yaml
           next_chart_version=$(yq '.version' charts/kube-state-metrics/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}')
+
+          echo Creating branch
+          git checkout -b feature/upgrade-kube-state-metrics-$latest_version
+
+          echo Bumping versions
+          yq '.appVersion=strenv(latest_version)' -i charts/kube-state-metrics/Chart.yaml
           yq '.version=strenv(next_chart_version)' -i charts/kube-state-metrics/Chart.yaml
           helm-docs
 
-          git checkout -b feature/upgrade-kube-state-metrics-$latest_version
+          echo Creating PR - if necressary
           git update-index -q --really-refresh
           if [ -n "$(git diff-index --name-only HEAD --)" ]; then
             git add charts/kube-state-metrics
