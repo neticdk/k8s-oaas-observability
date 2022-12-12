@@ -22,16 +22,15 @@ jobs:
 
           image_ref=$(yq '.image.repository' charts/kube-state-metrics/values.yaml)
           latest_version=$(skopeo list-tags docker://$image_ref | jq -r '.Tags | map(. | select(. | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort | last'); export latest_version
+          next_chart_version=$(yq '.version' charts/kube-state-metrics/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_chart_version
 
           echo Creating or checking out existing branch
           git checkout -b feature/upgrade-kube-state-metrics-$latest_version
 
-          next_chart_version=$(yq '.version' charts/kube-state-metrics/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_chart_version
-
           current_version=$(yq '.appVersion' charts/kube-state-metrics/Chart.yaml)
           echo "Comparing $current_version == $latest_version"
           if [ "$current_version" == "$latest_version" ]; then
-            echo "Upgrade already present"
+            echo "New image version $latest_version already present on branch"
             exit 0
           fi
 
@@ -76,25 +75,24 @@ jobs:
 
           image_ref=$(yq '.image.repository' charts/prometheus-node-exporter/values.yaml)
           latest_version=$(skopeo list-tags docker://$image_ref | jq -r '.Tags | map(. | select(. | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort | last'); export latest_version
+          next_chart_version=$(yq '.version' charts/prometheus-node-exporter/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_chart_version
+          next_oaas_version=$(yq '.version' charts/oaas-observability/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_oaas_version
 
           echo Creating or checking out existing branch
           git checkout -b feature/upgrade-prometheus-node-exporter-$latest_version
 
-          next_chart_version=$(yq '.version' charts/prometheus-node-exporter/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_chart_version
-          next_oaas_version=$(yq '.version' charts/oaas-observability/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_oaas_version
-
           current_version=$(yq '.appVersion' charts/prometheus-node-exporter/Chart.yaml)
           echo "Comparing $current_version == $latest_version"
           if [ "$current_version" == "$latest_version" ]; then
-            echo "Upgrade already present"
+            echo "New image version $latest_version already present on branch"
             exit 0
           fi
 
           echo Bumping versions
           yq '.appVersion=strenv(latest_version)' -i charts/prometheus-node-exporter/Chart.yaml
           yq '.version=strenv(next_chart_version)' -i charts/prometheus-node-exporter/Chart.yaml
-          helm dependency update charts/oaas-observability
           yq '.version=strenv(next_oaas_version)' -i charts/oaas-observability/Chart.yaml
+          helm dependency update charts/oaas-observability
           helm-docs
 
           echo Creating PR - if necressary
@@ -107,6 +105,54 @@ jobs:
             git commit -m "feat(prometheus-node-exporter): Upgrade prometheus-node-exporter image to $latest_version"
             git push --set-upstream origin feature/upgrade-prometheus-node-exporter-$latest_version
             gh pr create --base main --title "feat(prometheus-node-exporter): Upgrade prometheus-node-exporter image to $latest_version" --body "Upgrade prometheus-node-exporter image version to $latest_version"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  oaas-observability:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install extra tooling
+        run: |
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.5.0
+
+      - name: Add dependency chart repos
+        run: |
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo add vector https://helm.vector.dev
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add cert-manager https://charts.jetstack.io
+
+      - name: Check for chart updates
+        run: |
+          next_oaas_version=$(yq '.version' charts/oaas-observability/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}'); export next_oaas_version
+          git checkout -b feature/upgrade-oaas-observability-$next_oaas_version
+
+          grafana_version=$(helm search repo grafana -ojson | jq -r '.[0].version'); export grafana_version
+          yq '.dependencies.[] |= (select(.name=="grafana") | .version = strenv(grafana_version))' -i charts/oaas-observability/Chart.yaml
+
+          promtail_version=$(helm search repo promtail -ojson | jq -r '.[0].version'); export promtail_version
+          yq '.dependencies.[] |= (select(.name=="promtail") | .version = strenv(promtail_version))' -i charts/oaas-observability/Chart.yaml
+
+          kube_state_metrics_version=$(helm search repo kube-state-metrics -ojson | jq -r '.[0].version'); export kube_state_metrics_version
+          yq '.dependencies.[] |= (select(.name=="kube-state-metrics") | .version = strenv(kube_state_metrics_version))' -i charts/oaas-observability/Chart.yaml
+
+          yq '.version=strenv(next_oaas_version)' -i charts/oaas-observability/Chart.yaml
+          helm dependency update charts/oaas-observability
+          helm-docs
+
+          echo Creating PR - if necressary
+          git update-index -q --really-refresh
+          if [ -n "$(git diff-index --name-only HEAD --)" ]; then
+            git config user.email "support@netic.dk"
+            git config user.name "Upgrade Automation"
+            git add charts/oaas-observability
+            git commit -m "feat(oaas-observability): Upgrade oaas-observability dependencies"
+            git push --set-upstream origin feature/upgrade-oaas-observability-$next_oaas_version
+            gh pr create --base main --title "feat(oaas-observability): Upgrade oaas-observability dependencies" --body "Upgrade oaas-observability dependencies"
           fi
         env:
           GH_TOKEN: ${{ github.token }}
