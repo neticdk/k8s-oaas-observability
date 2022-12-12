@@ -16,7 +16,7 @@ jobs:
         run: |
           go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.5.0
 
-      - name: Check for images
+      - name: Check for image updates
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
 
@@ -43,3 +43,5 @@ jobs:
             git push --set-upstream origin feature/upgrade-kube-state-metrics-$latest_version
             gh pr create --base main --title "feat(kube-state-metrics): Upgrade kube-state-metrics image to $latest_version" --body "Upgrade kube-state-metrics image version to $latest_version"
           fi
+        env:
+          GH_TOKEN: ${{ github.token }}
