@@ -22,7 +22,7 @@ jobs:
 
           echo Fetching image ref
           image_ref=$(yq '.image.repository' charts/kube-state-metrics/values.yaml)
-          latest_version=$(skopeo skopeo list-tags docker://$image_ref | jq -r '.Tags | map(. | select(. | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort | last')
+          latest_version=$(skopeo list-tags docker://$image_ref | jq -r '.Tags | map(. | select(. | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort | last')
           next_chart_version=$(yq '.version' charts/kube-state-metrics/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}')
 
           echo Creating branch
