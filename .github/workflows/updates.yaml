@@ -1,0 +1,37 @@
+name: updates
+
+on:
+  push:
+    branches:
+      - feature/automated-upgrades
+
+jobs:
+  kube-state-metrics:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install extra tooling
+        run: |
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.5.0
+
+      - name: Check for images
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+
+          image_ref=$(yq '.image.repository' charts/kube-state-metrics/values.yaml)
+          latest_version=$(skopeo skopeo list-tags docker://$image_ref | jq -r '.Tags | map(. | select(. | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort | last')
+          yq '.appVersion=strenv(latest_version)' -i charts/kube-state-metrics/Chart.yaml
+          next_chart_version=$(yq '.version' charts/kube-state-metrics/Chart.yaml | awk -F. -v OFS=. '{$NF += 1 ; print}')
+          yq '.version=strenv(next_chart_version)' -i charts/kube-state-metrics/Chart.yaml
+          helm-docs
+
+          git checkout -b feature/upgrade-kube-state-metrics-$latest_version
+          git update-index -q --really-refresh
+          if [ -n "$(git diff-index --name-only HEAD --)" ]; then
+            git add charts/kube-state-metrics
+            git commit -m "feat(kube-state-metrics): Upgrade kube-state-metrics image to $latest_version"
+            git push --set-upstream origin feature/upgrade-kube-state-metrics-$latest_version
+            gh pr create --base main --title "feat(kube-state-metrics): Upgrade kube-state-metrics image to $latest_version" --body "Upgrade kube-state-metrics image version to $latest_version"
+          fi
