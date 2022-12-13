@@ -3,11 +3,7 @@
 {{- $servicePort := .Values.alertmanager.service.port -}}
 {{- $routePrefix := list .Values.alertmanager.alertmanagerSpec.routePrefix }}
 {{- $paths := .Values.alertmanager.ingress.paths | default $routePrefix -}}
-{{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" }}
-apiVersion: networking.k8s.io/v1beta1
-{{ else }}
-apiVersion: extensions/v1beta1
-{{ end -}}
+apiVersion: {{ include "netic-oaas.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
   name: {{ $serviceName }}
@@ -28,9 +24,19 @@ spec:
         paths:
   {{- range $p := $paths }}
           - path: {{ tpl $p $ }}
+            {{- if and $.Values.alertmanager.ingress.pathType (eq (include "netic-oaas.ingress.supportsPathType" $) "true") }}
+            pathType: {{ $.Values.alertmanager.ingress.pathType }}
+            {{- end }}
             backend:
+            {{- if eq (include "netic-oaas.ingress.isStable" $) "true" }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+            {{- end }}
   {{- end -}}
   {{- end -}}
   {{- else }}
@@ -38,9 +44,19 @@ spec:
         paths:
   {{- range $p := $paths }}
           - path: {{ tpl $p $ }}
+            {{- if and $.Values.alertmanager.ingress.pathType (eq (include "netic-oaas.ingress.supportsPathType" $) "true") }}
+            pathType: {{ $.Values.alertmanager.ingress.pathType }}
+            {{- end }}
             backend:
+            {{- if eq (include "netic-oaas.ingress.isStable" $) "true" }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+            {{- end }}
   {{- end -}}
   {{- end -}}
   {{- if .Values.alertmanager.ingress.tls }}

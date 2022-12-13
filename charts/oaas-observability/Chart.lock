@@ -7,18 +7,18 @@ dependencies:
   version: 4.24.0
 - name: prometheus-node-exporter
   repository: file://../prometheus-node-exporter
-  version: 1.0.8
+  version: 1.0.9
 - name: prometheus-operator
   repository: file://../prometheus-operator
   version: 1.0.9
 - name: otel-operator
   repository: file://../otel-operator
-  version: 0.2.1
+  version: 0.2.2
 - name: vector-agent
   repository: https://helm.vector.dev
   version: 0.19.1
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.7.4
-digest: sha256:a888bce1dc50b6ad30a0d230e582544090d5c0bdc73acaff73ec2d801efaef4a
-generated: "2022-12-12T13:20:30.601729511Z"
+digest: sha256:854b0ec05deea41f5c73dfb9a856b05e250a8f4574eb03fafd913328124123dd
+generated: "2022-12-13T11:27:54.864102+01:00"

@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
+![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
 
 Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 
@@ -26,10 +26,11 @@ $ helm install my-release netic-oaas/otel-operator
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | fullnameOverride | string | `""` |  |
+| global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
-| global.podSecurityPolicy.enabled | bool | `false` |  |
+| global.podSecurityPolicy.annotations | object | `{}` |  |
 | global.rbac.create | bool | `true` |  |
-| global.rbac.imagePullSecrets | list | `[]` |  |
+| global.rbac.pspEnabled | bool | `true` |  |
 | nameOverride | string | `""` |  |
 | opentelemetryOperator.affinity | object | `{}` |  |
 | opentelemetryOperator.controllerManagerMetricsService.annotations | object | `{}` |  |

@@ -1,9 +1,10 @@
 global:
   podSecurityPolicy:
-    enabled: false
+    annotations: {}
   rbac:
     create: true
-    imagePullSecrets: []
+    pspEnabled: true
+  imagePullSecrets: []
 
   networkPolicyEnabled: true
 

@@ -3,11 +3,7 @@
 {{- $servicePort := .Values.prometheus.service.port -}}
 {{- $routePrefix := list .Values.prometheus.prometheusSpec.routePrefix }}
 {{- $paths := .Values.prometheus.ingress.paths | default $routePrefix -}}
-{{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" }}
-apiVersion: networking.k8s.io/v1beta1
-{{ else }}
-apiVersion: extensions/v1beta1
-{{ end -}}
+apiVersion: {{ include "netic-oaas.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
 {{- if .Values.prometheus.ingress.annotations }}
@@ -29,9 +25,19 @@ spec:
         paths:
   {{- range $p := $paths }}
           - path: {{ tpl $p $ }}
+            {{- if and $.Values.prometheus.ingress.pathType (eq (include "netic-oaas.ingress.supportsPathType" $) "true") }}
+            pathType: {{ $.Values.prometheus.ingress.pathType }}
+            {{- end }}
             backend:
+            {{- if eq (include "netic-oaas.ingress.isStable" $) "true" }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+            {{- end }}
   {{- end -}}
   {{- end -}}
   {{- else }}
@@ -39,9 +45,19 @@ spec:
         paths:
   {{- range $p := $paths }}
           - path: {{ tpl $p $ }}
+            {{- if and $.Values.prometheus.ingress.pathType (eq (include "netic-oaas.ingress.supportsPathType" $) "true") }}
+            pathType: {{ $.Values.prometheus.ingress.pathType }}
+            {{- end }}
             backend:
+            {{- if eq (include "netic-oaas.ingress.isStable" $) "true" }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+            {{- end }}
   {{- end -}}
   {{- end -}}
   {{- if .Values.prometheus.ingress.tls }}

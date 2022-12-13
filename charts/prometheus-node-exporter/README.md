@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: v1.5.0](https://img.shields.io/badge/AppVersion-v1.5.0-informational?style=flat-square)
+![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square) ![AppVersion: v1.5.0](https://img.shields.io/badge/AppVersion-v1.5.0-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -57,6 +57,8 @@ The following table lists the configurable parameters of the Node Exporter chart
 | endpoints | list | `[]` | list of addresses that have node exporter deployed outside of the cluster |
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
+| global.rbac.create | bool | `false` |  |
+| global.rbac.pspEnabled | bool | `false` |  |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
 | hostRootFsMount | bool | `true` | If true, node-exporter pods mounts host / at /host/root |
 | image.pullPolicy | string | `"Always"` | Image pull policy. For security reasons set to "Always" |

@@ -1,5 +1,5 @@
 {{- if .Values.prometheus.podDisruptionBudget.enabled }}
-apiVersion: policy/v1beta1
+apiVersion: {{ include "netic-oaas.pdb.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
   name: {{ template "prometheus.fullname" . }}
@@ -7,10 +7,10 @@ metadata:
 spec:
   {{- if .Values.prometheus.podDisruptionBudget.minAvailable }}
   minAvailable: {{ .Values.prometheus.podDisruptionBudget.minAvailable }}
-  {{- end  }}
+  {{- end }}
   {{- if .Values.prometheus.podDisruptionBudget.maxUnavailable }}
   maxUnavailable: {{ .Values.prometheus.podDisruptionBudget.maxUnavailable }}
-  {{- end  }}
+  {{- end }}
   selector:
     matchLabels: {{ include "prometheus.matchLabels" . | nindent 6 }}
 {{- end }}

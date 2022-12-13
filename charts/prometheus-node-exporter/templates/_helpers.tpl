@@ -83,6 +83,6 @@ Resolve the actual image tag to use.
 {{- if .Values.image.tag }}
 {{- .Values.image.tag }}
 {{- else }}
-{{- printf "v%s" .Chart.AppVersion }}
+{{- .Chart.AppVersion }}
 {{- end }}
 {{- end }}

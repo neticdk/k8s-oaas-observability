@@ -7,22 +7,18 @@ kind: List
 metadata:
   name: {{ include "alertmanager.fullname" $ }}-ingressperreplica
 items:
-{{ range $i, $e := until $count }}
+{{- range $i, $e := until $count }}
   - kind: Ingress
-    {{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" }}
-    apiVersion: networking.k8s.io/v1beta1
-    {{ else }}
-    apiVersion: extensions/v1beta1
-    {{ end -}}
+    apiVersion: {{ include "netic-oaas.ingress.apiVersion" $ }}
     metadata:
       name: {{ include "alertmanager.fullname" $ }}-{{ $i }}
-      labels: {{ include "alertmanager.labels" . | nindent 8 }}
+      labels: {{ include "alertmanager.labels" $ | nindent 8 }}
       {{- if $ingressValues.labels }}
       {{ toYaml $ingressValues.labels | indent 8 }}
       {{- end }}
       {{- if $ingressValues.annotations }}
       annotations:
-{{ toYaml $ingressValues.annotations | indent 8 }}
+        {{ toYaml $ingressValues.annotations | nindent 8 }}
       {{- end }}
     spec:
       rules:
@@ -31,9 +27,19 @@ items:
             paths:
       {{- range $p := $ingressValues.paths }}
               - path: {{ tpl $p $ }}
+                {{- if and $.Values.alertmanager.ingressPerReplica.pathType (eq (include "netic-oaas.ingress.supportsPathType" $) "true") }}
+                pathType: {{ $.Values.alertmanager.ingressPerReplica.pathType }}
+                {{- end }}
                 backend:
+                {{- if eq (include "netic-oaas.ingress.isStable" $) "true" }}
+                  service:
+                    name: {{ include "alertmanager.fullname" $ }}-alertmanager-{{ $i }}
+                    port:
+                      number: {{ $servicePort }}
+                  {{- else }}
                   serviceName: {{ include "alertmanager.fullname" $ }}-alertmanager-{{ $i }}
                   servicePort: {{ $servicePort }}
+                {{- end }}
       {{- end -}}
       {{- if or $ingressValues.tlsSecretName $ingressValues.tlsSecretPerReplica.enabled }}
       tls:

@@ -1,6 +1,7 @@
 ##
 global:
   networkPolicyEnabled: true
+  imagePullSecrets: []
   rbac:
     create: true
     pspEnabled: true
@@ -19,6 +20,10 @@ global:
     labels:
       netic.dk/monitoring: "true"
 
+fullnameOverride: ""
+nameOverride: ""
+kubeVersionOverride: ""
+
 ## Configuration for alerts
 alerts:
   # -- Should alerting rules be enabled
@@ -35,21 +40,21 @@ coreDns:
   service:
     port: 9153
     targetPort: 9153
-    # selector:
+    selector: {}
     #   k8s-app: kube-dns
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
     interval: ""
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -94,7 +99,7 @@ kubeApiServer:
         component: apiserver
         provider: kubernetes
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings:
       - action: drop
@@ -164,7 +169,7 @@ kubeControllerManager:
   service:
     port: 10252
     targetPort: 10252
-    # selector:
+    selector: {}
     #   component: kube-controller-manager
 
   serviceMonitor:
@@ -183,7 +188,7 @@ kubeControllerManager:
     # Name of the server to use when validating TLS certificate
     serverName: "127.0.0.1"
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings:
       - action: drop
@@ -223,7 +228,7 @@ kubeControllerManager:
         sourceLabels:
           - __name__
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -244,21 +249,21 @@ kubeDns:
     skydns:
       port: 10055
       targetPort: 10055
-    # selector:
+    selector: {}
     #   k8s-app: kube-dns
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
     interval: ""
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -272,7 +277,7 @@ kubeDns:
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     dnsmasqRelabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -297,7 +302,7 @@ kubeEtcd:
   service:
     port: 2381  # default 2379
     targetPort: 2381  # default 2379
-    # selector:
+    selector: {}
     #   component: etcd
 
   ## Configure secure access to the etcd cluster by loading a secret into prometheus and
@@ -322,14 +327,14 @@ kubeEtcd:
     certFile: ""
     keyFile: ""
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -354,7 +359,7 @@ kubeProxy:
   service:
     port: 10249
     targetPort: 10249
-    # selector:
+    selector: {}
     #   k8s-app: kube-proxy
 
   serviceMonitor:
@@ -367,14 +372,14 @@ kubeProxy:
     ##
     https: false
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - action: keep
@@ -396,7 +401,7 @@ kubeScheduler:
   service:
     port: 10251
     targetPort: 10251
-    # selector:
+    selector: {}
     #   component: kube-scheduler
 
   serviceMonitor:
@@ -414,14 +419,14 @@ kubeScheduler:
     ## Name of the server to use when validating TLS certificate
     serverName: "127.0.0.1"
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -441,6 +446,8 @@ kubelet:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
     interval: ""
+
+    scrapeTimeout: ""
 
     ## Enable scraping the kubelet over https. For requirements to enable this see
     ## https://github.com/coreos/prometheus-operator/issues/926
@@ -493,7 +500,7 @@ kubelet:
     #   replacement: $1
     #   action: drop
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     #   metrics_path is required to match upstream rules and charts
     ##
     cAdvisorRelabelings:
@@ -564,7 +571,7 @@ kubelet:
         sourceLabels:
           - __name__
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     #   metrics_path is required to match upstream rules and charts
     ##
     relabelings:
@@ -576,6 +583,8 @@ kubelet:
     #   targetLabel: nodename
     #   replacement: $1
     #   action: replace
+
+    resourceMetricRelabelings: []
 
 ## Deploy node exporter as a daemonset to all nodes
 ##
@@ -596,7 +605,7 @@ nodeExporter:
     ##
     scrapeTimeout: ""
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - sourceLabels: [__name__]
@@ -605,7 +614,7 @@ nodeExporter:
     #   replacement: $1
     #   action: drop
 
-    ## 	relabel configs to apply to samples before ingestion.
+    ## relabel configs to apply to samples before ingestion.
     ##
     relabelings:
       - sourceLabels: [job]
@@ -703,6 +712,7 @@ alertmanager:
 
   ingress:
     enabled: false
+    pathType: ImplementationSpecific
 
     annotations: {}
 
@@ -737,6 +747,7 @@ alertmanager:
   ##
   ingressPerReplica:
     enabled: false
+    pathType: ImplementationSpecific
     annotations: {}
     labels: {}
 
@@ -827,14 +838,14 @@ alertmanager:
     interval: ""
     selfMonitor: true
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    # relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -878,7 +889,7 @@ alertmanager:
     ## ConfigSecret is the name of a Kubernetes Secret in the same namespace as the Alertmanager object, which contains configuration for
     ## this Alertmanager instance. Defaults to 'alertmanager-' The secret is mounted into /etc/alertmanager/config.
     ##
-    # configSecret:
+    configSecret: ""
 
     # -- Define Log Format
     # Use 'logfmt' (default) or 'json-formatted' logging
@@ -907,11 +918,14 @@ alertmanager:
     #         storage: 50Gi
     #   selector: {}
 
-    ## 	The external URL the Alertmanager instances will be available under. This is necessary to generate correct URLs. This is necessary if Alertmanager is not served from root of a DNS name.	string	false
+    volumes: []
+    volumeMounts: []
+
+    ## The external URL the Alertmanager instances will be available under. This is necessary to generate correct URLs. This is necessary if Alertmanager is not served from root of a DNS name.
     ##
     externalUrl:
 
-    ## 	The route prefix Alertmanager registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of a request, and the actual ExternalURL is still true,
+    ## The route prefix Alertmanager registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of a request, and the actual ExternalURL is still true,
     ## but the server serves requests under a different route prefix. For example for use with kubectl proxy.
     ##
     routePrefix: /
@@ -968,7 +982,7 @@ alertmanager:
     #   effect: "NoSchedule"
 
     ## SecurityContext holds pod-level security attributes and common container settings.
-    ## This defaults to non root user with uid 1000 and gid 2000.	*v1.PodSecurityContext	false
+    ## This defaults to non root user with uid 1000 and gid 2000. *v1.PodSecurityContext false
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
     ##
     securityContext:
@@ -1014,9 +1028,11 @@ prometheus:
   serviceAccount:
     create: true
     name: ""
+    annotations: {}
 
   ingress:
     enabled: false
+    pathType: ImplementationSpecific
     annotations: {}
     labels: {}
 
@@ -1075,6 +1091,8 @@ prometheus:
 
     sessionAffinity: ""
 
+    additionalPorts: []
+
   ## Configure pod disruption budgets for Prometheus
   ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
   ## This configuration is immutable once created and will require the PDB to be deleted to be changed
@@ -1105,14 +1123,14 @@ prometheus:
 
     bearerTokenFile:
 
-    ## 	metric relabel configs to apply to samples before ingestion.
+    ## metric relabel configs to apply to samples before ingestion.
     ##
     metricRelabelings: []
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
 
-    # 	relabel configs to apply to samples before ingestion.
+    ## relabel configs to apply to samples before ingestion.
     ##
     relabelings: []
     # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -1442,7 +1460,7 @@ prometheus:
       runAsUser: 1000
       fsGroup: 2000
 
-    ## 	Priority class assigned to the Pods
+    ## Priority class assigned to the Pods
     ##
     priorityClassName: ""
 
@@ -1464,6 +1482,10 @@ prometheus:
     ## PortName to use for Prometheus.
     ##
     portName: "web"
+
+    ## If set, a label will be added to all user-metrics and all PrometheusRule alerting/recording rules and the metrics in the expression
+    ##
+    enforcedNamespaceLabel: ""
 
 endpointController:
   # -- Enable endpoint controller to expose external endpoints
