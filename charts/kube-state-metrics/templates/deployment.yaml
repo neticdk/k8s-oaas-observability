@@ -32,17 +32,14 @@ spec:
     spec:
       hostNetwork: {{ .Values.hostNetwork }}
       serviceAccountName: {{ template "kube-state-metrics.serviceAccountName" . }}
-      {{- if .Values.securityContext.enabled }}
       securityContext:
-        fsGroup: {{ .Values.securityContext.fsGroup }}
-        runAsGroup: {{ .Values.securityContext.runAsGroup }}
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-      {{- end }}
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
     {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
     {{- end }}
       containers:
       - name: {{ .Chart.Name }}
+        securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
 {{- if .Values.autosharding.enabled }}
         env:
         - name: POD_NAME
