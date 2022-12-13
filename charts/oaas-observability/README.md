@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.0.42](https://img.shields.io/badge/Version-2.0.42-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.0.43](https://img.shields.io/badge/Version-2.0.43-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -47,12 +47,13 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.alertmanagerConfigNamespaceSelector | object | `{}` | Namespaces to be selected for AlertmanagerConfig discovery. If nil, only check own namespace. |
 | alertmanager.alertmanagerSpec.alertmanagerConfigSelector | object | `{"matchLabels":{"netic.dk/monitoring":"true"}}` | AlertmanagerConfigs to be selected for to merge and configure Alertmanager with. |
 | alertmanager.alertmanagerSpec.configMaps | list | `[]` | ConfigMaps is a list of ConfigMaps in the same namespace as the Alertmanager object, which shall be mounted into the Alertmanager Pods. The ConfigMaps are mounted into /etc/alertmanager/configmaps/. |
+| alertmanager.alertmanagerSpec.configSecret | string | `""` |  |
 | alertmanager.alertmanagerSpec.containers | list | `[]` |  |
 | alertmanager.alertmanagerSpec.externalUrl | string | `nil` |  |
 | alertmanager.alertmanagerSpec.image.repository | string | `"quay.io/prometheus/alertmanager"` |  |
 | alertmanager.alertmanagerSpec.image.tag | string | `"v0.23.0"` |  |
 | alertmanager.alertmanagerSpec.listenLocal | bool | `false` |  |
-| alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` |  |
+| alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` | Define Log Format Use 'logfmt' (default) or 'json-formatted' logging |
 | alertmanager.alertmanagerSpec.logLevel | string | `"info"` | Log level for Alertmanager to be configured with. |
 | alertmanager.alertmanagerSpec.nodeSelector | object | `{}` |  |
 | alertmanager.alertmanagerSpec.paused | bool | `false` |  |
@@ -73,6 +74,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.tolerations | list | `[]` |  |
 | alertmanager.alertmanagerSpec.useExistingSecret | bool | `false` | If true then the user will be responsible to provide a secret with alertmanager configuration So when true the config part will be ignored (including templateFiles) and the one in the secret will be used |
 | alertmanager.alertmanagerSpec.version | string | `"v0.23.0"` |  |
+| alertmanager.alertmanagerSpec.volumeMounts | list | `[]` |  |
+| alertmanager.alertmanagerSpec.volumes | list | `[]` |  |
 | alertmanager.apiVersion | string | `"v2"` | Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2 |
 | alertmanager.config | object | `{"global":{"resolve_timeout":"5m"},"receivers":[{"name":"null"}],"route":{"group_by":["job"],"group_interval":"5m","group_wait":"30s","receiver":"null","repeat_interval":"12h","routes":[{"match":{"alertname":"Watchdog"},"receiver":"null"}]}}` | Alertmanager configuration directives |
 | alertmanager.enabled | bool | `true` | Deploy alertmanager |
@@ -80,6 +83,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.ingress.enabled | bool | `false` |  |
 | alertmanager.ingress.hosts | list | `[]` |  |
 | alertmanager.ingress.labels | object | `{}` |  |
+| alertmanager.ingress.pathType | string | `"ImplementationSpecific"` |  |
 | alertmanager.ingress.paths | list | `[]` |  |
 | alertmanager.ingress.tls | list | `[]` |  |
 | alertmanager.ingressPerReplica.annotations | object | `{}` |  |
@@ -87,6 +91,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.ingressPerReplica.hostDomain | string | `""` |  |
 | alertmanager.ingressPerReplica.hostPrefix | string | `""` |  |
 | alertmanager.ingressPerReplica.labels | object | `{}` |  |
+| alertmanager.ingressPerReplica.pathType | string | `"ImplementationSpecific"` |  |
 | alertmanager.ingressPerReplica.paths | list | `[]` |  |
 | alertmanager.ingressPerReplica.tlsSecretName | string | `""` |  |
 | alertmanager.ingressPerReplica.tlsSecretPerReplica.enabled | bool | `false` |  |
@@ -120,6 +125,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alerts.enabled | bool | `true` | Should alerting rules be enabled |
 | coreDns.enabled | bool | `false` | Should coreDns be scraped |
 | coreDns.service.port | int | `9153` |  |
+| coreDns.service.selector | object | `{}` |  |
 | coreDns.service.targetPort | int | `9153` |  |
 | coreDns.serviceMonitor.interval | string | `""` |  |
 | coreDns.serviceMonitor.metricRelabelings | list | `[]` |  |
@@ -133,6 +139,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | endpointController.nodeSelector | string | `nil` |  |
 | endpointController.resources | object | `{}` |  |
 | endpointController.windowsExporterService | bool | `false` | Expose windows hosts based on labels |
+| fullnameOverride | string | `""` |  |
+| global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.pspAnnotations | object | `{}` |  |
@@ -212,6 +220,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeControllerManager.enabled | bool | `true` |  |
 | kubeControllerManager.endpoints | list | `[]` |  |
 | kubeControllerManager.service.port | int | `10252` |  |
+| kubeControllerManager.service.selector | object | `{}` |  |
 | kubeControllerManager.service.targetPort | int | `10252` |  |
 | kubeControllerManager.serviceMonitor.https | bool | `true` |  |
 | kubeControllerManager.serviceMonitor.insecureSkipVerify | bool | `true` |  |
@@ -248,16 +257,17 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeDns.enabled | bool | `false` |  |
 | kubeDns.service.dnsmasq.port | int | `10054` |  |
 | kubeDns.service.dnsmasq.targetPort | int | `10054` |  |
+| kubeDns.service.selector | object | `{}` |  |
 | kubeDns.service.skydns.port | int | `10055` |  |
 | kubeDns.service.skydns.targetPort | int | `10055` |  |
-| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |  |
+| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |    separator: ;   regex: ^(.*)$   targetLabel: nodename   replacement: $1   action: replace |
 | kubeDns.serviceMonitor.dnsmasqRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.interval | string | `""` |  |
 | kubeDns.serviceMonitor.metricRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.relabelings | list | `[]` |  |
 | kubeEtcd.enabled | bool | `true` |  |
 | kubeEtcd.endpoints | list | `[]` | If your etcd is not deployed as a pod, specify IPs it can be found on |
-| kubeEtcd.service | object | `{"port":2381,"targetPort":2381}` | Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used |
+| kubeEtcd.service | object | `{"port":2381,"selector":{},"targetPort":2381}` | Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used |
 | kubeEtcd.serviceMonitor.caFile | string | `""` |  |
 | kubeEtcd.serviceMonitor.certFile | string | `""` |  |
 | kubeEtcd.serviceMonitor.insecureSkipVerify | bool | `false` |  |
@@ -270,6 +280,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeProxy.enabled | bool | `false` |  |
 | kubeProxy.endpoints | list | `[]` |  |
 | kubeProxy.service.port | int | `10249` |  |
+| kubeProxy.service.selector | object | `{}` |  |
 | kubeProxy.service.targetPort | int | `10249` |  |
 | kubeProxy.serviceMonitor.https | bool | `false` |  |
 | kubeProxy.serviceMonitor.interval | string | `""` |  |
@@ -277,13 +288,14 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeProxy.serviceMonitor.relabelings | list | `[]` |  |
 | kubeScheduler.enabled | bool | `true` |  |
 | kubeScheduler.endpoints | list | `[]` | If your kube scheduler is not deployed as a pod, specify IPs it can be found on |
-| kubeScheduler.service | object | `{"port":10251,"targetPort":10251}` | If using kubeScheduler.endpoints only the port and targetPort are used |
+| kubeScheduler.service | object | `{"port":10251,"selector":{},"targetPort":10251}` | If using kubeScheduler.endpoints only the port and targetPort are used |
 | kubeScheduler.serviceMonitor.https | bool | `true` |  |
 | kubeScheduler.serviceMonitor.insecureSkipVerify | bool | `true` |  |
 | kubeScheduler.serviceMonitor.interval | string | `""` |  |
 | kubeScheduler.serviceMonitor.metricRelabelings | list | `[]` |  |
 | kubeScheduler.serviceMonitor.relabelings | list | `[]` |  |
 | kubeScheduler.serviceMonitor.serverName | string | `"127.0.0.1"` |  |
+| kubeVersionOverride | string | `""` |  |
 | kubelet.enabled | bool | `true` |  |
 | kubelet.namespace | string | `"kube-system"` |  |
 | kubelet.serviceMonitor.cAdvisor | bool | `true` |  |
@@ -299,12 +311,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings[2].regex | string | `"(container_blkio_device_usage_total);.+"` |  |
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings[2].sourceLabels[0] | string | `"__name__"` |  |
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings[2].sourceLabels[1] | string | `"container"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings[0].targetLabel | string | `"metrics_path"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings[1].action | string | `"replace"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings[1].replacement | string | `"cadvisor"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings[1].sourceLabels[0] | string | `"job"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings[1].targetLabel | string | `"job"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"},{"action":"replace","replacement":"cadvisor","sourceLabels":["job"],"targetLabel":"job"}]` |    metrics_path is required to match upstream rules and charts |
 | kubelet.serviceMonitor.https | bool | `true` |  |
 | kubelet.serviceMonitor.interval | string | `""` |  |
 | kubelet.serviceMonitor.metricRelabelings[0].action | string | `"drop"` |  |
@@ -335,12 +342,14 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.probesMetricRelabelings | list | `[]` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].targetLabel | string | `"metrics_path"` |  |
-| kubelet.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
-| kubelet.serviceMonitor.relabelings[0].targetLabel | string | `"metrics_path"` |  |
+| kubelet.serviceMonitor.relabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"}]` |    metrics_path is required to match upstream rules and charts |
 | kubelet.serviceMonitor.resource | bool | `false` |  |
+| kubelet.serviceMonitor.resourceMetricRelabelings | list | `[]` |  |
 | kubelet.serviceMonitor.resourcePath | string | `"/metrics/resource"` |  |
 | kubelet.serviceMonitor.resourceRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.resourceRelabelings[0].targetLabel | string | `"metrics_path"` |  |
+| kubelet.serviceMonitor.scrapeTimeout | string | `""` |  |
+| nameOverride | string | `""` |  |
 | nodeExporter.enabled | bool | `true` | Deploy node exporter as a daemonset to all nodes |
 | nodeExporter.jobLabel | string | `"app.kubernetes.io/name"` |  |
 | nodeExporter.serviceMonitor.interval | string | `""` |  |
@@ -356,8 +365,9 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
 | prometheus.ingress.enabled | bool | `false` |  |
-| prometheus.ingress.hosts | list | `[]` |  |
+| prometheus.ingress.hosts | list | `[]` |  hosts:   - prometheus.domain.com |
 | prometheus.ingress.labels | object | `{}` |  |
+| prometheus.ingress.pathType | string | `"ImplementationSpecific"` |  |
 | prometheus.ingress.paths | list | `[]` |  |
 | prometheus.ingress.tls | list | `[]` |  |
 | prometheus.podDisruptionBudget.enabled | bool | `false` |  |
@@ -372,6 +382,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.containers | list | `[]` |  |
 | prometheus.prometheusSpec.disableCompaction | bool | `false` |  |
 | prometheus.prometheusSpec.enableAdminAPI | bool | `false` |  |
+| prometheus.prometheusSpec.enforcedNamespaceLabel | string | `""` |  |
 | prometheus.prometheusSpec.evaluationInterval | string | `""` |  |
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
@@ -422,6 +433,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |
+| prometheus.service.additionalPorts | list | `[]` |  |
 | prometheus.service.annotations | object | `{}` |  |
 | prometheus.service.clusterIP | string | `""` |  |
 | prometheus.service.externalIPs | list | `[]` |  |
@@ -433,6 +445,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.service.sessionAffinity | string | `""` |  |
 | prometheus.service.targetPort | int | `9090` |  |
 | prometheus.service.type | string | `"ClusterIP"` |  |
+| prometheus.serviceAccount.annotations | object | `{}` |  |
 | prometheus.serviceAccount.create | bool | `true` |  |
 | prometheus.serviceAccount.name | string | `""` |  |
 | prometheus.serviceMonitor.bearerTokenFile | string | `nil` |  |

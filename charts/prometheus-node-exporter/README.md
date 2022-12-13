@@ -57,6 +57,8 @@ The following table lists the configurable parameters of the Node Exporter chart
 | endpoints | list | `[]` | list of addresses that have node exporter deployed outside of the cluster |
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
+| global.rbac.create | bool | `false` |  |
+| global.rbac.pspEnabled | bool | `false` |  |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
 | hostRootFsMount | bool | `true` | If true, node-exporter pods mounts host / at /host/root |
 | image.pullPolicy | string | `"Always"` | Image pull policy. For security reasons set to "Always" |
