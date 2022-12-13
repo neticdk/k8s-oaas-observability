@@ -28,11 +28,16 @@ $ helm install my-release netic-oaas/opentelemetry-collector
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"otel/opentelemetry-collector"` |  |
 | image.tag | string | `""` |  |
+| podSecurityContext.fsGroup | int | `10001` |  |
+| podSecurityContext.runAsGroup | int | `10001` |  |
+| podSecurityContext.runAsUser | int | `10001` |  |
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | int | `1` |  |
 | resources.limits.memory | string | `"2Gi"` |  |
 | resources.requests.cpu | string | `"200m"` |  |
 | resources.requests.memory | string | `"400Mi"` |  |
+| securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.ports.grpc.nodePort | int | `30317` |  |
 | service.ports.grpc.port | int | `4317` |  |
 | service.type | string | `"ClusterIP"` |  |

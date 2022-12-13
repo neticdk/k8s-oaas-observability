@@ -15,10 +15,13 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
       - name: otel-collector
         image: {{ .Values.image.repository }}:{{ include "otel-collector.imageTag"  . }}
         imagePullPolicy: {{ default "IfNotPresent" .Values.image.pullPolicy }}
+        securityContext: {{ toYaml .Values.securityContext | nindent 10 }}
         args:
           - "--config=/conf/otel-collector-config.yaml"
           - "--metrics-addr=0.0.0.0:8888"
