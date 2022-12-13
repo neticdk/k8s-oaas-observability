@@ -39,7 +39,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | kubeTargetVersionOverride | string | `""` | Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role. For example: kubeTargetVersionOverride: 1.14.9 |
 | kubeconfig.enabled | bool | `false` |  |
 | kubeconfig.secret | string | `nil` | base64 encoded kube-config file |
-| namespaceOverride | string | `""` | Override the deployment namespace @default will be set to `.Release.Namespace` if it is not set |
+| namespaceOverride | string | `""` |  |
 | nodeSelector | object | `{}` | Node labels for pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/ |
 | podAnnotations | object | `{}` | Annotations to be added to the pod |
 | podDisruptionBudget | object | `{}` | Optional PodDisruptionBudget Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/ |

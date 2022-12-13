@@ -260,7 +260,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeDns.service.selector | object | `{}` |  |
 | kubeDns.service.skydns.port | int | `10055` |  |
 | kubeDns.service.skydns.targetPort | int | `10055` |  |
-| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |    separator: ;   regex: ^(.*)$   targetLabel: nodename   replacement: $1   action: replace |
+| kubeDns.serviceMonitor.dnsmasqMetricRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.dnsmasqRelabelings | list | `[]` |  |
 | kubeDns.serviceMonitor.interval | string | `""` |  |
 | kubeDns.serviceMonitor.metricRelabelings | list | `[]` |  |
@@ -311,7 +311,12 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings[2].regex | string | `"(container_blkio_device_usage_total);.+"` |  |
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings[2].sourceLabels[0] | string | `"__name__"` |  |
 | kubelet.serviceMonitor.cAdvisorMetricRelabelings[2].sourceLabels[1] | string | `"container"` |  |
-| kubelet.serviceMonitor.cAdvisorRelabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"},{"action":"replace","replacement":"cadvisor","sourceLabels":["job"],"targetLabel":"job"}]` |    metrics_path is required to match upstream rules and charts |
+| kubelet.serviceMonitor.cAdvisorRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[0].targetLabel | string | `"metrics_path"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].action | string | `"replace"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].replacement | string | `"cadvisor"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].sourceLabels[0] | string | `"job"` |  |
+| kubelet.serviceMonitor.cAdvisorRelabelings[1].targetLabel | string | `"job"` |  |
 | kubelet.serviceMonitor.https | bool | `true` |  |
 | kubelet.serviceMonitor.interval | string | `""` |  |
 | kubelet.serviceMonitor.metricRelabelings[0].action | string | `"drop"` |  |
@@ -342,7 +347,8 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubelet.serviceMonitor.probesMetricRelabelings | list | `[]` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
 | kubelet.serviceMonitor.probesRelabelings[0].targetLabel | string | `"metrics_path"` |  |
-| kubelet.serviceMonitor.relabelings | list | `[{"sourceLabels":["__metrics_path__"],"targetLabel":"metrics_path"}]` |    metrics_path is required to match upstream rules and charts |
+| kubelet.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__metrics_path__"` |  |
+| kubelet.serviceMonitor.relabelings[0].targetLabel | string | `"metrics_path"` |  |
 | kubelet.serviceMonitor.resource | bool | `false` |  |
 | kubelet.serviceMonitor.resourceMetricRelabelings | list | `[]` |  |
 | kubelet.serviceMonitor.resourcePath | string | `"/metrics/resource"` |  |
@@ -365,7 +371,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
 | prometheus.ingress.enabled | bool | `false` |  |
-| prometheus.ingress.hosts | list | `[]` |  hosts:   - prometheus.domain.com |
+| prometheus.ingress.hosts | list | `[]` |  |
 | prometheus.ingress.labels | object | `{}` |  |
 | prometheus.ingress.pathType | string | `"ImplementationSpecific"` |  |
 | prometheus.ingress.paths | list | `[]` |  |
