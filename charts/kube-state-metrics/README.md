@@ -13,7 +13,7 @@ See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-st
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install my-release netic-oaas/kube-state-metrics
 ```
 

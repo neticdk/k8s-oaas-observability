@@ -11,20 +11,20 @@ A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 ## TL;DR;
 
 ```bash
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install netic-oaas netic-oaas/prometheus-node-exporter
 ```
 
 ## Introduction
 
-This chart bootstraps a prometheus [node exporter](http://github.com/prometheus/node_exporter) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a prometheus [node exporter](https://github.com/prometheus/node_exporter) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:
 
 ```console
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install --name my-release netic-oaas/prometheus-node-exporter
 ```
 
