@@ -32,7 +32,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | customLabels | object | `{}` | Custom labels to apply to service, deployment and pods |
 | global.networkPolicyEnabled | bool | `false` | Deploy network policy allowing ingress. |
 | hostNetwork | bool | `false` | Whether or not to use the host network |
-| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.pullPolicy | string | `"Always"` | Image pull policy |
 | image.repository | string | `"k8s.gcr.io/kube-state-metrics/kube-state-metrics"` | The image repository to pull from |
 | image.tag | string | `nil` | The image tag to pull - default is version from Chart.yaml |
 | imagePullSecrets | list | `[]` |  |
@@ -57,7 +57,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | prometheusScrape | bool | `true` | Whether or not enable prom scrape |
 | rbac.create | bool | `true` |  |
 | replicas | int | `1` | Number of replicas |
-| resources | object | `{}` | kube-state-metrics resource requests and limits |
+| resources | object | `{"limits":{"cpu":"50m","memory":"100Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | kube-state-metrics resource requests and limits |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.annotations | object | `{}` | Annotations to be added to the service. |
