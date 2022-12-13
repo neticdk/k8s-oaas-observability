@@ -43,6 +43,9 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | nodeSelector | object | `{}` | Node labels for pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/ |
 | podAnnotations | object | `{}` | Annotations to be added to the pod |
 | podDisruptionBudget | object | `{}` | Optional PodDisruptionBudget Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/ |
+| podSecurityContext.fsGroup | int | `65534` | Group ID for the filesystem |
+| podSecurityContext.runAsGroup | int | `65534` | Group ID for the container |
+| podSecurityContext.runAsUser | int | `65534` | User ID for the container |
 | podSecurityPolicy.additionalVolumes | list | `[]` | Specify allowed volumes in the pod security policy (`secret` is always allowed) |
 | podSecurityPolicy.annotations | object | `{}` | Specify pod annotations in the pod security policy Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl |
 | podSecurityPolicy.enabled | bool | `false` | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. |
@@ -55,10 +58,8 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | rbac.create | bool | `true` |  |
 | replicas | int | `1` | Number of replicas |
 | resources | object | `{}` | kube-state-metrics resource requests and limits |
-| securityContext.enabled | bool | `true` | Enable security context |
-| securityContext.fsGroup | int | `65534` | Group ID for the filesystem |
-| securityContext.runAsGroup | int | `65534` | Group ID for the container |
-| securityContext.runAsUser | int | `65534` | User ID for the container |
+| securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.annotations | object | `{}` | Annotations to be added to the service. |
 | service.loadBalancerIP | string | `""` |  |
 | service.nodePort | int | `0` |  |
