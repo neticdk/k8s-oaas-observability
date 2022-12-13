@@ -87,15 +87,19 @@ podSecurityPolicy:
   # -- Specify allowed volumes in the pod security policy (`secret` is always allowed)
   additionalVolumes: []
 
-securityContext:
-  # -- Enable security context
-  enabled: true
+podSecurityContext:
   # -- Group ID for the container
   runAsGroup: 65534
   # -- User ID for the container
   runAsUser: 65534
   # -- Group ID for the filesystem
   fsGroup: 65534
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
 
 # -- Node labels for pod assignment
 # Ref: https://kubernetes.io/docs/user-guide/node-selection/
