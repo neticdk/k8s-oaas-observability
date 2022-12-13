@@ -2013,6 +2013,19 @@ entries:
   opentelemetry-collector:
   - apiVersion: v2
     appVersion: 0.27.0
+    created: "2022-12-13T11:50:09.284310582Z"
+    description: A small Helm chart to install OpenTelemetry Collector
+    digest: fcc8e09f9297588c369ce3b33e7509bba33c00d44145c77026495ae0c676195e
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: opentelemetry-collector
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/opentelemetry-collector-0.1.1/opentelemetry-collector-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.27.0
     created: "2021-05-31T08:26:53.875954295Z"
     description: A small Helm chart to install OpenTelemetry Collector
     digest: 6e66b5c628e8d825a5fc04d10ab3c76b7ee68e2e9126c8ccc9acbab8c7b22595
@@ -2448,4 +2461,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2022-12-12T13:25:55.965195146Z"
+generated: "2022-12-13T11:50:09.284692578Z"
