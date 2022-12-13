@@ -7,7 +7,7 @@ dependencies:
   version: 4.24.0
 - name: prometheus-node-exporter
   repository: file://../prometheus-node-exporter
-  version: 1.0.8
+  version: 1.0.9
 - name: prometheus-operator
   repository: file://../prometheus-operator
   version: 1.0.9
@@ -20,5 +20,5 @@ dependencies:
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.7.4
-digest: sha256:efdf855025b30a5d49df69976e1e2ee02caab081259ddd9a0993c2b7a844fa2c
-generated: "2022-12-13T11:15:37.673796+01:00"
+digest: sha256:854b0ec05deea41f5c73dfb9a856b05e250a8f4574eb03fafd913328124123dd
+generated: "2022-12-13T11:27:54.864102+01:00"
