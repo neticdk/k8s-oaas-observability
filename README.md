@@ -15,3 +15,4 @@ $ helm install my-release netic-oaas/oaas-observability
 
 Details is found in the [oass-observability](./charts/oaas-observability) chart documentation. See also a more thorough
 description of [Operation as a Service (OaaS)](oaas.md).
+

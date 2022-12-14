@@ -11,14 +11,14 @@ dependencies:
 - name: prometheus-operator
   repository: file://../prometheus-operator
   version: 1.0.9
-- name: otel-operator
-  repository: file://../otel-operator
-  version: 0.2.2
+- name: opentelemetry-operator
+  repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+  version: 0.20.2
 - name: vector-agent
   repository: https://helm.vector.dev
   version: 0.19.1
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.7.4
-digest: sha256:854b0ec05deea41f5c73dfb9a856b05e250a8f4574eb03fafd913328124123dd
-generated: "2022-12-13T11:27:54.864102+01:00"
+digest: sha256:7f59da6ae1a375f7306e5dc8f444a34f9743c7eeba084e12d32a204280ed2fe2
+generated: "2022-12-14T08:57:25.99802+01:00"

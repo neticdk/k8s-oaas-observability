@@ -1678,28 +1678,8 @@ grafana:
       label: netic_grafana_datasource
 
 # -- Values for included otel-operator chart
-otel-operator:
+opentelemetry-operator:
   enabled: true
-  global:
-    podSecurityPolicy:
-      enabled: true
-  opentelemetryOperator:
-    manager:
-      resources:
-        limits:
-          cpu: 100m
-          memory: 64Mi
-        requests:
-          cpu: 100m
-          memory: 64Mi
-    kubeRbacProxy:
-      resources:
-        limits:
-          cpu: 10m
-          memory: 16Mi
-        requests:
-          cpu: 10m
-          memory: 16Mi
 
 # -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
 promtail:
