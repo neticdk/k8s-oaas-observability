@@ -1,6 +1,6 @@
 # opentelemetry-collector
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.27.0](https://img.shields.io/badge/AppVersion-0.27.0-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.27.0](https://img.shields.io/badge/AppVersion-0.27.0-informational?style=flat-square)
 
 A small Helm chart to install OpenTelemetry Collector
 
@@ -9,7 +9,7 @@ A small Helm chart to install OpenTelemetry Collector
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install my-release netic-oaas/opentelemetry-collector
 ```
 
@@ -28,11 +28,16 @@ $ helm install my-release netic-oaas/opentelemetry-collector
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"otel/opentelemetry-collector"` |  |
 | image.tag | string | `""` |  |
+| podSecurityContext.fsGroup | int | `10001` |  |
+| podSecurityContext.runAsGroup | int | `10001` |  |
+| podSecurityContext.runAsUser | int | `10001` |  |
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | int | `1` |  |
 | resources.limits.memory | string | `"2Gi"` |  |
 | resources.requests.cpu | string | `"200m"` |  |
 | resources.requests.memory | string | `"400Mi"` |  |
+| securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.ports.grpc.nodePort | int | `30317` |  |
 | service.ports.grpc.port | int | `4317` |  |
 | service.type | string | `"ClusterIP"` |  |

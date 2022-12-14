@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.1.21](https://img.shields.io/badge/Version-0.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.37.0](https://img.shields.io/badge/AppVersion-v0.37.0-informational?style=flat-square)
+![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
 
 **DEPRECATED** We recommend using: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator
 
@@ -15,7 +15,7 @@ Install the OpenTelemetry Operator to create OpenTelemetry Collector instances
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install my-release netic-oaas/otel-operator
 ```
 
@@ -28,10 +28,11 @@ $ helm install my-release netic-oaas/otel-operator
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | fullnameOverride | string | `""` |  |
+| global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
-| global.podSecurityPolicy.enabled | bool | `false` |  |
+| global.podSecurityPolicy.annotations | object | `{}` |  |
 | global.rbac.create | bool | `true` |  |
-| global.rbac.imagePullSecrets | list | `[]` |  |
+| global.rbac.pspEnabled | bool | `true` |  |
 | nameOverride | string | `""` |  |
 | opentelemetryOperator.affinity | object | `{}` |  |
 | opentelemetryOperator.controllerManagerMetricsService.annotations | object | `{}` |  |
@@ -54,7 +55,7 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetryOperator.manager.args.metricsaddr | string | `"127.0.0.1:8080"` |  |
 | opentelemetryOperator.manager.image.pullPolicy | string | `"Always"` |  |
-| opentelemetryOperator.manager.image.repository | string | `"quay.io/opentelemetry/opentelemetry-operator"` |  |
+| opentelemetryOperator.manager.image.repository | string | `"ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator"` |  |
 | opentelemetryOperator.manager.image.tag | string | `nil` |  |
 | opentelemetryOperator.manager.resources.limits.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.limits.memory | string | `"64Mi"` |  |

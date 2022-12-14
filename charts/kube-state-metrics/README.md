@@ -1,6 +1,6 @@
 # kube-state-metrics
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: v2.2.3](https://img.shields.io/badge/AppVersion-v2.2.3-informational?style=flat-square)
+![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square) ![AppVersion: v2.7.0](https://img.shields.io/badge/AppVersion-v2.7.0-informational?style=flat-square)
 
 Install kube-state-metrics to generate and expose cluster-level metrics. Since this is now part of the Prometheus community
 Helm charts this has been deprecated and wont be maintained.
@@ -13,7 +13,7 @@ See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-st
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install my-release netic-oaas/kube-state-metrics
 ```
 
@@ -32,7 +32,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | customLabels | object | `{}` | Custom labels to apply to service, deployment and pods |
 | global.networkPolicyEnabled | bool | `false` | Deploy network policy allowing ingress. |
 | hostNetwork | bool | `false` | Whether or not to use the host network |
-| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.pullPolicy | string | `"Always"` | Image pull policy |
 | image.repository | string | `"k8s.gcr.io/kube-state-metrics/kube-state-metrics"` | The image repository to pull from |
 | image.tag | string | `nil` | The image tag to pull - default is version from Chart.yaml |
 | imagePullSecrets | list | `[]` |  |
@@ -43,6 +43,9 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | nodeSelector | object | `{}` | Node labels for pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/ |
 | podAnnotations | object | `{}` | Annotations to be added to the pod |
 | podDisruptionBudget | object | `{}` | Optional PodDisruptionBudget Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/ |
+| podSecurityContext.fsGroup | int | `65534` | Group ID for the filesystem |
+| podSecurityContext.runAsGroup | int | `65534` | Group ID for the container |
+| podSecurityContext.runAsUser | int | `65534` | User ID for the container |
 | podSecurityPolicy.additionalVolumes | list | `[]` | Specify allowed volumes in the pod security policy (`secret` is always allowed) |
 | podSecurityPolicy.annotations | object | `{}` | Specify pod annotations in the pod security policy Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl |
 | podSecurityPolicy.enabled | bool | `false` | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. |
@@ -54,11 +57,9 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | prometheusScrape | bool | `true` | Whether or not enable prom scrape |
 | rbac.create | bool | `true` |  |
 | replicas | int | `1` | Number of replicas |
-| resources | object | `{}` | kube-state-metrics resource requests and limits |
-| securityContext.enabled | bool | `true` | Enable security context |
-| securityContext.fsGroup | int | `65534` | Group ID for the filesystem |
-| securityContext.runAsGroup | int | `65534` | Group ID for the container |
-| securityContext.runAsUser | int | `65534` | User ID for the container |
+| resources | object | `{"limits":{"cpu":"50m","memory":"100Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | kube-state-metrics resource requests and limits |
+| securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.annotations | object | `{}` | Annotations to be added to the service. |
 | service.loadBalancerIP | string | `""` |  |
 | service.nodePort | int | `0` |  |

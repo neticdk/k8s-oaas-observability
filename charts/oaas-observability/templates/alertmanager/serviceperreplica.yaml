@@ -10,11 +10,11 @@ items:
   - apiVersion: v1
     kind: Service
     metadata:
-      name: {{ template "alertmanager.fullname" . }}-{{ $i }}
-      labels: {{ include "alertmanager.labels" . | nindent 8 }}
+      name: {{ template "alertmanager.fullname" $ }}-{{ $i }}
+      labels: {{ include "alertmanager.labels" $ | nindent 8 }}
       {{- if $serviceValues.annotations }}
       annotations:
-{{ toYaml $serviceValues.annotations | indent 8 }}
+        {{- toYaml $serviceValues.annotations | nindent 8 }}
       {{- end }}
     spec:
       {{- if $serviceValues.clusterIP }}
@@ -34,8 +34,8 @@ items:
           port: {{ $serviceValues.port }}
           targetPort: {{ $serviceValues.targetPort }}
       selector:
-{{ include "alertmanager.matchLabels" . | indent 8 }}
-        statefulset.kubernetes.io/pod-name: alertmanager-{{ template "alertmanager.fullname" . }}-{{ $i }}
+        {{ include "alertmanager.matchLabels" $ | nindent 8 }}
+        statefulset.kubernetes.io/pod-name: alertmanager-{{ template "alertmanager.fullname" $ }}-{{ $i }}
       type: "{{ $serviceValues.type }}"
 {{- end }}
 {{- end }}

@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square) ![AppVersion: v1.5.0](https://img.shields.io/badge/AppVersion-v1.5.0-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -11,20 +11,20 @@ A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 ## TL;DR;
 
 ```bash
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install netic-oaas netic-oaas/prometheus-node-exporter
 ```
 
 ## Introduction
 
-This chart bootstraps a prometheus [node exporter](http://github.com/prometheus/node_exporter) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a prometheus [node exporter](https://github.com/prometheus/node_exporter) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:
 
 ```console
-$ helm repo add netic-oaas http://neticdk.github.io/k8s-oaas-observability
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 $ helm install --name my-release netic-oaas/prometheus-node-exporter
 ```
 
@@ -57,6 +57,8 @@ The following table lists the configurable parameters of the Node Exporter chart
 | endpoints | list | `[]` | list of addresses that have node exporter deployed outside of the cluster |
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
+| global.rbac.create | bool | `false` |  |
+| global.rbac.pspEnabled | bool | `false` |  |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
 | hostRootFsMount | bool | `true` | If true, node-exporter pods mounts host / at /host/root |
 | image.pullPolicy | string | `"Always"` | Image pull policy. For security reasons set to "Always" |

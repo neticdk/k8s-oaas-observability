@@ -40,3 +40,14 @@ service:
     grpc:
       port: 4317
       nodePort: 30317
+
+podSecurityContext:
+  runAsGroup: 10001
+  runAsUser: 10001
+  fsGroup: 10001
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL

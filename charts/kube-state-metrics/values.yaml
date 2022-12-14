@@ -11,7 +11,7 @@ image:
   # -- The image tag to pull - default is version from Chart.yaml
   tag:
   # -- Image pull policy
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 # - name: "image-pull-secret"
@@ -87,15 +87,19 @@ podSecurityPolicy:
   # -- Specify allowed volumes in the pod security policy (`secret` is always allowed)
   additionalVolumes: []
 
-securityContext:
-  # -- Enable security context
-  enabled: true
+podSecurityContext:
   # -- Group ID for the container
   runAsGroup: 65534
   # -- User ID for the container
   runAsUser: 65534
   # -- Group ID for the filesystem
   fsGroup: 65534
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
 
 # -- Node labels for pod assignment
 # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -165,17 +169,17 @@ kubeconfig:
 namespaceOverride: ""
 
 # -- kube-state-metrics resource requests and limits
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 64Mi
-  # requests:
-  #  cpu: 10m
-  #  memory: 32Mi
+  limits:
+    cpu: 50m
+    memory: 100Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
 
 # -- Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role.
 # For example: kubeTargetVersionOverride: 1.14.9
