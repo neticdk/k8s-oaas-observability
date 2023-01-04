@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
+![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
 
 **DEPRECATED** We recommend using: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator
 
@@ -32,7 +32,7 @@ $ helm install my-release netic-oaas/otel-operator
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.podSecurityPolicy.annotations | object | `{}` |  |
 | global.rbac.create | bool | `true` |  |
-| global.rbac.pspEnabled | bool | `true` |  |
+| global.rbac.pspEnabled | bool | `false` |  |
 | nameOverride | string | `""` |  |
 | opentelemetryOperator.affinity | object | `{}` |  |
 | opentelemetryOperator.controllerManagerMetricsService.annotations | object | `{}` |  |

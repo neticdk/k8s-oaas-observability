@@ -3,7 +3,7 @@ global:
     annotations: {}
   rbac:
     create: true
-    pspEnabled: true
+    pspEnabled: false
   imagePullSecrets: []
 
   networkPolicyEnabled: true

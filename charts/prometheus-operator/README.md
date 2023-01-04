@@ -1,6 +1,6 @@
 # prometheus-operator
 
-![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.56.1](https://img.shields.io/badge/AppVersion-0.56.1-informational?style=flat-square)
+![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.56.1](https://img.shields.io/badge/AppVersion-0.56.1-informational?style=flat-square)
 
 A Helm chart to install Prometheus Operator
 
@@ -26,7 +26,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 |-----|------|---------|-------------|
 | global.rbac.create | bool | `true` |  |
 | global.rbac.pspAnnotations | object | `{}` |  |
-| global.rbac.pspEnabled | bool | `true` |  |
+| global.rbac.pspEnabled | bool | `false` |  |
 | global.serviceMonitor.labels | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.enabled | bool | `true` |  |
 | prometheusOperator.admissionWebhooks.failurePolicy | string | `"Fail"` |  |
