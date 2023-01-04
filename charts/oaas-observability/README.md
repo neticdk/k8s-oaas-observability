@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.1.1](https://img.shields.io/badge/Version-2.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.1.2](https://img.shields.io/badge/Version-2.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -77,7 +77,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.volumeMounts | list | `[]` |  |
 | alertmanager.alertmanagerSpec.volumes | list | `[]` |  |
 | alertmanager.apiVersion | string | `"v2"` | Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2 |
-| alertmanager.config | object | `{"global":{"resolve_timeout":"5m"},"receivers":[{"name":"null"}],"route":{"group_by":["job"],"group_interval":"5m","group_wait":"30s","receiver":"null","repeat_interval":"12h","routes":[{"match":{"alertname":"Watchdog"},"receiver":"null"}]}}` | Alertmanager configuration directives |
+| alertmanager.config | object | `{"global":{"resolve_timeout":"5m"},"receivers":[{"name":"null"}],"route":{"group_by":["job"],"group_interval":"5m","group_wait":"30s","receiver":"null","repeat_interval":"12h","routes":[{"match":{"alertname":"Watchdog"},"receiver":"null"}]}}` | Alertmanager configuration directives # ref: https://prometheus.io/docs/alerting/configuration/#configuration-file #      https://prometheus.io/webtools/alerting/routing-tree-editor/ # |
 | alertmanager.enabled | bool | `true` | Deploy alertmanager |
 | alertmanager.ingress.annotations | object | `{}` |  |
 | alertmanager.ingress.enabled | bool | `false` |  |
@@ -96,7 +96,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.ingressPerReplica.tlsSecretName | string | `""` |  |
 | alertmanager.ingressPerReplica.tlsSecretPerReplica.enabled | bool | `false` |  |
 | alertmanager.ingressPerReplica.tlsSecretPerReplica.prefix | string | `"alertmanager"` |  |
-| alertmanager.podDisruptionBudget | object | `{"enabled":false,"maxUnavailable":"","minAvailable":1}` | Configure pod disruption budgets for Alertmanager |
+| alertmanager.podDisruptionBudget | object | `{"enabled":false,"maxUnavailable":"","minAvailable":1}` | Configure pod disruption budgets for Alertmanager # ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget # This configuration is immutable once created and will require the PDB to be deleted to be changed # https://github.com/kubernetes/kubernetes/issues/45398 # |
 | alertmanager.secret.annotations | object | `{}` |  |
 | alertmanager.service.annotations | object | `{}` |  |
 | alertmanager.service.clusterIP | string | `""` |  |
@@ -108,7 +108,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.service.port | int | `9093` |  |
 | alertmanager.service.targetPort | int | `9093` |  |
 | alertmanager.service.type | string | `"ClusterIP"` |  |
-| alertmanager.serviceAccount | object | `{"annotations":{},"create":true,"name":""}` | Service account for Alertmanager to use. |
+| alertmanager.serviceAccount | object | `{"annotations":{},"create":true,"name":""}` | Service account for Alertmanager to use. # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/ # |
 | alertmanager.serviceMonitor.interval | string | `""` |  |
 | alertmanager.serviceMonitor.metricRelabelings | list | `[]` |  |
 | alertmanager.serviceMonitor.relabelings | list | `[]` |  |
@@ -144,7 +144,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.pspAnnotations | object | `{}` |  |
-| global.rbac.pspEnabled | bool | `true` |  |
+| global.rbac.pspEnabled | bool | `false` |  |
 | global.serviceMonitor.labels | object | `{"netic.dk/monitoring":"true"}` | Labels to add to all service monitors |
 | grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | grafana.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
