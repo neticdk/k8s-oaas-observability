@@ -10,7 +10,7 @@ dependencies:
   version: 1.0.9
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 1.0.9
+  version: 1.0.10
 - name: opentelemetry-operator
   repository: https://open-telemetry.github.io/opentelemetry-helm-charts
   version: 0.20.2
