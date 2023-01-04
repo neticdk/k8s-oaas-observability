@@ -4,7 +4,7 @@ global:
   imagePullSecrets: []
   rbac:
     create: true
-    pspEnabled: true
+    pspEnabled: false
     pspAnnotations:
       {}
       ## Specify pod annotations
