@@ -1506,7 +1506,7 @@ endpointController:
 # -- Values for included kube-state-metrics chart
 kube-state-metrics:
   podSecurityPolicy:
-    enabled: true
+    enabled: false
   securityContext:
     enabled: true
   image:
@@ -1552,7 +1552,7 @@ vector-agent:
   image:
     pullPolicy: Always
   psp:
-    enabled: true
+    enabled: false
   rbac:
     enabled: true
   resources:

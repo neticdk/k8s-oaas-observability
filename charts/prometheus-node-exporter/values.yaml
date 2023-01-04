@@ -96,7 +96,7 @@ rbac:
   create: true
   # -- Specifies whether a PodSecurityPolicy should be created.
   # https://kubernetes.io/docs/concepts/policy/pod-security-policy/
-  pspEnabled: true
+  pspEnabled: false
 
 # -- list of addresses that have node exporter deployed outside of the cluster
 endpoints: []

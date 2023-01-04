@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.1.4](https://img.shields.io/badge/Version-2.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.1.5](https://img.shields.io/badge/Version-2.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -168,7 +168,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":true},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":false},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
@@ -494,7 +494,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.livenessProbe.initialDelaySeconds | int | `10` |  |
 | vector-agent.livenessProbe.periodSeconds | int | `30` |  |
 | vector-agent.livenessProbe.timeoutSeconds | int | `5` |  |
-| vector-agent.psp.enabled | bool | `true` |  |
+| vector-agent.psp.enabled | bool | `false` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.readinessProbe.failureThreshold | int | `3` |  |
 | vector-agent.readinessProbe.httpGet.path | string | `"/health"` |  |
