@@ -1680,6 +1680,10 @@ grafana:
 # -- Values for included otel-operator chart
 opentelemetry-operator:
   enabled: true
+  manager:
+    collectorImage:
+      repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:"
+
 
 # -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
 promtail:
