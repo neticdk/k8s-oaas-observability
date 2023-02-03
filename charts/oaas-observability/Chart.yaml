@@ -13,7 +13,7 @@ maintainers:
     email: kn@netic.dk
 dependencies:
   - name: grafana
-    version: 6.50.6
+    version: 6.50.7
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
   - name: kube-state-metrics
