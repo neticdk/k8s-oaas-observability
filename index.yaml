@@ -2,6 +2,27 @@ apiVersion: v1
 entries:
   kube-state-metrics:
   - apiVersion: v1
+    appVersion: v2.8.0
+    created: "2023-02-20T14:08:29.372697127Z"
+    deprecated: true
+    description: 'Install kube-state-metrics to generate and expose cluster-level
+      metrics. Since this is now part of the Prometheus community Helm charts this
+      has been deprecated and wont be maintained. See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics '
+    digest: 283508d3c3a9497a59d6dd2bd62e2325f6ebd2e9009f0fb9eee890bc622190d2
+    home: https://github.com/kubernetes/kube-state-metrics
+    keywords:
+    - metric
+    - monitoring
+    - prometheus
+    - kubernetes
+    name: kube-state-metrics
+    sources:
+    - https://github.com/kubernetes/kube-state-metrics
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/kube-state-metrics-1.0.13/kube-state-metrics-1.0.13.tgz
+    version: 1.0.13
+  - apiVersion: v1
     appVersion: v2.7.0
     created: "2022-12-12T13:03:48.700685525Z"
     deprecated: true
@@ -2938,4 +2959,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2023-01-20T10:22:55.463414816Z"
+generated: "2023-02-20T14:08:29.37389543Z"
