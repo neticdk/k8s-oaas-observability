@@ -1,6 +1,6 @@
 # kube-state-metrics
 
-![Version: 1.0.12](https://img.shields.io/badge/Version-1.0.12-informational?style=flat-square) ![AppVersion: v2.7.0](https://img.shields.io/badge/AppVersion-v2.7.0-informational?style=flat-square)
+![Version: 1.0.13](https://img.shields.io/badge/Version-1.0.13-informational?style=flat-square) ![AppVersion: v2.8.0](https://img.shields.io/badge/AppVersion-v2.8.0-informational?style=flat-square)
 
 Install kube-state-metrics to generate and expose cluster-level metrics. Since this is now part of the Prometheus community
 Helm charts this has been deprecated and wont be maintained.
