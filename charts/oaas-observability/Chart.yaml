@@ -36,6 +36,6 @@ dependencies:
     repository: https://helm.vector.dev
     condition: vector-agent.enabled
   - name: promtail
-    version: 6.9.2
+    version: 6.9.3
     repository: https://grafana.github.io/helm-charts
     condition: promtail.enabled
