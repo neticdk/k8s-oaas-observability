@@ -13,11 +13,11 @@ maintainers:
     email: kn@netic.dk
 dependencies:
   - name: grafana
-    version: 6.51.5
+    version: 6.52.1
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
   - name: kube-state-metrics
-    version: 4.32.0
+    version: 5.0.0
     repository: https://prometheus-community.github.io/helm-charts
   - name: prometheus-node-exporter
     version: "*"
