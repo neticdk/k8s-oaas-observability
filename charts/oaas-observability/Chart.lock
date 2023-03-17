@@ -1,7 +1,7 @@
 dependencies:
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 6.52.3
+  version: 6.52.4
 - name: kube-state-metrics
   repository: https://prometheus-community.github.io/helm-charts
   version: 5.0.0
@@ -20,5 +20,5 @@ dependencies:
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.9.3
-digest: sha256:9dcee941233ec77e0f1ee5e22a4a68757a34d521fa221f9737e308f88eaa6129
-generated: "2023-03-14T01:47:30.336630737Z"
+digest: sha256:d8bca64a674b761e8385eb314071ddb31c6ebd164a82d913af9e27d8bb25b922
+generated: "2023-03-17T01:59:02.87670426Z"
