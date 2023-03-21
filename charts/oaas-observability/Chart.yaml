@@ -28,7 +28,7 @@ dependencies:
     repository: file://../prometheus-operator
     condition: prometheus-operator.enabled
   - name: opentelemetry-operator
-    version: 0.20.2
+    version: 0.24.3
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
     condition: opentelemetry-operator.enabled
   - name: vector-agent
