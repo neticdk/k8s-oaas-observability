@@ -43,6 +43,8 @@ exemptions:
       - charts/oaas-observability-test
       - charts/oaas-observability-prometheus-operator-admission-patch
       - charts/oaas-observability-prometheus-operator-admission-create
+      - charts/oaas-observability-opentelemetry-operator-cert-manager # OpenTelemetry Operator chart test
+      - charts/oaas-observability-opentelemetry-operator-metrics # OpenTelemetry Operator chart test
       - opentelemetry-operator-cert-manager-test-connection
       - opentelemetry-operator-controller-manager-metrics-test-connection
       - opentelemetry-operator-webhook-test-connection
