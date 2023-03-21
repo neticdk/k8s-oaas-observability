@@ -164,6 +164,9 @@ jobs:
           kube_state_metrics_version=$(helm search repo kube-state-metrics -ojson | jq -r '.[0].version'); export kube_state_metrics_version
           yq '.dependencies.[] |= (select(.name=="kube-state-metrics") | .version = strenv(kube_state_metrics_version))' -i charts/oaas-observability/Chart.yaml
 
+          opentelemetry_version=$(helm search repo opentelemetry-operator -ojson | jq -r '.[0].version'); export opentelemetry_version
+          yq '.dependencies.[] |= (select(.name=="opentelemetry-operator") | .version = strenv(opentelemetry_version))' -i charts/oaas-observability/Chart.yaml
+
           echo Creating PR - if necressary
           git update-index -q --really-refresh
           if [ -n "$(git diff-index --name-only HEAD --)" ]; then
