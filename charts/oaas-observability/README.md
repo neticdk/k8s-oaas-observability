@@ -35,7 +35,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | https://grafana.github.io/helm-charts | grafana | 6.56.1 |
 | https://grafana.github.io/helm-charts | promtail | 6.11.0 |
 | https://helm.vector.dev | vector-agent | 0.19.1 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.27.0 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.28.0 |
 | https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.6.1 |
 
 ## Configuration
