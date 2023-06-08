@@ -1,7 +1,7 @@
 checks:
   # reliability
   multipleReplicasForDeployment: ignore
-  priorityClassNotSet: ignore
+  priorityClassNotSet: danger
   tagNotSpecified: danger
   pullPolicyNotAlways: warning
   readinessProbeMissing: warning

@@ -62,7 +62,7 @@ prometheusOperator:
           cpu: 100m
           memory: 64Mi
       # -- Provide a priority class name to the webhook patching job
-      priorityClassName: ""
+      priorityClassName: "secure-cloud-stack-technical-operations-critical"
       podAnnotations: {}
       nodeSelector: {}
       affinity: {}
@@ -126,7 +126,7 @@ prometheusOperator:
   podAnnotations: {}
 
   # -- Assign a PriorityClassName to pods if set
-  priorityClassName:
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
   # -- Define Log Format
   # Use logfmt (default) or json-formatted logging

@@ -135,7 +135,7 @@ tolerations:
     operator: Exists
 
 # -- Name of Priority Class to assign pods
-priorityClassName:
+priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Additional container arguments
 extraArgs: []

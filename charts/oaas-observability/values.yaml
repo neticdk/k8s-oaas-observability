@@ -1002,7 +1002,7 @@ alertmanager:
 
     ## Priority class assigned to the Pods
     ##
-    priorityClassName: ""
+    priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
     ## AdditionalPeers allows injecting a set of additional Alertmanagers to peer with to form a highly available cluster.
     ##
@@ -1462,7 +1462,7 @@ prometheus:
 
     ## Priority class assigned to the Pods
     ##
-    priorityClassName: ""
+    priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
     ## Thanos configuration allows configuring various aspects of a Prometheus server in a Thanos environment.
     ## This section is experimental, it may change significantly without deprecation notice in any release.

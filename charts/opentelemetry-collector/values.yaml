@@ -51,3 +51,5 @@ securityContext:
   capabilities:
     drop:
       - ALL
+## Priority class assigned to the Pods
+priorityClassName: "secure-cloud-stack-technical-operations-critical"
