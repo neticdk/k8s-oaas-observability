@@ -366,7 +366,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
-| opentelemetry-operator | object | `{"enabled":true,"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"}},"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
+| opentelemetry-operator | object | `{"enabled":true,"kubeRBACProxy":{"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}},"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}},"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
 | priorityclass.enabled | bool | `true` |  |
 | priorityclass.name | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | priorityclass.value | int | `500000000` |  |

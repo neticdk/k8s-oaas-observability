@@ -1691,6 +1691,17 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+  kubeRBACProxy:
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
   priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
