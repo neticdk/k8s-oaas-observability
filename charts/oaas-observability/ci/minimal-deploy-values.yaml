@@ -30,3 +30,6 @@ prometheus-operator:
 
 otel-operator:
   enabled: false
+
+priorityclass:
+  enabled: false
