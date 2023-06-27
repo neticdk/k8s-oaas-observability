@@ -1,7 +1,7 @@
 checks:
   # reliability
-  multipleReplicasForDeployment: ignore
-  priorityClassNotSet: danger
+  deploymentMissingReplicas: ignore
+  priorityClassNotSet: warning
   tagNotSpecified: danger
   pullPolicyNotAlways: warning
   readinessProbeMissing: warning
@@ -9,24 +9,39 @@ checks:
   metadataAndNameMismatched: ignore
   pdbDisruptionsIsZero: warning
   missingPodDisruptionBudget: ignore
+  topologySpreadConstraint: warning
 
   # efficiency
   cpuRequestsMissing: warning
   cpuLimitsMissing: ignore
   memoryRequestsMissing: warning
   memoryLimitsMissing: warning
+
   # security
+  automountServiceAccountToken: warning
   hostIPCSet: danger
   hostPIDSet: danger
+  linuxHardening: warning
+  missingNetworkPolicy: warning
   notReadOnlyRootFilesystem: warning
   privilegeEscalationAllowed: danger
-  runAsRootAllowed: warning
+  runAsRootAllowed: danger
   runAsPrivileged: danger
   dangerousCapabilities: danger
   insecureCapabilities: warning
-  hostNetworkSet: warning
+  hostNetworkSet: danger
   hostPortSet: warning
   tlsSettingsMissing: warning
+  sensitiveContainerEnvVar: danger
+  sensitiveConfigmapContent: danger
+  clusterrolePodExecAttach: danger
+  rolePodExecAttach: danger
+  clusterrolebindingPodExecAttach: danger
+  rolebindingClusterRolePodExecAttach: danger
+  rolebindingRolePodExecAttach: danger
+  clusterrolebindingClusterAdmin: danger
+  rolebindingClusterAdminClusterRole: danger
+  rolebindingClusterAdminRole: danger
 
 exemptions:
   - controllerNames:

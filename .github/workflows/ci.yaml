@@ -67,9 +67,8 @@ jobs:
 
       - name: Run chart-testing (lint)
         run: |
-          ls -la $GITHUB_WORKSPACE
-          echo PATH: $PATH
-          ct lint --additional-commands "$GITHUB_WORKSPACE/polaris/polaris audit --set-exit-code-below-score 90 --format pretty --config polaris.yaml --helm-chart {{ .Path }}"  --config ct.yaml
+          export PATH=$GITHUB_WORKSPACE/polaris:$PATH
+          ct lint --config ct.yaml
 
       - name: Run chart-testing (list-changed)
         id: list-changed
