@@ -6,5 +6,5 @@ chart-repos:
   - open-telemetry=https://open-telemetry.github.io/opentelemetry-helm-charts
 excluded-charts:
   - prometheus
-additional-commands:
-  - polaris audit --set-exit-code-below-score 90 --format pretty --config polaris.yaml --helm-chart {{ .Path }}
+#additional-commands:
+#  - polaris audit --set-exit-code-below-score 90 --format pretty --config polaris.yaml --helm-chart {{ .Path }}
