@@ -54,6 +54,7 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.resources.requests.memory | string | `"16Mi"` |  |
 | opentelemetryOperator.kubeRbacProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetryOperator.kubeRbacProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| opentelemetryOperator.kubeRbacProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | opentelemetryOperator.manager.args.metricsaddr | string | `"127.0.0.1:8080"` |  |
 | opentelemetryOperator.manager.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.manager.image.repository | string | `"ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator"` |  |
@@ -64,6 +65,7 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.manager.resources.requests.memory | string | `"64Mi"` |  |
 | opentelemetryOperator.manager.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetryOperator.manager.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| opentelemetryOperator.manager.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | opentelemetryOperator.nodeSelector | object | `{}` |  |
 | opentelemetryOperator.podLabels | object | `{}` |  |
 | opentelemetryOperator.podSecurityContext.fsGroup | int | `1` |  |
