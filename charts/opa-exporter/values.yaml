@@ -51,7 +51,13 @@ serviceMonitor:
   extraLabels: {}
 
 # -- Resources for the Agent container
-resources: {}
+resources:
+  limits:
+    memory: 48Mi
+  requests:
+    cpu: 10m
+    memory: 48Mi
+
 
 # -- Pod node selector
 nodeSelector: {}

@@ -47,7 +47,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | rbac.extraClusterRoleRules | list | `[]` | Extra ClusterRole rules |
 | rbac.useExistingRole | string | `nil` | Use an existing ClusterRole/Role |
 | replicaCount | int | `1` | Count of Pod replicas |
-| resources | object | `{}` | Resources for the Agent container |
+| resources | object | `{"limits":{"memory":"48Mi"},"requests":{"cpu":"10m","memory":"48Mi"}}` | Resources for the Agent container |
 | securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":1000}` | Security context for the Agent container |
 | service.port | int | `8080` | Service port |
 | service.type | string | `"ClusterIP"` | Service type |
