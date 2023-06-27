@@ -76,7 +76,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheus.monitor.scrapeTimeout | string | `"10s"` | Timeout after which the scrape is ended |
 | rbac.create | bool | `true` | If true, create & use RBAC resources |
 | rbac.pspEnabled | bool | `false` | Specifies whether a PodSecurityPolicy should be created. https://kubernetes.io/docs/concepts/policy/pod-security-policy/ |
-| resources | object | `{"limits":{"cpu":"300m","memory":"50Mi"},"requests":{"cpu":"10m","memory":"30Mi"}}` | CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context. |
+| resources | object | `{"limits":{"memory":"50Mi"},"requests":{"cpu":"10m","memory":"30Mi"}}` | CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context. |
 | securityContext | object | `{"fsGroup":65534,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534}` | SecurityContext |
 | service.annotations | object | `{"prometheus.io/scrape":"true"}` | Kubernetes service annotations |
 | service.listenOnAllInterfaces | bool | `true` | If true, listen on all interfaces using IP `0.0.0.0`. Else listen on the IP address pod has been assigned by Kubernetes. |

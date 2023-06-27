@@ -57,7 +57,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | prometheusScrape | bool | `true` | Whether or not enable prom scrape |
 | rbac.create | bool | `true` |  |
 | replicas | int | `1` | Number of replicas |
-| resources | object | `{"limits":{"cpu":"50m","memory":"100Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | kube-state-metrics resource requests and limits |
+| resources | object | `{"limits":{"memory":"100Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | kube-state-metrics resource requests and limits |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.annotations | object | `{}` | Annotations to be added to the service. |

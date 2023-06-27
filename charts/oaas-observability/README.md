@@ -152,7 +152,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.enabled | bool | `true` |  |
 | grafana.image.pullPolicy | string | `"Always"` |  |
 | grafana.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
-| grafana.resources.limits.cpu | string | `"200m"` |  |
 | grafana.resources.limits.memory | string | `"196Mi"` |  |
 | grafana.resources.requests.cpu | string | `"200m"` |  |
 | grafana.resources.requests.memory | string | `"196Mi"` |  |
@@ -161,7 +160,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.datasources.enabled | bool | `true` |  |
 | grafana.sidecar.datasources.label | string | `"netic_grafana_datasource"` |  |
 | grafana.sidecar.imagePullPolicy | string | `"Always"` |  |
-| grafana.sidecar.resources.limits.cpu | string | `"50m"` |  |
 | grafana.sidecar.resources.limits.memory | string | `"96Mi"` |  |
 | grafana.sidecar.resources.requests.cpu | string | `"50m"` |  |
 | grafana.sidecar.resources.requests.memory | string | `"96Mi"` |  |
@@ -169,7 +167,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":false},"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":false},"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
@@ -370,7 +368,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | priorityclass.enabled | bool | `true` |  |
 | priorityclass.name | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | priorityclass.value | int | `500000000` |  |
-| prometheus-operator | object | `{"enabled":true,"prometheusOperator":{"image":{"pullPolicy":"Always"},"resources":{"limits":{"cpu":"25m","memory":"80Mi"},"requests":{"cpu":"25m","memory":"80Mi"}}}}` | Values for included prometheus-operator chart |
+| prometheus-operator | object | `{"enabled":true,"prometheusOperator":{"image":{"pullPolicy":"Always"},"resources":{"limits":{"memory":"80Mi"},"requests":{"cpu":"25m","memory":"80Mi"}}}}` | Values for included prometheus-operator chart |
 | prometheus.agent | bool | `false` | Sets up Prometheus to run in agent mode only running discovery, scrape and remote write |
 | prometheus.annotations | object | `{}` |  |
 | prometheus.ingress.annotations | object | `{}` |  |
@@ -508,7 +506,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.readinessProbe.initialDelaySeconds | int | `10` |  |
 | vector-agent.readinessProbe.periodSeconds | int | `30` |  |
 | vector-agent.readinessProbe.timeoutSeconds | int | `5` |  |
-| vector-agent.resources.limits.cpu | string | `"150m"` |  |
 | vector-agent.resources.limits.memory | string | `"64Mi"` |  |
 | vector-agent.resources.requests.cpu | string | `"150m"` |  |
 | vector-agent.resources.requests.memory | string | `"64Mi"` |  |

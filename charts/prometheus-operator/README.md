@@ -39,7 +39,6 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.admissionWebhooks.patch.nodeSelector | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.podAnnotations | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Provide a priority class name to the webhook patching job |
-| prometheusOperator.admissionWebhooks.patch.resources.limits.cpu | string | `"100m"` |  |
 | prometheusOperator.admissionWebhooks.patch.resources.limits.memory | string | `"64Mi"` |  |
 | prometheusOperator.admissionWebhooks.patch.resources.requests.cpu | string | `"100m"` |  |
 | prometheusOperator.admissionWebhooks.patch.resources.requests.memory | string | `"64Mi"` |  |
@@ -63,7 +62,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.podLabels | object | `{}` | Labels to add to the operator pod |
 | prometheusOperator.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Assign a PriorityClassName to pods if set |
 | prometheusOperator.prometheusConfigReloaderImage | object | `{"repository":"quay.io/prometheus-operator/prometheus-config-reloader","sha":"","tag":""}` | Prometheus-config-reloader image to use for config and rule reloading |
-| prometheusOperator.resources | object | `{"limits":{"cpu":"150m","memory":"192Mi"},"requests":{"cpu":"150m","memory":"192Mi"}}` | Resource limits & requests |
+| prometheusOperator.resources | object | `{"limits":{"memory":"192Mi"},"requests":{"cpu":"150m","memory":"192Mi"}}` | Resource limits & requests |
 | prometheusOperator.securityContext.fsGroup | int | `65534` |  |
 | prometheusOperator.securityContext.runAsGroup | int | `65534` |  |
 | prometheusOperator.securityContext.runAsNonRoot | bool | `true` |  |
@@ -85,7 +84,6 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.tlsProxy.image.repository | string | `"squareup/ghostunnel"` |  |
 | prometheusOperator.tlsProxy.image.sha | string | `""` |  |
 | prometheusOperator.tlsProxy.image.tag | string | `"v1.5.2"` |  |
-| prometheusOperator.tlsProxy.resources.limits.cpu | string | `"50m"` |  |
 | prometheusOperator.tlsProxy.resources.limits.memory | string | `"48Mi"` |  |
 | prometheusOperator.tlsProxy.resources.requests.cpu | string | `"50m"` |  |
 | prometheusOperator.tlsProxy.resources.requests.memory | string | `"48Mi"` |  |

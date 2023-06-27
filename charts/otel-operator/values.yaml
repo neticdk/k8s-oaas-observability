@@ -40,7 +40,6 @@ opentelemetryOperator:
           - ALL
     resources:
       limits:
-        cpu: 100m
         memory: 64Mi
       requests:
         cpu: 100m
@@ -62,7 +61,6 @@ opentelemetryOperator:
           - ALL
     resources:
       limits:
-        cpu: 10m
         memory: 16Mi
       requests:
         cpu: 10m

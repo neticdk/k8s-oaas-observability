@@ -48,7 +48,6 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.repository | string | `"gcr.io/kubebuilder/kube-rbac-proxy"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.tag | string | `"v0.5.0"` |  |
-| opentelemetryOperator.kubeRbacProxy.resources.limits.cpu | string | `"10m"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.limits.memory | string | `"16Mi"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.requests.cpu | string | `"10m"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.requests.memory | string | `"16Mi"` |  |
@@ -59,7 +58,6 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.manager.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.manager.image.repository | string | `"ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator"` |  |
 | opentelemetryOperator.manager.image.tag | string | `nil` |  |
-| opentelemetryOperator.manager.resources.limits.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.limits.memory | string | `"64Mi"` |  |
 | opentelemetryOperator.manager.resources.requests.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.requests.memory | string | `"64Mi"` |  |

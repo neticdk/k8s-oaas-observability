@@ -32,7 +32,6 @@ prometheusOperator:
       pullPolicy: Always
     resources:
       limits:
-        cpu: 50m
         memory: 48Mi
       requests:
         cpu: 50m
@@ -56,7 +55,6 @@ prometheusOperator:
         pullPolicy: Always
       resources:
         limits:
-          cpu: 100m
           memory: 64Mi
         requests:
           cpu: 100m
@@ -167,7 +165,6 @@ prometheusOperator:
   # -- Resource limits & requests
   resources:
     limits:
-      cpu: 150m
       memory: 192Mi
     requests:
       cpu: 150m

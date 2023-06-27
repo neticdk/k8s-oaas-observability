@@ -53,7 +53,6 @@ updateStrategy:
 # -- CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context.
 resources:
   limits:
-    cpu: 300m
     memory: 50Mi
   requests:
     cpu: 10m
@@ -63,7 +62,6 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
-  #   cpu: 200m
   #   memory: 50Mi
   # requests:
   #   cpu: 100m
