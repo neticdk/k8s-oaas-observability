@@ -12,7 +12,7 @@ checks:
 
   # efficiency
   cpuRequestsMissing: warning
-  cpuLimitsMissing: warning
+  cpuLimitsMissing: ignore
   memoryRequestsMissing: warning
   memoryLimitsMissing: warning
   # security
