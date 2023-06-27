@@ -37,7 +37,7 @@ spec:
               path: /
               port: http
           resources: {{- toYaml .Values.resources | nindent 12 }}
-          priorityClassName: "secure-cloud-stack-technical-operations-critical"
+      priorityClassName: {{ .Values.priorityClassName }}
       {{- with .Values.nodeSelector }}
       nodeSelector: {{- toYaml . | nindent 8 }}
       {{- end }}

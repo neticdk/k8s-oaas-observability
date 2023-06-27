@@ -41,13 +41,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.tag | string | `""` | Overrides the image tag whose default is the chart `appVersion` |
 | nodeSelector | object | `{}` | Pod node selector |
 | podAnnotations | object | `{}` | Pod annotations |
-| podSecurityContext | object | `{}` | Pod security context |
+| podSecurityContext | object | `{"fsGroup":1,"supplementalGroups":[1]}` | Pod security context |
+| priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Priority class for OPA exporter |
 | rbac.create | bool | `true` | Whether to create Cluster Role and Cluster Role Binding |
 | rbac.extraClusterRoleRules | list | `[]` | Extra ClusterRole rules |
 | rbac.useExistingRole | string | `nil` | Use an existing ClusterRole/Role |
 | replicaCount | int | `1` | Count of Pod replicas |
 | resources | object | `{}` | Resources for the Agent container |
-| securityContext | object | `{}` | Security context for the Agent container |
+| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":1000}` | Security context for the Agent container |
 | service.port | int | `8080` | Service port |
 | service.type | string | `"ClusterIP"` | Service type |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
