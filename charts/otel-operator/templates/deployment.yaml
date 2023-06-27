@@ -54,8 +54,8 @@ spec:
         - containerPort: 8443
           name: https
         resources: {{ toYaml .Values.opentelemetryOperator.kubeRbacProxy.resources | nindent 12 }}
-        priorityClassName: {{ toYaml .Values.global.priorityClassName  | nindent 12 }}
 {{- end }}
+      priorityClassName: {{ .Values.global.priorityClassName }}
       terminationGracePeriodSeconds: 10
       volumes:
       - name: cert
