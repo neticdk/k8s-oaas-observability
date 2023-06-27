@@ -3,7 +3,7 @@ appVersion: v1.5.0
 description: A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 name: prometheus-node-exporter
 home: https://github.com/prometheus/node_exporter
-version: 1.0.10
+version: 1.0.11
 sources:
   - https://github.com/prometheus/node_exporter
   - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-node-exporter
