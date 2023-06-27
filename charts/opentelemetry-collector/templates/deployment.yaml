@@ -17,6 +17,7 @@ spec:
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      priorityClassName: {{ .Values.priorityClassName }}
       containers:
       - name: otel-collector
         image: {{ .Values.image.repository }}:{{ include "otel-collector.imageTag"  . }}
@@ -27,7 +28,6 @@ spec:
           - "--metrics-addr=0.0.0.0:8888"
           - "--mem-ballast-size-mib={{ include "otel-collector.getMemBallastSizeMib" .Values.resources.limits.memory }}"
         resources: {{ .Values.resources | toYaml | nindent 10 }}
-        priorityClassName: {{ Values.priorityClassName | toYaml | nindent 10 }}
         ports:
         - name: grpc
           containerPort: {{ mustRegexReplaceAll ".*:([0-9])" .Values.config.receivers.otlp.protocols.grpc.endpoint "${1}" }}
