@@ -24,6 +24,11 @@ fullnameOverride: ""
 nameOverride: ""
 kubeVersionOverride: ""
 
+priorityclass:
+  enabled: true
+  name: "secure-cloud-stack-technical-operations-critical"
+  value: 500000000
+
 ## Configuration for alerts
 alerts:
   # -- Should alerting rules be enabled
@@ -1530,6 +1535,7 @@ kube-state-metrics:
       honorLabels: true
       additionalLabels:
         netic.dk/monitoring: "true"
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Values for included prometheus-operator chart
 prometheus-operator:
@@ -1568,6 +1574,7 @@ vector-agent:
         - ALL
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
+  podPriorityClassName: "secure-cloud-stack-technical-operations-critical"
   livenessProbe:
     httpGet:
       path: /health
@@ -1656,6 +1663,7 @@ grafana:
     requests:
       cpu: 200m
       memory: 196Mi
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
   sidecar:
     imagePullPolicy: Always
     securityContext:
@@ -1683,7 +1691,7 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"
-
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
 promtail:

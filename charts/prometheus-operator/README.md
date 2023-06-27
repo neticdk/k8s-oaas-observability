@@ -38,7 +38,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.admissionWebhooks.patch.image.tag | string | `"v1.5.2"` |  |
 | prometheusOperator.admissionWebhooks.patch.nodeSelector | object | `{}` |  |
 | prometheusOperator.admissionWebhooks.patch.podAnnotations | object | `{}` |  |
-| prometheusOperator.admissionWebhooks.patch.priorityClassName | string | `""` | Provide a priority class name to the webhook patching job |
+| prometheusOperator.admissionWebhooks.patch.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Provide a priority class name to the webhook patching job |
 | prometheusOperator.admissionWebhooks.patch.resources.limits.cpu | string | `"100m"` |  |
 | prometheusOperator.admissionWebhooks.patch.resources.limits.memory | string | `"64Mi"` |  |
 | prometheusOperator.admissionWebhooks.patch.resources.requests.cpu | string | `"100m"` |  |
@@ -61,7 +61,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.nodeSelector | object | `{}` | Define which Nodes the Pods are scheduled on. ref: https://kubernetes.io/docs/user-guide/node-selection/ |
 | prometheusOperator.podAnnotations | object | `{}` | Annotations to add to the operator pod |
 | prometheusOperator.podLabels | object | `{}` | Labels to add to the operator pod |
-| prometheusOperator.priorityClassName | string | `nil` | Assign a PriorityClassName to pods if set |
+| prometheusOperator.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Assign a PriorityClassName to pods if set |
 | prometheusOperator.prometheusConfigReloaderImage | object | `{"repository":"quay.io/prometheus-operator/prometheus-config-reloader","sha":"","tag":""}` | Prometheus-config-reloader image to use for config and rule reloading |
 | prometheusOperator.resources | object | `{"limits":{"cpu":"150m","memory":"192Mi"},"requests":{"cpu":"150m","memory":"192Mi"}}` | Resource limits & requests |
 | prometheusOperator.securityContext.fsGroup | int | `65534` |  |

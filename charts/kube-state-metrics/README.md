@@ -49,7 +49,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | podSecurityPolicy.additionalVolumes | list | `[]` | Specify allowed volumes in the pod security policy (`secret` is always allowed) |
 | podSecurityPolicy.annotations | object | `{}` | Specify pod annotations in the pod security policy Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl |
 | podSecurityPolicy.enabled | bool | `false` | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. |
-| priorityClassName | string | `nil` | Name of Priority Class to assign pods |
+| priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Name of Priority Class to assign pods |
 | prometheus.monitor.additionalLabels | object | `{}` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus |
 | prometheus.monitor.enabled | bool | `false` | Set this to true to create ServiceMonitor for Prometheus operator |
 | prometheus.monitor.honorLabels | bool | `false` | Honor metric labels |

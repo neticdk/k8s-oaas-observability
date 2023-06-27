@@ -31,6 +31,7 @@ $ helm install my-release netic-oaas/opentelemetry-collector
 | podSecurityContext.fsGroup | int | `10001` |  |
 | podSecurityContext.runAsGroup | int | `10001` |  |
 | podSecurityContext.runAsUser | int | `10001` |  |
+| priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | int | `1` |  |
 | resources.limits.memory | string | `"2Gi"` |  |

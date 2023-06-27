@@ -31,6 +31,7 @@ $ helm install my-release netic-oaas/otel-operator
 | global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.podSecurityPolicy.annotations | object | `{}` |  |
+| global.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.pspEnabled | bool | `false` |  |
 | nameOverride | string | `""` |  |

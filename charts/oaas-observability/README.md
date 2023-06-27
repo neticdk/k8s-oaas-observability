@@ -60,7 +60,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.podAntiAffinity | string | `""` |  |
 | alertmanager.alertmanagerSpec.podAntiAffinityTopologyKey | string | `"kubernetes.io/hostname"` |  |
 | alertmanager.alertmanagerSpec.portName | string | `"web"` |  |
-| alertmanager.alertmanagerSpec.priorityClassName | string | `""` |  |
+| alertmanager.alertmanagerSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | alertmanager.alertmanagerSpec.replicas | int | `1` | Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the running cluster equal to the expected size. |
 | alertmanager.alertmanagerSpec.resources | object | `{}` |  |
 | alertmanager.alertmanagerSpec.retention | string | `"120h"` | Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours). |
@@ -151,6 +151,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.enabled | bool | `true` |  |
 | grafana.image.pullPolicy | string | `"Always"` |  |
+| grafana.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | grafana.resources.limits.cpu | string | `"200m"` |  |
 | grafana.resources.limits.memory | string | `"196Mi"` |  |
 | grafana.resources.requests.cpu | string | `"200m"` |  |
@@ -168,7 +169,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":false},"prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":false},"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"cpu":"25m","memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
@@ -365,7 +366,10 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
-| opentelemetry-operator | object | `{"enabled":true,"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"}}}` | Values for included otel-operator chart |
+| opentelemetry-operator | object | `{"enabled":true,"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"}},"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
+| priorityclass.enabled | bool | `true` |  |
+| priorityclass.name | string | `"secure-cloud-stack-technical-operations-critical"` |  |
+| priorityclass.value | int | `500000000` |  |
 | prometheus-operator | object | `{"enabled":true,"prometheusOperator":{"image":{"pullPolicy":"Always"},"resources":{"limits":{"cpu":"25m","memory":"80Mi"},"requests":{"cpu":"25m","memory":"80Mi"}}}}` | Values for included prometheus-operator chart |
 | prometheus.agent | bool | `false` | Sets up Prometheus to run in agent mode only running discovery, scrape and remote write |
 | prometheus.annotations | object | `{}` |  |
@@ -406,7 +410,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.podMonitorSelector | object | `{}` |  |
 | prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues | bool | `true` |  |
 | prometheus.prometheusSpec.portName | string | `"web"` |  |
-| prometheus.prometheusSpec.priorityClassName | string | `""` |  |
+| prometheus.prometheusSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | prometheus.prometheusSpec.prometheusExternalLabelName | string | `""` |  |
 | prometheus.prometheusSpec.prometheusExternalLabelNameClear | bool | `false` |  |
 | prometheus.prometheusSpec.query | object | `{}` |  |
@@ -494,6 +498,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.livenessProbe.initialDelaySeconds | int | `10` |  |
 | vector-agent.livenessProbe.periodSeconds | int | `30` |  |
 | vector-agent.livenessProbe.timeoutSeconds | int | `5` |  |
+| vector-agent.podPriorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | vector-agent.psp.enabled | bool | `false` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.readinessProbe.failureThreshold | int | `3` |  |

@@ -68,7 +68,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to node exporter pods |
 | podLabels | object | `{}` | Additional labels to be added to pods |
-| priorityClassName | string | `nil` | Name of Priority Class to assign pods |
+| priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Name of Priority Class to assign pods |
 | prometheus.monitor.additionalLabels | object | `{}` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus |
 | prometheus.monitor.enabled | bool | `false` | Set this to `true` to create ServiceMonitor for Prometheus operator |
 | prometheus.monitor.namespace | string | `""` | namespace where servicemonitor resource should be created |
