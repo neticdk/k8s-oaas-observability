@@ -27,6 +27,8 @@ prometheusSpec:
   retentionSize: ""
   routePrefix: /
   secrets: []
+  ## Priority class assigned to the Pods
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 ingress:
   enabled: false

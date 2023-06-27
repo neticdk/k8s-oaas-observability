@@ -23,17 +23,20 @@ serviceAccount:
 podAnnotations: {}
 
 # -- Pod security context
-podSecurityContext: {}
+podSecurityContext:
+  fsGroup: 1
+  supplementalGroups:
+    - 1
 
 # -- Security context for the Agent container
-securityContext: {}
-# securityContext:
-#   capabilities:
-#     drop:
-#       - ALL
-#   readOnlyRootFilesystem: true
-#   runAsNonRoot: true
-#   runAsUser: 1000
+securityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
 
 service:
   # -- Service type
@@ -48,7 +51,13 @@ serviceMonitor:
   extraLabels: {}
 
 # -- Resources for the Agent container
-resources: {}
+resources:
+  limits:
+    memory: 48Mi
+  requests:
+    cpu: 10m
+    memory: 48Mi
+
 
 # -- Pod node selector
 nodeSelector: {}
@@ -58,6 +67,9 @@ tolerations: []
 
 # -- Pod affinity
 affinity: {}
+
+# -- Priority class for OPA exporter
+priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 rbac:
   # -- Whether to create Cluster Role and Cluster Role Binding

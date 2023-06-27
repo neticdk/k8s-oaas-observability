@@ -10,7 +10,7 @@ keywords:
   - monitoring
   - prometheus
   - kubernetes
-version: 1.0.14
+version: 1.0.15
 appVersion: v2.8.2
 deprecated: true
 sources:

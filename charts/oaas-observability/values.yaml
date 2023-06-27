@@ -24,6 +24,11 @@ fullnameOverride: ""
 nameOverride: ""
 kubeVersionOverride: ""
 
+priorityclass:
+  enabled: true
+  name: "secure-cloud-stack-technical-operations-critical"
+  value: 500000000
+
 ## Configuration for alerts
 alerts:
   # -- Should alerting rules be enabled
@@ -1002,7 +1007,7 @@ alertmanager:
 
     ## Priority class assigned to the Pods
     ##
-    priorityClassName: ""
+    priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
     ## AdditionalPeers allows injecting a set of additional Alertmanagers to peer with to form a highly available cluster.
     ##
@@ -1462,7 +1467,7 @@ prometheus:
 
     ## Priority class assigned to the Pods
     ##
-    priorityClassName: ""
+    priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
     ## Thanos configuration allows configuring various aspects of a Prometheus server in a Thanos environment.
     ## This section is experimental, it may change significantly without deprecation notice in any release.
@@ -1513,7 +1518,6 @@ kube-state-metrics:
     pullPolicy: Always
   resources:
     limits:
-      cpu: 25m
       memory: 64Mi
     requests:
       cpu: 25m
@@ -1530,6 +1534,7 @@ kube-state-metrics:
       honorLabels: true
       additionalLabels:
         netic.dk/monitoring: "true"
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Values for included prometheus-operator chart
 prometheus-operator:
@@ -1539,7 +1544,6 @@ prometheus-operator:
       pullPolicy: Always
     resources:
       limits:
-        cpu: 25m
         memory: 80Mi
       requests:
         cpu: 25m
@@ -1557,7 +1561,6 @@ vector-agent:
     enabled: true
   resources:
     limits:
-      cpu: 150m
       memory: 64Mi
     requests:
       cpu: 150m
@@ -1568,6 +1571,7 @@ vector-agent:
         - ALL
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
+  podPriorityClassName: "secure-cloud-stack-technical-operations-critical"
   livenessProbe:
     httpGet:
       path: /health
@@ -1651,11 +1655,11 @@ grafana:
       drop: ["ALL"]
   resources:
     limits:
-      cpu: 200m
       memory: 196Mi
     requests:
       cpu: 200m
       memory: 196Mi
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
   sidecar:
     imagePullPolicy: Always
     securityContext:
@@ -1665,7 +1669,6 @@ grafana:
         drop: ["ALL"]
     resources:
       limits:
-        cpu: 50m
         memory: 96Mi
       requests:
         cpu: 50m
@@ -1683,7 +1686,18 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"
-
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+  kubeRBACProxy:
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+  priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
 promtail:

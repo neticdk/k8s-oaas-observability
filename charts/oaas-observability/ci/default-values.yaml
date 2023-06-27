@@ -26,3 +26,6 @@ otel-operator:
 
 prometheus-node-exporter:
   resources: {}
+
+priorityclass:
+  enabled: false

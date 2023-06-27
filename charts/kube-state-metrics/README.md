@@ -1,6 +1,6 @@
 # kube-state-metrics
 
-![Version: 1.0.14](https://img.shields.io/badge/Version-1.0.14-informational?style=flat-square) ![AppVersion: v2.8.2](https://img.shields.io/badge/AppVersion-v2.8.2-informational?style=flat-square)
+![Version: 1.0.15](https://img.shields.io/badge/Version-1.0.15-informational?style=flat-square) ![AppVersion: v2.8.2](https://img.shields.io/badge/AppVersion-v2.8.2-informational?style=flat-square)
 
 Install kube-state-metrics to generate and expose cluster-level metrics. Since this is now part of the Prometheus community
 Helm charts this has been deprecated and wont be maintained.
@@ -49,7 +49,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | podSecurityPolicy.additionalVolumes | list | `[]` | Specify allowed volumes in the pod security policy (`secret` is always allowed) |
 | podSecurityPolicy.annotations | object | `{}` | Specify pod annotations in the pod security policy Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl |
 | podSecurityPolicy.enabled | bool | `false` | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. |
-| priorityClassName | string | `nil` | Name of Priority Class to assign pods |
+| priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Name of Priority Class to assign pods |
 | prometheus.monitor.additionalLabels | object | `{}` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus |
 | prometheus.monitor.enabled | bool | `false` | Set this to true to create ServiceMonitor for Prometheus operator |
 | prometheus.monitor.honorLabels | bool | `false` | Honor metric labels |
@@ -57,7 +57,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | prometheusScrape | bool | `true` | Whether or not enable prom scrape |
 | rbac.create | bool | `true` |  |
 | replicas | int | `1` | Number of replicas |
-| resources | object | `{"limits":{"cpu":"50m","memory":"100Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | kube-state-metrics resource requests and limits |
+| resources | object | `{"limits":{"memory":"100Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | kube-state-metrics resource requests and limits |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.annotations | object | `{}` | Annotations to be added to the service. |

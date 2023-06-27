@@ -2,7 +2,7 @@
 
 # prometheus
 
-![Version: 2.0.7](https://img.shields.io/badge/Version-2.0.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.30.0](https://img.shields.io/badge/AppVersion-2.30.0-informational?style=flat-square)
+![Version: 2.0.8](https://img.shields.io/badge/Version-2.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.30.0](https://img.shields.io/badge/AppVersion-2.30.0-informational?style=flat-square)
 
 A Helm chart to install Prometheus based on Prometheus Operator
 
@@ -60,6 +60,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheusSpec.image | string | `"quay.io/prometheus/prometheus:v2.30.0"` |  |
 | prometheusSpec.podMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.podMonitorSelector | object | `{}` |  |
+| prometheusSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | prometheusSpec.remoteWrite | list | `[]` |  |
 | prometheusSpec.replicas | int | `2` |  |
 | prometheusSpec.resources | object | `{}` |  |

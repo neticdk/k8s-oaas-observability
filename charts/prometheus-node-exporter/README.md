@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square) ![AppVersion: v1.5.0](https://img.shields.io/badge/AppVersion-v1.5.0-informational?style=flat-square)
+![Version: 1.0.11](https://img.shields.io/badge/Version-1.0.11-informational?style=flat-square) ![AppVersion: v1.5.0](https://img.shields.io/badge/AppVersion-v1.5.0-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -68,7 +68,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to node exporter pods |
 | podLabels | object | `{}` | Additional labels to be added to pods |
-| priorityClassName | string | `nil` | Name of Priority Class to assign pods |
+| priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Name of Priority Class to assign pods |
 | prometheus.monitor.additionalLabels | object | `{}` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus |
 | prometheus.monitor.enabled | bool | `false` | Set this to `true` to create ServiceMonitor for Prometheus operator |
 | prometheus.monitor.namespace | string | `""` | namespace where servicemonitor resource should be created |
@@ -76,7 +76,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheus.monitor.scrapeTimeout | string | `"10s"` | Timeout after which the scrape is ended |
 | rbac.create | bool | `true` | If true, create & use RBAC resources |
 | rbac.pspEnabled | bool | `false` | Specifies whether a PodSecurityPolicy should be created. https://kubernetes.io/docs/concepts/policy/pod-security-policy/ |
-| resources | object | `{"limits":{"cpu":"300m","memory":"50Mi"},"requests":{"cpu":"10m","memory":"30Mi"}}` | CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context. |
+| resources | object | `{"limits":{"memory":"50Mi"},"requests":{"cpu":"10m","memory":"30Mi"}}` | CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context. |
 | securityContext | object | `{"fsGroup":65534,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534}` | SecurityContext |
 | service.annotations | object | `{"prometheus.io/scrape":"true"}` | Kubernetes service annotations |
 | service.listenOnAllInterfaces | bool | `true` | If true, listen on all interfaces using IP `0.0.0.0`. Else listen on the IP address pod has been assigned by Kubernetes. |

@@ -17,6 +17,8 @@ spec:
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      serviceAccountName: {{ template "otel-collector.serviceAccountName" . }}
       containers:
       - name: otel-collector
         image: {{ .Values.image.repository }}:{{ include "otel-collector.imageTag"  . }}

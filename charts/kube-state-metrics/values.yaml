@@ -117,7 +117,7 @@ tolerations: []
 podAnnotations: {}
 
 # -- Name of Priority Class to assign pods
-priorityClassName:
+priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Optional PodDisruptionBudget
 # Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
@@ -175,7 +175,6 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 50m
     memory: 100Mi
   requests:
     cpu: 50m

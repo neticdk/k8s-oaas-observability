@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
+![Version: 0.2.6](https://img.shields.io/badge/Version-0.2.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
 
 **DEPRECATED** We recommend using: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator
 
@@ -31,6 +31,7 @@ $ helm install my-release netic-oaas/otel-operator
 | global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.podSecurityPolicy.annotations | object | `{}` |  |
+| global.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | global.rbac.create | bool | `true` |  |
 | global.rbac.pspEnabled | bool | `false` |  |
 | nameOverride | string | `""` |  |
@@ -47,22 +48,22 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.repository | string | `"gcr.io/kubebuilder/kube-rbac-proxy"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.tag | string | `"v0.5.0"` |  |
-| opentelemetryOperator.kubeRbacProxy.resources.limits.cpu | string | `"10m"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.limits.memory | string | `"16Mi"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.requests.cpu | string | `"10m"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.requests.memory | string | `"16Mi"` |  |
 | opentelemetryOperator.kubeRbacProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetryOperator.kubeRbacProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| opentelemetryOperator.kubeRbacProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | opentelemetryOperator.manager.args.metricsaddr | string | `"127.0.0.1:8080"` |  |
 | opentelemetryOperator.manager.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.manager.image.repository | string | `"ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator"` |  |
 | opentelemetryOperator.manager.image.tag | string | `nil` |  |
-| opentelemetryOperator.manager.resources.limits.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.limits.memory | string | `"64Mi"` |  |
 | opentelemetryOperator.manager.resources.requests.cpu | string | `"100m"` |  |
 | opentelemetryOperator.manager.resources.requests.memory | string | `"64Mi"` |  |
 | opentelemetryOperator.manager.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetryOperator.manager.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| opentelemetryOperator.manager.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | opentelemetryOperator.nodeSelector | object | `{}` |  |
 | opentelemetryOperator.podLabels | object | `{}` |  |
 | opentelemetryOperator.podSecurityContext.fsGroup | int | `1` |  |

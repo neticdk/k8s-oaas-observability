@@ -1,0 +1,10 @@
+{{- if .Values.priorityclass.enabled }}
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: {{ .Values.priorityclass.name }}
+value: {{ .Values.priorityclass.value }}
+preemptionPolicy: "PreemptLowerPriority"
+globalDefault: false
+description: "Priority class used for observability components"
+{{- end }}
