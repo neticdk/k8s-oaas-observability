@@ -19,10 +19,24 @@ config:
 
 replicaCount: 1
 
+serviceAccount:
+  # -- If true, create & use serviceAccount. Require rbac true
+  create: true
+  # -- The name of the ServiceAccount to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+  # -- Reference to one or more secrets to be used when pulling images
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+  # -- ServiceAccount annotations.
+  # Use case: AWS EKS IAM roles for service accounts
+  # ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html
+  annotations: {}
+
 image:
   repository: otel/opentelemetry-collector
   # repository: otel/opentelemetry-collector-contrib
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -47,6 +61,7 @@ podSecurityContext:
 
 securityContext:
   allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
   capabilities:
     drop:
       - ALL

@@ -25,7 +25,7 @@ $ helm install my-release netic-oaas/opentelemetry-collector
 | config.service.extensions[0] | string | `"health_check"` |  |
 | config.service.extensions[1] | string | `"zpages"` |  |
 | config.service.pipelines | object | `{}` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.pullPolicy | string | `"Always"` |  |
 | image.repository | string | `"otel/opentelemetry-collector"` |  |
 | image.tag | string | `""` |  |
 | podSecurityContext.fsGroup | int | `10001` |  |
@@ -38,9 +38,14 @@ $ helm install my-release netic-oaas/opentelemetry-collector
 | resources.requests.memory | string | `"400Mi"` |  |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | service.ports.grpc.nodePort | int | `30317` |  |
 | service.ports.grpc.port | int | `4317` |  |
 | service.type | string | `"ClusterIP"` |  |
+| serviceAccount.annotations | object | `{}` | ServiceAccount annotations. Use case: AWS EKS IAM roles for service accounts ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html |
+| serviceAccount.create | bool | `true` | If true, create & use serviceAccount. Require rbac true |
+| serviceAccount.imagePullSecrets | list | `[]` | Reference to one or more secrets to be used when pulling images ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
+| serviceAccount.name | string | `nil` | The name of the ServiceAccount to use. If not set and create is true, a name is generated using the fullname template |
 
 ## Development
 

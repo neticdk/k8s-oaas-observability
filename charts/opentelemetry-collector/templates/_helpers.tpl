@@ -117,3 +117,14 @@ Get otel memory_limiter ballast_size_mib value based on 40% of resources.memory.
 {{- define "otel-collector.getMemBallastSizeMib" }}
 {{- div (mul (include "otel-collector.convertMemToMib" .) 40) 100 }}
 {{- end -}}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "otel-collector.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "otel-collector.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
