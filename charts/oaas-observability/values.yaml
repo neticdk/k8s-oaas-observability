@@ -1528,6 +1528,8 @@ kube-state-metrics:
         - ALL
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
+  metricLabelsAllowlist:
+    - nodes=[topology.kubernetes.io/region,topology.kubernetes.io/zone]
   prometheus:
     monitor:
       enabled: true

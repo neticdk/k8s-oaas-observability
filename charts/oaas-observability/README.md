@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.1.16](https://img.shields.io/badge/Version-2.1.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.1.17](https://img.shields.io/badge/Version-2.1.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -32,11 +32,11 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 6.56.1 |
-| https://grafana.github.io/helm-charts | promtail | 6.11.0 |
+| https://grafana.github.io/helm-charts | grafana | 6.58.1 |
+| https://grafana.github.io/helm-charts | promtail | 6.11.5 |
 | https://helm.vector.dev | vector-agent | 0.19.1 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.32.0 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.6.0 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.33.0 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.8.2 |
 
 ## Configuration
 
@@ -167,7 +167,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"podSecurityPolicy":{"enabled":false},"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"metricLabelsAllowlist":["nodes=[topology.kubernetes.io/region,topology.kubernetes.io/zone]"],"podSecurityPolicy":{"enabled":false},"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
