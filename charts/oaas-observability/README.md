@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.1.25](https://img.shields.io/badge/Version-2.1.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.1.26](https://img.shields.io/badge/Version-2.1.26-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -32,11 +32,11 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 6.61.1 |
+| https://grafana.github.io/helm-charts | grafana | 7.0.3 |
 | https://grafana.github.io/helm-charts | promtail | 6.15.3 |
 | https://helm.vector.dev | vector-agent | 0.19.1 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.41.0 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.14.0 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.42.0 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.15.1 |
 
 ## Configuration
 
