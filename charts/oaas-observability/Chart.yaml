@@ -13,7 +13,7 @@ maintainers:
     email: kn@netic.dk
 dependencies:
   - name: grafana
-    version: 7.0.11
+    version: 7.0.14
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
   - name: kube-state-metrics
@@ -28,7 +28,7 @@ dependencies:
     repository: file://../prometheus-operator
     condition: prometheus-operator.enabled
   - name: opentelemetry-operator
-    version: 0.43.1
+    version: 0.44.0
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
     condition: opentelemetry-operator.enabled
   - name: vector-agent
