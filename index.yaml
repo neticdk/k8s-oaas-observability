@@ -171,6 +171,51 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2023-12-15T09:33:54.043495433Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 7.0.17
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 5.15.2
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: opentelemetry-operator.enabled
+      name: opentelemetry-operator
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.44.1
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://helm.vector.dev
+      version: 0.19.1
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.15.3
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: f9e398293f45f6e5b87a414e49c052a7c70bb9cc8f07598cb0ac7ca72daac524
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.1.29/oaas-observability-2.1.29.tgz
+    version: 2.1.29
+  - apiVersion: v2
     created: "2023-12-14T06:28:17.384605624Z"
     dependencies:
     - condition: grafana.enabled
@@ -3954,4 +3999,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2023-12-14T06:28:17.584570504Z"
+generated: "2023-12-15T09:33:54.044120417Z"
