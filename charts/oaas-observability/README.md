@@ -32,7 +32,7 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 7.3.2 |
+| https://grafana.github.io/helm-charts | grafana | 7.3.3 |
 | https://grafana.github.io/helm-charts | promtail | 6.15.5 |
 | https://helm.vector.dev | vector-agent | 0.19.1 |
 | https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.48.0 |
