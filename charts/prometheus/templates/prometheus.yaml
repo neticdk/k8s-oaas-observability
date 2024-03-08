@@ -12,6 +12,8 @@ spec:
   ruleSelector: {{ .Values.prometheusSpec.ruleSelector | toYaml | nindent 4 }}
   podMonitorNamespaceSelector: {{ .Values.prometheusSpec.podMonitorNamespaceSelector | toYaml | nindent 4 }}
   podMonitorSelector: {{ .Values.prometheusSpec.podMonitorSelector | toYaml | nindent 4 }}
+  probeNamespaceSelector: {{ .Values.prometheusSpec.probeNamespaceSelector | toYaml | nindent 4 }}
+  probeSelector: {{ .Values.prometheusSpec.probeSelector | toYaml | nindent 4 }}
   image: {{ .Values.prometheusSpec.image }}
   version: {{ .Values.prometheusSpec.version | quote }}
   resources: {{ .Values.prometheusSpec.resources | toYaml | nindent 4 }}
