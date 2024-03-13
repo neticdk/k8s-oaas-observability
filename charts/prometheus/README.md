@@ -60,9 +60,9 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheusSpec.image | string | `"quay.io/prometheus/prometheus:v2.48.1"` |  |
 | prometheusSpec.podMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.podMonitorSelector | object | `{}` |  |
+| prometheusSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | prometheusSpec.probeNamespaceSelector | object | `{}` |  |
 | prometheusSpec.probeSelector | object | `{}` |  |
-| prometheusSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | prometheusSpec.remoteWrite | list | `[]` |  |
 | prometheusSpec.replicas | int | `2` |  |
 | prometheusSpec.resources | object | `{}` |  |
