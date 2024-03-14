@@ -18,6 +18,8 @@ prometheusSpec:
   ruleSelector: {}
   podMonitorNamespaceSelector: {}
   podMonitorSelector: {}
+  probeNamespaceSelector: {}
+  probeSelector: {}
   resources: {}
   externalLabels: {}
   remoteWrite: []
