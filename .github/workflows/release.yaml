@@ -7,6 +7,9 @@ on:
 
 jobs:
   push_docker_image:
+    permissions:
+      contents: read
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
