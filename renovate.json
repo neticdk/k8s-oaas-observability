@@ -25,14 +25,14 @@
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
-      "depNameTemplate": "k8s.gcr.io/kube-state-metrics/kube-state-metrics",
+      "depNameTemplate": "registry.k8s.io/kube-state-metrics/kube-state-metrics",
       "datasourceTemplate": "docker"
     },
     {
       "customType": "regex",
       "fileMatch": ["^charts/oaas-observability/values.yaml$"],
       "matchStrings": [
-        "repository: quay.io/prometheus/prometheus\\s+tag: .*\\s+version: (?<currentValue>.*?)\\s"
+        "repository: quay.io/prometheus/prometheus\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
       ],
       "depNameTemplate": "quay.io/prometheus/prometheus",
       "datasourceTemplate": "docker"
@@ -41,7 +41,7 @@
       "customType": "regex",
       "fileMatch": ["^charts/oaas-observability/values.yaml$"],
       "matchStrings": [
-        "repository: quay.io/prometheus/alertmanager\\s+tag: .*\\s+version: (?<currentValue>.*?)\\s"
+        "repository: quay.io/prometheus/alertmanager\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
       ],
       "depNameTemplate": "quay.io/prometheus/alertmanager",
       "datasourceTemplate": "docker"
