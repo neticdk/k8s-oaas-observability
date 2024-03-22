@@ -3,6 +3,7 @@
   "extends": [
     "local>neticdk/renovate-config"
   ],
+  "bumpVersion": "patch",
   "postUpgradeTasks": {
     "commands": [
         "helm-docs"
