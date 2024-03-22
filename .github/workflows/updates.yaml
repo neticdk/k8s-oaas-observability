@@ -19,7 +19,7 @@ jobs:
 
       - name: Install extra tooling
         run: |
-          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.11.0
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.13.1
 
       - name: Check for image updates
         run: |
@@ -74,7 +74,7 @@ jobs:
 
       - name: Install extra tooling
         run: |
-          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.11.0
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.13.1
 
       - name: Add dependency chart repos
         run: ./.github/scripts/helm-repos.sh
@@ -137,7 +137,7 @@ jobs:
 
       - name: Install extra tooling
         run: |
-          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.11.0
+          go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.13.1
 
       - name: Add dependency chart repos
         run: ./.github/scripts/helm-repos.sh
