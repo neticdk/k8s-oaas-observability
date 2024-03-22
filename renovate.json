@@ -84,6 +84,15 @@
     },
     {
       "customType": "regex",
+      "fileMatch": ["^charts/prometheus/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/prometheus",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
       "fileMatch": ["^charts/prometheus-node-exporter/Chart.yaml$"],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
