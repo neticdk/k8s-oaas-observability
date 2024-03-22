@@ -51,7 +51,7 @@ $ helm install my-release netic-oaas/prometheus-operator
 | prometheusOperator.denyNamespaces | list | `[]` | Namespaces not to scope the interaction of the Prometheus Operator (deny list). |
 | prometheusOperator.enabled | bool | `true` |  |
 | prometheusOperator.hostNetwork | bool | `false` | Required for use in managed kubernetes clusters (such as AWS EKS) with custom CNI (such as calico), because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working |
-| prometheusOperator.hyperkubeImage | object | `{"pullPolicy":"Always","repository":"k8s.gcr.io/hyperkube","sha":"","tag":"v1.16.12"}` | Hyperkube image to use when cleaning up |
+| prometheusOperator.hyperkubeImage | object | `{"pullPolicy":"Always","repository":"registry.k8s.io/hyperkube","sha":"","tag":"v1.16.12"}` | Hyperkube image to use when cleaning up |
 | prometheusOperator.image | object | `{"pullPolicy":"Always","repository":"quay.io/prometheus-operator/prometheus-operator","sha":"","tag":""}` | Prometheus-operator image |
 | prometheusOperator.kubeletService | object | `{"enabled":true,"namespace":"kube-system"}` | If true, the operator will create and maintain a service for scraping kubelets ref: https://github.com/coreos/prometheus-operator/blob/master/helm/prometheus-operator/README.md |
 | prometheusOperator.logFormat | string | `"logfmt"` | Define Log Format Use logfmt (default) or json-formatted logging |
