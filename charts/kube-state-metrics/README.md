@@ -1,6 +1,6 @@
 # kube-state-metrics
 
-![Version: 1.0.16](https://img.shields.io/badge/Version-1.0.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.8.2](https://img.shields.io/badge/AppVersion-v2.8.2-informational?style=flat-square)
+![Version: 1.0.17](https://img.shields.io/badge/Version-1.0.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.8.2](https://img.shields.io/badge/AppVersion-v2.8.2-informational?style=flat-square)
 
 Install kube-state-metrics to generate and expose cluster-level metrics. Since this is now part of the Prometheus community
 Helm charts this has been deprecated and wont be maintained.
@@ -33,7 +33,7 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | global.networkPolicyEnabled | bool | `false` | Deploy network policy allowing ingress. |
 | hostNetwork | bool | `false` | Whether or not to use the host network |
 | image.pullPolicy | string | `"Always"` | Image pull policy |
-| image.repository | string | `"k8s.gcr.io/kube-state-metrics/kube-state-metrics"` | The image repository to pull from |
+| image.repository | string | `"registry.k8s.io/kube-state-metrics/kube-state-metrics"` | The image repository to pull from |
 | image.tag | string | `nil` | The image tag to pull - default is version from Chart.yaml |
 | imagePullSecrets | list | `[]` |  |
 | kubeTargetVersionOverride | string | `""` | Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role. For example: kubeTargetVersionOverride: 1.14.9 |
