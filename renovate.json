@@ -7,7 +7,6 @@
     "commands": [
         "helm-docs"
     ],
-    "fileFilters": ["**/README.md"],
     "executionMode": "branch"
   }
 }
