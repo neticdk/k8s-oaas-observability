@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>neticdk/renovate-config"
+  ],
+  "postUpgradeTasks": {
+    "commands": [
+        "helm-docs"
+    ],
+    "fileFilters": ["**/README.md"],
+    "executionMode": "branch"
+  }
+}
