@@ -9,5 +9,71 @@
         "helm-docs"
     ],
     "executionMode": "branch"
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/kube-state-metrics/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "k8s.gcr.io/kube-state-metrics/kube-state-metrics",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/opa-exporter/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "mcelep/opa_scorecard_exporter",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/opentelemetry-collector/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "otel/opentelemetry-collector",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/otel-operator/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/prometheus/values.yaml$"],
+      "matchStrings": [
+        "image: (?<depName>.*?):(?<currentValue>.*?)\\s",
+        "version: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/prometheus",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/prometheus-node-exporter/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/node-exporter",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/prometheus-operator/Chart.yaml$"],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus-operator/prometheus-operator",
+      "datasourceTemplate": "docker"
+    }
+  ]
 }
