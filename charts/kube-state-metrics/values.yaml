@@ -7,7 +7,7 @@ prometheusScrape: true
 
 image:
   # -- The image repository to pull from
-  repository: k8s.gcr.io/kube-state-metrics/kube-state-metrics
+  repository: registry.k8s.io/kube-state-metrics/kube-state-metrics
   # -- The image tag to pull - default is version from Chart.yaml
   tag:
   # -- Image pull policy
