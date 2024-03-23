@@ -51,7 +51,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.containers | list | `[]` |  |
 | alertmanager.alertmanagerSpec.externalUrl | string | `nil` |  |
 | alertmanager.alertmanagerSpec.image.repository | string | `"quay.io/prometheus/alertmanager"` |  |
-| alertmanager.alertmanagerSpec.image.tag | string | `"v0.23.0"` |  |
+| alertmanager.alertmanagerSpec.image.tag | string | `"v0.27.0"` |  |
 | alertmanager.alertmanagerSpec.listenLocal | bool | `false` |  |
 | alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` | Define Log Format Use 'logfmt' (default) or 'json-formatted' logging |
 | alertmanager.alertmanagerSpec.logLevel | string | `"info"` | Log level for Alertmanager to be configured with. |
@@ -73,7 +73,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.storage | object | `{}` | Storage is the definition of how storage will be used by the Alertmanager instances. ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md |
 | alertmanager.alertmanagerSpec.tolerations | list | `[]` |  |
 | alertmanager.alertmanagerSpec.useExistingSecret | bool | `false` | If true then the user will be responsible to provide a secret with alertmanager configuration So when true the config part will be ignored (including templateFiles) and the one in the secret will be used |
-| alertmanager.alertmanagerSpec.version | string | `"v0.23.0"` |  |
+| alertmanager.alertmanagerSpec.version | string | `"v0.27.0"` |  |
 | alertmanager.alertmanagerSpec.volumeMounts | list | `[]` |  |
 | alertmanager.alertmanagerSpec.volumes | list | `[]` |  |
 | alertmanager.apiVersion | string | `"v2"` | Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2 |
