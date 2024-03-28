@@ -57,7 +57,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | ingress.enabled | bool | `false` |  |
 | prometheusSpec.alerting | object | `{}` |  |
 | prometheusSpec.externalLabels | object | `{}` |  |
-| prometheusSpec.image | string | `"quay.io/prometheus/prometheus:v2.48.1"` |  |
+| prometheusSpec.image | string | `"quay.io/prometheus/prometheus:v2.51.1"` |  |
 | prometheusSpec.podMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.podMonitorSelector | object | `{}` |  |
 | prometheusSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
@@ -75,7 +75,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheusSpec.serviceMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.serviceMonitorSelector | object | `{}` |  |
 | prometheusSpec.storage | object | `{}` |  |
-| prometheusSpec.version | string | `"v2.48.1"` |  |
+| prometheusSpec.version | string | `"v2.51.1"` |  |
 | serviceAccount.create | bool | `true` |  |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
