@@ -6,7 +6,11 @@
   "bumpVersion": "patch",
   "postUpgradeTasks": {
     "commands": [
-        "helm-docs"
+      "helm-docs",
+      ".github/bump-versions",
+      "helm dependency update charts/oaas-observability",
+      ".github/bump-versions",
+      "helm-docs"
     ],
     "executionMode": "branch"
   },
@@ -21,7 +25,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^charts/kube-state-metrics/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/kube-state-metrics/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
@@ -30,7 +36,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/oaas-observability/values.yaml$"],
+      "fileMatch": [
+        "^charts/oaas-observability/values.yaml$"
+      ],
       "matchStrings": [
         "repository: quay.io/prometheus/prometheus\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
       ],
@@ -39,7 +47,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/oaas-observability/values.yaml$"],
+      "fileMatch": [
+        "^charts/oaas-observability/values.yaml$"
+      ],
       "matchStrings": [
         "repository: quay.io/prometheus/alertmanager\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
       ],
@@ -48,7 +58,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/opa-exporter/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/opa-exporter/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
@@ -57,7 +69,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/opentelemetry-collector/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/opentelemetry-collector/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
@@ -66,7 +80,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/otel-operator/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/otel-operator/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
@@ -75,7 +91,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/prometheus/values.yaml$"],
+      "fileMatch": [
+        "^charts/prometheus/values.yaml$"
+      ],
       "matchStrings": [
         "version: (?<currentValue>.*?)\\s"
       ],
@@ -84,7 +102,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/prometheus/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/prometheus/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
@@ -93,7 +113,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/prometheus-node-exporter/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/prometheus-node-exporter/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],
@@ -102,7 +124,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^charts/prometheus-operator/Chart.yaml$"],
+      "fileMatch": [
+        "^charts/prometheus-operator/Chart.yaml$"
+      ],
       "matchStrings": [
         "appVersion: (?<currentValue>.*?)\\s"
       ],

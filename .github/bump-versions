@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+git update-index -q --really-refresh
+
+for CHART in charts/*; do
+  if [ -n "$(git diff-index --name-only HEAD $CHART)" ]; then
+    next_chart_version=$(git show HEAD:./$CHART/Chart.yaml | yq '.version' | awk -F. -v OFS=. '{$NF += 1 ; print}');
+    export next_chart_version
+    yq '.version=strenv(next_chart_version)' -i $CHART/Chart.yaml
+  fi
+done
