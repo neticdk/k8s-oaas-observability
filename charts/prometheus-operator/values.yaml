@@ -227,6 +227,6 @@ prometheusOperator:
   # -- Hyperkube image to use when cleaning up
   hyperkubeImage:
     repository: registry.k8s.io/hyperkube
-    tag: v1.16.12
+    tag: v1.18.20
     sha: ""
     pullPolicy: Always
