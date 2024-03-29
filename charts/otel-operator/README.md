@@ -1,6 +1,6 @@
 # otel-operator
 
-![Version: 0.2.6](https://img.shields.io/badge/Version-0.2.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
+![Version: 0.2.7](https://img.shields.io/badge/Version-0.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.56.0](https://img.shields.io/badge/AppVersion-v0.56.0-informational?style=flat-square)
 
 **DEPRECATED** We recommend using: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator
 
@@ -47,7 +47,7 @@ $ helm install my-release netic-oaas/otel-operator
 | opentelemetryOperator.kubeRbacProxy.enabled | bool | `true` |  |
 | opentelemetryOperator.kubeRbacProxy.image.pullPolicy | string | `"Always"` |  |
 | opentelemetryOperator.kubeRbacProxy.image.repository | string | `"gcr.io/kubebuilder/kube-rbac-proxy"` |  |
-| opentelemetryOperator.kubeRbacProxy.image.tag | string | `"v0.5.0"` |  |
+| opentelemetryOperator.kubeRbacProxy.image.tag | string | `"v0.15.0"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.limits.memory | string | `"16Mi"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.requests.cpu | string | `"10m"` |  |
 | opentelemetryOperator.kubeRbacProxy.resources.requests.memory | string | `"16Mi"` |  |
