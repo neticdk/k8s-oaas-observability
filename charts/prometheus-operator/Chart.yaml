@@ -3,11 +3,11 @@ name: prometheus-operator
 type: application
 description: A Helm chart to install Prometheus Operator
 home: https://github.com/prometheus-operator/prometheus-operator
-version: 1.0.13
+version: 1.0.14
 appVersion: "0.56.1"
 maintainers:
-- name: langecode
-  email: tal@netic.dk
+  - name: langecode
+    email: tal@netic.dk
 sources:
-- https://github.com/prometheus-operator/prometheus-operator
-- https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-operator
+  - https://github.com/prometheus-operator/prometheus-operator
+  - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-operator
