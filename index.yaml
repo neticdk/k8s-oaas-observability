@@ -3839,6 +3839,23 @@ entries:
   otel-operator:
   - apiVersion: v2
     appVersion: v0.56.0
+    created: "2024-03-29T10:40:16.189978601Z"
+    description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
+      instances
+    digest: 97bbe38ce7208c9ca7d00c6e13573149a5c0b4659d1ed12249833a772cd44295
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: otel-operator
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.2.7/otel-operator-0.2.7.tgz
+    version: 0.2.7
+  - apiVersion: v2
+    appVersion: v0.56.0
     created: "2023-06-27T10:07:15.746336066Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
       instances
@@ -4503,4 +4520,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2024-03-26T08:54:45.142044883Z"
+generated: "2024-03-29T10:40:16.190528997Z"
