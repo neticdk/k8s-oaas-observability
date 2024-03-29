@@ -4,22 +4,33 @@
     "local>neticdk/renovate-config"
   ],
   "bumpVersion": "patch",
-  "postUpgradeTasks": {
-    "commands": [
-      "helm-docs",
-      ".github/bump-versions",
-      "helm dependency update charts/oaas-observability",
-      ".github/bump-versions",
-      "helm-docs"
-    ],
-    "executionMode": "branch"
-  },
   "packageRules": [
     {
       "matchDatasources": [
         "docker"
       ],
       "pinDigests": false
+    },
+    {
+      "matchFileNames": [
+        "charts/**"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "helm-docs",
+          ".github/bump-versions",
+          "helm dependency update charts/oaas-observability",
+          ".github/bump-versions",
+          "helm-docs"
+        ],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchFileNames": [
+        "charts/oaas-observability/**"
+      ],
+      "groupName": "oaas-observability"
     }
   ],
   "customManagers": [
