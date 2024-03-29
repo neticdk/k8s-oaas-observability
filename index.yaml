@@ -3883,6 +3883,23 @@ entries:
     version: 0.1.0
   otel-operator:
   - apiVersion: v2
+    appVersion: v0.96.0
+    created: "2024-03-29T11:06:19.100851768Z"
+    description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
+      instances
+    digest: e64cbfadcf5c36282902eba9b8cc4364a479d19a657507f6cc215dbfa7fea39e
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: otel-operator
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.2.8/otel-operator-0.2.8.tgz
+    version: 0.2.8
+  - apiVersion: v2
     appVersion: v0.56.0
     created: "2024-03-29T10:40:16.189978601Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
@@ -4087,25 +4104,6 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.1.14/otel-operator-0.1.14.tgz
     version: 0.1.14
   prometheus:
-  - apiVersion: v2
-    appVersion: v2.48.1
-    created: "2024-03-29T11:05:53.341250842Z"
-    description: A Helm chart to install Prometheus based on Prometheus Operator
-    digest: e1c466380ad8890552142f4dc314e1a67e4b3f6ae30821963bacd0f0451b9ead
-    home: https://prometheus.io/
-    keywords:
-    - prometheus
-    maintainers:
-    - email: tal@netic.dk
-      name: langecode
-    name: prometheus
-    sources:
-    - https://github.com/prometheus/prometheus
-    - https://github.com/neticdk/k8s-oaas-observability
-    type: application
-    urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-2.1.1/prometheus-2.1.1.tgz
-    version: 2.1.1
   - apiVersion: v2
     appVersion: v2.48.1
     created: "2024-03-14T10:19:38.240758692Z"
@@ -4584,4 +4582,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2024-03-29T11:05:53.341986305Z"
+generated: "2024-03-29T11:06:19.102119437Z"
