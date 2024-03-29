@@ -3,11 +3,135 @@
   "extends": [
     "local>neticdk/renovate-config"
   ],
+  "bumpVersion": "patch",
   "postUpgradeTasks": {
     "commands": [
-        "helm-docs"
+      "helm-docs",
+      ".github/bump-versions",
+      "helm dependency update charts/oaas-observability",
+      ".github/bump-versions",
+      "helm-docs"
     ],
-    "fileFilters": ["**/README.md"],
     "executionMode": "branch"
-  }
+  },
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/kube-state-metrics/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "registry.k8s.io/kube-state-metrics/kube-state-metrics",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/oaas-observability/values.yaml$"
+      ],
+      "matchStrings": [
+        "repository: quay.io/prometheus/prometheus\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/prometheus",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/oaas-observability/values.yaml$"
+      ],
+      "matchStrings": [
+        "repository: quay.io/prometheus/alertmanager\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/alertmanager",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/opa-exporter/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "mcelep/opa_scorecard_exporter",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/opentelemetry-collector/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "otel/opentelemetry-collector",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/otel-operator/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/prometheus/values.yaml$"
+      ],
+      "matchStrings": [
+        "version: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/prometheus",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/prometheus/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/prometheus",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/prometheus-node-exporter/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus/node-exporter",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/prometheus-operator/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "quay.io/prometheus-operator/prometheus-operator",
+      "datasourceTemplate": "docker"
+    }
+  ]
 }
