@@ -52,7 +52,7 @@ opentelemetryOperator:
     image:
       repository: gcr.io/kubebuilder/kube-rbac-proxy
       pullPolicy: Always
-      tag: v0.15.0
+      tag: v0.16.0
     securityContext:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
