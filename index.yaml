@@ -2,28 +2,6 @@ apiVersion: v1
 entries:
   kube-state-metrics:
   - apiVersion: v2
-    appVersion: v2.12.0
-    created: "2024-04-04T05:44:47.659312538Z"
-    deprecated: true
-    description: 'Install kube-state-metrics to generate and expose cluster-level
-      metrics. Since this is now part of the Prometheus community Helm charts this
-      has been deprecated and wont be maintained. See https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics '
-    digest: 98aa03df736002635b086cc013b52edca31de090d0377627bab1dcee07776ec0
-    home: https://github.com/kubernetes/kube-state-metrics
-    keywords:
-    - metric
-    - monitoring
-    - prometheus
-    - kubernetes
-    name: kube-state-metrics
-    sources:
-    - https://github.com/kubernetes/kube-state-metrics
-    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/kube-state-metrics
-    type: application
-    urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/kube-state-metrics-1.0.19/kube-state-metrics-1.0.19.tgz
-    version: 1.0.19
-  - apiVersion: v2
     appVersion: v2.8.2
     created: "2024-03-22T20:53:41.742327703Z"
     deprecated: true
@@ -4040,6 +4018,23 @@ entries:
     version: 0.1.0
   otel-operator:
   - apiVersion: v2
+    appVersion: v0.97.0
+    created: "2024-04-04T05:44:55.198232281Z"
+    description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
+      instances
+    digest: 804c0e3efe133a0ab0753743a3a5a91cf214263f1b37ac81a69a9f36242ac45c
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: otel-operator
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/otel-operator-0.2.10/otel-operator-0.2.10.tgz
+    version: 0.2.10
+  - apiVersion: v2
     appVersion: v0.96.0
     created: "2024-04-02T11:39:42.008208526Z"
     description: Install the OpenTelemetry Operator to create OpenTelemetry Collector
@@ -4756,4 +4751,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2024-04-04T05:44:47.660116297Z"
+generated: "2024-04-04T05:44:55.198952539Z"
