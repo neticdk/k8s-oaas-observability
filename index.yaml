@@ -4303,6 +4303,25 @@ entries:
   prometheus:
   - apiVersion: v2
     appVersion: v2.48.1
+    created: "2024-04-11T06:17:29.55069342Z"
+    description: A Helm chart to install Prometheus based on Prometheus Operator
+    digest: 63581d851c596869a6e882d0e6e9d5f9848e1a9245a19b1797504074a4bd4004
+    home: https://prometheus.io/
+    keywords:
+    - prometheus
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: prometheus
+    sources:
+    - https://github.com/prometheus/prometheus
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-2.1.2/prometheus-2.1.2.tgz
+    version: 2.1.2
+  - apiVersion: v2
+    appVersion: v2.48.1
     created: "2024-03-14T10:19:38.240758692Z"
     description: A Helm chart to install Prometheus based on Prometheus Operator
     digest: cd3363da90c3a95c401d3bff9da115f86eb30331160b0208811912fafc6b7de1
@@ -4796,4 +4815,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2024-04-09T19:37:15.899118474Z"
+generated: "2024-04-11T06:17:29.551314939Z"
