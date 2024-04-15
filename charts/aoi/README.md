@@ -116,6 +116,9 @@ A Helm chart for Netic application operations infrastructure
 | grafana.sidecar.datasources.enabled | bool | `true` |  |
 | grafana.sidecar.datasources.label | string | `"aoi_grafana_datasource"` |  |
 | grafana.sidecar.imagePullPolicy | string | `"Always"` |  |
+| grafana.sidecar.resources.limits.memory | string | `"96Mi"` |  |
+| grafana.sidecar.resources.requests.cpu | string | `"50m"` |  |
+| grafana.sidecar.resources.requests.memory | string | `"96Mi"` |  |
 | grafana.sidecar.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"all"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
@@ -181,6 +184,7 @@ A Helm chart for Netic application operations infrastructure
 | victoria-metrics-single-1.server.podSecurityContext.fsGroup | int | `2000` |  |
 | victoria-metrics-single-1.server.podSecurityContext.runAsGroup | int | `3000` |  |
 | victoria-metrics-single-1.server.podSecurityContext.runAsUser | int | `1000` |  |
+| victoria-metrics-single-1.server.priorityClassName | string | `"secure-cloud-stack-tenant-namespace-application-critical"` |  |
 | victoria-metrics-single-1.server.resources.limits.memory | string | `"1024Mi"` |  |
 | victoria-metrics-single-1.server.resources.requests.cpu | string | `"200m"` |  |
 | victoria-metrics-single-1.server.resources.requests.memory | string | `"1024Mi"` |  |
