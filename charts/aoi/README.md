@@ -85,6 +85,7 @@ A Helm chart for Netic application operations infrastructure
 | global.clusterDomain | string | `"cluster.local"` |  |
 | global.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | global.containerSecurityContext.capabilities.drop[0] | string | `"all"` |  |
+| global.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | global.image.pullPolicy | string | `"Always"` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | global.podAnnotations | object | `{}` |  |
@@ -180,6 +181,7 @@ A Helm chart for Netic application operations infrastructure
 | victoria-metrics-single-1.server.retentionPeriod | string | `"90d"` | Data retention period |
 | victoria-metrics-single-1.server.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | victoria-metrics-single-1.server.securityContext.capabilities.drop[0] | string | `"all"` |  |
+| victoria-metrics-single-1.server.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | victoria-metrics-single-1.server.serviceMonitor.enabled | bool | `true` |  |
 | victoria-metrics-single-1.server.serviceMonitor.extraLabels."netic.dk/monitoring" | string | `"true"` |  |
 | victoria-metrics-single-2.rbac.create | bool | `false` |  |
@@ -197,6 +199,7 @@ A Helm chart for Netic application operations infrastructure
 | victoria-metrics-single-2.server.retentionPeriod | string | `"90d"` | Data retention period |
 | victoria-metrics-single-2.server.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | victoria-metrics-single-2.server.securityContext.capabilities.drop[0] | string | `"all"` |  |
+| victoria-metrics-single-2.server.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | victoria-metrics-single-2.server.serviceMonitor.enabled | bool | `true` |  |
 | victoria-metrics-single-2.server.serviceMonitor.extraLabels."netic.dk/monitoring" | string | `"true"` |  |
 | victoriaMetrics.persistentVolume.size | string | `"5Gi"` | Size of the volume. Should be calculated based on the metrics you send and retention policy you set. |

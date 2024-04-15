@@ -17,6 +17,7 @@ global:
   podLabels: {}
   imagePullSecrets: []
   containerSecurityContext:
+    readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
     capabilities:
       drop:
@@ -277,6 +278,7 @@ victoria-metrics-single-1:
         memory: 1024Mi
     securityContext:
       allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
       capabilities:
         drop:
           - all
@@ -316,6 +318,7 @@ victoria-metrics-single-2:
         memory: 1024Mi
     securityContext:
       allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
       capabilities:
         drop:
           - all
