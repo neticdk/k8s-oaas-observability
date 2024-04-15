@@ -89,7 +89,7 @@ A Helm chart for Netic application operations infrastructure
 | global.imagePullSecrets | list | `[]` |  |
 | global.podAnnotations | object | `{}` |  |
 | global.podLabels | object | `{}` |  |
-| global.priorityClassName | string | `nil` | Default priorityClassName to use |
+| global.priorityClassName | string | `"secure-cloud-stack-tenant-namespace-application-critical"` | Default priorityClassName to use |
 | global.revisionHistoryLimit | int | `5` |  |
 | global.serviceAnnotations | object | `{}` |  |
 | global.serviceLabels | object | `{}` |  |
