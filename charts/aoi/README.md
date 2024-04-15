@@ -95,6 +95,9 @@ A Helm chart for Netic application operations infrastructure
 | global.serviceAnnotations | object | `{}` |  |
 | global.serviceLabels | object | `{}` |  |
 | global.tsdb.high_availability.enabled | bool | `false` | Enable high-availability for tsdb (Victoria-metrics-single) |
+| grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| grafana.containerSecurityContext.capabilities.drop[0] | string | `"all"` |  |
+| grafana.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.enabled | bool | `true` | If true deploy Grafana for tenant dashboards |
 | grafana.image.pullPolicy | string | `"Always"` |  |
 | grafana.ingress.enabled | bool | `false` |  |
@@ -112,7 +115,10 @@ A Helm chart for Netic application operations infrastructure
 | grafana.sidecar.dashboards.searchNamespace | list | `["application-operations-dashboards"]` | Watch for configmaps in namespaces |
 | grafana.sidecar.datasources.enabled | bool | `true` |  |
 | grafana.sidecar.datasources.label | string | `"aoi_grafana_datasource"` |  |
-| grafana.sidecar.image.pullPolicy | string | `"Always"` |  |
+| grafana.sidecar.imagePullPolicy | string | `"Always"` |  |
+| grafana.sidecar.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| grafana.sidecar.securityContext.capabilities.drop[0] | string | `"all"` |  |
+| grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
 | prometheus.configReloader.resources.limits.memory | string | `"25Mi"` |  |
 | prometheus.configReloader.resources.requests.cpu | string | `"10m"` |  |

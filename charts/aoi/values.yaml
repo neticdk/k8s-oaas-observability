@@ -215,6 +215,12 @@ grafana:
     pullPolicy: Always
   testFramework:
     enabled: false
+  containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - all
   priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
   resources:
     limits:
@@ -225,8 +231,13 @@ grafana:
   podPortName: http
   # sidecar used to provision tenant dashboards found as configmaps in the namespace application-operations-dashboards with label aoi_dashboard
   sidecar:
-    image:
-      pullPolicy: Always
+    imagePullPolicy: Always
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - all
     dashboards:
       enabled: true
       # -- Load configmaps with label key
