@@ -238,6 +238,12 @@ grafana:
       capabilities:
         drop:
           - all
+    resources:
+      limits:
+        memory: 96Mi
+      requests:
+        cpu: 50m
+        memory: 96Mi
     dashboards:
       enabled: true
       # -- Load configmaps with label key
@@ -266,6 +272,7 @@ victoria-metrics-single-1:
   rbac:
     create: false
   server:
+    priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
     # -- Data retention period
     retentionPeriod: 90d
     image:
