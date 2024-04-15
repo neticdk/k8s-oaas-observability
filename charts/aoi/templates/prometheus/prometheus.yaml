@@ -19,9 +19,13 @@ spec:
         - -remoteWrite.tmpDataPath=/prometheus
         - -remoteWrite.maxDiskUsagePerURL={{- include "aoi.prometheusMaxDiskUsagePerURL" . }}
       image: "{{ .Values.prometheus.image.registry }}/{{ .Values.prometheus.image.repository }}:{{ .Values.prometheus.image.tag }}"
+      securityContext:
+        {{- toYaml .Values.global.containerSecurityContext | nindent 8 }}
     - name: config-reloader
       resources:
         {{- toYaml .Values.prometheus.configReloader.resources | nindent 8 }}
+      securityContext:
+        {{- toYaml .Values.global.containerSecurityContext | nindent 8 }}
   evaluationInterval: 30s
   externalLabels: {{ .Values.prometheus.externalLabels | toYaml | nindent 4 }}
   podMetadata:
