@@ -38,6 +38,7 @@ jobs:
       - name: Render documentation
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
+          echo test
           helm-docs
           git update-index --ignore-submodules --refresh
           if ! git diff-files --ignore-submodules -- ; then
