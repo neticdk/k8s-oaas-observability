@@ -39,8 +39,8 @@ jobs:
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
           helm-docs
-          git update-index -q --ignore-submodules --refresh
-          if ! git diff-files --quiet --ignore-submodules -- ; then
+          git update-index --ignore-submodules --refresh
+          if ! git diff-files --ignore-submodules -- ; then
             echo Generating documentation caused a change - did you forget to run 'helm-docs' before commit?
             exit 1
           fi
