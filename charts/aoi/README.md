@@ -59,7 +59,7 @@ A Helm chart for Netic application operations infrastructure
 | authProxy.podSecurityContext.runAsGroup | int | `3000` |  |
 | authProxy.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | authProxy.podSecurityContext.runAsUser | int | `1000` |  |
-| authProxy.priorityClassName | string | `nil` |  |
+| authProxy.priorityClassName | string | `"secure-cloud-stack-tenant-namespace-application-critical"` |  |
 | authProxy.replicas | int | `1` |  |
 | authProxy.resources.limits.memory | string | `"64Mi"` |  |
 | authProxy.resources.requests.cpu | string | `"100m"` |  |

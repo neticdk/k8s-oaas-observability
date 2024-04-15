@@ -62,7 +62,7 @@ authProxy:
     registry: registry.netic.dk
     repository: netic-oaas/cortex-proxy
     tag: v1.0.4
-  priorityClassName: null
+  priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
   annotations: {}
   podAnnotations: {}
   podLabels: {}
