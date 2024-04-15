@@ -216,11 +216,11 @@ grafana:
   testFramework:
     enabled: false
   containerSecurityContext:
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      capabilities:
-        drop:
-          - all
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - all
   priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
   resources:
     limits:
