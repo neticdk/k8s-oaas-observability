@@ -6,7 +6,7 @@ global:
       # -- Enable high-availability for tsdb (Victoria-metrics-single)
       enabled: false
   # -- Default priorityClassName to use
-  priorityClassName: null
+  priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
   serviceLabels: {}
   serviceAnnotations: {}
   image:
