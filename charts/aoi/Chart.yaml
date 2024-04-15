@@ -2,7 +2,15 @@ apiVersion: v2
 name: aoi
 description: A Helm chart for Netic application operations infrastructure
 type: application
-version: 0.1.13
+version: 0.1.14
+home: https://github.com/neticdk/k8s-oaas-observability
+sources:
+  - https://github.com/neticdk/k8s-oaas-observability
+maintainers:
+  - name: alex5517
+    email: ash@netic.dk
+  - name: mathiasfm
+    email: mfm@netic.dk
 dependencies:
   - name: grafana
     version: 7.3.7
