@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.1.46](https://img.shields.io/badge/Version-2.1.46-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.1.47](https://img.shields.io/badge/Version-2.1.47-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -198,7 +198,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeApiServer.serviceMonitor.metricRelabelings[4].regex | string | `"reflector_(items_per_list|items_per_watch|list_duration_seconds|lists_total|short_watches_total|watch_duration_seconds|watches_total)"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[4].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[5].action | string | `"drop"` |  |
-| kubeApiServer.serviceMonitor.metricRelabelings[5].regex | string | `"etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary)"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[5].regex | string | `"etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary|request_duration_seconds_bucket)"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[5].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[6].action | string | `"drop"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[6].regex | string | `"transformation_(transformation_latencies_microseconds|failures_total)"` |  |
