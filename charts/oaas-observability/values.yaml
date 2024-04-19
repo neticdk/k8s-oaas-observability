@@ -128,7 +128,7 @@ kubeApiServer:
         sourceLabels:
           - __name__
       - action: drop
-        regex: etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary)
+        regex: etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary|request_duration_seconds_bucket)
         sourceLabels:
           - __name__
       - action: drop
