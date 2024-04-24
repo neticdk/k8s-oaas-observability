@@ -92,17 +92,6 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^charts/otel-operator/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
         "^charts/prometheus/values.yaml$"
       ],
       "matchStrings": [
