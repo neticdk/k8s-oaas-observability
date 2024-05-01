@@ -1,6 +1,8 @@
 # opentelemetry-collector
 
-![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.27.0](https://img.shields.io/badge/AppVersion-0.27.0-informational?style=flat-square)
+![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.99.0](https://img.shields.io/badge/AppVersion-0.99.0-informational?style=flat-square)
+
+**DEPRECATED** We recommend using: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
 
 A small Helm chart to install OpenTelemetry Collector
 
@@ -18,7 +20,7 @@ $ helm install my-release netic-oaas/opentelemetry-collector
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | config.exporters | object | `{}` |  |
-| config.extensions.health_check.port | int | `13133` |  |
+| config.extensions.health_check.endpoint | string | `"0.0.0.0:13133"` |  |
 | config.extensions.zpages.endpoint | string | `"localhost:55679"` |  |
 | config.receivers.otlp.protocols.grpc.endpoint | string | `"0.0.0.0:4317"` |  |
 | config.receivers.otlp.protocols.http.endpoint | string | `"0.0.0.0:55681"` |  |

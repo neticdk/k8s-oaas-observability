@@ -1,10 +1,9 @@
 config:
   exporters:
-    logging:
-      logLevel: debug
+    debug: {}
   service:
     pipelines:
       traces:
         receivers: [otlp]
         processors: [memory_limiter, batch]
-        exporters: [logging]
+        exporters: [debug]

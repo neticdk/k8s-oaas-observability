@@ -26,8 +26,6 @@ spec:
         securityContext: {{ toYaml .Values.securityContext | nindent 10 }}
         args:
           - "--config=/conf/otel-collector-config.yaml"
-          - "--metrics-addr=0.0.0.0:8888"
-          - "--mem-ballast-size-mib={{ include "otel-collector.getMemBallastSizeMib" .Values.resources.limits.memory }}"
         resources: {{ .Values.resources | toYaml | nindent 10 }}
         ports:
         - name: grpc
@@ -42,11 +40,11 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: {{ .Values.config.extensions.health_check.port }}
+            port: 13133
         readinessProbe:
           httpGet:
             path: /
-            port: {{ .Values.config.extensions.health_check.port }}
+            port: 13133
       volumes:
         - name: otel-collector-config-vol
           configMap:
