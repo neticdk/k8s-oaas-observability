@@ -5,6 +5,3 @@ appVersion: 0.99.0
 type: application
 description: A small Helm chart to install OpenTelemetry Collector
 deprecated: true
-maintainers:
-  - name: langecode
-    email: tal@netic.dk
