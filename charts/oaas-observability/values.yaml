@@ -1497,7 +1497,7 @@ endpointController:
   enabled: false
   image:
     repository: ghcr.io/neticdk/endpoint-controller
-    tag: v1.0.4
+    tag: v1.0.5
     pullPolicy: IfNotPresent
   # -- Expose controller and scheduler based on node labels
   kubeServices: true
