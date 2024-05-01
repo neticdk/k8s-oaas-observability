@@ -4158,6 +4158,17 @@ entries:
     version: 0.1.1
   opentelemetry-collector:
   - apiVersion: v2
+    appVersion: 0.99.0
+    created: "2024-05-01T12:56:08.007018995Z"
+    deprecated: true
+    description: A small Helm chart to install OpenTelemetry Collector
+    digest: 33cf9afb2090460448215214e43a013f69142b6bde6424e4870d0d41cb0a9453
+    name: opentelemetry-collector
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/opentelemetry-collector-0.1.3/opentelemetry-collector-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     appVersion: 0.27.0
     created: "2023-06-27T10:07:15.603797486Z"
     description: A small Helm chart to install OpenTelemetry Collector
@@ -4990,4 +5001,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2024-04-30T10:03:06.001078341Z"
+generated: "2024-05-01T12:56:08.007808727Z"
