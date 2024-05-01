@@ -1,5 +1,6 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push")
+load("@rules_pkg//pkg:pkg.bzl", "pkg_tar")
 
 go_library(
     name = "go_default_library",
@@ -22,19 +23,20 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
-container_image(
-    name = "docker_image",
-    base = "@alpine_linux_amd64//image",
-    entrypoint = ["/controller"],
-    files = [":controller"],
-    user = "65534",
+pkg_tar(
+    name = "controller_layer",
+    srcs = [":controller"],
 )
 
-container_push(
-    name = "publish",
-    format = "Docker",
-    image = ":docker_image",
-    registry = "ghcr.io",
-    repository = "neticdk/endpoint-controller",
-    tag = "$(version)",
+oci_image(
+    name = "controller_image",
+    base = "@distroless_base",
+    entrypoint = ["/controller"],
+    tars = [":controller_layer"],
+)
+
+oci_push(
+    name = "push",
+    image = ":controller_image",
+    repository = "ghcr.io/neticdk/endpoint-controller",
 )
