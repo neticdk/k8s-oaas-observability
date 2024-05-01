@@ -9,7 +9,6 @@ data:
     processors:
       batch:
       memory_limiter:
-        ballast_size_mib: {{ include "otel-collector.getMemBallastSizeMib" .Values.resources.limits.memory }}
         limit_mib: {{ include "otel-collector.getMemLimitMib" .Values.resources.limits.memory }}
         spike_limit_mib: {{ include "otel-collector.getMemSpikeLimitMib" .Values.resources.limits.memory }}
         check_interval: 5s
