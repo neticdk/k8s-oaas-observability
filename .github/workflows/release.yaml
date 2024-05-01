@@ -26,4 +26,4 @@ jobs:
       - name: Push container image to GitHub Container Registry
         run: |
           cd controllers/endpoint-controller
-          bazel run --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 --define version=${{ steps.vars.outputs.tag }} //cmd/controller:publish
+          bazel run //cmd/controller:push -- --tag ${{ steps.vars.outputs.tag }} --tag latest
