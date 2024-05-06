@@ -22,7 +22,7 @@ services:
 
   grafana:
     container_name: grafana
-    image: grafana/grafana:10.4.1
+    image: grafana/grafana:10.4.2
     depends_on:
     - "victoriametrics"
     ports:

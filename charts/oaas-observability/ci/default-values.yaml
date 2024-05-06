@@ -2,11 +2,12 @@
 # Values used by ct for linting and testing
 
 grafana:
+  enabled: false
+  testFramework:
+    enabled: false
   resources: {}
   sidecar:
     resources: {}
-  testFramework:
-    enabled: true
 
 kube-state-metrics:
   resources: {}
