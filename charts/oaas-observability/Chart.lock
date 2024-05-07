@@ -13,12 +13,12 @@ dependencies:
   version: 1.0.14
 - name: opentelemetry-operator
   repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-  version: 0.56.0
+  version: 0.56.1
 - name: vector-agent
   repository: https://helm.vector.dev
   version: 0.21.3
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.15.5
-digest: sha256:0779fa93786b0dc50ead57608a98c48521d49c6cfdf696509238ef85181a6f0b
-generated: "2024-05-01T12:06:45.636405706Z"
+digest: sha256:8b2cbffe79a241cdaebb43f1ccdb703a032d7a3118344806603142c66a0e4463
+generated: "2024-05-07T04:06:03.581678142Z"
