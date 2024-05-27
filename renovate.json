@@ -132,6 +132,17 @@
       ],
       "depNameTemplate": "quay.io/prometheus-operator/prometheus-operator",
       "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^charts/opa-exporter/Chart.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.*?)\\s"
+      ],
+      "depNameTemplate": "mcelep/opa_scorecard_exporter",
+      "datasourceTemplate": "docker"
     }
   ]
 }
