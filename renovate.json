@@ -28,6 +28,17 @@
     },
     {
       "matchFileNames": [
+        "charts/prometheus-operator/**"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "curl -L -ocharts/prometheus-operator/crds/prometheus-operator-crds.yaml https://github.com/prometheus-operator/prometheus-operator/releases/download/$(yq '.appVersion' charts/prometheus-operator/Chart.yaml)/stripped-down-crds.yaml"
+        ],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchFileNames": [
         "charts/oaas-observability/**"
       ],
       "groupName": "oaas-observability"
@@ -37,12 +48,13 @@
     {
       "customType": "regex",
       "datasourceTemplate": "docker",
-      "fileMatch": ["(^|/)Chart\\.yaml$"],
+      "fileMatch": [
+        "(^|/)Chart\\.yaml$"
+      ],
       "matchStrings": [
         "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
       ]
     },
-
     {
       "customType": "regex",
       "fileMatch": [
@@ -65,7 +77,6 @@
       "depNameTemplate": "quay.io/prometheus/alertmanager",
       "datasourceTemplate": "docker"
     },
-
     {
       "customType": "regex",
       "fileMatch": [
