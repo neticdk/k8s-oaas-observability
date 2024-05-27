@@ -12,6 +12,7 @@ keywords:
   - prometheus
   - kubernetes
 version: 1.0.19
+# renovate: image=registry.k8s.io/kube-state-metrics/kube-state-metrics
 appVersion: v2.12.0
 deprecated: true
 sources:

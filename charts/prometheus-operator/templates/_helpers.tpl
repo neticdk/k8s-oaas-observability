@@ -69,7 +69,7 @@ Resolve the actual image tag to use.
 {{- if .Values.prometheusOperator.image.tag }}
 {{- .Values.prometheusOperator.image.tag }}
 {{- else }}
-{{- printf "v%s" .Chart.AppVersion }}
+{{- printf "%s" .Chart.AppVersion }}
 {{- end }}
 {{- end }}
 
@@ -80,6 +80,6 @@ Resolve the actual image tag to use for config map reloader.
 {{- if .Values.prometheusOperator.prometheusConfigReloaderImage.tag }}
 {{- .Values.prometheusOperator.prometheusConfigReloaderImage.tag }}
 {{- else }}
-{{- printf "v%s" .Chart.AppVersion }}
+{{- printf "%s" .Chart.AppVersion }}
 {{- end }}
 {{- end }}
