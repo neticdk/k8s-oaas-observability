@@ -3,7 +3,7 @@ name: prometheus-operator
 type: application
 description: A Helm chart to install Prometheus Operator
 home: https://github.com/prometheus-operator/prometheus-operator
-version: 1.0.14
+version: 1.0.15
 # renovate: image=quay.io/prometheus-operator/prometheus-operator
 appVersion: "v0.60.0"
 maintainers:
