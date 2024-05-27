@@ -1,7 +1,7 @@
 apiVersion: v2
 name: opentelemetry-collector
-version: 0.1.4
-appVersion: 0.100.0
+version: 0.1.5
+appVersion: 0.101.0
 type: application
 description: A small Helm chart to install OpenTelemetry Collector
 deprecated: true
