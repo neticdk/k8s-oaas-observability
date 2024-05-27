@@ -28,6 +28,17 @@
     },
     {
       "matchFileNames": [
+        "charts/prometheus-operator/**"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "curl -L -ocharts/prometheus-operator/crds/prometheus-operator-crds.yaml https://github.com/prometheus-operator/prometheus-operator/releases/download/$(yq '.appVersion' charts/prometheus-operator/Chart.yaml)/stripped-down-crds.yaml"
+        ],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchFileNames": [
         "charts/oaas-observability/**"
       ],
       "groupName": "oaas-observability"
@@ -36,14 +47,13 @@
   "customManagers": [
     {
       "customType": "regex",
+      "datasourceTemplate": "docker",
       "fileMatch": [
-        "^charts/kube-state-metrics/Chart.yaml$"
+        "(^|/)Chart\\.yaml$"
       ],
       "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "registry.k8s.io/kube-state-metrics/kube-state-metrics",
-      "datasourceTemplate": "docker"
+        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
+      ]
     },
     {
       "customType": "regex",
@@ -70,78 +80,12 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^charts/opa-exporter/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "mcelep/opa_scorecard_exporter",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^charts/opentelemetry-collector/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "otel/opentelemetry-collector",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
         "^charts/prometheus/values.yaml$"
       ],
       "matchStrings": [
         "version: (?<currentValue>.*?)\\s"
       ],
       "depNameTemplate": "quay.io/prometheus/prometheus",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^charts/prometheus/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "quay.io/prometheus/prometheus",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^charts/prometheus-node-exporter/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "quay.io/prometheus/node-exporter",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^charts/prometheus-operator/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "quay.io/prometheus-operator/prometheus-operator",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^charts/opa-exporter/Chart.yaml$"
-      ],
-      "matchStrings": [
-        "appVersion: (?<currentValue>.*?)\\s"
-      ],
-      "depNameTemplate": "mcelep/opa_scorecard_exporter",
       "datasourceTemplate": "docker"
     }
   ]

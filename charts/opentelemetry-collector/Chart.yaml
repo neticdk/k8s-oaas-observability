@@ -1,6 +1,7 @@
 apiVersion: v2
 name: opentelemetry-collector
-version: 0.1.5
+version: 0.1.6
+# renovate: image=otel/opentelemetry-collector
 appVersion: 0.101.0
 type: application
 description: A small Helm chart to install OpenTelemetry Collector
