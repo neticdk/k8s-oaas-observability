@@ -69,43 +69,6 @@ spec:
             readOnlyRootFilesystem: true
             capabilities:
               drop: ['ALL']
-        {{- if .Values.prometheusOperator.tlsProxy.enabled }}
-        - name: tls-proxy
-          {{- if .Values.prometheusOperator.tlsProxy.image.sha }}
-          image: {{ .Values.prometheusOperator.tlsProxy.image.repository }}:{{ .Values.prometheusOperator.tlsProxy.image.tag }}@sha256:{{ .Values.prometheusOperator.tlsProxy.image.sha }}
-          {{- else }}
-          image: {{ .Values.prometheusOperator.tlsProxy.image.repository }}:{{ .Values.prometheusOperator.tlsProxy.image.tag }}
-          {{- end }}
-          imagePullPolicy: {{ .Values.prometheusOperator.tlsProxy.image.pullPolicy }}
-          args:
-            - server
-            - --listen=:8443
-            - --target=127.0.0.1:8080
-            - --key=cert/key
-            - --cert=cert/cert
-            - --disable-authentication
-          resources:
-{{ toYaml .Values.prometheusOperator.tlsProxy.resources | indent 12 }}
-          volumeMounts:
-          - name: tls-proxy-secret
-            mountPath: /cert
-            readOnly: true
-          ports:
-            - containerPort: 8443
-              name: https
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop: ['ALL']
-        {{- end }}
-{{- if .Values.prometheusOperator.tlsProxy.enabled }}
-      volumes:
-        - name: tls-proxy-secret
-          secret:
-            defaultMode: 420
-            secretName: {{ template "fullname" . }}-admission
-{{- end }}
 {{- if .Values.prometheusOperator.securityContext }}
       securityContext:
 {{ toYaml .Values.prometheusOperator.securityContext | indent 8 }}
