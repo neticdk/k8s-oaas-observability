@@ -19,53 +19,6 @@ global:
 prometheusOperator:
   enabled: true
 
-  # If true prometheus operator will create and update its CRDs on startup
-  # Only for prometheusOperator.image.tag < v0.39.0
-  manageCrds: true
-
-  tlsProxy:
-    enabled: true
-    image:
-      repository: squareup/ghostunnel
-      tag: v1.5.2
-      sha: ""
-      pullPolicy: Always
-    resources:
-      limits:
-        memory: 48Mi
-      requests:
-        cpu: 50m
-        memory: 48Mi
-
-  ## Admission webhook support for PrometheusRules resources added in Prometheus Operator 0.30 can be enabled to prevent incorrectly formatted
-  ## rules from making their way into prometheus and potentially preventing the container from starting
-  admissionWebhooks:
-    failurePolicy: Fail
-    enabled: true
-    ## If enabled, generate a self-signed certificate, then patch the webhook configurations with the generated data.
-    ## On chart upgrades (or if the secret exists) the cert will not be re-generated. You can use this to provide your own
-    ## certs ahead of time if you wish.
-    ##
-    patch:
-      enabled: true
-      image:
-        repository: rpkatz/kube-webhook-certgen
-        tag: v1.5.2
-        sha: ""
-        pullPolicy: Always
-      resources:
-        limits:
-          memory: 64Mi
-        requests:
-          cpu: 100m
-          memory: 64Mi
-      # -- Provide a priority class name to the webhook patching job
-      priorityClassName: "secure-cloud-stack-technical-operations-critical"
-      podAnnotations: {}
-      nodeSelector: {}
-      affinity: {}
-      tolerations: []
-
   # -- Namespaces to scope the interaction of the Prometheus Operator and the apiserver (allow list).
   # This is mutually exclusive with denyNamespaces. Setting this to an empty object will disable the configuration
   namespaces: {}
@@ -110,12 +63,6 @@ prometheusOperator:
     # -- List of IP addresses at which the Prometheus server service is available
     # Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
     externalIPs: []
-
-  # -- Deploy CRDs used by Prometheus Operator.
-  createCustomResource: true
-
-  # -- Attempt to clean up CRDs created by Prometheus Operator.
-  cleanupCustomResource: false
 
   # -- Labels to add to the operator pod
   podLabels: {}
