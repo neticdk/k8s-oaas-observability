@@ -1,0 +1,34 @@
+{{ template "chart.header" . }}
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+## A note on cert-manager
+
+oaas-observability depends on cert-manager version 1.3.x. A cert-manager chart
+is included but not enabled by default. It can be enabled by setting the value
+`cert-manager.enabled` to `true`. Otherwise it is assumed that cert-manager has
+been installed.
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```bash
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
+$ helm install my-release netic-oaas/{{ template "chart.name" . }}
+```
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+## Configuration
+
+{{ template "chart.valuesTable" . }}
+
+## Development
+
+See [DEVELOPMENT.md](../../DEVELOPMENT.md)
