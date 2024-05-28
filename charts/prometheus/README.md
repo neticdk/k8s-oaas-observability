@@ -2,7 +2,7 @@
 
 # prometheus
 
-![Version: 2.1.4](https://img.shields.io/badge/Version-2.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.48.1](https://img.shields.io/badge/AppVersion-v2.48.1-informational?style=flat-square)
+![Version: 2.1.5](https://img.shields.io/badge/Version-2.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.52.0](https://img.shields.io/badge/AppVersion-v2.52.0-informational?style=flat-square)
 
 A Helm chart to install Prometheus based on Prometheus Operator
 
