@@ -17,7 +17,6 @@
       ],
       "postUpgradeTasks": {
         "commands": [
-          "helm-docs",
           ".github/bump-versions",
           "helm dependency update charts/oaas-observability",
           ".github/bump-versions",
@@ -32,7 +31,11 @@
       ],
       "postUpgradeTasks": {
         "commands": [
-          "curl -L -ocharts/prometheus-operator/crds/prometheus-operator-crds.yaml https://github.com/prometheus-operator/prometheus-operator/releases/download/$(yq '.appVersion' charts/prometheus-operator/Chart.yaml)/stripped-down-crds.yaml"
+          "curl -L -ocharts/prometheus-operator/crds/prometheus-operator-crds.yaml https://github.com/prometheus-operator/prometheus-operator/releases/download/$(yq '.appVersion' charts/prometheus-operator/Chart.yaml)/stripped-down-crds.yaml",
+          ".github/bump-versions",
+          "helm dependency update charts/oaas-observability",
+          ".github/bump-versions",
+          "helm-docs"
         ],
         "executionMode": "branch"
       }
