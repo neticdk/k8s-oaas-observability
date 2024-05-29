@@ -1,4 +1,3 @@
-
 promtail:
   configmap:
     enabled: true
