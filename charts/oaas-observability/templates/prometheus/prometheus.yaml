@@ -198,7 +198,12 @@ spec:
 {{- end }}
 {{- if or .Values.prometheus.prometheusSpec.containers .Values.prometheus.agent }}
   containers:
-{{- if .Values.prometheus.agent }}
+{{- if .Values.prometheus.remoteWrite }}
+    - name: prometheus
+      args:
+        - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
+        - --web.enable-remote-write-receiver
+{{- else if .Values.prometheus.agent }}
     - name: prometheus
       args:
         - --enable-feature=agent

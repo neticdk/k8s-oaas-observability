@@ -441,6 +441,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |
+| prometheus.remoteWrite | bool | `false` |  |
 | prometheus.service.additionalPorts | list | `[]` |  |
 | prometheus.service.annotations | object | `{}` |  |
 | prometheus.service.clusterIP | string | `""` |  |

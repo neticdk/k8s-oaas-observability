@@ -1027,6 +1027,11 @@ prometheus:
   # -- Sets up Prometheus to run in agent mode only running discovery, scrape and remote write
   agent: false
 
+  ## -- Sets up Prometheus to run with remote write receiver flag set
+  ## ref: https://prometheus.io/docs/prometheus/latest/feature_flags/#remote-write-receiver
+  ##
+  remoteWrite: false
+
   ## Service account for Prometheuses to use.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
   ##
