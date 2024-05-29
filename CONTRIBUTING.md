@@ -25,6 +25,8 @@ Unsure where to begin contributing?
 ## Code Contribution Guideline
 This repository is currently a private repository and thus have no ability to apply rules for commits. Thus everyone is urged to not commit directly to main and use a feature branch instead. The feature branched are names with "feature/\<feature>". Please use a pull-request from the feature branch as the way to merge to main - an appointed person such as tal@netic.dk should be reviewing the contribution targetted for the merge. Please ensure that the code has been proofed and tested before the pre-merge review using the pull-request.
 
+This repository is currently a private repository and thus have limited ability to apply rules for commits. Thus everyone contributing is discouraged from committing directly to main and are politely asked to use a feature branch instead, use that feature branch to create a pull-request. The feature branched are named as "feature/\<feature>". Please create a meaningful feature name and pull-request from the feature branch. Please ensure that code contributions has been proofed and tested before the pre-merge review using the pull-request. Please add an appointed person for review such as tal@netic.dk. That person will be reviewing the contribution and respond to the contribution. Furthermore that person will merge the pull-request to main.
+
 ## Guideline Contributions
 Improvements to the Guidelines in this repository are welcome, e.g. create an issue with the suggested improvement or added guideline.
 
