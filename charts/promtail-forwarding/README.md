@@ -58,6 +58,9 @@ $ helm install my-release netic-oaas/promtail-forwarding
 | opentelemetry-collector.ports.otlp.enabled | bool | `false` |  |
 | opentelemetry-collector.ports.zipkin.enabled | bool | `false` |  |
 | opentelemetry-collector.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
+| opentelemetry-collector.resources.limits.memory | string | `"48Mi"` |  |
+| opentelemetry-collector.resources.requests.cpu | string | `"5m"` |  |
+| opentelemetry-collector.resources.requests.memory | string | `"48Mi"` |  |
 | opentelemetry-collector.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | opentelemetry-collector.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | opentelemetry-collector.securityContext.privileged | bool | `false` |  |
@@ -67,6 +70,9 @@ $ helm install my-release netic-oaas/promtail-forwarding
 | promtail.configmap.enabled | bool | `true` |  |
 | promtail.image.pullPolicy | string | `"Always"` |  |
 | promtail.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
+| promtail.resources.limits.memory | string | `"64Mi"` |  |
+| promtail.resources.requests.cpu | string | `"10m"` |  |
+| promtail.resources.requests.memory | string | `"64Mi"` |  |
 
 ## Development
 
