@@ -1,0 +1,14 @@
+promtail:
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      memory: 64Mi
+      cpu: 10m
+opentelemetry-collector:
+  resources:
+    limits:
+      memory: 48Mi
+    requests:
+      memory: 48Mi
+      cpu: 5m
