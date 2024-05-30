@@ -180,10 +180,20 @@ opentelemetry-collector:
       protocol: TCP
       appProtocol: grpc
 
-## -- OpenTelemetry Collector yaml configuration. The input will be run through the Helm templating engine.
+# -- Endpoint for OpenTelemetry logs to be forwarded
+otelHttpEndpoint:
+
+# -- OpenTelemetry Collector yaml configuration. The input will be run through the Helm templating engine.
 collectorConfig: |
   exporters:
+  {{- if .Values.otelHttpEndpoint }}
+    otlphttp:
+      endpoint: http://opentelemetry-collector:4318
+      tls:
+        insecure: true
+  {{- else }}
     debug: {}
+  {{- end }}
   extensions:
     health_check:
       endpoint: ${env:MY_POD_IP}:13133
@@ -207,7 +217,11 @@ collectorConfig: |
     pipelines:
       logs:
         exporters:
+  {{- if .Values.otelHttpEndpoint }}
+        - otlphttp
+  {{- else }}
         - debug
+  {{- end }}
         processors:
         - memory_limiter
         - batch

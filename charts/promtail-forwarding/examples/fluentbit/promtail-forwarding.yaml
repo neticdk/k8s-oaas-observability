@@ -5,43 +5,4 @@ opentelemetry-collector:
     requests:
       memory: 64Mi
 
-collectorConfig: |
-  exporters:
-    debug: {}
-    otlphttp:
-      endpoint: http://fluent-bit:4318
-      tls:
-        insecure: true
-  extensions:
-    health_check:
-      endpoint: ${env:MY_POD_IP}:13133
-  processors:
-    batch: {}
-    memory_limiter:
-      check_interval: 5s
-      limit_percentage: 80
-      spike_limit_percentage: 25
-  receivers:
-    loki:
-      protocols:
-        grpc:
-          endpoint: ${env:MY_POD_IP}:3600
-        http:
-          endpoint: ${env:MY_POD_IP}:3500
-      use_incoming_timestamp: true
-  service:
-    extensions:
-    - health_check
-    pipelines:
-      logs:
-        exporters:
-        - debug
-        - otlphttp
-        processors:
-        - memory_limiter
-        - batch
-        receivers:
-        - loki
-    telemetry:
-      metrics:
-        address: ${env:MY_POD_IP}:8888
+otelHttpEndpoint: http://fluent-bit:4318
