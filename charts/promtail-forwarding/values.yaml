@@ -2,6 +2,12 @@ promtail:
   image:
     pullPolicy: Always
   priorityClassName: secure-cloud-stack-technical-operations-critical
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      memory: 64Mi
+      cpu: 10m
   configmap:
     enabled: true
   config:
@@ -122,6 +128,12 @@ opentelemetry-collector:
   image:
     repository: "otel/opentelemetry-collector-contrib"
     pullPolicy: Always
+  resources:
+    limits:
+      memory: 48Mi
+    requests:
+      memory: 48Mi
+      cpu: 5m
   podSecurityContext:
     fsGroup: 65534
     runAsGroup: 65534
