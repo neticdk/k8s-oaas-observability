@@ -29,15 +29,6 @@ promtail:
         - job_name: kubernetes-pods
           pipeline_stages:
             - cri: {}
-            - pack:
-                labels:
-                - app
-                - filename
-                - job
-                - pod
-                - container
-                - node_name
-                - version
           kubernetes_sd_configs:
             - role: pod
           relabel_configs:
