@@ -118,6 +118,15 @@ opentelemetry-collector:
   mode: deployment
   image:
     repository: "otel/opentelemetry-collector-contrib"
+  securityContext:
+    fsGroup: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 65534
+  podSecurityContext:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: true
   configMap:
     create: false
     existingName: "true"
