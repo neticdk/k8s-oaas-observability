@@ -13,6 +13,7 @@ promtail:
   configmap:
     enabled: true
   config:
+    # -- The configuration is rendered by this chart so it should not be rendered by the included Promtail chart
     enabled: false
     # -- The default yaml configuration. This can be overriden to filter or otherwise change the Promtail configuration. Note that the configuration
     # sets up the OpenTelemetry Collector as target for the log data.
@@ -120,31 +121,38 @@ promtail:
 
 # -- Default configuration for the OpenTelemetry Collector part
 opentelemetry-collector:
+  # -- should be deployet as Kubernetes "deployment"
   mode: deployment
+  # -- image must be "contrib" to include the Loki receiver
   image:
     repository: "otel/opentelemetry-collector-contrib"
     pullPolicy: Always
+  # -- default resource allocation should be overriden
   resources:
     limits:
       memory: 48Mi
     requests:
       memory: 48Mi
       cpu: 5m
+  # -- setting up strict security contexts
   podSecurityContext:
     fsGroup: 65534
     runAsGroup: 65534
     runAsNonRoot: true
     runAsUser: 65534
+  # -- setting up strict security contexts
   securityContext:
     allowPrivilegeEscalation: false
     privileged: false
     readOnlyRootFilesystem: true
     capabilities:
       drop: [ALL]
+  # -- set up configuration matching the Promtail configuration
   configMap:
     create: false
     existingName: "true"
   priorityClassName: secure-cloud-stack-technical-operations-critical
+  # -- only setup up port to receive Loki protocol
   ports:
     otlp:
       enabled: false
