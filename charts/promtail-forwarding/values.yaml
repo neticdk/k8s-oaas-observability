@@ -1,7 +1,9 @@
+# -- Configuration for promtail log scraper
 promtail:
   image:
     pullPolicy: Always
   priorityClassName: secure-cloud-stack-technical-operations-critical
+  # -- Default resources should be overriden based on the usage
   resources:
     limits:
       memory: 64Mi
@@ -12,6 +14,8 @@ promtail:
     enabled: true
   config:
     enabled: false
+    # -- The default yaml configuration. This can be overriden to filter or otherwise change the Promtail configuration. Note that the configuration
+    # sets up the OpenTelemetry Collector as target for the log data.
     file: |
       server:
         log_level: info
@@ -114,6 +118,7 @@ promtail:
         enabled: false
 
 
+# -- Default configuration for the OpenTelemetry Collector part
 opentelemetry-collector:
   mode: deployment
   image:
@@ -167,7 +172,7 @@ opentelemetry-collector:
       protocol: TCP
       appProtocol: grpc
 
-
+## -- OpenTelemetry Collector yaml configuration. The input will be run through the Helm templating engine.
 collectorConfig: |
   exporters:
     debug: {}
