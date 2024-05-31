@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ include "promtail-forwarding.opentelemetry-configname" . }}
   namespace: {{ include "promtail-forwarding.namespace" . }}
+  labels:
+    {{- include "promtail-forwarding.labels" . | nindent 4 }}
 data:
   relay: |
     {{- tpl .Values.collectorConfig . | nindent 4 }}

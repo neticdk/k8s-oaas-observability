@@ -10,6 +10,8 @@ promtail:
     requests:
       memory: 64Mi
       cpu: 10m
+  networkPolicy:
+    enabled: true
   configmap:
     enabled: true
   config:
@@ -179,16 +181,29 @@ opentelemetry-collector:
       hostPort: 3600
       protocol: TCP
       appProtocol: grpc
+  networkPolicy:
+    enabled: true
+    allowIngressFrom:
+      - podSelector: {}
 
-# -- Endpoint for OpenTelemetry logs to be forwarded
-otelHttpEndpoint:
+# -- Properties for the exporter configuration
+otelExporter:
+  # -- Endpoint for OTEL export
+  endpoint:
+  # -- Proprties to configure egress network policy
+  networkPolicy:
+    enabled: false
+    port: 4318
+    to:
+      #namespaceSelector:
+      #podSelector:
 
 # -- OpenTelemetry Collector yaml configuration. The input will be run through the Helm templating engine.
 collectorConfig: |
   exporters:
-  {{- if .Values.otelHttpEndpoint }}
+  {{- if .Values.otelExporter.endpoint }}
     otlphttp:
-      endpoint: http://opentelemetry-collector:4318
+      endpoint: {{ .Values.otelExporter.endpoint }}
       tls:
         insecure: true
   {{- else }}
@@ -217,7 +232,7 @@ collectorConfig: |
     pipelines:
       logs:
         exporters:
-  {{- if .Values.otelHttpEndpoint }}
+  {{- if .Values.otelExporter.endpoint }}
         - otlphttp
   {{- else }}
         - debug

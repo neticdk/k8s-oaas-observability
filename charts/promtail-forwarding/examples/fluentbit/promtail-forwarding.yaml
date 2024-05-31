@@ -1,3 +1,8 @@
+promtail:
+  networkPolicy:
+    k8sApi:
+      port: 6443 # kind is running api-server on port 6443
+
 opentelemetry-collector:
   resources:
     limits:
@@ -5,4 +10,13 @@ opentelemetry-collector:
     requests:
       memory: 64Mi
 
-otelHttpEndpoint: http://fluent-bit:4318
+otelExporter:
+  endpoint: http://fluent-bit:4318
+  networkPolicy:
+    enabled: true
+    port: 4318
+    to:
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: fluent-bit
+          app.kubernetes.io/name: fluent-bit

@@ -1,0 +1,29 @@
+{{- if .Values.otelExporter.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "promtail-forwarding.fullname" . }}
+  namespace: {{ include "promtail-forwarding.namespace" . }}
+  labels:
+    {{- include "promtail-forwarding.labels" . | nindent 4 }}
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      {{- $values := dict "Values" (index .Values "opentelemetry-collector") "Chart" (dict "Name" "opentelemetry-collector") "Release" .Release}}
+      {{- include "opentelemetry-collector.selectorLabels" $values | nindent 6 }}
+      {{- include "opentelemetry-collector.component" $values | nindent 6 }}
+  egress:
+    - ports:
+        - port: {{ .Values.otelExporter.networkPolicy.port }}
+{{- if .Values.otelExporter.networkPolicy.to }}
+      to:
+        - {{ toYaml .Values.otelExporter.networkPolicy.to | nindent 10 }}
+{{- end }}
+    - ports:
+        - port: 53
+          protocol: UDP
+      to:
+        - namespaceSelector: {}
+{{- end }}
