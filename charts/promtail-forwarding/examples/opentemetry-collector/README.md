@@ -8,5 +8,5 @@ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
 helm upgrade -i promtail-forwarding netic-oaas/promtail-forwarding -f promtail-forwarding.yaml
 
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-helm upgrade -i opentelemetry-collector open-telemetry/opentelemetry-collector --set mode=deployment --set image.repository=otel/opentelemetry-collector-k8s
+helm upgrade -i opentelemetry-collector open-telemetry/opentelemetry-collector --set mode=deployment --set image.repository=otel/opentelemetry-collector-k8s --set networkPolicy.enabled=true
 ```
