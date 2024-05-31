@@ -1,4 +1,3 @@
-# -- Configuration for promtail log scraper
 promtail:
   image:
     pullPolicy: Always
@@ -121,7 +120,6 @@ promtail:
         enabled: false
 
 
-# -- Default configuration for the OpenTelemetry Collector part
 opentelemetry-collector:
   # -- should be deployet as Kubernetes "deployment"
   mode: deployment
@@ -186,7 +184,6 @@ opentelemetry-collector:
     allowIngressFrom:
       - podSelector: {}
 
-# -- Properties for the exporter configuration
 otelExporter:
   # -- Endpoint for OTEL export
   endpoint:
@@ -195,8 +192,8 @@ otelExporter:
     enabled: false
     port: 4318
     to:
-      #namespaceSelector:
-      #podSelector:
+      # namespaceSelector:
+      # podSelector:
 
 # -- OpenTelemetry Collector yaml configuration. The input will be run through the Helm templating engine.
 collectorConfig: |
