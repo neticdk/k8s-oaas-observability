@@ -67,13 +67,6 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
 {{- end -}}
 
 {{/*
-Redefine template from included chart
-*/}}
-{{- define "opentelemetry-collector.configName" -}}
-{{ include "promtail-forwarding.opentelemetry-configname" . }}
-{{- end }}
-
-{{/*
 Common labels
 */}}
 {{- define "promtail-forwarding.labels" -}}
@@ -91,4 +84,18 @@ Selector labels
 {{- define "promtail-forwarding.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "promtail-forwarding.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
+Redefine "configName" template from included chart
+*/}}
+{{- define "opentelemetry-collector.configName" -}}
+{{ include "promtail-forwarding.opentelemetry-configname" . }}
+{{- end }}
+
+{{/*
+Redefine "podAnnotations" template from included chart
+*/}}
+{{- define "opentelemetry-collector.podAnnotations" -}}
+checksum/custom-config: {{ print $.Template.BasePath "/configmap-otel.yaml" . | sha256sum }}
 {{- end }}
