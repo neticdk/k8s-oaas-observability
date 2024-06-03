@@ -1,0 +1,239 @@
+promtail:
+  image:
+    pullPolicy: Always
+  priorityClassName: secure-cloud-stack-technical-operations-critical
+  # -- Default resources should be overriden based on the usage
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      memory: 64Mi
+      cpu: 10m
+  networkPolicy:
+    enabled: true
+  configmap:
+    enabled: true
+  config:
+    # -- The configuration is rendered by this chart so it should not be rendered by the included Promtail chart
+    enabled: false
+    # -- The default yaml configuration. This can be overriden to filter or otherwise change the Promtail configuration. Note that the configuration
+    # sets up the OpenTelemetry Collector as target for the log data.
+    file: |
+      server:
+        log_level: info
+        log_format: logfmt
+        http_listen_port: 3101
+
+      clients:
+        - url: http://{{ include "promtail-forwarding.opentelemetry-servicename" . }}:3500/loki/api/v1/push
+
+      positions:
+        filename: /run/promtail/positions.yaml
+
+      scrape_configs:
+        # See also https://github.com/grafana/loki/blob/master/production/ksonnet/promtail/scrape_config.libsonnet for reference
+        - job_name: kubernetes-pods
+          pipeline_stages:
+            - cri: {}
+          kubernetes_sd_configs:
+            - role: pod
+          relabel_configs:
+            - source_labels:
+                - __meta_kubernetes_pod_controller_name
+              regex: ([0-9a-z-.]+?)(-[0-9a-f]{8,10})?
+              action: replace
+              target_label: __tmp_controller_name
+            - source_labels:
+                - __meta_kubernetes_pod_label_app_kubernetes_io_name
+                - __meta_kubernetes_pod_label_app
+                - __tmp_controller_name
+                - __meta_kubernetes_pod_name
+              regex: ^;*([^;]+)(;.*)?$
+              action: replace
+              target_label: app
+            - source_labels:
+                - __meta_kubernetes_pod_label_app_kubernetes_io_instance
+                - __meta_kubernetes_pod_label_instance
+              regex: ^;*([^;]+)(;.*)?$
+              action: replace
+              target_label: instance
+            - source_labels:
+                - __meta_kubernetes_pod_label_app_kubernetes_io_component
+                - __meta_kubernetes_pod_label_component
+              regex: ^;*([^;]+)(;.*)?$
+              action: replace
+              target_label: component
+            - action: replace
+              source_labels:
+              - __meta_kubernetes_pod_node_name
+              target_label: node_name
+            - action: replace
+              source_labels:
+              - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              replacement: $1
+              separator: /
+              source_labels:
+              - namespace
+              - app
+              target_label: job
+            - action: replace
+              source_labels:
+              - __meta_kubernetes_pod_name
+              target_label: pod
+            - action: replace
+              source_labels:
+              - __meta_kubernetes_pod_container_name
+              target_label: container
+            - action: replace
+              replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+              - __meta_kubernetes_pod_uid
+              - __meta_kubernetes_pod_container_name
+              target_label: __path__
+            - action: replace
+              regex: true/(.*)
+              replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+              - __meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash
+              - __meta_kubernetes_pod_annotation_kubernetes_io_config_hash
+              - __meta_kubernetes_pod_container_name
+              target_label: __path__
+            - action: replace
+              regex: ^;*([^;]+)(;.*)?$
+              source_labels:
+              - __meta_kubernetes_pod_label_app_kubernetes_io_version
+              - __meta_kubernetes_pod_label_version
+              target_label: version
+
+      limits_config:
+
+      tracing:
+        enabled: false
+
+
+opentelemetry-collector:
+  # -- should be deployet as Kubernetes "deployment"
+  mode: deployment
+  # -- image must be "contrib" to include the Loki receiver
+  image:
+    repository: "otel/opentelemetry-collector-contrib"
+    pullPolicy: Always
+  # -- default resource allocation should be overriden
+  resources:
+    limits:
+      memory: 48Mi
+    requests:
+      memory: 48Mi
+      cpu: 5m
+  # -- setting up strict security contexts
+  podSecurityContext:
+    fsGroup: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 65534
+  # -- setting up strict security contexts
+  securityContext:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: [ALL]
+  # -- set up configuration matching the Promtail configuration
+  configMap:
+    create: false
+    existingName: "true"
+  priorityClassName: secure-cloud-stack-technical-operations-critical
+  # -- only setup up port to receive Loki protocol
+  ports:
+    otlp:
+      enabled: false
+    otlp-http:
+      enabled: false
+    jaeger-compact:
+      enabled: false
+    jaeger-thrift:
+      enabled: false
+    jaeger-grpc:
+      enabled: false
+    zipkin:
+      enabled: false
+    loki-http:
+      enabled: true
+      containerPort: 3500
+      servicePort: 3500
+      hostPort: 3500
+      protocol: TCP
+    loki-grpc:
+      enabled: true
+      containerPort: 3600
+      servicePort: 3600
+      hostPort: 3600
+      protocol: TCP
+      appProtocol: grpc
+  networkPolicy:
+    enabled: true
+    allowIngressFrom:
+      - podSelector: {}
+
+otelExporter:
+  # -- Endpoint for OTEL export
+  endpoint:
+  # -- Proprties to configure egress network policy
+  networkPolicy:
+    enabled: false
+    port: 4318
+    to:
+      # namespaceSelector:
+      # podSelector:
+
+# -- OpenTelemetry Collector yaml configuration. The input will be run through the Helm templating engine.
+collectorConfig: |
+  exporters:
+  {{- if .Values.otelExporter.endpoint }}
+    otlphttp:
+      endpoint: {{ .Values.otelExporter.endpoint }}
+      tls:
+        insecure: true
+  {{- else }}
+    debug: {}
+  {{- end }}
+  extensions:
+    health_check:
+      endpoint: ${env:MY_POD_IP}:13133
+  processors:
+    batch: {}
+    memory_limiter:
+      check_interval: 5s
+      limit_percentage: 80
+      spike_limit_percentage: 25
+  receivers:
+    loki:
+      protocols:
+        grpc:
+          endpoint: ${env:MY_POD_IP}:3600
+        http:
+          endpoint: ${env:MY_POD_IP}:3500
+      use_incoming_timestamp: true
+  service:
+    extensions:
+    - health_check
+    pipelines:
+      logs:
+        exporters:
+  {{- if .Values.otelExporter.endpoint }}
+        - otlphttp
+  {{- else }}
+        - debug
+  {{- end }}
+        processors:
+        - memory_limiter
+        - batch
+        receivers:
+        - loki
+    telemetry:
+      metrics:
+        address: ${env:MY_POD_IP}:8888

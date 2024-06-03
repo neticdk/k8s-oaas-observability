@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "promtail-forwarding.promtail-configname" . }}
+  namespace: {{ include "promtail-forwarding.namespace" . }}
+  labels:
+    {{- include "promtail-forwarding.labels" . | nindent 4 }}
+data:
+  promtail.yaml: |
+    {{- tpl .Values.promtail.config.file . | nindent 4 }}

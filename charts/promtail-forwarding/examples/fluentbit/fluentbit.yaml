@@ -1,0 +1,25 @@
+# Value for configuring Fluentbit Helm chart
+
+kind: Deployment
+podSecurityContext:
+  fsGroup: 2000
+securityContext:
+  capabilities:
+    drop: [ALL]
+  readOnlyRootFilesystem: true
+  runAsNonRoot: false
+  runAsUser: 1000
+extraPorts:
+  - name: otel-http
+    protocol: TCP
+    port: 4318
+    containerPort: 4318
+config:
+  inputs: |
+    [INPUT]
+        name opentelemetry
+  filters: ''
+  outputs: |
+    [OUTPUT]
+        name stdout
+        match *
