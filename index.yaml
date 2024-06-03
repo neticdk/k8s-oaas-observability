@@ -5279,4 +5279,28 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-1.0.5/prometheus-operator-1.0.5.tgz
     version: 1.0.5
-generated: "2024-05-28T06:46:41.247037807Z"
+  promtail-forwarding:
+  - apiVersion: v2
+    created: "2024-06-03T12:36:16.976905947Z"
+    dependencies:
+    - name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.15.5
+    - name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.92.0
+    description: A Helm chart to install promtail together with OpenTelemetry Collector
+      for receiving and forwarding logs
+    digest: c9ee594678b685d9ea9b6f6bb20a6d4efa7aebae00e0f0b667da8e2270387107
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: promtail-forwarding
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-06-03T12:36:16.977627292Z"
