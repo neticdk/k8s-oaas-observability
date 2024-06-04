@@ -161,6 +161,8 @@ opentelemetry-collector:
       enabled: false
     zipkin:
       enabled: false
+    metrics:
+      enabled: true
     loki-http:
       enabled: true
       containerPort: 3500

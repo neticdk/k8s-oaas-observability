@@ -1,6 +1,6 @@
 # promtail-forwarding
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to install promtail together with OpenTelemetry Collector for receiving and forwarding logs
 
@@ -37,7 +37,7 @@ $ helm install my-release netic-oaas/promtail-forwarding
 | opentelemetry-collector.networkPolicy.allowIngressFrom[0].podSelector | object | `{}` |  |
 | opentelemetry-collector.networkPolicy.enabled | bool | `true` |  |
 | opentelemetry-collector.podSecurityContext | object | `{"fsGroup":65534,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534}` | setting up strict security contexts |
-| opentelemetry-collector.ports | object | `{"jaeger-compact":{"enabled":false},"jaeger-grpc":{"enabled":false},"jaeger-thrift":{"enabled":false},"loki-grpc":{"appProtocol":"grpc","containerPort":3600,"enabled":true,"hostPort":3600,"protocol":"TCP","servicePort":3600},"loki-http":{"containerPort":3500,"enabled":true,"hostPort":3500,"protocol":"TCP","servicePort":3500},"otlp":{"enabled":false},"otlp-http":{"enabled":false},"zipkin":{"enabled":false}}` | only setup up port to receive Loki protocol |
+| opentelemetry-collector.ports | object | `{"jaeger-compact":{"enabled":false},"jaeger-grpc":{"enabled":false},"jaeger-thrift":{"enabled":false},"loki-grpc":{"appProtocol":"grpc","containerPort":3600,"enabled":true,"hostPort":3600,"protocol":"TCP","servicePort":3600},"loki-http":{"containerPort":3500,"enabled":true,"hostPort":3500,"protocol":"TCP","servicePort":3500},"metrics":{"enabled":true},"otlp":{"enabled":false},"otlp-http":{"enabled":false},"zipkin":{"enabled":false}}` | only setup up port to receive Loki protocol |
 | opentelemetry-collector.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
 | opentelemetry-collector.resources | object | `{"limits":{"memory":"48Mi"},"requests":{"cpu":"5m","memory":"48Mi"}}` | default resource allocation should be overriden |
 | opentelemetry-collector.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true}` | setting up strict security contexts |
