@@ -196,7 +196,7 @@ spec:
     name: {{ template "netic-oaas.fullname" . }}-prometheus-scrape-confg
     key: additional-scrape-configs.yaml
 {{- end }}
-{{- if or .Values.prometheus.prometheusSpec.containers .Values.prometheus.agent }}
+{{- if or .Values.prometheus.prometheusSpec.containers .Values.prometheus.agent .Values.prometheus.remoteWrite }}
   containers:
 {{- if .Values.prometheus.remoteWrite }}
     - name: prometheus
