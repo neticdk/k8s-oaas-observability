@@ -52,6 +52,7 @@ exemptions:
       - hostNetworkSet
   - controllerNames:
       - release-name-vector-agent
+      - release-name-promtail
     rules:
       - runAsRootAllowed
   - controllerNames:
