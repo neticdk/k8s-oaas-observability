@@ -1666,6 +1666,9 @@ grafana:
     requests:
       cpu: 200m
       memory: 196Mi
+  grafana.ini:
+    security:
+      angular_support_enabled: true
   priorityClassName: "secure-cloud-stack-technical-operations-critical"
   sidecar:
     imagePullPolicy: Always
