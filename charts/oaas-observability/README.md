@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.2.4](https://img.shields.io/badge/Version-2.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.2.5](https://img.shields.io/badge/Version-2.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -146,6 +146,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | global.rbac.pspAnnotations | object | `{}` |  |
 | global.rbac.pspEnabled | bool | `false` |  |
 | global.serviceMonitor.labels | object | `{"netic.dk/monitoring":"true"}` | Labels to add to all service monitors |
+| grafana."grafana.ini".security.angular_support_enabled | bool | `true` |  |
 | grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | grafana.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
