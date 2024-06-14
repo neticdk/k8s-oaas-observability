@@ -1,0 +1,14 @@
+{{- if .Values.alerting.enabled }}
+{{- range $i, $namespace := (include "aoi.alerting.namespaces" . | fromJsonArray) }}
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: victoria-metrics
+  namespace: {{ $namespace }}
+spec:
+  interval: 30m0s
+  url: {{ include "aoi.alerting.helmRepository" $ }}
+  type: {{ include "aoi.alerting.helmRepository.type" $ }}
+{{- end }}
+{{- end }}

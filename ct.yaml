@@ -4,6 +4,7 @@ chart-repos:
   - prometheus-community=https://prometheus-community.github.io/helm-charts
   - vector=https://helm.vector.dev
   - open-telemetry=https://open-telemetry.github.io/opentelemetry-helm-charts
+  - victoria-metrics=https://victoriametrics.github.io/helm-charts
 excluded-charts:
   - prometheus
 additional-commands:
