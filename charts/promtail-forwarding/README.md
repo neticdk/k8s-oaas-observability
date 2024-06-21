@@ -1,6 +1,6 @@
 # promtail-forwarding
 
-![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to install promtail together with OpenTelemetry Collector for receiving and forwarding logs
 
@@ -24,7 +24,7 @@ $ helm install my-release netic-oaas/promtail-forwarding
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | promtail | 6.16.0 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-collector | 0.93.3 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-collector | 0.94.0 |
 
 ## Configuration
 
