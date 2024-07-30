@@ -2,7 +2,7 @@
 
 # prometheus
 
-![Version: 2.1.6](https://img.shields.io/badge/Version-2.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.53.0](https://img.shields.io/badge/AppVersion-v2.53.0-informational?style=flat-square)
+![Version: 2.1.7](https://img.shields.io/badge/Version-2.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.53.1](https://img.shields.io/badge/AppVersion-v2.53.1-informational?style=flat-square)
 
 A Helm chart to install Prometheus based on Prometheus Operator
 
@@ -57,7 +57,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | ingress.enabled | bool | `false` |  |
 | prometheusSpec.alerting | object | `{}` |  |
 | prometheusSpec.externalLabels | object | `{}` |  |
-| prometheusSpec.image | string | `"quay.io/prometheus/prometheus:v2.53.0"` |  |
+| prometheusSpec.image | string | `"quay.io/prometheus/prometheus:v2.53.1"` |  |
 | prometheusSpec.podMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.podMonitorSelector | object | `{}` |  |
 | prometheusSpec.priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
@@ -75,7 +75,7 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheusSpec.serviceMonitorNamespaceSelector | object | `{}` |  |
 | prometheusSpec.serviceMonitorSelector | object | `{}` |  |
 | prometheusSpec.storage | object | `{}` |  |
-| prometheusSpec.version | string | `"v2.53.0"` |  |
+| prometheusSpec.version | string | `"v2.53.1"` |  |
 | serviceAccount.create | bool | `true` |  |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
