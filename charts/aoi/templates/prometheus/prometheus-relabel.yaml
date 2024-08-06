@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: remote-write-relabel
+  namespace: {{ .Release.Namespace }}
+data:
+  relabel_config.yaml: |
+    {{- tpl .Values.prometheus.relabelConfig . | nindent 4 }}

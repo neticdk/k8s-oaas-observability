@@ -1,0 +1,14 @@
+---
+apiVersion: project.tcs.trifork.com/v1alpha1
+kind: ProjectBootstrap
+metadata:
+  name: application-operations-dashboards
+  namespace: netic-gitops-system
+spec:
+  namespace: application-operations-dashboards
+  config:
+    ref: application-operations-dashboards
+    size: application-operations-dashboards
+  git:
+    {{- toYaml .Values.dashboards.projectBootstrap.git | nindent 4 }}
+  metadata: {}

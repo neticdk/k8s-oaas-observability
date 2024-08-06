@@ -1,0 +1,32 @@
+{{- if .Values.authProxy.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aoi.authProxyFullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "aoi.authProxyLabels" . | nindent 4 }}
+    {{- with .Values.global.serviceLabels }}
+    {{- toYaml . | nindent 4}}
+    {{- end }}
+    {{- with .Values.authProxy.service.labels }}
+    {{- toYaml . | nindent 4}}
+    {{- end }}
+  annotations:
+    {{- with .Values.global.serviceAnnotations }}
+    {{- toYaml . | nindent 4}}
+    {{- end }}
+    {{- with .Values.authProxy.service.annotations }}
+    {{- toYaml . | nindent 4}}
+    {{- end }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP
+  selector:
+    {{- include "aoi.authProxySelectorLabels" . | nindent 4 }}
+{{- end }}

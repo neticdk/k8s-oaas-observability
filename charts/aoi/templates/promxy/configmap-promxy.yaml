@@ -1,0 +1,13 @@
+{{- if .Values.global.tsdb.high_availability.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "aoi.promxyFullname" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "aoi.promxyLabels" . | nindent 4 }}
+data:
+  config.yaml: |
+    {{- tpl .Values.promxy.config . | nindent 4 }}
+{{- end }}

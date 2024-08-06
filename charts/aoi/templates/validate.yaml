@@ -1,0 +1,16 @@
+{{/* validate flux CRDs */}}
+{{- if .Values.alerting.enabled }}
+  {{- if not (.Capabilities.APIVersions.Has "source.toolkit.fluxcd.io/v1beta2") }}
+          {{ fail "alerting requires source.toolkit.fluxcd.io/v1beta2 CRDs." }}
+  {{- end }}
+  {{- if not (.Capabilities.APIVersions.Has "helm.toolkit.fluxcd.io/v2beta1") }}
+          {{ fail "alerting requires helm.toolkit.fluxcd.io/v2beta1 CRDs." }}
+  {{- end }}
+{{- end }}
+
+{{/* validate cluster_id is defined */}}
+{{- if .Values.alerting.enabled }}
+  {{- if (eq .Values.alerting.clusterId "") }}
+    {{ fail "alerting is enabled, clusterId must be defined and set to the value of the label cluster_id" }}
+  {{- end }}
+{{- end }}
