@@ -116,6 +116,9 @@ A Helm chart for Netic application operations infrastructure
 | prometheus.configReloader.resources.limits.memory | string | `"25Mi"` |  |
 | prometheus.configReloader.resources.requests.cpu | string | `"10m"` |  |
 | prometheus.configReloader.resources.requests.memory | string | `"25Mi"` |  |
+| prometheus.configReloader.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| prometheus.configReloader.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| prometheus.configReloader.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | prometheus.externalLabels | object | `{}` | labels to add to all metrics. externalLabels:   cluster_id: "${cluster_provider}_${cluster_name}"   cluster: ${cluster_name}   cluster_type: "${cluster_type}"   prometheus_cluster: ${cluster_name}/aoi-prometheus   provider: "${cluster_provider}" |
 | prometheus.extraVolumeMounts | list | `[]` |  |
 | prometheus.extraVolumes | list | `[]` |  |
@@ -133,6 +136,8 @@ A Helm chart for Netic application operations infrastructure
 | prometheus.resources.limits.memory | string | `"768Mi"` |  |
 | prometheus.resources.requests.cpu | string | `"100m"` |  |
 | prometheus.resources.requests.memory | string | `"256Mi"` |  |
+| prometheus.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| prometheus.securityContext.capabilities.drop[0] | string | `"all"` |  |
 | promxy.affinity | list | `[]` |  |
 | promxy.annotations | object | `{}` |  |
 | promxy.config | string | `"##\n### Promxy configuration\n##\npromxy:\n  server_groups:\n    - static_configs:\n        - targets:\n          - victoria-metrics-single-1-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428\n      labels:\n        replica: 1\n      http_client:\n        dial_timeout: 1s\n      ignore_error: true\n      remote_read: true\n      remote_read_path: /api/v1\n    - static_configs:\n        - targets:\n          - victoria-metrics-single-2-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428\n      labels:\n        replica: 2\n      http_client:\n        dial_timeout: 1s\n      ignore_error: true\n      remote_read: true\n      remote_read_path: /api/v1\n"` |  |
