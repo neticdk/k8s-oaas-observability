@@ -1,21 +1,9 @@
 # aoi
 
-![Version: 0.1.15](https://img.shields.io/badge/Version-0.1.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.16](https://img.shields.io/badge/Version-0.1.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+
 
 A Helm chart for Netic application operations infrastructure
-
-**Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
-
-## Maintainers
-
-| Name | Email | Url |
-| ---- | ------ | --- |
-| alex5517 | <ash@netic.dk> |  |
-| mathiasfm | <mfm@netic.dk> |  |
-
-## Source Code
-
-* <https://github.com/neticdk/k8s-oaas-observability>
 
 ## Requirements
 
@@ -59,7 +47,7 @@ A Helm chart for Netic application operations infrastructure
 | authProxy.podSecurityContext.runAsGroup | int | `3000` |  |
 | authProxy.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | authProxy.podSecurityContext.runAsUser | int | `1000` |  |
-| authProxy.priorityClassName | string | `"secure-cloud-stack-tenant-namespace-application-critical"` |  |
+| authProxy.priorityClassName | string | `nil` |  |
 | authProxy.replicas | int | `1` |  |
 | authProxy.resources.limits.memory | string | `"64Mi"` |  |
 | authProxy.resources.requests.cpu | string | `"100m"` |  |
@@ -85,19 +73,15 @@ A Helm chart for Netic application operations infrastructure
 | global.clusterDomain | string | `"cluster.local"` |  |
 | global.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | global.containerSecurityContext.capabilities.drop[0] | string | `"all"` |  |
-| global.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | global.image.pullPolicy | string | `"Always"` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | global.podAnnotations | object | `{}` |  |
 | global.podLabels | object | `{}` |  |
-| global.priorityClassName | string | `"secure-cloud-stack-tenant-namespace-application-critical"` | Default priorityClassName to use |
+| global.priorityClassName | string | `nil` | Default priorityClassName to use |
 | global.revisionHistoryLimit | int | `5` |  |
 | global.serviceAnnotations | object | `{}` |  |
 | global.serviceLabels | object | `{}` |  |
 | global.tsdb.high_availability.enabled | bool | `false` | Enable high-availability for tsdb (Victoria-metrics-single) |
-| grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
-| grafana.containerSecurityContext.capabilities.drop[0] | string | `"all"` |  |
-| grafana.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.enabled | bool | `true` | If true deploy Grafana for tenant dashboards |
 | grafana.image.pullPolicy | string | `"Always"` |  |
 | grafana.ingress.enabled | bool | `false` |  |
@@ -115,13 +99,7 @@ A Helm chart for Netic application operations infrastructure
 | grafana.sidecar.dashboards.searchNamespace | list | `["application-operations-dashboards"]` | Watch for configmaps in namespaces |
 | grafana.sidecar.datasources.enabled | bool | `true` |  |
 | grafana.sidecar.datasources.label | string | `"aoi_grafana_datasource"` |  |
-| grafana.sidecar.imagePullPolicy | string | `"Always"` |  |
-| grafana.sidecar.resources.limits.memory | string | `"96Mi"` |  |
-| grafana.sidecar.resources.requests.cpu | string | `"50m"` |  |
-| grafana.sidecar.resources.requests.memory | string | `"96Mi"` |  |
-| grafana.sidecar.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| grafana.sidecar.securityContext.capabilities.drop[0] | string | `"all"` |  |
-| grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| grafana.sidecar.image.pullPolicy | string | `"Always"` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
 | prometheus.configReloader.resources.limits.memory | string | `"25Mi"` |  |
 | prometheus.configReloader.resources.requests.cpu | string | `"10m"` |  |
@@ -184,14 +162,12 @@ A Helm chart for Netic application operations infrastructure
 | victoria-metrics-single-1.server.podSecurityContext.fsGroup | int | `2000` |  |
 | victoria-metrics-single-1.server.podSecurityContext.runAsGroup | int | `3000` |  |
 | victoria-metrics-single-1.server.podSecurityContext.runAsUser | int | `1000` |  |
-| victoria-metrics-single-1.server.priorityClassName | string | `"secure-cloud-stack-tenant-namespace-application-critical"` |  |
 | victoria-metrics-single-1.server.resources.limits.memory | string | `"1024Mi"` |  |
 | victoria-metrics-single-1.server.resources.requests.cpu | string | `"200m"` |  |
 | victoria-metrics-single-1.server.resources.requests.memory | string | `"1024Mi"` |  |
 | victoria-metrics-single-1.server.retentionPeriod | string | `"90d"` | Data retention period |
 | victoria-metrics-single-1.server.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | victoria-metrics-single-1.server.securityContext.capabilities.drop[0] | string | `"all"` |  |
-| victoria-metrics-single-1.server.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | victoria-metrics-single-1.server.serviceMonitor.enabled | bool | `true` |  |
 | victoria-metrics-single-1.server.serviceMonitor.extraLabels."netic.dk/monitoring" | string | `"true"` |  |
 | victoria-metrics-single-2.rbac.create | bool | `false` |  |
@@ -209,8 +185,9 @@ A Helm chart for Netic application operations infrastructure
 | victoria-metrics-single-2.server.retentionPeriod | string | `"90d"` | Data retention period |
 | victoria-metrics-single-2.server.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | victoria-metrics-single-2.server.securityContext.capabilities.drop[0] | string | `"all"` |  |
-| victoria-metrics-single-2.server.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | victoria-metrics-single-2.server.serviceMonitor.enabled | bool | `true` |  |
 | victoria-metrics-single-2.server.serviceMonitor.extraLabels."netic.dk/monitoring" | string | `"true"` |  |
 | victoriaMetrics.persistentVolume.size | string | `"5Gi"` | Size of the volume. Should be calculated based on the metrics you send and retention policy you set. |
 
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.13.1](https://github.com/norwoodj/helm-docs/releases/v1.13.1)
