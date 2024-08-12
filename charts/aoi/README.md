@@ -136,8 +136,6 @@ A Helm chart for Netic application operations infrastructure
 | prometheus.resources.limits.memory | string | `"768Mi"` |  |
 | prometheus.resources.requests.cpu | string | `"100m"` |  |
 | prometheus.resources.requests.memory | string | `"256Mi"` |  |
-| prometheus.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| prometheus.securityContext.capabilities.drop[0] | string | `"all"` |  |
 | promxy.affinity | list | `[]` |  |
 | promxy.annotations | object | `{}` |  |
 | promxy.config | string | `"##\n### Promxy configuration\n##\npromxy:\n  server_groups:\n    - static_configs:\n        - targets:\n          - victoria-metrics-single-1-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428\n      labels:\n        replica: 1\n      http_client:\n        dial_timeout: 1s\n      ignore_error: true\n      remote_read: true\n      remote_read_path: /api/v1\n    - static_configs:\n        - targets:\n          - victoria-metrics-single-2-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428\n      labels:\n        replica: 2\n      http_client:\n        dial_timeout: 1s\n      ignore_error: true\n      remote_read: true\n      remote_read_path: /api/v1\n"` |  |
