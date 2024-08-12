@@ -245,7 +245,7 @@ grafana:
     enabled: false
     fqdn: null
 
-victoriaMetrics: 
+victoriaMetrics:
   persistentVolume:
     # -- Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
     size: 5Gi
