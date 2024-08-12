@@ -104,11 +104,6 @@ prometheus:
       memory: 256Mi
   priorityClassName: null
   podAnnotations: {}
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-        - all
   podSecurityContext:
     runAsUser: 1000
     runAsGroup: 3000
