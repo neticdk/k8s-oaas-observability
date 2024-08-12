@@ -4,6 +4,19 @@
 
 A Helm chart for Netic application operations infrastructure
 
+**Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| alex5517 | <ash@netic.dk> |  |
+| mathiasfm | <mfm@netic.dk> |  |
+
+## Source Code
+
+* <https://github.com/neticdk/k8s-oaas-observability>
+
 ## Requirements
 
 | Repository | Name | Version |
