@@ -6,7 +6,7 @@ global:
       # -- Enable high-availability for tsdb (Victoria-metrics-single)
       enabled: false
   # -- Default priorityClassName to use
-  priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
+  priorityClassName: null
   serviceLabels: {}
   serviceAnnotations: {}
   image:
@@ -17,7 +17,6 @@ global:
   podLabels: {}
   imagePullSecrets: []
   containerSecurityContext:
-    readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
     capabilities:
       drop:
@@ -62,7 +61,7 @@ authProxy:
     registry: registry.netic.dk
     repository: netic-oaas/cortex-proxy
     tag: v1.0.4
-  priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
+  priorityClassName: null
   annotations: {}
   podAnnotations: {}
   podLabels: {}
@@ -135,6 +134,12 @@ prometheus:
       requests:
         cpu: 10m
         memory: 25Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
   extraVolumes: []
   extraVolumeMounts: []
 
@@ -215,12 +220,6 @@ grafana:
     pullPolicy: Always
   testFramework:
     enabled: false
-  containerSecurityContext:
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop:
-        - all
   priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
   resources:
     limits:
@@ -231,19 +230,8 @@ grafana:
   podPortName: http
   # sidecar used to provision tenant dashboards found as configmaps in the namespace application-operations-dashboards with label aoi_dashboard
   sidecar:
-    imagePullPolicy: Always
-    securityContext:
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      capabilities:
-        drop:
-          - all
-    resources:
-      limits:
-        memory: 96Mi
-      requests:
-        cpu: 50m
-        memory: 96Mi
+    image:
+      pullPolicy: Always
     dashboards:
       enabled: true
       # -- Load configmaps with label key
@@ -272,7 +260,6 @@ victoria-metrics-single-1:
   rbac:
     create: false
   server:
-    priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
     # -- Data retention period
     retentionPeriod: 90d
     image:
@@ -296,7 +283,6 @@ victoria-metrics-single-1:
         memory: 1024Mi
     securityContext:
       allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
       capabilities:
         drop:
           - all
@@ -336,7 +322,6 @@ victoria-metrics-single-2:
         memory: 1024Mi
     securityContext:
       allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
       capabilities:
         drop:
           - all
