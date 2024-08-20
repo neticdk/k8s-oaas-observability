@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.2.16](https://img.shields.io/badge/Version-2.2.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.2.17](https://img.shields.io/badge/Version-2.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -32,10 +32,10 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 8.4.1 |
+| https://grafana.github.io/helm-charts | grafana | 8.4.6 |
 | https://grafana.github.io/helm-charts | promtail | 6.16.4 |
 | https://helm.vector.dev | vector-agent | 0.21.3 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.65.1 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.68.0 |
 | https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.25.1 |
 
 ## Configuration
@@ -396,7 +396,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
 | prometheus.prometheusSpec.image.repository | string | `"quay.io/prometheus/prometheus"` |  |
-| prometheus.prometheusSpec.image.tag | string | `"v2.53.1"` |  |
+| prometheus.prometheusSpec.image.tag | string | `"v2.54.0"` |  |
 | prometheus.prometheusSpec.initContainers | list | `[]` |  |
 | prometheus.prometheusSpec.listenLocal | bool | `false` |  |
 | prometheus.prometheusSpec.logFormat | string | `"logfmt"` |  |
@@ -438,7 +438,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheus.prometheusSpec.thanos | object | `{}` |  |
 | prometheus.prometheusSpec.tolerations | list | `[]` |  |
-| prometheus.prometheusSpec.version | string | `"v2.53.1"` |  |
+| prometheus.prometheusSpec.version | string | `"v2.54.0"` |  |
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |
