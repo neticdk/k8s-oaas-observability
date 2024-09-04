@@ -22,7 +22,7 @@ jobs:
       #
       - uses: actions/setup-go@v2
         with:
-          go-version: '1.17.2'
+          go-version: '1.23.0'
 
       - name: Install extra tooling
         run: |

@@ -6,10 +6,13 @@ checks:
   pullPolicyNotAlways: warning
   readinessProbeMissing: warning
   livenessProbeMissing: warning
-  metadataAndNameMismatched: ignore
+  metadataAndInstanceMismatched: warning
   pdbDisruptionsIsZero: warning
   missingPodDisruptionBudget: ignore
   topologySpreadConstraint: warning
+  hpaMaxAvailability: warning
+  hpaMinAvailability: warning
+  pdbMinAvailableGreaterThanHPAMinReplicas: warning
 
   # efficiency
   cpuRequestsMissing: warning
@@ -59,8 +62,8 @@ exemptions:
       - release-name-prometheus-operator-admission-patch
       - release-name-prometheus-operator-admission-create
       - release-name-opentelemetry-operator-cert-manager # OpenTelemetry Operator chart test
-      - release-name-opentelemetry-operator-metrics      # OpenTelemetry Operator chart test
-      - release-name-opentelemetry-operator-webhook      # OpenTelemetry Operator chart test
+      - release-name-opentelemetry-operator-metrics # OpenTelemetry Operator chart test
+      - release-name-opentelemetry-operator-webhook # OpenTelemetry Operator chart test
       - release-name-opentelemetry-operator-cert-manager
       - release-name-opentelemetry-operator-metrics
       - release-name-opentelemetry-operator-webhook
