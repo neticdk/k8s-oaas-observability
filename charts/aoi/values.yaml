@@ -2,6 +2,7 @@
 global:
   clusterDomain: "cluster.local"
   tsdb:
+    enabled: true
     high_availability:
       # -- Enable high-availability for tsdb (Victoria-metrics-single)
       enabled: false
@@ -17,7 +18,6 @@ global:
   podLabels: {}
   imagePullSecrets: []
   containerSecurityContext:
-    readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
     capabilities:
       drop:
@@ -425,6 +425,8 @@ alerting:
           runAsGroup: 3000
           fsGroup: 2000
       alertmanager:
+        # -- Boolean that is used to mount the secret aoi-alertmanager-email-password into the alertmanager container
+        emailPasswordMount: false
         priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
         image:
           registry: docker.io

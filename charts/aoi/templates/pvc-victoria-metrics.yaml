@@ -1,4 +1,4 @@
-
+{{- if .Values.global.tsdb.enabled }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -12,7 +12,7 @@ spec:
     requests:
         storage: {{ .Values.victoriaMetrics.persistentVolume.size  }}
   volumeMode: Filesystem
-
+{{- end }}
 {{- if .Values.global.tsdb.high_availability.enabled }}
 
 ---
