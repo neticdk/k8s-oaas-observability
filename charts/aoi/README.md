@@ -39,7 +39,7 @@ A Helm chart for Netic application operations infrastructure
 | alerting.clusterWideNamespace.name | string | `"application-operations-alerting"` |  |
 | alerting.clusterWideNamespace.projectBootstrap | object | `{"git":{}}` | Options to configure the projectBootstrap used for cluster-wide alert namespace. |
 | alerting.enabled | bool | `false` | Enable deploying alerting components |
-| alerting.helmRelease | object | `{"values":{"alertmanager":{"configReloader":{"image":{"pullPolicy":"Always","registry":"ghcr.io","repository":"neticdk/inotifywait-reloader","tag":"v0.0.2"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"emailPasswordMount":false,"image":{"pullPolicy":"Always","registry":"docker.io","repository":"prom/alertmanager","tag":"v0.27.0"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"server":{"configReloader":{"image":{"pullPolicy":"Always","registry":"docker.io","repository":"kiwigrid/k8s-sidecar","tag":"1.26.1@sha256:b8d5067137fec093cf48670dc3a1dbb38f9e734f3a6683015c2e89a45db5fd16"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"image":{"pullPolicy":"Always","registry":"docker.io","repository":"victoriametrics/vmalert"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true}}}}` | Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml |
+| alerting.helmRelease | object | `{"values":{"alertmanager":{"configReloader":{"image":{"pullPolicy":"Always","registry":"ghcr.io","repository":"neticdk/inotifywait-reloader","tag":"v0.0.2"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"emailPasswordMount":false,"image":{"registry":"docker.io","repository":"prom/alertmanager","tag":"v0.27.0"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"server":{"configReloader":{"image":{"pullPolicy":"Always","registry":"docker.io","repository":"kiwigrid/k8s-sidecar","tag":"1.26.1@sha256:b8d5067137fec093cf48670dc3a1dbb38f9e734f3a6683015c2e89a45db5fd16"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"image":{"pullPolicy":"Always","registry":"docker.io","repository":"victoriametrics/vmalert"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true}}}}` | Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml |
 | alerting.helmRelease.values.alertmanager.emailPasswordMount | bool | `false` | Boolean that is used to mount the secret aoi-alertmanager-email-password into the alertmanager container |
 | alerting.helmRepository | string | `nil` | Override the default helmRepository used to deploy alerting components |
 | alerting.namespaces | list | `[]` | List of namespaces which should have alerting components deployed |
@@ -86,6 +86,7 @@ A Helm chart for Netic application operations infrastructure
 | global.clusterDomain | string | `"cluster.local"` |  |
 | global.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | global.containerSecurityContext.capabilities.drop[0] | string | `"all"` |  |
+| global.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | global.image.pullPolicy | string | `"Always"` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | global.podAnnotations | object | `{}` |  |
@@ -124,6 +125,10 @@ A Helm chart for Netic application operations infrastructure
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"all"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
+| prometheus.configReloader.image.pullPolicy | string | `"Always"` |  |
+| prometheus.configReloader.image.registry | string | `"quay.io"` |  |
+| prometheus.configReloader.image.repository | string | `"prometheus-operator/prometheus-config-reloader"` |  |
+| prometheus.configReloader.image.tag | string | `"v0.76.1@sha256:31410de3f01e8ee4e3fd692345d247e7ef57351ce58b21c89d71639d50d1f424"` |  |
 | prometheus.configReloader.resources.limits.memory | string | `"25Mi"` |  |
 | prometheus.configReloader.resources.requests.cpu | string | `"10m"` |  |
 | prometheus.configReloader.resources.requests.memory | string | `"25Mi"` |  |
@@ -133,13 +138,16 @@ A Helm chart for Netic application operations infrastructure
 | prometheus.externalLabels | object | `{}` | labels to add to all metrics. externalLabels:   cluster_id: "${cluster_provider}_${cluster_name}"   cluster: ${cluster_name}   cluster_type: "${cluster_type}"   prometheus_cluster: ${cluster_name}/aoi-prometheus   provider: "${cluster_provider}" |
 | prometheus.extraVolumeMounts | list | `[]` |  |
 | prometheus.extraVolumes | list | `[]` |  |
+| prometheus.image.pullPolicy | string | `"Always"` |  |
 | prometheus.image.registry | string | `"docker.io"` |  |
 | prometheus.image.repository | string | `"victoriametrics/vmagent"` |  |
 | prometheus.image.tag | string | `"v1.100.1@sha256:18959c254d474d150fd74534b8183e1a800d18d673a408b0c7d20e3febe6f4fe"` |  |
 | prometheus.persistence.size | string | `"60Gi"` |  |
 | prometheus.podAnnotations | object | `{}` |  |
 | prometheus.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| prometheus.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | prometheus.podSecurityContext.fsGroup | int | `2000` |  |
+| prometheus.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | prometheus.podSecurityContext.runAsGroup | int | `3000` |  |
 | prometheus.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | prometheus.podSecurityContext.runAsUser | int | `1000` |  |
