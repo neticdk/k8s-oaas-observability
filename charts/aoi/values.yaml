@@ -22,7 +22,7 @@ global:
     readOnlyRootFilesystem: true
     capabilities:
       drop:
-        - all
+        - ALL
   # -- Options to configure the bootstrapConfig globally can be overwritten for dashboards and clusterWideNamespace alerting namespace.
   # .Values.dashboards.bootstrapConfig
   # .Values.alerting.clusterWideNamespace.bootstrapConfig
@@ -116,7 +116,7 @@ prometheus:
     readOnlyRootFilesystem: true
     capabilities:
       drop:
-        - all
+        - ALL
   # -- labels to add to all metrics.
   # externalLabels:
   #   cluster_id: "${cluster_provider}_${cluster_name}"
@@ -238,7 +238,7 @@ grafana:
     readOnlyRootFilesystem: true
     capabilities:
       drop:
-        - all
+        - ALL
   priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
   resources:
     limits:
@@ -255,7 +255,7 @@ grafana:
       readOnlyRootFilesystem: true
       capabilities:
         drop:
-          - all
+          - ALL
     resources:
       limits:
         memory: 96Mi
@@ -316,7 +316,7 @@ victoria-metrics-single-1:
       readOnlyRootFilesystem: true
       capabilities:
         drop:
-          - all
+          - ALL
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 3000
@@ -356,7 +356,7 @@ victoria-metrics-single-2:
       readOnlyRootFilesystem: true
       capabilities:
         drop:
-          - all
+          - ALL
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 3000
@@ -413,7 +413,7 @@ alerting:
           readOnlyRootFilesystem: true
           capabilities:
             drop:
-              - all
+              - ALL
         configReloader:
           image:
             registry: docker.io
