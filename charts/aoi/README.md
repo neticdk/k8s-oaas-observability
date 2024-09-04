@@ -138,6 +138,7 @@ A Helm chart for Netic application operations infrastructure
 | prometheus.image.tag | string | `"v1.100.1@sha256:18959c254d474d150fd74534b8183e1a800d18d673a408b0c7d20e3febe6f4fe"` |  |
 | prometheus.persistence.size | string | `"60Gi"` |  |
 | prometheus.podAnnotations | object | `{}` |  |
+| prometheus.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | prometheus.podSecurityContext.fsGroup | int | `2000` |  |
 | prometheus.podSecurityContext.runAsGroup | int | `3000` |  |
 | prometheus.podSecurityContext.runAsNonRoot | bool | `true` |  |
