@@ -13,7 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - name: Cache Bazel
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/bazel
+          key: ${{ runner.os }}-bazel-${{ hashFiles('.bazelversion', '.bazelrc', 'WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel') }}
+          restore-keys: ${{ runner.os }}-bazel-
       - name: Retrieve version
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
@@ -26,4 +32,4 @@ jobs:
       - name: Push container image to GitHub Container Registry
         run: |
           cd controllers/endpoint-controller
-          bazel run --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 --define version=${{ steps.vars.outputs.tag }} //cmd/controller:publish
+          bazel run //cmd/controller:push -- --tag ${{ steps.vars.outputs.tag }} --tag latest

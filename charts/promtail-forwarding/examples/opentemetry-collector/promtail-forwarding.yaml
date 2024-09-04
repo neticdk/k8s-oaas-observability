@@ -1,0 +1,23 @@
+promtail:
+  networkPolicy:
+    k8sApi:
+      port: 6443 # kind is running api-server on port 6443
+
+opentelemetry-collector:
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      memory: 64Mi
+
+otelExporter:
+  endpoint: http://opentelemetry-collector:4318
+  networkPolicy:
+    enabled: true
+    port: 4318
+    to:
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: opentelemetry-collector
+          app.kubernetes.io/name: opentelemetry-collector
+          component: standalone-collector

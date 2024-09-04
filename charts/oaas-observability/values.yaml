@@ -128,7 +128,7 @@ kubeApiServer:
         sourceLabels:
           - __name__
       - action: drop
-        regex: etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary)
+        regex: etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary|request_duration_seconds_bucket)
         sourceLabels:
           - __name__
       - action: drop
@@ -1027,6 +1027,11 @@ prometheus:
   # -- Sets up Prometheus to run in agent mode only running discovery, scrape and remote write
   agent: false
 
+  ## -- Sets up Prometheus to run with remote write receiver flag set
+  ## ref: https://prometheus.io/docs/prometheus/latest/feature_flags/#remote-write-receiver
+  ##
+  remoteWrite: false
+
   ## Service account for Prometheuses to use.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
   ##
@@ -1179,8 +1184,8 @@ prometheus:
     ##
     image:
       repository: quay.io/prometheus/prometheus
-      tag: v2.51.2
-    version: v2.51.2
+      tag: v2.54.0
+    version: v2.54.0
 
     ## additionalScrapeConfigs for adding scape configs (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config).
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusspec
@@ -1497,7 +1502,7 @@ endpointController:
   enabled: false
   image:
     repository: ghcr.io/neticdk/endpoint-controller
-    tag: v1.0.4
+    tag: v1.0.5
     pullPolicy: IfNotPresent
   # -- Expose controller and scheduler based on node labels
   kubeServices: true
@@ -1661,6 +1666,9 @@ grafana:
     requests:
       cpu: 200m
       memory: 196Mi
+  grafana.ini:
+    security:
+      angular_support_enabled: true
   priorityClassName: "secure-cloud-stack-technical-operations-critical"
   sidecar:
     imagePullPolicy: Always

@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.1.46](https://img.shields.io/badge/Version-2.1.46-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.2.17](https://img.shields.io/badge/Version-2.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -32,11 +32,11 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 7.3.7 |
-| https://grafana.github.io/helm-charts | promtail | 6.15.5 |
+| https://grafana.github.io/helm-charts | grafana | 8.4.6 |
+| https://grafana.github.io/helm-charts | promtail | 6.16.4 |
 | https://helm.vector.dev | vector-agent | 0.21.3 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.53.2 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.18.1 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.68.0 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.25.1 |
 
 ## Configuration
 
@@ -134,7 +134,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | endpointController.etcdService | bool | `true` | Expose etcd on nodes based on labels |
 | endpointController.image.pullPolicy | string | `"IfNotPresent"` |  |
 | endpointController.image.repository | string | `"ghcr.io/neticdk/endpoint-controller"` |  |
-| endpointController.image.tag | string | `"v1.0.4"` |  |
+| endpointController.image.tag | string | `"v1.0.5"` |  |
 | endpointController.kubeServices | bool | `true` | Expose controller and scheduler based on node labels |
 | endpointController.nodeSelector | string | `nil` |  |
 | endpointController.resources | object | `{}` |  |
@@ -146,6 +146,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | global.rbac.pspAnnotations | object | `{}` |  |
 | global.rbac.pspEnabled | bool | `false` |  |
 | global.serviceMonitor.labels | object | `{"netic.dk/monitoring":"true"}` | Labels to add to all service monitors |
+| grafana."grafana.ini".security.angular_support_enabled | bool | `true` |  |
 | grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | grafana.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
@@ -198,7 +199,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeApiServer.serviceMonitor.metricRelabelings[4].regex | string | `"reflector_(items_per_list|items_per_watch|list_duration_seconds|lists_total|short_watches_total|watch_duration_seconds|watches_total)"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[4].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[5].action | string | `"drop"` |  |
-| kubeApiServer.serviceMonitor.metricRelabelings[5].regex | string | `"etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary)"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[5].regex | string | `"etcd_(helper_cache_hit_count|helper_cache_miss_count|helper_cache_entry_count|object_counts|request_cache_get_latencies_summary|request_cache_add_latencies_summary|request_latencies_summary|request_duration_seconds_bucket)"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[5].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[6].action | string | `"drop"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[6].regex | string | `"transformation_(transformation_latencies_microseconds|failures_total)"` |  |
@@ -395,7 +396,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
 | prometheus.prometheusSpec.image.repository | string | `"quay.io/prometheus/prometheus"` |  |
-| prometheus.prometheusSpec.image.tag | string | `"v2.51.2"` |  |
+| prometheus.prometheusSpec.image.tag | string | `"v2.54.0"` |  |
 | prometheus.prometheusSpec.initContainers | list | `[]` |  |
 | prometheus.prometheusSpec.listenLocal | bool | `false` |  |
 | prometheus.prometheusSpec.logFormat | string | `"logfmt"` |  |
@@ -437,10 +438,11 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheus.prometheusSpec.thanos | object | `{}` |  |
 | prometheus.prometheusSpec.tolerations | list | `[]` |  |
-| prometheus.prometheusSpec.version | string | `"v2.51.2"` |  |
+| prometheus.prometheusSpec.version | string | `"v2.54.0"` |  |
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |
+| prometheus.remoteWrite | bool | `false` |  |
 | prometheus.service.additionalPorts | list | `[]` |  |
 | prometheus.service.annotations | object | `{}` |  |
 | prometheus.service.clusterIP | string | `""` |  |

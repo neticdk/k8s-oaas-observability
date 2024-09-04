@@ -7,14 +7,20 @@ on:
       - main
 
 jobs:
-  # endpoint-controller-test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Test
-  #       run: |
-  #         cd controllers/endpoint-controller
-  #         bazel test --define version=dummy //...
+  endpoint-controller-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache Bazel
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/bazel
+          key: ${{ runner.os }}-bazel-${{ hashFiles('.bazelversion', '.bazelrc', 'WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel') }}
+          restore-keys: ${{ runner.os }}-bazel-
+      - name: Test Endpoint Controller
+        run: |
+          cd controllers/endpoint-controller
+          bazel test //...
 
   charts-test:
     runs-on: ubuntu-latest

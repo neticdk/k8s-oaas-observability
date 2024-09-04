@@ -43,9 +43,9 @@ export PATH=$PATH:$(go env GOPATH)/bin
 Install Go based utilities
 
 ```bash
-go get github.com/google/go-jsonnet/cmd/jsonnet  # On MacOS this may be installed from Brew instead
-go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-GO111MODULE=on go get github.com/norwoodj/helm-docs/cmd/helm-docs
+go install github.com/google/go-jsonnet/cmd/jsonnet@latest # On MacOS this may be installed from Brew instead
+go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
+GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
 ```
 
 ## Working with the Charts
