@@ -1,0 +1,125 @@
+{{- if .Values.alerting.enabled }}
+{{- range $i, $namespace := (include "aoi.alerting.namespaces" . | fromJsonArray) }}
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-alert
+  namespace: {{ $namespace }}
+spec:
+  chart:
+    spec:
+      chart: victoria-metrics-alert
+      version: {{ include "aoi.alerting.chartVersion" $ }}
+      sourceRef:
+        kind: HelmRepository
+        name: victoria-metrics
+      interval: 5m
+  interval: 5m
+  timeout: 15m
+  values:
+    serviceAccount:
+      create: false
+      name: victoria-metrics-alert-config-reloader
+    rbac:
+      create: false
+    server:
+      {{- include "aoi.serverPriorityClassName" $ | nindent 6 }}
+      image:
+        repository: "{{ $.Values.alerting.helmRelease.values.server.image.registry }}/{{ $.Values.alerting.helmRelease.values.server.image.repository }}"
+        pullPolicy: {{ $.Values.alerting.helmRelease.values.server.image.pullPolicy }}
+      podLabels:
+        netic.dk/allow-prometheus-scraping: "true"
+      resources:
+        {{- toYaml $.Values.alerting.helmRelease.values.server.resources | nindent 8 }}
+      extraArgs:
+        rule: '/tmp/rules/*.yaml'
+      extraVolumes:
+        - name: alert-rules
+          emptyDir: {}
+      extraVolumeMounts:
+        - name: alert-rules
+          mountPath: /tmp/rules
+      datasource:
+        {{- if eq $namespace $.Values.alerting.clusterWideNamespace.name }}
+        url: "{{ include "aoi.readUrl" $ }}"
+        {{- else }}
+        url: "{{ include "aoi.readUrl" $ }}?extra_label=namespace_id={{ $.Values.alerting.clusterId }}_{{ $namespace }}"
+        {{- end }}
+      securityContext:
+        {{- toYaml $.Values.alerting.helmRelease.values.server.securityContext | nindent 8 }}
+      extraContainers:
+        - name: config-reloader
+          image: "{{ $.Values.alerting.helmRelease.values.server.configReloader.image.registry }}/{{ $.Values.alerting.helmRelease.values.server.configReloader.image.repository }}:{{ $.Values.alerting.helmRelease.values.server.configReloader.image.tag }}"
+          imagePullPolicy: {{ $.Values.alerting.helmRelease.values.server.configReloader.image.pullPolicy }}
+          resources:
+            {{- toYaml $.Values.alerting.helmRelease.values.server.configReloader.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml $.Values.alerting.helmRelease.values.server.configReloader.securityContext | nindent 12 }}
+          env:
+            - name: IGNORE_ALREADY_PROCESSED
+              value: "true"
+            - name: METHOD
+              value: WATCH
+            - name: LABEL
+              value: application-operations-alerting
+            - name: FOLDER
+              value: /tmp/rules
+            - name: RESOURCE
+              value: configmap
+            - name: REQ_URL
+              value: http://localhost:8880/-/reload
+            - name: REQ_METHOD
+              value: GET
+          volumeMounts:
+            - name: alert-rules
+              mountPath: /tmp/rules
+      podSecurityContext:
+        {{- toYaml $.Values.alerting.helmRelease.values.server.podSecurityContext | nindent 8 }}
+    alertmanager:
+      enabled: true
+      {{- include "aoi.alertmanagerPriorityClassName" $ | nindent 6 }}
+      image: "{{ $.Values.alerting.helmRelease.values.alertmanager.image.registry }}/{{ $.Values.alerting.helmRelease.values.alertmanager.image.repository }}"
+      tag: "{{ $.Values.alerting.helmRelease.values.alertmanager.image.tag }}"
+      resources:
+        {{- toYaml $.Values.alerting.helmRelease.values.alertmanager.resources | nindent 8 }}
+      configMap: "alertmanager-config"
+      securityContext:
+        {{- toYaml $.Values.alerting.helmRelease.values.alertmanager.securityContext | nindent 8 }}
+      podSecurityContext:
+        {{- toYaml $.Values.alerting.helmRelease.values.alertmanager.podSecurityContext | nindent 8 }}
+      extraContainers:
+        - name: config-reloader
+          image: "{{ $.Values.alerting.helmRelease.values.alertmanager.configReloader.image.registry }}/{{ $.Values.alerting.helmRelease.values.alertmanager.configReloader.image.repository }}:{{ $.Values.alerting.helmRelease.values.alertmanager.configReloader.image.tag }}"
+          imagePullPolicy: {{ $.Values.alerting.helmRelease.values.alertmanager.configReloader.image.pullPolicy }}
+          resources:
+            {{- toYaml $.Values.alerting.helmRelease.values.alertmanager.configReloader.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml $.Values.alerting.helmRelease.values.alertmanager.configReloader.securityContext | nindent 12 }}
+          env:
+            - name: WATCH_PATHS
+              value: /tmp/config
+            - name: REQ_URL
+              value: http://localhost:9093/-/reload
+            - name: REQ_METHOD
+              value: POST
+          volumeMounts:
+            - name: config
+              mountPath: /tmp/config
+      {{- if $.Values.alerting.helmRelease.values.alertmanager.emailPasswordMount }}
+      extraVolumeMounts:
+        - name: email-password
+          readOnly: true
+          mountPath: /etc/email-password
+      extraVolumes:
+        - name: email-password
+          secret: 
+            optional: true
+            secretName: aoi-alertmanager-email-password
+      {{- end }}
+    serviceMonitor:
+      enabled: true
+      extraLabels:
+        netic.dk/monitoring: "true"
+{{- end }}
+{{- end }}

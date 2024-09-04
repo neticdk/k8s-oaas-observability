@@ -22,7 +22,7 @@ jobs:
       #
       - uses: actions/setup-go@v2
         with:
-          go-version: '1.17.2'
+          go-version: '1.23.0'
 
       - name: Install extra tooling
         run: |
@@ -56,7 +56,7 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.7.2
+          version: v3.15.3
 
       - name: Add dependency chart repos
         run: ./.github/scripts/helm-repos.sh

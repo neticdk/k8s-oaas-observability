@@ -1,0 +1,24 @@
+{{- if and .Values.alerting.enabled .Values.alerting.clusterWideNamespace.enabled }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.alerting.clusterWideNamespace.name }}
+  labels:
+    netic.dk/monitoring: "true"
+  annotations:
+    netic.dk/alerting: "true"
+---
+apiVersion: project.tcs.trifork.com/v1alpha1
+kind: ProjectBootstrap
+metadata:
+  name: {{ .Values.alerting.clusterWideNamespace.name }}
+  namespace: netic-gitops-system
+spec:
+  namespace: {{ .Values.alerting.clusterWideNamespace.name }}
+  config:
+    ref: application-operations-alerting
+    size: application-operations-alerting
+  git:
+    {{- toYaml .Values.alerting.clusterWideNamespace.projectBootstrap.git | nindent 4 }}
+{{- end }}

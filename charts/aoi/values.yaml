@@ -1,0 +1,491 @@
+# Global definitions used for components directly managed by this chart
+global:
+  clusterDomain: "cluster.local"
+  tsdb:
+    enabled: true
+    high_availability:
+      # -- Enable high-availability for tsdb (Victoria-metrics-single)
+      enabled: false
+  # -- Default priorityClassName to use
+  priorityClassName: null
+  serviceLabels: {}
+  serviceAnnotations: {}
+  image:
+    pullPolicy: Always
+  revisionHistoryLimit: 5
+  annotations: {}
+  podAnnotations: {}
+  podLabels: {}
+  imagePullSecrets: []
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+  # -- Options to configure the bootstrapConfig globally can be overwritten for dashboards and clusterWideNamespace alerting namespace.
+  # .Values.dashboards.bootstrapConfig
+  # .Values.alerting.clusterWideNamespace.bootstrapConfig
+  bootstrapConfig:
+    git:
+      # -- Which git flavor to use, currently only supports github, gitlab and bitbucket
+      flavor: "github"
+      github: {}
+      gitlab: {}
+      bitbucket: {}
+    vault: {}
+    externalSecretsStore: {}
+
+
+# Namespace for tenant dashboards
+dashboards:
+  # -- overwrite options configured in global.bootstrapConfig
+  bootstrapConfig:
+    git:
+      # -- overwrite git options, make sure to include all options in overwrite, it is not merged with globally defined options.
+      github: {}
+      gitlab: {}
+      bitbucket: {}
+    # -- overwrite vault options, make sure to include all options in overwrite, it is not merged with globally defined options.
+    vault: {}
+    # -- overwrite externalSecretStore options, make sure to include all options in overwrite, it is not merged with globally defined options.
+    externalSecretsStore: {}
+  # -- Options to configure the projectBootstrap used for tenant dashboard namespace
+  projectBootstrap:
+    git: {}
+
+# Prometheus Queries are filtered using client JWT token (Grafana)
+authProxy:
+  # -- Enable filtering of Prometheus Queries based on client JWT token (Grafana)
+  enabled: true
+  replicas: 1
+  image:
+    registry: registry.netic.dk
+    repository: netic-oaas/cortex-proxy
+    tag: v1.0.4
+  priorityClassName: null
+  annotations: {}
+  podAnnotations: {}
+  podLabels: {}
+  selectorLabels: {}
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+    runAsNonRoot: true
+  service:
+    annotations: {}
+    labels: {}
+  extraArgs: []
+  extraEnv: []
+  extraEnvFrom: []
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  terminationGracePeriodSeconds: 30
+  affinity: []
+  nodeSelector: {}
+  topologySpauthProxyConstraints: []
+  tolerations: []
+  podManagementPolicy: "Parallel"
+
+
+prometheus:
+  image:
+    registry: docker.io
+    repository: victoriametrics/vmagent
+    tag: v1.100.1@sha256:18959c254d474d150fd74534b8183e1a800d18d673a408b0c7d20e3febe6f4fe
+    pullPolicy: Always
+  resources:
+    limits:
+      memory: 768Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  priorityClassName: null
+  podAnnotations: {}
+  podSecurityContext:
+    allowPrivilegeEscalation: false
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+    runAsNonRoot: true
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+  # -- labels to add to all metrics.
+  # externalLabels:
+  #   cluster_id: "${cluster_provider}_${cluster_name}"
+  #   cluster: ${cluster_name}
+  #   cluster_type: "${cluster_type}"
+  #   prometheus_cluster: ${cluster_name}/aoi-prometheus
+  #   provider: "${cluster_provider}"
+  externalLabels: {}
+  # -- relabel configs to apply to samples before ingestion.
+  relabelConfig: |
+    - source_labels: [cluster_id, namespace]
+      separator: _
+      regex: (.*)
+      target_label: namespace_id
+      replacement: $1
+      action: replace
+  persistence:
+    size: 60Gi
+  configReloader:
+    image:
+      registry: quay.io
+      repository: prometheus-operator/prometheus-config-reloader
+      tag: v0.76.1@sha256:31410de3f01e8ee4e3fd692345d247e7ef57351ce58b21c89d71639d50d1f424
+      pullPolicy: Always
+    resources:
+      limits:
+        memory: 25Mi
+      requests:
+        cpu: 10m
+        memory: 25Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+  extraVolumes: []
+  extraVolumeMounts: []
+
+# Used in HA mode to route request to one or the other tsdb - https://github.com/jacksontj/promxy?tab=readme-ov-file#why-promxy
+promxy:
+  replicas: 1
+  image:
+    registry: quay.io
+    repository: jacksontj/promxy
+    tag: v0.0.85@sha256:115686ce1eb8e37696304b191ce33f13db1c0d7ec8f3ef36501f12bb74f83b9e
+  priorityClassName: null
+  annotations: {}
+  podAnnotations: {}
+  podLabels: {}
+  selectorLabels: {}
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+    runAsNonRoot: true
+  service:
+    annotations: {}
+    labels: {}
+  extraArgs: []
+  extraEnv: []
+  extraEnvFrom: []
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  terminationGracePeriodSeconds: 30
+  affinity: []
+  nodeSelector: {}
+  topologySpauthProxyConstraints: []
+  tolerations: []
+  podManagementPolicy: "Parallel"
+  config: |
+    ##
+    ### Promxy configuration
+    ##
+    promxy:
+      server_groups:
+        - static_configs:
+            - targets:
+              - victoria-metrics-single-1-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428
+          labels:
+            replica: 1
+          http_client:
+            dial_timeout: 1s
+          ignore_error: true
+          remote_read: true
+          remote_read_path: /api/v1
+        - static_configs:
+            - targets:
+              - victoria-metrics-single-2-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428
+          labels:
+            replica: 2
+          http_client:
+            dial_timeout: 1s
+          ignore_error: true
+          remote_read: true
+          remote_read_path: /api/v1
+
+
+externalSecret:
+  vaultServer: null
+  vaultPath: null
+  vaultMountPath: null
+  vaultDataFromKey: null
+
+
+grafana:
+  # -- If true deploy Grafana for tenant dashboards
+  enabled: true
+  image:
+    pullPolicy: Always
+  testFramework:
+    enabled: false
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+  priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  podPortName: http
+  # sidecar used to provision tenant dashboards found as configmaps in the namespace application-operations-dashboards with label aoi_dashboard
+  sidecar:
+    imagePullPolicy: Always
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+    resources:
+      limits:
+        memory: 96Mi
+      requests:
+        cpu: 50m
+        memory: 96Mi
+    dashboards:
+      enabled: true
+      # -- Load configmaps with label key
+      label: application-operations-dashboards
+      # -- Watch for configmaps in namespaces
+      searchNamespace:
+        - application-operations-dashboards
+      # -- override grafana folder using annotation
+      folderAnnotation: grafana_dashboard_folder
+      provider:
+        disableDelete: true
+        foldersFromFilesStructure: true
+    datasources:
+      enabled: true
+      label: aoi_grafana_datasource
+  ingress:
+    enabled: false
+    fqdn: null
+
+victoriaMetrics:
+  persistentVolume:
+    # -- Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
+    size: 5Gi
+
+victoria-metrics-single-1:
+  rbac:
+    create: false
+  server:
+    # -- Data retention period
+    retentionPeriod: 90d
+    image:
+      pullPolicy: Always
+    # Try to not schedule victoria-metrics-single-1 in same zone as victoria-metrics-single-2
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - victoria-metrics-single-2
+            topologyKey: topology.kubernetes.io/zone
+    resources:
+      limits:
+        memory: 1024Mi
+      requests:
+        cpu: 200m
+        memory: 1024Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 3000
+      fsGroup: 2000
+    serviceMonitor:
+      enabled: true
+      extraLabels:
+        netic.dk/monitoring: "true"
+
+victoria-metrics-single-2:
+  rbac:
+    create: false
+  server:
+    # -- Data retention period
+    retentionPeriod: 90d
+    image:
+      pullPolicy: Always
+    # Try to not schedule victoria-metrics-single-2 in same zone as victoria-metrics-single-1
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - victoria-metrics-single-1
+            topologyKey: topology.kubernetes.io/zone
+    resources:
+      limits:
+        memory: 1024Mi
+      requests:
+        cpu: 200m
+        memory: 1024Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 3000
+      fsGroup: 2000
+    serviceMonitor:
+      enabled: true
+      extraLabels:
+        netic.dk/monitoring: "true"
+
+alerting:
+  # -- Enable deploying alerting components
+  enabled: false
+  # -- Value of the label (cluster_id)
+  clusterId: ""
+  clusterWideNamespace:
+    # -- Create alerting namespace for cluster-wide alert definitions
+    enabled: false
+    name: application-operations-alerting
+    # -- overwrite options configured in global.bootstrapConfig
+    bootstrapConfig:
+      git:
+        # -- overwrite git options, make sure to include all options in overwrite, it is not merged with globally defined options.
+        github: {}
+        gitlab: {}
+        bitbucket: {}
+      # -- overwrite vault options, make sure to include all options in overwrite, it is not merged with globally defined options.
+      vault: {}
+      # -- overwrite externalSecretStore options, make sure to include all options in overwrite, it is not merged with globally defined options.
+      externalSecretsStore: {}
+    # -- Options to configure the projectBootstrap used for cluster-wide alert namespace.
+    projectBootstrap:
+      git: {}
+  # -- List of namespaces which should have alerting components deployed
+  namespaces: []
+  # -- Override the default helmRepository used to deploy alerting components
+  helmRepository: null
+  # -- Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml
+  helmRelease:
+    values:
+      server:
+        priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
+        image:
+          registry: docker.io
+          repository: victoriametrics/vmalert
+          pullPolicy: Always
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
+        configReloader:
+          image:
+            registry: docker.io
+            repository: kiwigrid/k8s-sidecar
+            tag: "1.26.1@sha256:b8d5067137fec093cf48670dc3a1dbb38f9e734f3a6683015c2e89a45db5fd16"
+            pullPolicy: Always
+          resources:
+            limits:
+              memory: 96Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+        podSecurityContext:
+          runAsUser: 1000
+          runAsGroup: 3000
+          fsGroup: 2000
+      alertmanager:
+        # -- Boolean that is used to mount the secret aoi-alertmanager-email-password into the alertmanager container
+        emailPasswordMount: false
+        priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
+        image:
+          registry: docker.io
+          repository: prom/alertmanager
+          tag: "v0.27.0"
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
+        configReloader:
+          image:
+            registry: ghcr.io
+            repository: neticdk/inotifywait-reloader
+            tag: "v0.0.2"
+            pullPolicy: Always
+          resources:
+            limits:
+              memory: 96Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+        podSecurityContext:
+          runAsUser: 1000
+          runAsGroup: 3000
+          fsGroup: 2000
+
+# This is here to disable everything from the victoria-metrics-alert helm chart in chart.yaml since it is only used for versioning
+# Do not change!
+victoria-metrics-alert:
+  serviceAccount:
+    create: false
+  rbac:
+    create: false
+  server:
+    enabled: false
+    configMap: "null"
