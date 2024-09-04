@@ -19,6 +19,7 @@ global:
   imagePullSecrets: []
   containerSecurityContext:
     allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
     capabilities:
       drop:
         - all
@@ -97,6 +98,7 @@ prometheus:
     registry: docker.io
     repository: victoriametrics/vmagent
     tag: v1.100.1@sha256:18959c254d474d150fd74534b8183e1a800d18d673a408b0c7d20e3febe6f4fe
+    pullPolicy: Always
   resources:
     limits:
       memory: 768Mi
@@ -111,6 +113,10 @@ prometheus:
     runAsGroup: 3000
     fsGroup: 2000
     runAsNonRoot: true
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - all
   # -- labels to add to all metrics.
   # externalLabels:
   #   cluster_id: "${cluster_provider}_${cluster_name}"
@@ -130,6 +136,11 @@ prometheus:
   persistence:
     size: 60Gi
   configReloader:
+    image:
+      registry: quay.io
+      repository: prometheus-operator/prometheus-config-reloader
+      tag: v0.76.1@sha256:31410de3f01e8ee4e3fd692345d247e7ef57351ce58b21c89d71639d50d1f424
+      pullPolicy: Always
     resources:
       limits:
         memory: 25Mi
@@ -433,7 +444,6 @@ alerting:
           registry: docker.io
           repository: prom/alertmanager
           tag: "v0.27.0"
-          pullPolicy: Always
         resources:
           limits:
             memory: 64Mi

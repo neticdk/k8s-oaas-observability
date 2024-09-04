@@ -1,0 +1,6 @@
+global:
+  priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
+
+victoria-metrics-single-1:
+  server:
+    priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
