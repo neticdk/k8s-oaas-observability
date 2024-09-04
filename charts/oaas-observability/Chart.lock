@@ -10,7 +10,7 @@ dependencies:
   version: 1.0.16
 - name: prometheus-operator
   repository: file://../prometheus-operator
-  version: 2.0.1
+  version: 2.0.2
 - name: opentelemetry-operator
   repository: https://open-telemetry.github.io/opentelemetry-helm-charts
   version: 0.68.0
@@ -20,5 +20,5 @@ dependencies:
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.16.4
-digest: sha256:0586742c7dfd3b4f26789affdb65e70654c5bdf226b303ba054f6d5376e6a9ac
-generated: "2024-08-19T16:06:56.724808736Z"
+digest: sha256:ca64e615b6510198fc89713d1b9f14e81c257d7dd33c49863e63949aca2f7f50
+generated: "2024-09-04T12:12:11.239786964Z"
