@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.21](https://img.shields.io/badge/Version-0.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.22](https://img.shields.io/badge/Version-0.1.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -166,7 +166,7 @@ $ helm install my-release netic-oaas/aoi
 | promxy.extraEnvFrom | list | `[]` |  |
 | promxy.image.registry | string | `"quay.io"` |  |
 | promxy.image.repository | string | `"jacksontj/promxy"` |  |
-| promxy.image.tag | string | `"v0.0.85@sha256:115686ce1eb8e37696304b191ce33f13db1c0d7ec8f3ef36501f12bb74f83b9e"` |  |
+| promxy.image.tag | string | `"v0.0.87@sha256:a055469846d4db35575f8f8800ea77f37fb1f102db9e27b391a1bcaaffb2dbe9"` |  |
 | promxy.nodeSelector | object | `{}` |  |
 | promxy.podAnnotations | object | `{}` |  |
 | promxy.podLabels | object | `{}` |  |
