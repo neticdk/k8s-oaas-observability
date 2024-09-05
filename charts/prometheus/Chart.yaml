@@ -1,9 +1,9 @@
 apiVersion: v2
 name: prometheus
 type: application
-version: "2.1.8"
+version: "2.1.9"
 # renovate: image=quay.io/prometheus/prometheus
-appVersion: "v2.54.0"
+appVersion: "v2.54.1"
 description: A Helm chart to install Prometheus based on Prometheus Operator
 home: https://prometheus.io/
 sources:
