@@ -6,12 +6,14 @@ A Helm chart for Netic application operations infrastructure
 
 **Homepage:** <https://github.com/neticdk/k8s-oaas-observability>
 
-## Maintainers
+## Installing the Chart
 
-| Name | Email | Url |
-| ---- | ------ | --- |
-| alex5517 | <ash@netic.dk> |  |
-| mathiasfm | <mfm@netic.dk> |  |
+To install the chart with the release name `my-release`:
+
+```bash
+$ helm repo add netic-oaas https://neticdk.github.io/k8s-oaas-observability
+$ helm install my-release netic-oaas/aoi
+```
 
 ## Source Code
 
@@ -26,7 +28,7 @@ A Helm chart for Netic application operations infrastructure
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.9.17 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.9.17 |
 
-## Values
+## Configuration
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -225,4 +227,3 @@ A Helm chart for Netic application operations infrastructure
 | victoria-metrics-single-2.server.serviceMonitor.enabled | bool | `true` |  |
 | victoria-metrics-single-2.server.serviceMonitor.extraLabels."netic.dk/monitoring" | string | `"true"` |  |
 | victoriaMetrics.persistentVolume.size | string | `"5Gi"` | Size of the volume. Should be calculated based on the metrics you send and retention policy you set. |
-
