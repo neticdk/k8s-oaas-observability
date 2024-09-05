@@ -47,6 +47,12 @@
         "charts/oaas-observability/**"
       ],
       "groupName": "oaas-observability"
+    },
+    {
+      "matchFileNames": [
+        "charts/aoi/**"
+      ],
+      "groupName": "aoi"
     }
   ],
   "customManagers": [
