@@ -2,7 +2,7 @@ apiVersion: v2
 name: aoi
 description: A Helm chart for Netic application operations infrastructure
 type: application
-version: 0.1.22
+version: 0.1.23
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
@@ -18,15 +18,15 @@ dependencies:
     condition: grafana.enabled
   - name: victoria-metrics-single
     alias: victoria-metrics-single-1
-    version: 0.9.17
+    version: 0.11.1
     repository: https://victoriametrics.github.io/helm-charts/
     condition: global.tsdb.enabled
   - name: victoria-metrics-single
     alias: victoria-metrics-single-2
-    version: 0.9.17
+    version: 0.11.1
     repository: https://victoriametrics.github.io/helm-charts/
     condition: global.tsdb.high_availability.enabled
   - name: victoria-metrics-alert
-    version: 0.9.4
+    version: 0.11.0
     repository: https://victoriametrics.github.io/helm-charts/
     condition: alerting.enabled
