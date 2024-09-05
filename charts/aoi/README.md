@@ -23,7 +23,7 @@ $ helm install my-release netic-oaas/aoi
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://grafana.github.io/helm-charts | grafana | 7.3.7 |
+| https://grafana.github.io/helm-charts | grafana | 7.3.12 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-alert | 0.9.4 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.9.17 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.9.17 |
