@@ -101,7 +101,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: prometheus-scrape-ingress
+  name: vmalert-prometheus-scrape-ingress
   namespace: {{ $namespace }}
 spec:
   ingress:
