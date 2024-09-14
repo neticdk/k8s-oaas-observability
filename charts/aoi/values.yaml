@@ -139,7 +139,7 @@ prometheus:
     image:
       registry: quay.io
       repository: prometheus-operator/prometheus-config-reloader
-      tag: v0.76.1@sha256:31410de3f01e8ee4e3fd692345d247e7ef57351ce58b21c89d71639d50d1f424
+      tag: v0.76.2@sha256:fd8162030f10e097c96185cd38f6b71194c580da771fd97d6d7fe4e19de6df8a
       pullPolicy: Always
     resources:
       limits:
@@ -162,7 +162,7 @@ promxy:
   image:
     registry: quay.io
     repository: jacksontj/promxy
-    tag: v0.0.87@sha256:a055469846d4db35575f8f8800ea77f37fb1f102db9e27b391a1bcaaffb2dbe9
+    tag: v0.0.88@sha256:0843adee0d5acc2a2965228379f385332d14a51a0b8758e387fca0e308b6a652
   priorityClassName: null
   annotations: {}
   podAnnotations: {}
