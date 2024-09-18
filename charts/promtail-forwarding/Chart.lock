@@ -1,9 +1,9 @@
 dependencies:
 - name: promtail
   repository: https://grafana.github.io/helm-charts
-  version: 6.16.5
+  version: 6.16.6
 - name: opentelemetry-collector
   repository: https://open-telemetry.github.io/opentelemetry-helm-charts
   version: 0.105.0
-digest: sha256:5680bcd6febb615e52770a4af0385207dc23c29a1426a496cfd43932c50d3e01
-generated: "2024-09-16T16:06:37.115316066Z"
+digest: sha256:5f66bfb25aab1cce896fd9452efb9cf5977d038f830b9fc61cbc8a6247945da9
+generated: "2024-09-18T00:16:51.210097835Z"
