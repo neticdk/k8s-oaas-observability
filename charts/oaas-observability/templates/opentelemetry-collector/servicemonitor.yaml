@@ -10,7 +10,9 @@ metadata:
 {{- end }}
 spec:
   selector:
-    matchLabels: {{ include "opentelemetryCollector.matchLabels" . | nindent 6 }}
+    matchLabels:
+      operator.opentelemetry.io/collector-service-type: monitoring
+      {{- include "opentelemetryCollector.matchLabels" . | nindent 6 }}
   namespaceSelector:
     matchNames:
       - {{ .Release.Namespace | quote }}

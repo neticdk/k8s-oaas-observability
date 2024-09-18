@@ -46,7 +46,6 @@ The instance label is created to match that of the opentelemetryCollector Operat
 */}}
 {{- define "opentelemetryCollector.matchLabels" -}}
 app.kubernetes.io/component: opentelemetry-collector
-app.kubernetes.io/instance: {{ include "opentelemetryCollector.resource-fullname" . }}
 app.kubernetes.io/name: opentelemetry-collector
 {{- end -}}
 
