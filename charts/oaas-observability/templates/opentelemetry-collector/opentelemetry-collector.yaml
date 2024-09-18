@@ -1,0 +1,63 @@
+{{- if .Values.opentelemetryCollector.enabled }}
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: {{ include "opentelemetryCollector.resource-fullname" . }}
+  labels: {{ include "opentelemetryCollector.labels" . | nindent 4 }}
+{{- if .Values.opentelemetryCollector.annotations }}
+  annotations:
+{{ toYaml .Values.opentelemetryCollector.annotations | indent 4 }}
+{{- end }}
+spec:
+  config:
+{{- include "opentelemetryCollector.genconfig" . | nindent 4 }}
+  image: "{{ .Values.opentelemetryCollector.image.registry }}/{{ .Values.opentelemetryCollector.image.repository }}"
+  imagePullPolicy: {{ .Values.opentelemetryCollector.image.pullPolicy }}
+{{- if .Values.opentelemetryCollector.mode }}
+  mode: {{ .Values.opentelemetryCollector.mode }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.extraArgs }}  
+  args:
+{{ toYaml .Values.opentelemetryCollector.extraArgs | indent 4 }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.podDisruptionBudget.enabled }}
+  podDisruptionBudget:
+    minAvailable: {{ .Values.opentelemetryCollector.podDisruptionBudget.minAvailable }}
+    maxUnavailable: {{ .Values.opentelemetryCollector.podDisruptionBudget.maxUnavailable }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.podSecurityContext }}
+  podSecurityContext:
+{{ toYaml .Values.opentelemetryCollector.podSecurityContext | indent 4 }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.priorityClassName }}
+  priorityClassName: {{ .Values.opentelemetryCollector.priorityClassName }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.replicas }}
+  replicas: {{ .Values.opentelemetryCollector.replicas }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.resources }}
+  resources:
+{{ toYaml .Values.opentelemetryCollector.resources | indent 4 }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.securityContext }}
+  securityContext:
+{{ toYaml .Values.opentelemetryCollector.securityContext | indent 4 }}
+{{- end }}
+  serviceAccount: {{ template "opentelemetryCollector.serviceAccountName" . }}
+{{- if .Values.opentelemetryCollector.tolerations }}
+  tolerations:
+{{ toYaml .Values.opentelemetryCollector.tolerations | indent 4 }}
+{{- end }}
+{{- if and (.Values.opentelemetryCollector.volumeClaimTemplates) (.Values.opentelemetryCollector.mode | eq "statefulset") }}
+  volumeClaimTemplates:
+{{ toYaml .Values.opentelemetryCollector.volumeClaimTemplates | indent 4 }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.volumes }}
+  volumes:
+{{ toYaml .Values.opentelemetryCollector.volumes | indent 4 }}
+{{- end }}
+{{- if .Values.opentelemetryCollector.volumeMounts }}
+  volumeMounts:
+{{ toYaml .Values.opentelemetryCollector.volumeMounts | indent 4 }}
+{{- end }}
+{{- end }}

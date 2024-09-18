@@ -1,0 +1,20 @@
+{{- if .Values.opentelemetryCollector.enabled }}
+{{- if .Values.opentelemetryCollector.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "opentelemetryCollector.fullname" . }}
+  labels: {{ include "opentelemetryCollector.labels" . | nindent 4 }}
+{{- if .Values.opentelemetryCollector.serviceMonitor.labels }}
+{{ toYaml .Values.opentelemetryCollector.serviceMonitor.labels | indent 4}}
+{{- end }}
+spec:
+  selector:
+    matchLabels: {{ include "opentelemetryCollector.matchLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace | quote }}
+  endpoints:
+  - port: monitoring
+{{- end }}
+{{- end }}

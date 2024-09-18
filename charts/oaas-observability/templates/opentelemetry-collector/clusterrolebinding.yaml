@@ -1,0 +1,21 @@
+{{- if .Values.opentelemetryCollector.enabled }}
+{{- if or (.Values.global.rbac.create) (.Values.opentelemetryCollector.presets.kubernetesAttributes.enabled) (.Values.opentelemetryCollector.presets.kubernetesEvents.enabled) -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "opentelemetryCollector.fullname" . }}
+  labels: {{ include "opentelemetryCollector.labels" . | nindent 4 }}
+{{- if .Values.opentelemetryCollector.annotations }}
+  annotations:
+{{ toYaml .Values.opentelemetryCollector.annotations | indent 4 }}
+{{- end }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ template "opentelemetryCollector.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "opentelemetryCollector.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}
+{{- end }}
