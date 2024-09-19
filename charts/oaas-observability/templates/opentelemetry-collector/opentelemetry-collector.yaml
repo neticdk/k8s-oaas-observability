@@ -20,6 +20,12 @@ spec:
   args:
 {{ toYaml .Values.opentelemetryCollector.extraArgs | indent 4 }}
 {{- end }}
+  env:
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
 {{- if .Values.opentelemetryCollector.podDisruptionBudget.enabled }}
   podDisruptionBudget:
     minAvailable: {{ .Values.opentelemetryCollector.podDisruptionBudget.minAvailable }}
@@ -52,12 +58,12 @@ spec:
   volumeClaimTemplates:
 {{ toYaml .Values.opentelemetryCollector.volumeClaimTemplates | indent 4 }}
 {{- end }}
-{{- if .Values.opentelemetryCollector.volumes }}
+{{- if .Values.opentelemetryCollector.extraVolumes }}
   volumes:
-{{ toYaml .Values.opentelemetryCollector.volumes | indent 4 }}
+{{ toYaml .Values.opentelemetryCollector.extraVolumes | indent 4 }}
 {{- end }}
-{{- if .Values.opentelemetryCollector.volumeMounts }}
+{{- if .Values.opentelemetryCollector.extraVolumeMounts }}
   volumeMounts:
-{{ toYaml .Values.opentelemetryCollector.volumeMounts | indent 4 }}
+{{ toYaml .Values.opentelemetryCollector.extraVolumeMounts | indent 4 }}
 {{- end }}
 {{- end }}
