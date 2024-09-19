@@ -1501,7 +1501,7 @@ prometheus:
 ##
 opentelemetryCollector:
   enabled: false
-  
+
   # -- override the fullname for the OpenTelemetry Collector
   #
   fullnameOverride: ""
@@ -1526,7 +1526,7 @@ opentelemetryCollector:
     enabled: false
     minAvailable: 1
     maxUnavailable: ""
-  
+
   # -- The podsecuritycontext for the OpenTelemetry Collector
   #
   podSecurityContext:
@@ -1536,7 +1536,7 @@ opentelemetryCollector:
     runAsUser: 10001
     seccompProfile:
       type: RuntimeDefault
-  
+
   # -- The securitycontext for the OpenTelemetry Collector container
   #
   securityContext:
@@ -1560,15 +1560,15 @@ opentelemetryCollector:
   # -- extraArgs for the OpenTelemetry Collector
   #
   extraArgs: []
-  
+
   # -- Priority class assigned to the opentelemetry collector
   #
   priorityClassName: ""
-  
+
   # -- The number of replicas for the OpenTelemetry Collector
   #
   replicas: 1
-  
+
   # -- Resource limits & requests
   #
   resources: {}
@@ -1576,7 +1576,7 @@ opentelemetryCollector:
   # -- Define the tolerations for the OpenTelemetry Collector
   #
   tolerations: []
-  
+
   # -- if mode is "statefulset" then volumeClaimTemplates can be used to define the PVCs
   volumeClaimTemplates: []
   # -- Additional volumes on the output StatefulSet definition.
