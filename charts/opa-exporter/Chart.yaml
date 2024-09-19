@@ -7,6 +7,3 @@ version: 0.1.5
 appVersion: 0.0.4
 home: https://github.com/mcelep/opa-scorecard
 deprecated: true
-maintainers:
-  - name: alex5517
-    email: ash@netic.dk
