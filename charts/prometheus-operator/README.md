@@ -1,6 +1,6 @@
 # prometheus-operator
 
-![Version: 2.0.2](https://img.shields.io/badge/Version-2.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.76.1](https://img.shields.io/badge/AppVersion-v0.76.1-informational?style=flat-square)
+![Version: 2.0.3](https://img.shields.io/badge/Version-2.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.76.1](https://img.shields.io/badge/AppVersion-v0.76.1-informational?style=flat-square)
 
 A Helm chart to install Prometheus Operator
 
@@ -25,8 +25,6 @@ $ helm install my-release netic-oaas/prometheus-operator
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.rbac.create | bool | `true` |  |
-| global.rbac.pspAnnotations | object | `{}` |  |
-| global.rbac.pspEnabled | bool | `false` |  |
 | global.serviceMonitor.labels | object | `{}` |  |
 | prometheusOperator.affinity | object | `{}` | Assign custom affinity rules to the prometheus operator ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |
 | prometheusOperator.configReloaderCpu | string | `"100m"` | Set the prometheus config reloader side-car CPU limit |

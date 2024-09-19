@@ -1,6 +1,6 @@
 # kube-state-metrics
 
-![Version: 1.0.20](https://img.shields.io/badge/Version-1.0.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.12.0](https://img.shields.io/badge/AppVersion-v2.12.0-informational?style=flat-square)
+![Version: 1.0.21](https://img.shields.io/badge/Version-1.0.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.12.0](https://img.shields.io/badge/AppVersion-v2.12.0-informational?style=flat-square)
 
 Install kube-state-metrics to generate and expose cluster-level metrics. Since this is now part of the Prometheus community
 Helm charts this has been deprecated and wont be maintained.
@@ -36,7 +36,6 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | image.repository | string | `"registry.k8s.io/kube-state-metrics/kube-state-metrics"` | The image repository to pull from |
 | image.tag | string | `nil` | The image tag to pull - default is version from Chart.yaml |
 | imagePullSecrets | list | `[]` |  |
-| kubeTargetVersionOverride | string | `""` | Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role. For example: kubeTargetVersionOverride: 1.14.9 |
 | kubeconfig.enabled | bool | `false` |  |
 | kubeconfig.secret | string | `nil` | base64 encoded kube-config file |
 | namespaceOverride | string | `""` | Override the deployment namespace @default will be set to `.Release.Namespace` if it is not set |
@@ -46,9 +45,6 @@ $ helm install my-release netic-oaas/kube-state-metrics
 | podSecurityContext.fsGroup | int | `65534` | Group ID for the filesystem |
 | podSecurityContext.runAsGroup | int | `65534` | Group ID for the container |
 | podSecurityContext.runAsUser | int | `65534` | User ID for the container |
-| podSecurityPolicy.additionalVolumes | list | `[]` | Specify allowed volumes in the pod security policy (`secret` is always allowed) |
-| podSecurityPolicy.annotations | object | `{}` | Specify pod annotations in the pod security policy Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl |
-| podSecurityPolicy.enabled | bool | `false` | If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`. |
 | priorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` | Name of Priority Class to assign pods |
 | prometheus.monitor.additionalLabels | object | `{}` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus |
 | prometheus.monitor.enabled | bool | `false` | Set this to true to create ServiceMonitor for Prometheus operator |
