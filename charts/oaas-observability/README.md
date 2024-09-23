@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.2.21](https://img.shields.io/badge/Version-2.2.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.2.22](https://img.shields.io/badge/Version-2.2.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -143,8 +143,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicyEnabled | bool | `true` |  |
 | global.rbac.create | bool | `true` |  |
-| global.rbac.pspAnnotations | object | `{}` |  |
-| global.rbac.pspEnabled | bool | `false` |  |
 | global.serviceMonitor.labels | object | `{"netic.dk/monitoring":"true"}` | Labels to add to all service monitors |
 | grafana."grafana.ini".security.angular_support_enabled | bool | `true` |  |
 | grafana.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -168,7 +166,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | grafana.sidecar.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | grafana.sidecar.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | grafana.testFramework.enabled | bool | `false` |  |
-| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"metricLabelsAllowlist":["nodes=[topology.kubernetes.io/region,topology.kubernetes.io/zone]"],"podSecurityPolicy":{"enabled":false},"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
+| kube-state-metrics | object | `{"containerSecurityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"image":{"pullPolicy":"Always"},"metricLabelsAllowlist":["nodes=[topology.kubernetes.io/region,topology.kubernetes.io/zone]"],"priorityClassName":"secure-cloud-stack-technical-operations-critical","prometheus":{"monitor":{"additionalLabels":{"netic.dk/monitoring":"true"},"enabled":true,"honorLabels":true}},"resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"25m","memory":"64Mi"}},"securityContext":{"enabled":true}}` | Values for included kube-state-metrics chart |
 | kubeApiServer.enabled | bool | `true` | Should api server be scraped |
 | kubeApiServer.relabelings[0].action | string | `"replace"` |  |
 | kubeApiServer.relabelings[0].replacement | string | `"kube-apiserver"` |  |
@@ -382,7 +380,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.podDisruptionBudget.enabled | bool | `false` |  |
 | prometheus.podDisruptionBudget.maxUnavailable | string | `""` |  |
 | prometheus.podDisruptionBudget.minAvailable | int | `1` |  |
-| prometheus.podSecurityPolicy.allowedCapabilities | list | `[]` |  |
 | prometheus.prometheusSpec.additionalScrapeConfigs | list | `[]` |  |
 | prometheus.prometheusSpec.affinity | object | `{}` |  |
 | prometheus.prometheusSpec.alertingEndpoints | list | `[]` |  |
@@ -499,7 +496,6 @@ $ helm install my-release netic-oaas/oaas-observability
 | vector-agent.livenessProbe.periodSeconds | int | `30` |  |
 | vector-agent.livenessProbe.timeoutSeconds | int | `5` |  |
 | vector-agent.podPriorityClassName | string | `"secure-cloud-stack-technical-operations-critical"` |  |
-| vector-agent.psp.enabled | bool | `false` |  |
 | vector-agent.rbac.enabled | bool | `true` |  |
 | vector-agent.readinessProbe.failureThreshold | int | `3` |  |
 | vector-agent.readinessProbe.httpGet.path | string | `"/health"` |  |

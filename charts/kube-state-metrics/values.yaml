@@ -68,25 +68,6 @@ prometheus:
     # -- Honor metric labels
     honorLabels: false
 
-## Specify if a Pod Security Policy for kube-state-metrics must be created
-## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
-##
-podSecurityPolicy:
-  # -- If true, create & use PodSecurityPolicy resources. Note that related RBACs are created only if `rbac.enabled` is `true`.
-  enabled: false
-  # -- Specify pod annotations in the pod security policy
-  # Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
-  # Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
-  # Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
-  annotations: {}
-    ##
-    # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
-    # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
-    # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
-
-  # -- Specify allowed volumes in the pod security policy (`secret` is always allowed)
-  additionalVolumes: []
-
 podSecurityContext:
   # -- Group ID for the container
   runAsGroup: 65534
@@ -179,7 +160,3 @@ resources:
   requests:
     cpu: 50m
     memory: 64Mi
-
-# -- Provide a k8s version to define apiGroups for podSecurityPolicy Cluster Role.
-# For example: kubeTargetVersionOverride: 1.14.9
-kubeTargetVersionOverride: ""
