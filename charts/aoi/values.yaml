@@ -117,6 +117,22 @@ prometheus:
     capabilities:
       drop:
         - ALL
+
+  # -- selectors for serviceMonitor, podMonitor and probe
+  # Default is to match all objects
+  serviceMonitorNamespaceSelector:
+    matchLabels: {}
+  serviceMonitorSelector:
+    matchLabels: {}
+  podMonitorNamespaceSelector:
+    matchLabels: {}
+  podMonitorSelector:
+    matchLabels: {}
+  probeNamespaceSelector:
+    matchLabels: {}
+  probeSelector:
+    matchLabels: {}
+
   # -- labels to add to all metrics.
   # externalLabels:
   #   cluster_id: "${cluster_provider}_${cluster_name}"

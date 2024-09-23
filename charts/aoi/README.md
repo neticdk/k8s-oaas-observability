@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.25](https://img.shields.io/badge/Version-0.1.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.26](https://img.shields.io/badge/Version-0.1.26-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -146,6 +146,8 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.image.tag | string | `"v1.103.0@sha256:cc36d2a84be1edb8c9277ffaa1c27d9d268758bcf5554b21f14b225b226320a8"` |  |
 | prometheus.persistence.size | string | `"60Gi"` |  |
 | prometheus.podAnnotations | object | `{}` |  |
+| prometheus.podMonitorNamespaceSelector.matchLabels | object | `{}` |  |
+| prometheus.podMonitorSelector.matchLabels | object | `{}` |  |
 | prometheus.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | prometheus.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | prometheus.podSecurityContext.fsGroup | int | `2000` |  |
@@ -154,10 +156,14 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | prometheus.podSecurityContext.runAsUser | int | `1000` |  |
 | prometheus.priorityClassName | string | `nil` |  |
+| prometheus.probeNamespaceSelector.matchLabels | object | `{}` |  |
+| prometheus.probeSelector.matchLabels | object | `{}` |  |
 | prometheus.relabelConfig | string | `"- source_labels: [cluster_id, namespace]\n  separator: _\n  regex: (.*)\n  target_label: namespace_id\n  replacement: $1\n  action: replace\n"` | relabel configs to apply to samples before ingestion. |
 | prometheus.resources.limits.memory | string | `"768Mi"` |  |
 | prometheus.resources.requests.cpu | string | `"100m"` |  |
 | prometheus.resources.requests.memory | string | `"256Mi"` |  |
+| prometheus.serviceMonitorNamespaceSelector | object | `{"matchLabels":{}}` | selectors for serviceMonitor, podMonitor and probe Default is to match all objects |
+| prometheus.serviceMonitorSelector.matchLabels | object | `{}` |  |
 | promxy.affinity | list | `[]` |  |
 | promxy.annotations | object | `{}` |  |
 | promxy.config | string | `"##\n### Promxy configuration\n##\npromxy:\n  server_groups:\n    - static_configs:\n        - targets:\n          - victoria-metrics-single-1-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428\n      labels:\n        replica: 1\n      http_client:\n        dial_timeout: 1s\n      ignore_error: true\n      remote_read: true\n      remote_read_path: /api/v1\n    - static_configs:\n        - targets:\n          - victoria-metrics-single-2-server.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:8428\n      labels:\n        replica: 2\n      http_client:\n        dial_timeout: 1s\n      ignore_error: true\n      remote_read: true\n      remote_read_path: /api/v1\n"` |  |

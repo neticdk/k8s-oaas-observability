@@ -47,18 +47,12 @@ spec:
       {{- with .Values.prometheus.selectorLabels }}
       {{- tpl (toYaml .) $ | nindent 6 }}
       {{- end }}
-  podMonitorNamespaceSelector:
-    matchLabels: {}
-  podMonitorSelector:
-    matchLabels: {}
-  ruleNamespaceSelector:
-    matchLabels: {}
-  ruleSelector:
-    matchLabels: {}
-  serviceMonitorNamespaceSelector:
-    matchLabels: {}
-  serviceMonitorSelector:
-    matchLabels: {}
+  serviceMonitorNamespaceSelector: {{ .Values.prometheus.serviceMonitorNamespaceSelector | toYaml | nindent 4 }}
+  serviceMonitorSelector: {{ .Values.prometheus.serviceMonitorSelector | toYaml | nindent 4 }}
+  podMonitorNamespaceSelector: {{ .Values.prometheus.podMonitorNamespaceSelector | toYaml | nindent 4 }}
+  podMonitorSelector: {{ .Values.prometheus.podMonitorSelector | toYaml | nindent 4 }}
+  probeNamespaceSelector: {{ .Values.prometheus.probeNamespaceSelector | toYaml | nindent 4 }}
+  probeSelector: {{ .Values.prometheus.probeSelector | toYaml | nindent 4 }}
   portName: web
   {{- include "aoi.prometheusPriorityClassName" . | nindent 2 }}
   replicas: 1
