@@ -2,7 +2,7 @@
 
 # prometheus-node-exporter
 
-![Version: 1.0.16](https://img.shields.io/badge/Version-1.0.16-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 1.0.17](https://img.shields.io/badge/Version-1.0.17-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
 A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 
@@ -58,7 +58,6 @@ The following table lists the configurable parameters of the Node Exporter chart
 | extraArgs | list | `[]` | Additional container arguments |
 | extraHostVolumeMounts | list | `[]` | Additional mounts from the host |
 | global.rbac.create | bool | `false` |  |
-| global.rbac.pspEnabled | bool | `false` |  |
 | hostNetwork | bool | `true` | Whether to expose the service to the host network |
 | hostRootFsMount | bool | `true` | If true, node-exporter pods mounts host / at /host/root |
 | image.pullPolicy | string | `"Always"` | Image pull policy. For security reasons set to "Always" |
@@ -75,7 +74,6 @@ The following table lists the configurable parameters of the Node Exporter chart
 | prometheus.monitor.relabelings | list | `[]` | Relabelings that should be applied on the ServerMonitor |
 | prometheus.monitor.scrapeTimeout | string | `"10s"` | Timeout after which the scrape is ended |
 | rbac.create | bool | `true` | If true, create & use RBAC resources |
-| rbac.pspEnabled | bool | `false` | Specifies whether a PodSecurityPolicy should be created. https://kubernetes.io/docs/concepts/policy/pod-security-policy/ |
 | resources | object | `{"limits":{"memory":"50Mi"},"requests":{"cpu":"10m","memory":"30Mi"}}` | CPU/Memory resource requests/limits. It is recommended to adjust the the resources in the concrete context. |
 | securityContext | object | `{"fsGroup":65534,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534}` | SecurityContext |
 | service.annotations | object | `{"prometheus.io/scrape":"true"}` | Kubernetes service annotations |

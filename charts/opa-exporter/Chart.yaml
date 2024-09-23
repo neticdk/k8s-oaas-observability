@@ -2,10 +2,8 @@ apiVersion: v2
 name: opa-exporter
 description: Prometheus exporter for OPA Gatekeeper.
 type: application
-version: 0.1.4
+version: 0.1.5
 # renovate: image=mcelep/opa_scorecard_exporter
 appVersion: 0.0.4
 home: https://github.com/mcelep/opa-scorecard
-maintainers:
-  - name: alex5517
-    email: ash@netic.dk
+deprecated: true

@@ -6,7 +6,6 @@
 global:
   rbac:
     create: false
-    pspEnabled: false
 
 image:
   # -- Image repository
@@ -92,9 +91,6 @@ containerSecurityContext:
 rbac:
   # -- If true, create & use RBAC resources
   create: true
-  # -- Specifies whether a PodSecurityPolicy should be created.
-  # https://kubernetes.io/docs/concepts/policy/pod-security-policy/
-  pspEnabled: false
 
 # -- list of addresses that have node exporter deployed outside of the cluster
 endpoints: []

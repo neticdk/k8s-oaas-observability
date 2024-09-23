@@ -4,17 +4,6 @@ global:
   imagePullSecrets: []
   rbac:
     create: true
-    pspEnabled: false
-    pspAnnotations:
-      {}
-      ## Specify pod annotations
-      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
-      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
-      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
-      ##
-      # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
-      # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
-      # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
   serviceMonitor:
     # -- Labels to add to all service monitors
     labels:
@@ -1113,11 +1102,6 @@ prometheus:
     minAvailable: 1
     maxUnavailable: ""
 
-  ## Configure additional options for default pod security policy for Prometheus
-  ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
-  podSecurityPolicy:
-    allowedCapabilities: []
-
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
@@ -1696,8 +1680,6 @@ endpointController:
 
 # -- Values for included kube-state-metrics chart
 kube-state-metrics:
-  podSecurityPolicy:
-    enabled: false
   securityContext:
     enabled: true
   image:
@@ -1743,8 +1725,6 @@ vector-agent:
   enabled: true
   image:
     pullPolicy: Always
-  psp:
-    enabled: false
   rbac:
     enabled: true
   resources:
