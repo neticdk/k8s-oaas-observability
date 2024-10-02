@@ -1481,6 +1481,187 @@ prometheus:
     ##
     enforcedNamespaceLabel: ""
 
+## Deploy a OpenTelemetry Collector instance using the OpenTelemetry Operator
+##
+opentelemetryCollector:
+  enabled: false
+
+  # -- override the fullname for the OpenTelemetry Collector
+  #
+  fullnameOverride: ""
+
+  # -- Annotations for OpenTelemetry Collector
+  #
+  annotations: {}
+
+  # -- Service account for Prometheuses to use.
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+  #
+  serviceAccount:
+    name: "opentelemetry-collector"
+    annotations: {}
+
+  # -- Configure pod disruption budgets for OpenTelemetry Collector
+  # ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
+  # This configuration is immutable once created and will require the PDB to be deleted to be changed
+  # https://github.com/kubernetes/kubernetes/issues/45398
+  #
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+    maxUnavailable: ""
+
+  # -- The podsecuritycontext for the OpenTelemetry Collector
+  #
+  podSecurityContext:
+    fsGroup: 10001
+    runAsGroup: 10001
+    runAsNonRoot: true
+    runAsUser: 10001
+    seccompProfile:
+      type: RuntimeDefault
+
+  # -- The securitycontext for the OpenTelemetry Collector container
+  #
+  securityContext:
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: [ALL]
+    allowPrivilegeEscalation: false
+
+
+  # -- Image of OpenTelemetry Collector, the opentelmetry operator version will determine the version of the collector
+  #
+  image:
+    registry: "docker.io"
+    repository: "otel/opentelemetry-collector-k8s"
+    pullPolicy: "Always"
+
+  # -- Valid values are "daemonset", "deployment", and "statefulset".
+  #
+  mode: "deployment"
+
+  # -- extraArgs for the OpenTelemetry Collector
+  #
+  extraArgs: []
+
+  # -- Priority class assigned to the opentelemetry collector
+  #
+  priorityClassName: ""
+
+  # -- The number of replicas for the OpenTelemetry Collector
+  #
+  replicas: 1
+
+  # -- Resource limits & requests
+  #
+  resources: {}
+
+  # -- Define the tolerations for the OpenTelemetry Collector
+  #
+  tolerations: []
+
+  # -- if mode is "statefulset" then volumeClaimTemplates can be used to define the PVCs
+  volumeClaimTemplates: []
+  # -- Additional volumes on the output StatefulSet definition.
+  extraVolumes: []
+  # -- Additional VolumeMounts on the output StatefulSet definition.
+  extraVolumeMounts: []
+
+  # -- additional rules to be added to the OpenTelemetry Collector clusterRole
+  rbac:
+    clusterRole:
+      rules: []
+
+  # -- If true, create a serviceMonitor for OpenTelemetry Collector
+  #
+  serviceMonitor:
+    enabled: true
+    labels:
+      netic.dk/monitoring: "true"
+
+  # -- configuration presets for the OpenTelemetry Collector, currently only "kubernetesAttributes" and "kubernetesEvents" are supported
+  # creates the config and the required roles needed
+  #
+  presets:
+    # Configures the Kubernetes Processor to add Kubernetes metadata.
+    # Adds the k8sattributes processor to all the pipelines
+    # and adds the necessary rules to ClusteRole.
+    # Best used with mode = daemonset.
+    # See https://opentelemetry.io/docs/kubernetes/collector/components/#kubernetes-attributes-processor for details on the receiver.
+    kubernetesAttributes:
+      enabled: false
+      # When enabled the processor will extra all labels for an associated pod and add them as resource attributes.
+      # The label's exact name will be the key.
+      extractAllPodLabels: false
+      # When enabled the processor will extra all annotations for an associated pod and add them as resource attributes.
+      # The annotation's exact name will be the key.
+      extractAllPodAnnotations: false
+    # Configures the collector to collect kubernetes events.
+    # Adds the k8sobject receiver to the logs pipeline
+    # and collects kubernetes events by default.
+    # Best used with mode = deployment or statefulset.
+    # See https://opentelemetry.io/docs/kubernetes/collector/components/#kubernetes-objects-receiver for details on the receiver.
+    kubernetesEvents:
+      enabled: false
+
+  # -- Base collector configuration.
+  # Supports templating. To escape existing instances of {{ }}, use {{` <original content> `}}.
+  # For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.
+  #
+  config:
+    exporters:
+      debug: {}
+    extensions:
+      # The health_check extension is mandatory for this chart.
+      # Without the health_check extension the collector will fail the readiness and liveliness probes.
+      # The health_check extension can be modified, but should never be removed.
+      health_check:
+        endpoint: ${MY_POD_IP}:13133
+    processors:
+      batch: {}
+      # Default memory limiter configuration for the collector based on k8s resource limits.
+      memory_limiter:
+        # check_interval is the time between measurements of memory usage.
+        check_interval: 5s
+        # By default limit_mib is set to 80% of ".Values.resources.limits.memory"
+        limit_percentage: 80
+        # By default spike_limit_mib is set to 25% of ".Values.resources.limits.memory"
+        spike_limit_percentage: 25
+    receivers:
+      jaeger:
+        protocols:
+          grpc:
+            endpoint: ${MY_POD_IP}:14250
+          thrift_http:
+            endpoint: ${MY_POD_IP}:14268
+          thrift_compact:
+            endpoint: ${MY_POD_IP}:6831
+      otlp:
+        protocols:
+          grpc:
+            endpoint: ${MY_POD_IP}:4317
+          http:
+            endpoint: ${MY_POD_IP}:4318
+    service:
+      telemetry:
+        metrics:
+          address: ${MY_POD_IP}:8888
+      extensions:
+        - health_check
+      pipelines:
+        traces:
+          exporters:
+            - debug
+          processors:
+            - memory_limiter
+            - batch
+          receivers:
+            - otlp
+            - jaeger
+
+## endpoint-controller values
+##
 endpointController:
   # -- Enable endpoint controller to expose external endpoints
   enabled: false
