@@ -97,7 +97,7 @@ prometheus:
   image:
     registry: docker.io
     repository: victoriametrics/vmagent
-    tag: v1.103.0@sha256:cc36d2a84be1edb8c9277ffaa1c27d9d268758bcf5554b21f14b225b226320a8
+    tag: v1.104.0@sha256:523f0a0ee7df00363e1cf55fe95e3a102e64f7a883114e5a2b3b3931acac6f67
     pullPolicy: Always
   resources:
     limits:
@@ -155,7 +155,7 @@ prometheus:
     image:
       registry: quay.io
       repository: prometheus-operator/prometheus-config-reloader
-      tag: v0.76.2@sha256:fd8162030f10e097c96185cd38f6b71194c580da771fd97d6d7fe4e19de6df8a
+      tag: v0.77.1@sha256:43d49b810891ecea497de531c5e2bbd44117e60986d4ecbd4810475806e8e387
       pullPolicy: Always
     resources:
       limits:
@@ -178,7 +178,7 @@ promxy:
   image:
     registry: quay.io
     repository: jacksontj/promxy
-    tag: v0.0.88@sha256:0843adee0d5acc2a2965228379f385332d14a51a0b8758e387fca0e308b6a652
+    tag: v0.0.90@sha256:76d36ffa94b85de043afd96fc8e7cb5089db6f21e161ca42ceb4b4ff5226e4c7
   priorityClassName: null
   annotations: {}
   podAnnotations: {}
@@ -434,7 +434,7 @@ alerting:
           image:
             registry: docker.io
             repository: kiwigrid/k8s-sidecar
-            tag: "1.27.6@sha256:db85bd5532530d288736b35e63baceacbf570bf863d85a0404b33c1e1631f63b"
+            tag: "1.28.0@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2"
             pullPolicy: Always
           resources:
             limits:
