@@ -2,6 +2,42 @@ apiVersion: v1
 entries:
   aoi:
   - apiVersion: v2
+    created: "2024-10-08T12:15:21.128413856Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 7.3.12
+    - alias: victoria-metrics-single-1
+      condition: global.tsdb.enabled
+      name: victoria-metrics-single
+      repository: https://victoriametrics.github.io/helm-charts/
+      version: 0.12.1
+    - alias: victoria-metrics-single-2
+      condition: global.tsdb.high_availability.enabled
+      name: victoria-metrics-single
+      repository: https://victoriametrics.github.io/helm-charts/
+      version: 0.12.1
+    - condition: alerting.enabled
+      name: victoria-metrics-alert
+      repository: https://victoriametrics.github.io/helm-charts/
+      version: 0.12.1
+    description: A Helm chart for Netic application operations infrastructure
+    digest: 1ae05ff27a84d46262f30cff69737f12c40a4f810f043884f415b3b26a1b0fe0
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: ash@netic.dk
+      name: alex5517
+    - email: mfm@netic.dk
+      name: mathiasfm
+    name: aoi
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/aoi-0.1.28/aoi-0.1.28.tgz
+    version: 0.1.28
+  - apiVersion: v2
     created: "2024-10-04T06:04:53.071173962Z"
     dependencies:
     - condition: grafana.enabled
@@ -6938,4 +6974,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-04T11:06:15.615672212Z"
+generated: "2024-10-08T12:15:21.129314569Z"
