@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.28](https://img.shields.io/badge/Version-0.1.28-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.29](https://img.shields.io/badge/Version-0.1.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -24,9 +24,9 @@ $ helm install my-release netic-oaas/aoi
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 7.3.12 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-alert | 0.12.1 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.12.1 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.12.1 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-alert | 0.12.2 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.12.2 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.12.2 |
 
 ## Configuration
 
