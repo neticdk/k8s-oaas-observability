@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.3.8](https://img.shields.io/badge/Version-2.3.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.3.9](https://img.shields.io/badge/Version-2.3.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -32,11 +32,11 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 8.5.11 |
+| https://grafana.github.io/helm-charts | grafana | 8.6.0 |
 | https://grafana.github.io/helm-charts | promtail | 6.16.6 |
 | https://helm.vector.dev | vector-agent | 0.21.3 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.72.0 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.26.0 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.73.0 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.27.0 |
 
 ## Configuration
 
@@ -414,7 +414,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
 | prometheus.prometheusSpec.image.repository | string | `"quay.io/prometheus/prometheus"` |  |
-| prometheus.prometheusSpec.image.tag | string | `"v2.55.0"` |  |
+| prometheus.prometheusSpec.image.tag | string | `"v2.55.1"` |  |
 | prometheus.prometheusSpec.initContainers | list | `[]` |  |
 | prometheus.prometheusSpec.listenLocal | bool | `false` |  |
 | prometheus.prometheusSpec.logFormat | string | `"logfmt"` |  |
@@ -456,7 +456,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheus.prometheusSpec.thanos | object | `{}` |  |
 | prometheus.prometheusSpec.tolerations | list | `[]` |  |
-| prometheus.prometheusSpec.version | string | `"v2.55.0"` |  |
+| prometheus.prometheusSpec.version | string | `"v2.55.1"` |  |
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |
