@@ -14,3 +14,17 @@
     {{ fail "alerting is enabled, clusterId must be defined and set to the value of the label cluster_id" }}
   {{- end }}
 {{- end }}
+
+{{/* validate only 1 preset is defined */}}
+{{- if .Values.global.presets }}
+  {{- $count := 0 -}}
+  {{- range $key, $value := .Values.global.presets -}}
+    {{- if eq $value true -}}
+      {{- $count = add $count 1 -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if ge $count 1 -}}
+    {{ fail "More than 1 preset is enabled" }}
+  {{- end }}
+{{- end }}
