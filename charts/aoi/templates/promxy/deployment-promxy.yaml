@@ -1,4 +1,4 @@
-{{- if ne .Values.global.presets.remoteWriteOnly }}
+{{- if ne .Values.global.presets.remoteWriteOnly true}}
 {{- if .Values.global.tsdb.high_availability.enabled }}
 ---
 apiVersion: apps/v1

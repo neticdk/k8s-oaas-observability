@@ -1,4 +1,4 @@
-{{- if ne .Values.global.presets.remoteWriteOnly }}
+{{- if ne .Values.global.presets.remoteWriteOnly true}}
 {{- if .Values.authProxy.enabled }}
 ---
 apiVersion: apps/v1

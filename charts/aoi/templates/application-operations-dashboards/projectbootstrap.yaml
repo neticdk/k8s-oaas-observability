@@ -1,4 +1,4 @@
-{{- if ne .Values.global.presets.remoteWriteOnly }}
+{{- if ne .Values.global.presets.remoteWriteOnly true}}
 {{- if .Values.grafana.enabled }}
 ---
 apiVersion: project.tcs.trifork.com/v1alpha1
