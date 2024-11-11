@@ -1,3 +1,4 @@
+{{- if ne .Values.global.presets.remoteWriteOnly }}
 {{- if .Values.global.tsdb.high_availability.enabled }}
 ---
 apiVersion: apps/v1
@@ -119,4 +120,5 @@ spec:
         - configMap:
             name: aoi-promxy-config
           name: aoi-promxy-config
+{{- end }}
 {{- end }}

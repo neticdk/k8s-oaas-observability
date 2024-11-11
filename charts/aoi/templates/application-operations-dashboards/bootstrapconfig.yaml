@@ -1,3 +1,4 @@
+{{- if ne .Values.global.presets.remoteWriteOnly }}
 {{- if .Values.grafana.enabled }}
 ---
 apiVersion: project.tcs.trifork.com/v1alpha1
@@ -34,4 +35,5 @@ spec:
   labels:
     netic.dk/enforce-policies: "true"
   {{- include "aoi.dashboards.bootstrapConfig" . | nindent 2 }}
+{{- end }}
 {{- end }}

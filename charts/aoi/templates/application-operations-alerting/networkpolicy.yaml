@@ -1,3 +1,4 @@
+{{- if ne .Values.global.presets.remoteWriteOnly }}
 {{- if .Values.alerting.enabled }}
 {{- range $i, $namespace := (include "aoi.alerting.namespaces" . | fromJsonArray) }}
 ---
@@ -120,5 +121,6 @@ spec:
       netic.dk/allow-prometheus-scraping: "true"
   policyTypes:
   - Ingress
+{{- end }}
 {{- end }}
 {{- end }}

@@ -1,3 +1,4 @@
+{{- if ne .Values.global.presets.remoteWriteOnly }}
 {{- if .Values.alerting.enabled }}
 {{- range $i, $namespace := (include "aoi.alerting.namespaces" . | fromJsonArray) }}
 ---
@@ -37,3 +38,5 @@ subjects:
     namespace: {{ $namespace }}
 {{- end }}
 {{- end }}
+{{- end }}
+

@@ -1,3 +1,4 @@
+{{- if ne .Values.global.presets.remoteWriteOnly }}
 {{- if and .Values.alerting.enabled .Values.alerting.clusterWideNamespace.enabled }}
 ---
 apiVersion: v1
@@ -22,3 +23,5 @@ spec:
   git:
     {{- toYaml .Values.alerting.clusterWideNamespace.projectBootstrap.git | nindent 4 }}
 {{- end }}
+{{- end }}
+
