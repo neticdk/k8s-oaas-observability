@@ -93,6 +93,7 @@ $ helm install my-release netic-oaas/aoi
 | global.imagePullSecrets | list | `[]` |  |
 | global.podAnnotations | object | `{}` |  |
 | global.podLabels | object | `{}` |  |
+| global.presets.remoteWriteOnly | bool | `false` |  |
 | global.priorityClassName | string | `nil` | Default priorityClassName to use |
 | global.revisionHistoryLimit | int | `5` |  |
 | global.serviceAnnotations | object | `{}` |  |
