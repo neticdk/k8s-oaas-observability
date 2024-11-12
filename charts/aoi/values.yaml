@@ -1,6 +1,8 @@
 # Global definitions used for components directly managed by this chart
 global:
+  # -- List of presets which allow us to easily toggle parts of the chart on or off.
   presets:
+    # -- Disables everything but Prometheus
     remoteWriteOnly: false
   clusterDomain: "cluster.local"
   tsdb:
