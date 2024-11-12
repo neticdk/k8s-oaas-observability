@@ -93,7 +93,8 @@ $ helm install my-release netic-oaas/aoi
 | global.imagePullSecrets | list | `[]` |  |
 | global.podAnnotations | object | `{}` |  |
 | global.podLabels | object | `{}` |  |
-| global.presets.remoteWriteOnly | bool | `false` |  |
+| global.presets | object | `{"remoteWriteOnly":false}` | List of presets which allow us to easily toggle parts of the chart on or off. |
+| global.presets.remoteWriteOnly | bool | `false` | Disables everything but Prometheus |
 | global.priorityClassName | string | `nil` | Default priorityClassName to use |
 | global.revisionHistoryLimit | int | `5` |  |
 | global.serviceAnnotations | object | `{}` |  |
