@@ -18,15 +18,15 @@ dependencies:
     condition: grafana.enabled
   - name: victoria-metrics-single
     alias: victoria-metrics-single-1
-    version: 0.12.3
+    version: 0.12.6
     repository: https://victoriametrics.github.io/helm-charts/
     condition: global.tsdb.enabled
   - name: victoria-metrics-single
     alias: victoria-metrics-single-2
-    version: 0.12.3
+    version: 0.12.6
     repository: https://victoriametrics.github.io/helm-charts/
     condition: global.tsdb.high_availability.enabled
   - name: victoria-metrics-alert
-    version: 0.12.3
+    version: 0.12.4
     repository: https://victoriametrics.github.io/helm-charts/
     condition: alerting.enabled
