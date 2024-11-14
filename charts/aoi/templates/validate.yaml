@@ -24,7 +24,7 @@
     {{- end -}}
   {{- end -}}
 
-  {{- if ge $count 1 -}}
+  {{- if gt $count 1 -}}
     {{ fail "More than 1 preset is enabled" }}
   {{- end }}
 {{- end }}
