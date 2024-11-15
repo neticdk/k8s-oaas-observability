@@ -6172,25 +6172,6 @@ entries:
     version: 0.1.14
   prometheus:
   - apiVersion: v2
-    appVersion: v2.55.1
-    created: "2024-11-15T12:53:11.839539487Z"
-    description: A Helm chart to install Prometheus based on Prometheus Operator
-    digest: 8b00652fbedcd6b6e336598e2d018bcd70db9a34aa5c017a6c8446e4c89d326b
-    home: https://prometheus.io/
-    keywords:
-    - prometheus
-    maintainers:
-    - email: tal@netic.dk
-      name: langecode
-    name: prometheus
-    sources:
-    - https://github.com/prometheus/prometheus
-    - https://github.com/neticdk/k8s-oaas-observability
-    type: application
-    urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-2.1.11/prometheus-2.1.11.tgz
-    version: 2.1.11
-  - apiVersion: v2
     appVersion: v2.54.1
     created: "2024-09-05T11:50:19.306608703Z"
     description: A Helm chart to install Prometheus based on Prometheus Operator
@@ -6930,6 +6911,29 @@ entries:
     version: 1.0.5
   promtail-forwarding:
   - apiVersion: v2
+    created: "2024-11-15T12:53:36.430574092Z"
+    dependencies:
+    - name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.16.6
+    - name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.109.0
+    description: A Helm chart to install promtail together with OpenTelemetry Collector
+      for receiving and forwarding logs
+    digest: 749b4cb7bd3114a749b1682f0a6032e320748ed82f8ee4eb85c9e759e0e12c9b
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: promtail-forwarding
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.19/promtail-forwarding-0.1.19.tgz
+    version: 0.1.19
+  - apiVersion: v2
     created: "2024-10-08T12:16:14.085002894Z"
     dependencies:
     - name: promtail
@@ -7366,4 +7370,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-15T12:53:11.840741309Z"
+generated: "2024-11-15T12:53:36.431647845Z"
