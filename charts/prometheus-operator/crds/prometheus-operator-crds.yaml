@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: alertmanagerconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -5269,7 +5269,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: alertmanagers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -9315,7 +9315,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: podmonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -9915,7 +9915,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -10545,7 +10545,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: prometheusagents.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -15498,7 +15498,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: prometheuses.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -21538,7 +21538,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: prometheusrules.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -21632,7 +21632,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: scrapeconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -27871,7 +27871,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -28484,7 +28484,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.0
+    operator.prometheus.io/version: 0.78.1
   name: thanosrulers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
