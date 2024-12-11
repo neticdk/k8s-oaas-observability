@@ -5,7 +5,7 @@ description: A Helm chart to install promtail together with OpenTelemetry Collec
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: 0.1.20
+version: 0.1.21
 maintainers:
   - name: langecode
     email: tal@netic.dk
@@ -14,5 +14,5 @@ dependencies:
     version: 6.16.6
     repository: https://grafana.github.io/helm-charts
   - name: opentelemetry-collector
-    version: 0.110.0
+    version: 0.110.7
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
