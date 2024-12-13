@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: alertmanagerconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -417,6 +417,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -945,6 +947,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -1369,6 +1373,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -1788,6 +1794,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -2213,6 +2221,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -2702,6 +2712,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -3100,6 +3112,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -3533,6 +3547,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -3939,6 +3955,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -4316,6 +4334,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -4689,6 +4709,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -5093,6 +5115,8 @@ spec:
                                 x-kubernetes-map-type: atomic
                               proxyFromEnvironment:
                                 type: boolean
+                              proxyURL:
+                                type: string
                               proxyUrl:
                                 pattern: ^http(s)?://.+$
                                 type: string
@@ -5269,7 +5293,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: alertmanagers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -9315,7 +9339,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: podmonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -9915,7 +9939,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -10545,7 +10569,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: prometheusagents.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -15498,7 +15522,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: prometheuses.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -21538,7 +21562,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: prometheusrules.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -21632,7 +21656,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: scrapeconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -27871,7 +27895,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -28484,7 +28508,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.4
-    operator.prometheus.io/version: 0.78.1
+    operator.prometheus.io/version: 0.78.2
   name: thanosrulers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
