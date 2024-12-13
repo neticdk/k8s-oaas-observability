@@ -2,6 +2,42 @@ apiVersion: v1
 entries:
   aoi:
   - apiVersion: v2
+    created: "2024-12-13T12:35:18.995994632Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 7.3.12
+    - alias: victoria-metrics-single-1
+      condition: global.tsdb.enabled
+      name: victoria-metrics-single
+      repository: https://victoriametrics.github.io/helm-charts/
+      version: 0.13.1
+    - alias: victoria-metrics-single-2
+      condition: global.tsdb.high_availability.enabled
+      name: victoria-metrics-single
+      repository: https://victoriametrics.github.io/helm-charts/
+      version: 0.13.1
+    - condition: alerting.enabled
+      name: victoria-metrics-alert
+      repository: https://victoriametrics.github.io/helm-charts/
+      version: 0.13.2
+    description: A Helm chart for Netic application operations infrastructure
+    digest: 946963a054b71bed1a964a5b4e5e4a9a8fadd6f161ceb1d5016571c6fb007b86
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: ash@netic.dk
+      name: alex5517
+    - email: mfm@netic.dk
+      name: mathiasfm
+    name: aoi
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/aoi-0.1.34/aoi-0.1.34.tgz
+    version: 0.1.34
+  - apiVersion: v2
     created: "2024-11-25T10:51:59.633532883Z"
     dependencies:
     - condition: grafana.enabled
@@ -647,51 +683,6 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/kube-state-metrics-1.0.4/kube-state-metrics-1.0.4.tgz
     version: 1.0.4
   oaas-observability:
-  - apiVersion: v2
-    created: "2024-12-13T12:34:52.441580186Z"
-    dependencies:
-    - condition: grafana.enabled
-      name: grafana
-      repository: https://grafana.github.io/helm-charts
-      version: 8.6.1
-    - name: kube-state-metrics
-      repository: https://prometheus-community.github.io/helm-charts
-      version: 5.27.0
-    - condition: nodeExporter.enabled
-      name: prometheus-node-exporter
-      repository: file://../prometheus-node-exporter
-      version: '*'
-    - condition: prometheus-operator.enabled
-      name: prometheus-operator
-      repository: file://../prometheus-operator
-      version: '*'
-    - condition: opentelemetry-operator.enabled
-      name: opentelemetry-operator
-      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-      version: 0.74.3
-    - condition: vector-agent.enabled
-      name: vector-agent
-      repository: https://helm.vector.dev
-      version: 0.21.3
-    - condition: promtail.enabled
-      name: promtail
-      repository: https://grafana.github.io/helm-charts
-      version: 6.16.6
-    description: A Helm chart to deploy obeservability stack on Kubernetes
-    digest: 23b5e367c4b5a2085d70a6e33cc9a86159ef34bc493f8d6b89d61fd9f9e28555
-    home: https://github.com/neticdk/k8s-oaas-observability
-    maintainers:
-    - email: tal@netic.dk
-      name: langecode
-    - email: kn@netic.dk
-      name: KimNorgaard
-    name: oaas-observability
-    sources:
-    - https://github.com/neticdk/k8s-oaas-observability
-    type: application
-    urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.3.12/oaas-observability-2.3.12.tgz
-    version: 2.3.12
   - apiVersion: v2
     created: "2024-11-25T10:52:33.121889567Z"
     dependencies:
@@ -6843,23 +6834,6 @@ entries:
     version: 1.0.2
   prometheus-operator:
   - apiVersion: v2
-    appVersion: v0.78.2
-    created: "2024-12-13T12:34:52.586632858Z"
-    description: A Helm chart to install Prometheus Operator
-    digest: 68ea1e253d778791856bbf55e975e80fede0f2e4e52b763c32406b3fdf6dfab3
-    home: https://github.com/prometheus-operator/prometheus-operator
-    maintainers:
-    - email: tal@netic.dk
-      name: langecode
-    name: prometheus-operator
-    sources:
-    - https://github.com/prometheus-operator/prometheus-operator
-    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-operator
-    type: application
-    urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-2.0.7/prometheus-operator-2.0.7.tgz
-    version: 2.0.7
-  - apiVersion: v2
     appVersion: v0.78.1
     created: "2024-11-15T12:54:21.927739908Z"
     description: A Helm chart to install Prometheus Operator
@@ -7575,4 +7549,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-13T12:34:52.587860958Z"
+generated: "2024-12-13T12:35:18.997106485Z"
