@@ -2,42 +2,6 @@ apiVersion: v1
 entries:
   aoi:
   - apiVersion: v2
-    created: "2025-01-07T06:55:02.829885367Z"
-    dependencies:
-    - condition: grafana.enabled
-      name: grafana
-      repository: https://grafana.github.io/helm-charts
-      version: 7.3.12
-    - alias: victoria-metrics-single-1
-      condition: global.tsdb.enabled
-      name: victoria-metrics-single
-      repository: https://victoriametrics.github.io/helm-charts/
-      version: 0.13.4
-    - alias: victoria-metrics-single-2
-      condition: global.tsdb.high_availability.enabled
-      name: victoria-metrics-single
-      repository: https://victoriametrics.github.io/helm-charts/
-      version: 0.13.4
-    - condition: alerting.enabled
-      name: victoria-metrics-alert
-      repository: https://victoriametrics.github.io/helm-charts/
-      version: 0.13.5
-    description: A Helm chart for Netic application operations infrastructure
-    digest: 376e465f1e586a2626a91dd537b7697fa44626ffbaf4098a235d0241f6753f51
-    home: https://github.com/neticdk/k8s-oaas-observability
-    maintainers:
-    - email: ash@netic.dk
-      name: alex5517
-    - email: mfm@netic.dk
-      name: mathiasfm
-    name: aoi
-    sources:
-    - https://github.com/neticdk/k8s-oaas-observability
-    type: application
-    urls:
-    - https://github.com/neticdk/k8s-oaas-observability/releases/download/aoi-0.1.36/aoi-0.1.36.tgz
-    version: 0.1.36
-  - apiVersion: v2
     created: "2025-01-03T06:42:54.340325557Z"
     dependencies:
     - condition: grafana.enabled
@@ -7188,6 +7152,29 @@ entries:
     version: 1.0.5
   promtail-forwarding:
   - apiVersion: v2
+    created: "2025-01-07T06:55:29.840280618Z"
+    dependencies:
+    - name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.16.6
+    - name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.111.1
+    description: A Helm chart to install promtail together with OpenTelemetry Collector
+      for receiving and forwarding logs
+    digest: 7755b5450107c0c9a3bfc1241ea4afba44722453bf62f8c70bf4b3ed554d8847
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: promtail-forwarding
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.23/promtail-forwarding-0.1.23.tgz
+    version: 0.1.23
+  - apiVersion: v2
     created: "2025-01-03T06:40:26.666329774Z"
     dependencies:
     - name: promtail
@@ -7693,4 +7680,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-07T06:55:02.830924073Z"
+generated: "2025-01-07T06:55:29.842080071Z"
