@@ -1,10 +1,10 @@
 dependencies:
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 8.8.2
+  version: 8.10.1
 - name: kube-state-metrics
   repository: https://prometheus-community.github.io/helm-charts
-  version: 5.28.0
+  version: 5.30.1
 - name: prometheus-node-exporter
   repository: file://../prometheus-node-exporter
   version: 1.0.17
@@ -13,12 +13,12 @@ dependencies:
   version: 2.0.8
 - name: opentelemetry-operator
   repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-  version: 0.78.1
+  version: 0.82.0
 - name: vector-agent
   repository: https://helm.vector.dev
   version: 0.21.3
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.16.6
-digest: sha256:6dd59405ece9bbc7efbeb0f82b60f85a22075ee69ea77ec724a45120619ef926
-generated: "2025-01-08T20:08:00.759141395Z"
+digest: sha256:250ec9018d839122c634ad58f0cc67e152b9e72d9e644719486de58eb2872090
+generated: "2025-03-07T16:07:26.517909695Z"

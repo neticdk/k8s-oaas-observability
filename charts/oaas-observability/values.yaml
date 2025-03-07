@@ -857,8 +857,8 @@ alertmanager:
     ##
     image:
       repository: quay.io/prometheus/alertmanager
-      tag: v0.27.0
-    version: v0.27.0
+      tag: v0.28.1
+    version: v0.28.1
 
     # -- If true then the user will be responsible to provide a secret with alertmanager configuration
     # So when true the config part will be ignored (including templateFiles) and the one in the secret will be used
