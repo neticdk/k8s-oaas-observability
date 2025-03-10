@@ -385,6 +385,8 @@ victoria-metrics-single-2:
 alerting:
   # -- Enable deploying alerting components
   enabled: false
+  # -- Configmap the contains alerting rules
+  configMap: example-alerts
   # -- Value of the label (cluster_id)
   clusterId: ""
   clusterWideNamespace:
