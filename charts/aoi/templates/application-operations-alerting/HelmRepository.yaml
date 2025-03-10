@@ -8,7 +8,7 @@ metadata:
   namespace: {{ $namespace }}
 spec:
   interval: 30m0s
-  url: {{ include "aoi.alerting.helmRepository" $ }}
+  url: {{ $.Values.alerting.helmRepository }}
   type: {{ include "aoi.alerting.helmRepository.type" $ }}
 {{- end }}
 {{- end }}

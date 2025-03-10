@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.36](https://img.shields.io/badge/Version-0.1.36-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.37](https://img.shields.io/badge/Version-0.1.37-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -24,7 +24,6 @@ $ helm install my-release netic-oaas/aoi
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 7.3.12 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-alert | 0.13.5 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.13.4 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.13.4 |
 
@@ -32,6 +31,7 @@ $ helm install my-release netic-oaas/aoi
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| alerting.chartVersion | string | `"0.13.5"` |  |
 | alerting.clusterId | string | `""` | Value of the label (cluster_id) |
 | alerting.clusterWideNamespace.bootstrapConfig | object | `{"externalSecretsStore":{},"git":{"bitbucket":{},"github":{},"gitlab":{}},"vault":{}}` | overwrite options configured in global.bootstrapConfig |
 | alerting.clusterWideNamespace.bootstrapConfig.externalSecretsStore | object | `{}` | overwrite externalSecretStore options, make sure to include all options in overwrite, it is not merged with globally defined options. |
@@ -43,7 +43,7 @@ $ helm install my-release netic-oaas/aoi
 | alerting.enabled | bool | `false` | Enable deploying alerting components |
 | alerting.helmRelease | object | `{"values":{"alertmanager":{"configReloader":{"image":{"pullPolicy":"Always","registry":"ghcr.io","repository":"neticdk/inotifywait-reloader","tag":"v0.0.2"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"emailPasswordMount":false,"image":{"registry":"docker.io","repository":"prom/alertmanager","tag":"v0.27.0"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"server":{"configReloader":{"image":{"pullPolicy":"Always","registry":"docker.io","repository":"kiwigrid/k8s-sidecar","tag":"1.28.4@sha256:20caf4e241e1f9f9231527db5e75b735aa7b0da7bee3d262cbe369bb9b33469f"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"image":{"pullPolicy":"Always","registry":"docker.io","repository":"victoriametrics/vmalert"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}}}}` | Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml |
 | alerting.helmRelease.values.alertmanager.emailPasswordMount | bool | `false` | Boolean that is used to mount the secret aoi-alertmanager-email-password into the alertmanager container |
-| alerting.helmRepository | string | `nil` | Override the default helmRepository used to deploy alerting components |
+| alerting.helmRepository | string | `"https://victoriametrics.github.io/helm-charts/"` | Override the default helmRepository used to deploy alerting components |
 | alerting.namespaces | list | `[]` | List of namespaces which should have alerting components deployed |
 | authProxy.affinity | list | `[]` |  |
 | authProxy.annotations | object | `{}` |  |
@@ -192,10 +192,6 @@ $ helm install my-release netic-oaas/aoi
 | promxy.terminationGracePeriodSeconds | int | `30` |  |
 | promxy.tolerations | list | `[]` |  |
 | promxy.topologySpauthProxyConstraints | list | `[]` |  |
-| victoria-metrics-alert.rbac.create | bool | `false` |  |
-| victoria-metrics-alert.server.configMap | string | `"null"` |  |
-| victoria-metrics-alert.server.enabled | bool | `false` |  |
-| victoria-metrics-alert.serviceAccount.create | bool | `false` |  |
 | victoria-metrics-single-1.rbac.create | bool | `false` |  |
 | victoria-metrics-single-1.server.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].key | string | `"app.kubernetes.io/name"` |  |
 | victoria-metrics-single-1.server.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].operator | string | `"In"` |  |

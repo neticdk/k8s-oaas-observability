@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: victoria-metrics-alert
-      version: {{ include "aoi.alerting.chartVersion" $ }}
+      version: {{ $.Values.alerting.chartVersion }}
       sourceRef:
         kind: HelmRepository
         name: victoria-metrics
