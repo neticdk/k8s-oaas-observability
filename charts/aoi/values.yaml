@@ -408,7 +408,8 @@ alerting:
   # -- List of namespaces which should have alerting components deployed
   namespaces: []
   # -- Override the default helmRepository used to deploy alerting components
-  helmRepository: null
+  helmRepository: "https://victoriametrics.github.io/helm-charts/"
+  chartVersion: 0.13.5
   # -- Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml
   helmRelease:
     values:
@@ -494,14 +495,3 @@ alerting:
           runAsUser: 1000
           runAsGroup: 3000
           fsGroup: 2000
-
-# This is here to disable everything from the victoria-metrics-alert helm chart in chart.yaml since it is only used for versioning
-# Do not change!
-victoria-metrics-alert:
-  serviceAccount:
-    create: false
-  rbac:
-    create: false
-  server:
-    enabled: false
-    configMap: "null"

@@ -26,7 +26,7 @@ HelmRepository for victoria-metrics-alert
 HelmRepository type
 */}}
 {{- define "aoi.alerting.helmRepository.type" -}}
-  {{- if hasPrefix "oci" ( include "aoi.alerting.helmRepository" . ) }}
+  {{- if hasPrefix "oci"  $.Values.alerting.helmRepository }}
     {{- print "oci" -}}
   {{- else }}
     {{- print "default" -}}
