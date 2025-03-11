@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.39](https://img.shields.io/badge/Version-0.1.39-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.40](https://img.shields.io/badge/Version-0.1.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -24,8 +24,8 @@ $ helm install my-release netic-oaas/aoi
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 7.3.12 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.13.4 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.13.4 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.14.3 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.14.3 |
 
 ## Configuration
 
@@ -42,7 +42,7 @@ $ helm install my-release netic-oaas/aoi
 | alerting.clusterWideNamespace.projectBootstrap | object | `{"git":{}}` | Options to configure the projectBootstrap used for cluster-wide alert namespace. |
 | alerting.configMap | string | `"example-alerts"` | Configmap the contains alerting rules |
 | alerting.enabled | bool | `false` | Enable deploying alerting components |
-| alerting.helmRelease | object | `{"values":{"alertmanager":{"configReloader":{"image":{"pullPolicy":"Always","registry":"ghcr.io","repository":"neticdk/inotifywait-reloader","tag":"v0.0.2"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"emailPasswordMount":false,"image":{"registry":"docker.io","repository":"prom/alertmanager","tag":"v0.27.0"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsUser":3000}},"server":{"configReloader":{"image":{"pullPolicy":"Always","registry":"docker.io","repository":"kiwigrid/k8s-sidecar","tag":"1.28.4@sha256:20caf4e241e1f9f9231527db5e75b735aa7b0da7bee3d262cbe369bb9b33469f"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"image":{"pullPolicy":"Always","registry":"docker.io","repository":"victoriametrics/vmalert"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}}}}` | Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml |
+| alerting.helmRelease | object | `{"values":{"alertmanager":{"configReloader":{"image":{"pullPolicy":"Always","registry":"ghcr.io","repository":"neticdk/inotifywait-reloader","tag":"v0.0.2"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"emailPasswordMount":false,"image":{"registry":"docker.io","repository":"prom/alertmanager","tag":"v0.28.1"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsUser":3000}},"server":{"configReloader":{"image":{"pullPolicy":"Always","registry":"docker.io","repository":"kiwigrid/k8s-sidecar","tag":"1.30.2@sha256:cdb361e67b1b5c4945b6e943fbf5909badaaeb51595eaf75fb7493b3abbbe10f"},"resources":{"limits":{"memory":"96Mi"},"requests":{"cpu":"10m","memory":"96Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}},"image":{"pullPolicy":"Always","registry":"docker.io","repository":"victoriametrics/vmalert"},"podSecurityContext":{"fsGroup":2000,"runAsGroup":3000,"runAsUser":1000},"priorityClassName":"secure-cloud-stack-tenant-namespace-application-critical","resources":{"limits":{"memory":"64Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}}}}` | Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml |
 | alerting.helmRelease.values.alertmanager.emailPasswordMount | bool | `false` | Boolean that is used to mount the secret aoi-alertmanager-email-password into the alertmanager container |
 | alerting.helmRepository | string | `"https://victoriametrics.github.io/helm-charts/"` | Override the default helmRepository used to deploy alerting components |
 | alerting.namespaces | list | `[]` | List of namespaces which should have alerting components deployed |
@@ -131,7 +131,7 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.configReloader.image.pullPolicy | string | `"Always"` |  |
 | prometheus.configReloader.image.registry | string | `"quay.io"` |  |
 | prometheus.configReloader.image.repository | string | `"prometheus-operator/prometheus-config-reloader"` |  |
-| prometheus.configReloader.image.tag | string | `"v0.79.2@sha256:193280a33bc1acad9bc1956c5d986e3da6950882bda89311bac317998dcebf30"` |  |
+| prometheus.configReloader.image.tag | string | `"v0.81.0@sha256:959d47672fbff2776a04ec62b8afcec89e8c036af84dc5fade50019dab212746"` |  |
 | prometheus.configReloader.resources.limits.memory | string | `"25Mi"` |  |
 | prometheus.configReloader.resources.requests.cpu | string | `"10m"` |  |
 | prometheus.configReloader.resources.requests.memory | string | `"25Mi"` |  |
@@ -144,7 +144,7 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.image.pullPolicy | string | `"Always"` |  |
 | prometheus.image.registry | string | `"docker.io"` |  |
 | prometheus.image.repository | string | `"victoriametrics/vmagent"` |  |
-| prometheus.image.tag | string | `"v1.108.1@sha256:afa7abbdc7d9d6f8f7cf820e01a71714c5012333ad90ba2ddd6ae02d0ae2f88d"` |  |
+| prometheus.image.tag | string | `"v1.113.0@sha256:da7e28cf4621f3397f6804424bc558fe01492a779e1656a6589c4c49b033c39c"` |  |
 | prometheus.persistence.size | string | `"60Gi"` |  |
 | prometheus.podAnnotations | object | `{}` |  |
 | prometheus.podMonitorNamespaceSelector.matchLabels | object | `{}` |  |
@@ -173,7 +173,7 @@ $ helm install my-release netic-oaas/aoi
 | promxy.extraEnvFrom | list | `[]` |  |
 | promxy.image.registry | string | `"quay.io"` |  |
 | promxy.image.repository | string | `"jacksontj/promxy"` |  |
-| promxy.image.tag | string | `"v0.0.91@sha256:35f4e661d48181284dac1aea3576276f46757739cd5ae09582482a0621f49d95"` |  |
+| promxy.image.tag | string | `"v0.0.92@sha256:d1a418430d14de4c8673412faf7621626f0970c9767abb8d9de5081c7d10efd0"` |  |
 | promxy.nodeSelector | object | `{}` |  |
 | promxy.podAnnotations | object | `{}` |  |
 | promxy.podLabels | object | `{}` |  |
