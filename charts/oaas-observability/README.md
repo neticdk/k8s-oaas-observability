@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.3.17](https://img.shields.io/badge/Version-2.3.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.3.18](https://img.shields.io/badge/Version-2.3.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -32,11 +32,11 @@ $ helm install my-release netic-oaas/oaas-observability
 |------------|------|---------|
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
-| https://grafana.github.io/helm-charts | grafana | 8.8.2 |
+| https://grafana.github.io/helm-charts | grafana | 8.10.3 |
 | https://grafana.github.io/helm-charts | promtail | 6.16.6 |
 | https://helm.vector.dev | vector-agent | 0.21.3 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.78.1 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.28.0 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.83.0 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.30.1 |
 
 ## Configuration
 
@@ -51,7 +51,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.containers | list | `[]` |  |
 | alertmanager.alertmanagerSpec.externalUrl | string | `nil` |  |
 | alertmanager.alertmanagerSpec.image.repository | string | `"quay.io/prometheus/alertmanager"` |  |
-| alertmanager.alertmanagerSpec.image.tag | string | `"v0.27.0"` |  |
+| alertmanager.alertmanagerSpec.image.tag | string | `"v0.28.1"` |  |
 | alertmanager.alertmanagerSpec.listenLocal | bool | `false` |  |
 | alertmanager.alertmanagerSpec.logFormat | string | `"logfmt"` | Define Log Format Use 'logfmt' (default) or 'json-formatted' logging |
 | alertmanager.alertmanagerSpec.logLevel | string | `"info"` | Log level for Alertmanager to be configured with. |
@@ -73,7 +73,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | alertmanager.alertmanagerSpec.storage | object | `{}` | Storage is the definition of how storage will be used by the Alertmanager instances. ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md |
 | alertmanager.alertmanagerSpec.tolerations | list | `[]` |  |
 | alertmanager.alertmanagerSpec.useExistingSecret | bool | `false` | If true then the user will be responsible to provide a secret with alertmanager configuration So when true the config part will be ignored (including templateFiles) and the one in the secret will be used |
-| alertmanager.alertmanagerSpec.version | string | `"v0.27.0"` |  |
+| alertmanager.alertmanagerSpec.version | string | `"v0.28.1"` |  |
 | alertmanager.alertmanagerSpec.volumeMounts | list | `[]` |  |
 | alertmanager.alertmanagerSpec.volumes | list | `[]` |  |
 | alertmanager.apiVersion | string | `"v2"` | Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2 |
