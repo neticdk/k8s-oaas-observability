@@ -912,6 +912,51 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2025-03-17T06:38:43.838894673Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.10.3
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 5.30.1
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: opentelemetry-operator.enabled
+      name: opentelemetry-operator
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.83.0
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://helm.vector.dev
+      version: 0.21.3
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.16.6
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: d76d9eb5a18c996733d5d27188513226c61cb0045c79ab60d14603bd9371c429
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.3.19/oaas-observability-2.3.19.tgz
+    version: 2.3.19
+  - apiVersion: v2
     created: "2025-03-14T13:34:08.826944243Z"
     dependencies:
     - condition: grafana.enabled
@@ -6787,6 +6832,25 @@ entries:
     version: 0.1.14
   prometheus:
   - apiVersion: v2
+    appVersion: v3.2.1
+    created: "2025-03-17T06:38:43.935154794Z"
+    description: A Helm chart to install Prometheus based on Prometheus Operator
+    digest: 2e922c08458c0a7a49b12232ab7a4a93eea94a3b88046114ee2ab2001e8a785d
+    home: https://prometheus.io/
+    keywords:
+    - prometheus
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: prometheus
+    sources:
+    - https://github.com/prometheus/prometheus
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-2.2.0/prometheus-2.2.0.tgz
+    version: 2.2.0
+  - apiVersion: v2
     appVersion: v2.54.1
     created: "2024-09-05T11:50:19.306608703Z"
     description: A Helm chart to install Prometheus based on Prometheus Operator
@@ -7286,6 +7350,23 @@ entries:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-node-exporter-1.0.2/prometheus-node-exporter-1.0.2.tgz
     version: 1.0.2
   prometheus-operator:
+  - apiVersion: v2
+    appVersion: v0.81.0
+    created: "2025-03-17T06:38:44.033519631Z"
+    description: A Helm chart to install Prometheus Operator
+    digest: 5982086bed6d7087c4adc51a91be28bb2a20fa5b8df03be53dcac348d6e634de
+    home: https://github.com/prometheus-operator/prometheus-operator
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: prometheus-operator
+    sources:
+    - https://github.com/prometheus-operator/prometheus-operator
+    - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-operator
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/prometheus-operator-2.0.9/prometheus-operator-2.0.9.tgz
+    version: 2.0.9
   - apiVersion: v2
     appVersion: v0.79.2
     created: "2025-01-03T06:42:11.237342699Z"
@@ -8111,4 +8192,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-14T13:35:08.810019648Z"
+generated: "2025-03-17T06:38:44.034023691Z"
