@@ -452,6 +452,7 @@ alerting:
               drop:
                 - ALL
         podSecurityContext:
+          enabled: true
           runAsUser: 1000
           runAsGroup: 3000
           fsGroup: 2000
@@ -470,12 +471,16 @@ alerting:
             cpu: 10m
             memory: 64Mi
         securityContext:
-          runAsUser: 3000
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
           capabilities:
             drop:
               - ALL
+        podSecurityContext:
+          enabled: true
+          runAsUser: 1000
+          runAsGroup: 3000
+          fsGroup: 2000
         configReloader:
           image:
             registry: ghcr.io
@@ -489,12 +494,9 @@ alerting:
               cpu: 10m
               memory: 96Mi
           securityContext:
+            enabled: true
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL
-        podSecurityContext:
-          runAsUser: 1000
-          runAsGroup: 3000
-          fsGroup: 2000
