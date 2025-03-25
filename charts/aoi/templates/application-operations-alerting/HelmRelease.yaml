@@ -24,7 +24,6 @@ spec:
     rbac:
       create: false
     server:
-      configMap: {{ $.Values.alerting.configMap }}
       {{- include "aoi.serverPriorityClassName" $ | nindent 6 }}
       image:
         repository: "{{ $.Values.alerting.helmRelease.values.server.image.registry }}/{{ $.Values.alerting.helmRelease.values.server.image.repository }}"
