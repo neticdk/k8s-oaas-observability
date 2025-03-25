@@ -24,8 +24,8 @@ $ helm install my-release netic-oaas/aoi
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.10.4 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.15.1 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.15.1 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.16.0 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.16.0 |
 
 ## Configuration
 
@@ -144,7 +144,7 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.image.pullPolicy | string | `"Always"` |  |
 | prometheus.image.registry | string | `"docker.io"` |  |
 | prometheus.image.repository | string | `"victoriametrics/vmagent"` |  |
-| prometheus.image.tag | string | `"v1.113.0@sha256:da7e28cf4621f3397f6804424bc558fe01492a779e1656a6589c4c49b033c39c"` |  |
+| prometheus.image.tag | string | `"v1.114.0@sha256:98ac244d2bcb3d39f25c74563199c8e217ec4cfc33ca6fe993bef8a57f6951d6"` |  |
 | prometheus.persistence.size | string | `"60Gi"` |  |
 | prometheus.podAnnotations | object | `{}` |  |
 | prometheus.podMonitorNamespaceSelector.matchLabels | object | `{}` |  |
