@@ -471,6 +471,7 @@ alerting:
             cpu: 10m
             memory: 64Mi
         securityContext:
+          enabled: true
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
           capabilities:
