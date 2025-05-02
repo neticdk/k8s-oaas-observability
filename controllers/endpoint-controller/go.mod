@@ -4,7 +4,7 @@ module netic.dk/endpoint-controller
 
 go 1.22.0
 
-toolchain go1.24.1
+toolchain go1.24.2
 
 require (
 	github.com/pkg/errors v0.9.1
