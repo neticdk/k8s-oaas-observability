@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.47](https://img.shields.io/badge/Version-0.1.47-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.48](https://img.shields.io/badge/Version-0.1.48-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -23,7 +23,7 @@ $ helm install my-release netic-oaas/aoi
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://grafana.github.io/helm-charts | grafana | 8.14.1 |
+| https://grafana.github.io/helm-charts | grafana | 8.15.0 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.18.0 |
 | https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.18.0 |
 
@@ -131,7 +131,7 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.configReloader.image.pullPolicy | string | `"Always"` |  |
 | prometheus.configReloader.image.registry | string | `"quay.io"` |  |
 | prometheus.configReloader.image.repository | string | `"prometheus-operator/prometheus-config-reloader"` |  |
-| prometheus.configReloader.image.tag | string | `"v0.82.0@sha256:346da644c84a36cc2b8f129b088fa35ecdbe5231644f598b03247c9213a995be"` |  |
+| prometheus.configReloader.image.tag | string | `"v0.82.1@sha256:22558a49909bf31d75b6a340064c553598bfd66103626868daeb107fe171f124"` |  |
 | prometheus.configReloader.resources.limits.memory | string | `"25Mi"` |  |
 | prometheus.configReloader.resources.requests.cpu | string | `"10m"` |  |
 | prometheus.configReloader.resources.requests.memory | string | `"25Mi"` |  |

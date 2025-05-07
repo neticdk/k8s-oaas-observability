@@ -155,7 +155,7 @@ prometheus:
     image:
       registry: quay.io
       repository: prometheus-operator/prometheus-config-reloader
-      tag: v0.82.0@sha256:346da644c84a36cc2b8f129b088fa35ecdbe5231644f598b03247c9213a995be
+      tag: v0.82.1@sha256:22558a49909bf31d75b6a340064c553598bfd66103626868daeb107fe171f124
       pullPolicy: Always
     resources:
       limits:
