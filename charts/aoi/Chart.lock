@@ -1,12 +1,12 @@
 dependencies:
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 8.15.0
+  version: 9.0.0
 - name: victoria-metrics-single
   repository: https://victoriametrics.github.io/helm-charts/
   version: 0.18.0
 - name: victoria-metrics-single
   repository: https://victoriametrics.github.io/helm-charts/
   version: 0.18.0
-digest: sha256:45717db876de826277b1c840442896dd55377184c7baf9cb22f3ae07907c6215
-generated: "2025-05-06T16:08:35.751672388Z"
+digest: sha256:6413639d55a6dfaf2a2f60fc04f173ddc539d0a4bf4a5e890566653c4ff0d820
+generated: "2025-05-12T12:10:43.047961316Z"
