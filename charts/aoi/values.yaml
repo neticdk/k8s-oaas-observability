@@ -411,7 +411,7 @@ alerting:
   namespaces: []
   # -- Override the default helmRepository used to deploy alerting components
   helmRepository: "https://victoriametrics.github.io/helm-charts/"
-  chartVersion: 0.13.5
+  chartVersion: 0.13.5                    # renovate: depName=victoria-metrics/victoria-metrics-alert extractVersion=^victoria-metrics-alert-(?<version>.+)$
   # -- Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml
   helmRelease:
     values:
