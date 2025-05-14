@@ -97,7 +97,7 @@ prometheus:
   image:
     registry: docker.io
     repository: victoriametrics/vmagent
-    tag: v1.116.0@sha256:0348a39b8be2e9636fd8a09d96800549005012c867acf25a247e44e76eb926fe
+    tag: v1.117.0@sha256:5d1c6683719d024f8733f4d2b4e1e2b949693fe2d158c3927bfe9d547d0f7f62
     pullPolicy: Always
   resources:
     limits:
@@ -411,7 +411,7 @@ alerting:
   namespaces: []
   # -- Override the default helmRepository used to deploy alerting components
   helmRepository: "https://victoriametrics.github.io/helm-charts/"
-  chartVersion: 0.13.5
+  chartVersion: 0.13.5                    # renovate: depName=victoria-metrics/victoria-metrics-alert extractVersion=^victoria-metrics-alert-(?<version>.+)$
   # -- Values to configure for the victoria-metrics-alert helm chart. https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-alert/values.yaml
   helmRelease:
     values:

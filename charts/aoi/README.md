@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.48](https://img.shields.io/badge/Version-0.1.48-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.50](https://img.shields.io/badge/Version-0.1.50-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -144,7 +144,7 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.image.pullPolicy | string | `"Always"` |  |
 | prometheus.image.registry | string | `"docker.io"` |  |
 | prometheus.image.repository | string | `"victoriametrics/vmagent"` |  |
-| prometheus.image.tag | string | `"v1.116.0@sha256:0348a39b8be2e9636fd8a09d96800549005012c867acf25a247e44e76eb926fe"` |  |
+| prometheus.image.tag | string | `"v1.117.0@sha256:5d1c6683719d024f8733f4d2b4e1e2b949693fe2d158c3927bfe9d547d0f7f62"` |  |
 | prometheus.persistence.size | string | `"60Gi"` |  |
 | prometheus.podAnnotations | object | `{}` |  |
 | prometheus.podMonitorNamespaceSelector.matchLabels | object | `{}` |  |
