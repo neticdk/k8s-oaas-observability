@@ -59,8 +59,8 @@
     {
       "customType": "regex",
       "datasourceTemplate": "docker",
-      "fileMatch": [
-        "(^|/)Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/(^|/)Chart\\.yaml$/"
       ],
       "matchStrings": [
         "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
@@ -68,8 +68,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^charts/oaas-observability/values.yaml$"
+      "managerFilePatterns": [
+        "/^charts/oaas-observability/values.yaml$/"
       ],
       "matchStrings": [
         "repository: quay.io/prometheus/prometheus\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
@@ -79,8 +79,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^charts/oaas-observability/values.yaml$"
+      "managerFilePatterns": [
+        "/^charts/oaas-observability/values.yaml$/"
       ],
       "matchStrings": [
         "repository: quay.io/prometheus/alertmanager\\s+tag: v[0-9\\.]+\\s+version: (?<currentValue>.*?)\\s"
@@ -90,8 +90,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^charts/prometheus/values.yaml$"
+      "managerFilePatterns": [
+        "/^charts/prometheus/values.yaml$/"
       ],
       "matchStrings": [
         "version: (?<currentValue>.*?)\\s"
@@ -99,16 +99,5 @@
       "depNameTemplate": "quay.io/prometheus/prometheus",
       "datasourceTemplate": "docker"
     }
-  ],
-  "regexManagers": [
-    {
-      "datasourceTemplate": "github-releases",
-      "fileMatch": [
-        "charts/aoi/values\\.yaml"
-      ],
-      "matchStrings": [
-        " +targetRevision: +(?<currentValue>[^'\" ]+) +# renovate: depName=(?<depName>[^ \\n]+) +(extractVersion=(?<extractVersion>[^\\n]+))?",
-      ],
-    },
   ]
 }
