@@ -1168,6 +1168,51 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2025-05-14T07:58:56.017233229Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.15.0
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 5.33.1
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: opentelemetry-operator.enabled
+      name: opentelemetry-operator
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.88.6
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://helm.vector.dev
+      version: 0.21.3
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.16.6
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: e907f167c10bad32d54d40e0b22f23e6ec922e93e85788b99e72eb4eee44c950
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.3.24/oaas-observability-2.3.24.tgz
+    version: 2.3.24
+  - apiVersion: v2
     created: "2025-05-07T08:38:42.08215671Z"
     dependencies:
     - condition: grafana.enabled
@@ -8712,4 +8757,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-14T07:57:17.278967449Z"
+generated: "2025-05-14T07:58:56.017689442Z"
