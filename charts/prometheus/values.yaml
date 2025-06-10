@@ -10,8 +10,8 @@ serviceAccount:
 # prometheusSpec will define the Prometheus instance using the Prometheus Operator CRD
 prometheusSpec:
   replicas: 2
-  image: quay.io/prometheus/prometheus:v3.4.0
-  version: v3.4.0
+  image: quay.io/prometheus/prometheus:v3.4.1
+  version: v3.4.1
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   ruleNamespaceSelector: {}
