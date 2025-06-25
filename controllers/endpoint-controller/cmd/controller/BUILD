@@ -13,7 +13,7 @@ go_library(
         "@io_k8s_client_go//informers:go_default_library",
         "@io_k8s_client_go//kubernetes:go_default_library",
         "@io_k8s_client_go//tools/clientcmd:go_default_library",
-        "@io_k8s_klog//:go_default_library",
+        "@io_k8s_klog_v2//:go_default_library",
     ],
 )
 
