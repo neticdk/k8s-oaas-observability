@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: alertmanagerconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -5695,7 +5695,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: alertmanagers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -6206,6 +6206,7 @@ spec:
                     default: OnNamespace
                     enum:
                     - OnNamespace
+                    - OnNamespaceExceptForAlertmanagerNamespace
                     - None
                     type: string
                 type: object
@@ -6624,6 +6625,12 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      jira:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
                       opsGenieApiKey:
                         properties:
                           key:
@@ -6655,6 +6662,38 @@ spec:
                       resolveTimeout:
                         pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                         type: string
+                      rocketChat:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                          token:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          tokenID:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                        type: object
                       slackApiUrl:
                         properties:
                           key:
@@ -6810,6 +6849,59 @@ spec:
                               serverName:
                                 type: string
                             type: object
+                        type: object
+                      telegram:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
+                      victorops:
+                        properties:
+                          apiKey:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
+                      webex:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
+                      wechat:
+                        properties:
+                          apiCorpID:
+                            minLength: 1
+                            type: string
+                          apiSecret:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
                         type: object
                     type: object
                   name:
@@ -10073,7 +10165,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: podmonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -10273,6 +10365,8 @@ spec:
                             type: string
                         type: object
                       type: array
+                    noProxy:
+                      type: string
                     oauth2:
                       properties:
                         clientId:
@@ -10465,7 +10559,28 @@ spec:
                       maximum: 65535
                       minimum: 1
                       type: integer
+                    proxyConnectHeader:
+                      additionalProperties:
+                        items:
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              default: ""
+                              type: string
+                            optional:
+                              type: boolean
+                          required:
+                          - key
+                          type: object
+                          x-kubernetes-map-type: atomic
+                        type: array
+                      type: object
+                      x-kubernetes-map-type: atomic
+                    proxyFromEnvironment:
+                      type: boolean
                     proxyUrl:
+                      pattern: ^(http|https|socks5)://.+$
                       type: string
                     relabelings:
                       items:
@@ -10694,7 +10809,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -11045,10 +11160,33 @@ spec:
                 type: object
               prober:
                 properties:
+                  noProxy:
+                    type: string
                   path:
                     default: /probe
                     type: string
+                  proxyConnectHeader:
+                    additionalProperties:
+                      items:
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            default: ""
+                            type: string
+                          optional:
+                            type: boolean
+                        required:
+                        - key
+                        type: object
+                        x-kubernetes-map-type: atomic
+                      type: array
+                    type: object
+                    x-kubernetes-map-type: atomic
+                  proxyFromEnvironment:
+                    type: boolean
                   proxyUrl:
+                    pattern: ^(http|https|socks5)://.+$
                     type: string
                   scheme:
                     enum:
@@ -11335,7 +11473,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: prometheusagents.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -11905,6 +12043,31 @@ spec:
                   bearerTokenFile:
                     type: string
                   host:
+                    type: string
+                  noProxy:
+                    type: string
+                  proxyConnectHeader:
+                    additionalProperties:
+                      items:
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            default: ""
+                            type: string
+                          optional:
+                            type: boolean
+                        required:
+                        - key
+                        type: object
+                        x-kubernetes-map-type: atomic
+                      type: array
+                    type: object
+                    x-kubernetes-map-type: atomic
+                  proxyFromEnvironment:
+                    type: boolean
+                  proxyUrl:
+                    pattern: ^(http|https|socks5)://.+$
                     type: string
                   tlsConfig:
                     properties:
@@ -14608,6 +14771,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - name
                 x-kubernetes-list-type: map
+              scrapeClassicHistograms:
+                type: boolean
               scrapeConfigNamespaceSelector:
                 properties:
                   matchExpressions:
@@ -16275,6 +16440,15 @@ spec:
                     type: object
                 type: object
             type: object
+            x-kubernetes-validations:
+            - message: replicas cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.replicas))'
+            - message: storage cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.storage))'
+            - message: shards cannot be greater than 1 when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.shards) && self.shards > 1)'
+            - message: persistentVolumeClaimRetentionPolicy cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.persistentVolumeClaimRetentionPolicy))'
           status:
             properties:
               availableReplicas:
@@ -16376,7 +16550,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: prometheuses.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -17315,6 +17489,31 @@ spec:
                   bearerTokenFile:
                     type: string
                   host:
+                    type: string
+                  noProxy:
+                    type: string
+                  proxyConnectHeader:
+                    additionalProperties:
+                      items:
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            default: ""
+                            type: string
+                          optional:
+                            type: boolean
+                        required:
+                        - key
+                        type: object
+                        x-kubernetes-map-type: atomic
+                      type: array
+                    type: object
+                    x-kubernetes-map-type: atomic
+                  proxyFromEnvironment:
+                    type: boolean
+                  proxyUrl:
+                    pattern: ^(http|https|socks5)://.+$
                     type: string
                   tlsConfig:
                     properties:
@@ -20512,6 +20711,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - name
                 x-kubernetes-list-type: map
+              scrapeClassicHistograms:
+                type: boolean
               scrapeConfigNamespaceSelector:
                 properties:
                   matchExpressions:
@@ -22543,7 +22744,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: prometheusrules.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -22641,7 +22842,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: scrapeconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -25309,6 +25510,9 @@ spec:
                       type: boolean
                     followRedirects:
                       type: boolean
+                    labelSelector:
+                      minLength: 1
+                      type: string
                     noProxy:
                       type: string
                     oauth2:
@@ -29462,7 +29666,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -29624,6 +29828,8 @@ spec:
                             type: string
                         type: object
                       type: array
+                    noProxy:
+                      type: string
                     oauth2:
                       properties:
                         clientId:
@@ -29811,7 +30017,28 @@ spec:
                       type: string
                     port:
                       type: string
+                    proxyConnectHeader:
+                      additionalProperties:
+                        items:
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              default: ""
+                              type: string
+                            optional:
+                              type: boolean
+                          required:
+                          - key
+                          type: object
+                          x-kubernetes-map-type: atomic
+                        type: array
+                      type: object
+                      x-kubernetes-map-type: atomic
+                    proxyFromEnvironment:
+                      type: boolean
                     proxyUrl:
+                      pattern: ^(http|https|socks5)://.+$
                       type: string
                     relabelings:
                       items:
@@ -30080,18 +30307,78 @@ spec:
             - endpoints
             - selector
             type: object
+          status:
+            properties:
+              bindings:
+                items:
+                  properties:
+                    conditions:
+                      items:
+                        properties:
+                          lastTransitionTime:
+                            format: date-time
+                            type: string
+                          message:
+                            type: string
+                          observedGeneration:
+                            format: int64
+                            type: integer
+                          reason:
+                            type: string
+                          status:
+                            minLength: 1
+                            type: string
+                          type:
+                            enum:
+                            - Accepted
+                            minLength: 1
+                            type: string
+                        required:
+                        - lastTransitionTime
+                        - status
+                        - type
+                        type: object
+                      type: array
+                      x-kubernetes-list-map-keys:
+                      - type
+                      x-kubernetes-list-type: map
+                    group:
+                      enum:
+                      - monitoring.coreos.com
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    namespace:
+                      minLength: 1
+                      type: string
+                    resource:
+                      enum:
+                      - prometheuses
+                      - prometheusagents
+                      type: string
+                  required:
+                  - group
+                  - name
+                  - namespace
+                  - resource
+                  type: object
+                type: array
+            type: object
         required:
         - spec
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-    operator.prometheus.io/version: 0.83.0
+    operator.prometheus.io/version: 0.84.0
   name: thanosrulers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -32890,6 +33177,10 @@ spec:
                 type: string
               routePrefix:
                 type: string
+              ruleConcurrentEval:
+                format: int32
+                minimum: 1
+                type: integer
               ruleNamespaceSelector:
                 properties:
                   matchExpressions:
@@ -32916,6 +33207,12 @@ spec:
                     type: object
                 type: object
                 x-kubernetes-map-type: atomic
+              ruleOutageTolerance:
+                pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                type: string
+              ruleQueryOffset:
+                pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                type: string
               ruleSelector:
                 properties:
                   matchExpressions:
