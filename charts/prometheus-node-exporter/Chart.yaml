@@ -1,10 +1,10 @@
 apiVersion: v2
 # renovate: image=quay.io/prometheus/node-exporter
-appVersion: v1.8.1
+appVersion: v1.9.1
 description: A Helm chart for installing Prometheus node-exporter as Kubernetes daemonset.
 name: prometheus-node-exporter
 home: https://github.com/prometheus/node_exporter
-version: 1.0.17
+version: 1.0.18
 sources:
   - https://github.com/prometheus/node_exporter
   - https://github.com/neticdk/k8s-oaas-observability/tree/main/charts/prometheus-node-exporter
