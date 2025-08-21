@@ -17,7 +17,7 @@ go_library(
         "@io_k8s_client_go//listers/core/v1:go_default_library",
         "@io_k8s_client_go//tools/cache:go_default_library",
         "@io_k8s_client_go//util/workqueue:go_default_library",
-        "@io_k8s_klog//:go_default_library",
+        "@io_k8s_klog_v2//:go_default_library",
     ],
 )
 
