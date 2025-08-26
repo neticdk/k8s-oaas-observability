@@ -24,14 +24,14 @@ $ helm install my-release netic-oaas/aoi
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.15.0 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.19.0 |
-| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.19.0 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-1(victoria-metrics-single) | 0.24.3 |
+| https://victoriametrics.github.io/helm-charts/ | victoria-metrics-single-2(victoria-metrics-single) | 0.24.3 |
 
 ## Configuration
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| alerting.chartVersion | string | `"0.13.5"` |  |
+| alerting.chartVersion | string | `"0.25.2"` |  |
 | alerting.clusterId | string | `""` | Value of the label (cluster_id) |
 | alerting.clusterWideNamespace.bootstrapConfig | object | `{"externalSecretsStore":{},"git":{"bitbucket":{},"github":{},"gitlab":{}},"vault":{}}` | overwrite options configured in global.bootstrapConfig |
 | alerting.clusterWideNamespace.bootstrapConfig.externalSecretsStore | object | `{}` | overwrite externalSecretStore options, make sure to include all options in overwrite, it is not merged with globally defined options. |
