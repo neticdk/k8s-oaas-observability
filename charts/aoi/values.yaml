@@ -266,6 +266,10 @@ grafana:
   # sidecar used to provision tenant dashboards found as configmaps in the namespace application-operations-dashboards with label aoi_dashboard
   sidecar:
     imagePullPolicy: Always
+    image:
+      registry: docker.io
+      repository: kiwigrid/k8s-sidecar
+      tag: "1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338"    
     securityContext:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
@@ -416,6 +420,8 @@ alerting:
   helmRelease:
     values:
       server:
+        services:
+          clusterIP: ""
         priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
         image:
           registry: docker.io
