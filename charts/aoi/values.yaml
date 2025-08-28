@@ -420,7 +420,7 @@ alerting:
   helmRelease:
     values:
       server:
-        services:
+        service:
           clusterIP: ""
         priorityClassName: "secure-cloud-stack-tenant-namespace-application-critical"
         image:
