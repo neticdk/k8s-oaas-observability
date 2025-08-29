@@ -28,6 +28,8 @@ spec:
       image:
         repository: "{{ $.Values.alerting.helmRelease.values.server.image.registry }}/{{ $.Values.alerting.helmRelease.values.server.image.repository }}"
         pullPolicy: {{ $.Values.alerting.helmRelease.values.server.image.pullPolicy }}
+      service:
+        clusterIP: "{{ $.Values.alerting.helmRelease.values.server.service.clusterIP }}"
       podLabels:
         netic.dk/allow-prometheus-scraping: "true"
       resources:
