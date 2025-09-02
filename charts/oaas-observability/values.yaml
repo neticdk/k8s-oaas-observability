@@ -1646,7 +1646,12 @@ opentelemetryCollector:
     service:
       telemetry:
         metrics:
-          address: ${MY_POD_IP}:8888
+          readers:
+            - pull:
+                exporter:
+                  prometheus:
+                    host: ${MY_POD_IP}
+                    port: 8888
       extensions:
         - health_check
       pipelines:
