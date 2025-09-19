@@ -5,7 +5,7 @@ description: A Helm chart to deploy obeservability stack on Kubernetes
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
-version: 2.3.35
+version: 2.3.36
 maintainers:
   - name: langecode
     email: tal@netic.dk
@@ -17,7 +17,7 @@ dependencies:
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
   - name: kube-state-metrics
-    version: 6.1.5
+    version: 6.3.0
     repository: https://prometheus-community.github.io/helm-charts
   - name: prometheus-node-exporter
     version: "*"
@@ -28,7 +28,7 @@ dependencies:
     repository: file://../prometheus-operator
     condition: prometheus-operator.enabled
   - name: opentelemetry-operator
-    version: 0.93.0
+    version: 0.95.1
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
     condition: opentelemetry-operator.enabled
   - name: vector-agent
