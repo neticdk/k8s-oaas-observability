@@ -1168,8 +1168,8 @@ prometheus:
     ##
     image:
       repository: quay.io/prometheus/prometheus
-      tag: v3.3.1
-    version: v3.3.1
+      tag: v3.4.2
+    version: v3.4.2
 
     ## additionalScrapeConfigs for adding scape configs (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config).
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusspec
@@ -1646,7 +1646,12 @@ opentelemetryCollector:
     service:
       telemetry:
         metrics:
-          address: ${MY_POD_IP}:8888
+          readers:
+            - pull:
+                exporter:
+                  prometheus:
+                    host: ${MY_POD_IP}
+                    port: 8888
       extensions:
         - health_check
       pipelines:

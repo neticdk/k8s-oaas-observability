@@ -3,8 +3,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: alertmanagerconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -2765,6 +2765,466 @@ spec:
                             x-kubernetes-map-type: atomic
                           userKeyFile:
                             type: string
+                        type: object
+                      type: array
+                    rocketchatConfigs:
+                      items:
+                        properties:
+                          actions:
+                            items:
+                              properties:
+                                msg:
+                                  minLength: 1
+                                  type: string
+                                text:
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  pattern: ^https?://.+$
+                                  type: string
+                              type: object
+                            minItems: 1
+                            type: array
+                          apiURL:
+                            pattern: ^https?://.+$
+                            type: string
+                          channel:
+                            minLength: 1
+                            type: string
+                          color:
+                            minLength: 1
+                            type: string
+                          emoji:
+                            minLength: 1
+                            type: string
+                          fields:
+                            items:
+                              properties:
+                                short:
+                                  type: boolean
+                                title:
+                                  minLength: 1
+                                  type: string
+                                value:
+                                  minLength: 1
+                                  type: string
+                              type: object
+                            minItems: 1
+                            type: array
+                          httpConfig:
+                            properties:
+                              authorization:
+                                properties:
+                                  credentials:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  type:
+                                    type: string
+                                type: object
+                              basicAuth:
+                                properties:
+                                  password:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  username:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                type: object
+                              bearerTokenSecret:
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    default: ""
+                                    type: string
+                                  optional:
+                                    type: boolean
+                                required:
+                                - key
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              followRedirects:
+                                type: boolean
+                              noProxy:
+                                type: string
+                              oauth2:
+                                properties:
+                                  clientId:
+                                    properties:
+                                      configMap:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      secret:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                    type: object
+                                  clientSecret:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  endpointParams:
+                                    additionalProperties:
+                                      type: string
+                                    type: object
+                                  noProxy:
+                                    type: string
+                                  proxyConnectHeader:
+                                    additionalProperties:
+                                      items:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      type: array
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  proxyFromEnvironment:
+                                    type: boolean
+                                  proxyUrl:
+                                    pattern: ^(http|https|socks5)://.+$
+                                    type: string
+                                  scopes:
+                                    items:
+                                      type: string
+                                    type: array
+                                  tlsConfig:
+                                    properties:
+                                      ca:
+                                        properties:
+                                          configMap:
+                                            properties:
+                                              key:
+                                                type: string
+                                              name:
+                                                default: ""
+                                                type: string
+                                              optional:
+                                                type: boolean
+                                            required:
+                                            - key
+                                            type: object
+                                            x-kubernetes-map-type: atomic
+                                          secret:
+                                            properties:
+                                              key:
+                                                type: string
+                                              name:
+                                                default: ""
+                                                type: string
+                                              optional:
+                                                type: boolean
+                                            required:
+                                            - key
+                                            type: object
+                                            x-kubernetes-map-type: atomic
+                                        type: object
+                                      cert:
+                                        properties:
+                                          configMap:
+                                            properties:
+                                              key:
+                                                type: string
+                                              name:
+                                                default: ""
+                                                type: string
+                                              optional:
+                                                type: boolean
+                                            required:
+                                            - key
+                                            type: object
+                                            x-kubernetes-map-type: atomic
+                                          secret:
+                                            properties:
+                                              key:
+                                                type: string
+                                              name:
+                                                default: ""
+                                                type: string
+                                              optional:
+                                                type: boolean
+                                            required:
+                                            - key
+                                            type: object
+                                            x-kubernetes-map-type: atomic
+                                        type: object
+                                      insecureSkipVerify:
+                                        type: boolean
+                                      keySecret:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      maxVersion:
+                                        enum:
+                                        - TLS10
+                                        - TLS11
+                                        - TLS12
+                                        - TLS13
+                                        type: string
+                                      minVersion:
+                                        enum:
+                                        - TLS10
+                                        - TLS11
+                                        - TLS12
+                                        - TLS13
+                                        type: string
+                                      serverName:
+                                        type: string
+                                    type: object
+                                  tokenUrl:
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - clientId
+                                - clientSecret
+                                - tokenUrl
+                                type: object
+                              proxyConnectHeader:
+                                additionalProperties:
+                                  items:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  type: array
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              proxyFromEnvironment:
+                                type: boolean
+                              proxyURL:
+                                type: string
+                              proxyUrl:
+                                pattern: ^(http|https|socks5)://.+$
+                                type: string
+                              tlsConfig:
+                                properties:
+                                  ca:
+                                    properties:
+                                      configMap:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      secret:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                    type: object
+                                  cert:
+                                    properties:
+                                      configMap:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      secret:
+                                        properties:
+                                          key:
+                                            type: string
+                                          name:
+                                            default: ""
+                                            type: string
+                                          optional:
+                                            type: boolean
+                                        required:
+                                        - key
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                    type: object
+                                  insecureSkipVerify:
+                                    type: boolean
+                                  keySecret:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  maxVersion:
+                                    enum:
+                                    - TLS10
+                                    - TLS11
+                                    - TLS12
+                                    - TLS13
+                                    type: string
+                                  minVersion:
+                                    enum:
+                                    - TLS10
+                                    - TLS11
+                                    - TLS12
+                                    - TLS13
+                                    type: string
+                                  serverName:
+                                    type: string
+                                type: object
+                            type: object
+                          iconURL:
+                            pattern: ^https?://.+$
+                            type: string
+                          imageURL:
+                            pattern: ^https?://.+$
+                            type: string
+                          linkNames:
+                            type: boolean
+                          sendResolved:
+                            type: boolean
+                          shortFields:
+                            type: boolean
+                          text:
+                            minLength: 1
+                            type: string
+                          thumbURL:
+                            pattern: ^https?://.+$
+                            type: string
+                          title:
+                            minLength: 1
+                            type: string
+                          titleLink:
+                            minLength: 1
+                            type: string
+                          token:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          tokenID:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                        required:
+                        - token
+                        - tokenID
                         type: object
                       type: array
                     slackConfigs:
@@ -5694,8 +6154,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: alertmanagers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -6206,6 +6666,7 @@ spec:
                     default: OnNamespace
                     enum:
                     - OnNamespace
+                    - OnNamespaceExceptForAlertmanagerNamespace
                     - None
                     type: string
                 type: object
@@ -6624,6 +7085,12 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      jira:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
                       opsGenieApiKey:
                         properties:
                           key:
@@ -6655,6 +7122,38 @@ spec:
                       resolveTimeout:
                         pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                         type: string
+                      rocketChat:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                          token:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          tokenID:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                        type: object
                       slackApiUrl:
                         properties:
                           key:
@@ -6718,6 +7217,151 @@ spec:
                             - host
                             - port
                             type: object
+                          tlsConfig:
+                            properties:
+                              ca:
+                                properties:
+                                  configMap:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  secret:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                type: object
+                              cert:
+                                properties:
+                                  configMap:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                  secret:
+                                    properties:
+                                      key:
+                                        type: string
+                                      name:
+                                        default: ""
+                                        type: string
+                                      optional:
+                                        type: boolean
+                                    required:
+                                    - key
+                                    type: object
+                                    x-kubernetes-map-type: atomic
+                                type: object
+                              insecureSkipVerify:
+                                type: boolean
+                              keySecret:
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    default: ""
+                                    type: string
+                                  optional:
+                                    type: boolean
+                                required:
+                                - key
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              maxVersion:
+                                enum:
+                                - TLS10
+                                - TLS11
+                                - TLS12
+                                - TLS13
+                                type: string
+                              minVersion:
+                                enum:
+                                - TLS10
+                                - TLS11
+                                - TLS12
+                                - TLS13
+                                type: string
+                              serverName:
+                                type: string
+                            type: object
+                        type: object
+                      telegram:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
+                      victorops:
+                        properties:
+                          apiKey:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
+                      webex:
+                        properties:
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
+                        type: object
+                      wechat:
+                        properties:
+                          apiCorpID:
+                            minLength: 1
+                            type: string
+                          apiSecret:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                default: ""
+                                type: string
+                              optional:
+                                type: boolean
+                            required:
+                            - key
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          apiURL:
+                            pattern: ^(http|https)://.+$
+                            type: string
                         type: object
                     type: object
                   name:
@@ -7206,6 +7850,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -7716,6 +8362,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - ip
                 x-kubernetes-list-type: map
+              hostUsers:
+                type: boolean
               image:
                 type: string
               imagePullPolicy:
@@ -7968,6 +8616,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -8414,6 +9064,16 @@ spec:
                   - name
                   type: object
                 type: array
+              limits:
+                properties:
+                  maxPerSilenceBytes:
+                    pattern: (^0|([0-9]*[.])?[0-9]+((K|M|G|T|E|P)i?)?B)$
+                    type: string
+                  maxSilences:
+                    format: int32
+                    minimum: 0
+                    type: integer
+                type: object
               listenLocal:
                 type: boolean
               logFormat:
@@ -8432,6 +9092,7 @@ spec:
                 type: string
               minReadySeconds:
                 format: int32
+                minimum: 0
                 type: integer
               nodeSelector:
                 additionalProperties:
@@ -9966,8 +10627,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: podmonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -10167,6 +10828,8 @@ spec:
                             type: string
                         type: object
                       type: array
+                    noProxy:
+                      type: string
                     oauth2:
                       properties:
                         clientId:
@@ -10359,7 +11022,28 @@ spec:
                       maximum: 65535
                       minimum: 1
                       type: integer
+                    proxyConnectHeader:
+                      additionalProperties:
+                        items:
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              default: ""
+                              type: string
+                            optional:
+                              type: boolean
+                          required:
+                          - key
+                          type: object
+                          x-kubernetes-map-type: atomic
+                        type: array
+                      type: object
+                      x-kubernetes-map-type: atomic
+                    proxyFromEnvironment:
+                      type: boolean
                     proxyUrl:
+                      pattern: ^(http|https|socks5)://.+$
                       type: string
                     relabelings:
                       items:
@@ -10587,8 +11271,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -10937,12 +11621,55 @@ spec:
                 - clientSecret
                 - tokenUrl
                 type: object
+              params:
+                items:
+                  properties:
+                    name:
+                      minLength: 1
+                      type: string
+                    values:
+                      items:
+                        minLength: 1
+                        type: string
+                      minItems: 1
+                      type: array
+                  required:
+                  - name
+                  type: object
+                minItems: 1
+                type: array
+                x-kubernetes-list-map-keys:
+                - name
+                x-kubernetes-list-type: map
               prober:
                 properties:
+                  noProxy:
+                    type: string
                   path:
                     default: /probe
                     type: string
+                  proxyConnectHeader:
+                    additionalProperties:
+                      items:
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            default: ""
+                            type: string
+                          optional:
+                            type: boolean
+                        required:
+                        - key
+                        type: object
+                        x-kubernetes-map-type: atomic
+                      type: array
+                    type: object
+                    x-kubernetes-map-type: atomic
+                  proxyFromEnvironment:
+                    type: boolean
                   proxyUrl:
+                    pattern: ^(http|https|socks5)://.+$
                     type: string
                   scheme:
                     enum:
@@ -11228,8 +11955,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: prometheusagents.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -11800,6 +12527,31 @@ spec:
                     type: string
                   host:
                     type: string
+                  noProxy:
+                    type: string
+                  proxyConnectHeader:
+                    additionalProperties:
+                      items:
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            default: ""
+                            type: string
+                          optional:
+                            type: boolean
+                        required:
+                        - key
+                        type: object
+                        x-kubernetes-map-type: atomic
+                      type: array
+                    type: object
+                    x-kubernetes-map-type: atomic
+                  proxyFromEnvironment:
+                    type: boolean
+                  proxyUrl:
+                    pattern: ^(http|https|socks5)://.+$
+                    type: string
                   tlsConfig:
                     properties:
                       ca:
@@ -12149,6 +12901,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -12595,6 +13349,8 @@ spec:
                   - name
                   type: object
                 type: array
+              convertClassicHistogramsToNHCB:
+                type: boolean
               dnsConfig:
                 properties:
                   nameservers:
@@ -12717,6 +13473,8 @@ spec:
                 - ip
                 x-kubernetes-list-type: map
               hostNetwork:
+                type: boolean
+              hostUsers:
                 type: boolean
               ignoreNamespaceSelectors:
                 type: boolean
@@ -12972,6 +13730,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -13452,11 +14212,19 @@ spec:
                 type: integer
               minReadySeconds:
                 format: int32
+                minimum: 0
                 type: integer
               mode:
                 enum:
                 - StatefulSet
                 - DaemonSet
+                type: string
+              nameEscapingScheme:
+                enum:
+                - AllowUTF8
+                - Underscores
+                - Dots
+                - Values
                 type: string
               nameValidationScheme:
                 enum:
@@ -13469,7 +14237,18 @@ spec:
                 type: object
               otlp:
                 properties:
+                  convertHistogramsToNHCB:
+                    type: boolean
+                  ignoreResourceAttributes:
+                    items:
+                      minLength: 1
+                      type: string
+                    minItems: 1
+                    type: array
+                    x-kubernetes-list-type: set
                   keepIdentifyingResourceAttributes:
+                    type: boolean
+                  promoteAllResourceAttributes:
                     type: boolean
                   promoteResourceAttributes:
                     items:
@@ -13482,6 +14261,7 @@ spec:
                     enum:
                     - NoUTF8EscapingWithSuffixes
                     - UnderscoreEscapingWithSuffixes
+                    - NoTranslation
                     type: string
                 type: object
               overrideHonorLabels:
@@ -14486,6 +15266,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - name
                 x-kubernetes-list-type: map
+              scrapeClassicHistograms:
+                type: boolean
               scrapeConfigNamespaceSelector:
                 properties:
                   matchExpressions:
@@ -16153,6 +16935,19 @@ spec:
                     type: object
                 type: object
             type: object
+            x-kubernetes-validations:
+            - message: replicas cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.replicas))'
+            - message: storage cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.storage))'
+            - message: shards cannot be greater than 1 when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.shards) && self.shards > 1)'
+            - message: persistentVolumeClaimRetentionPolicy cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.persistentVolumeClaimRetentionPolicy))'
+            - message: scrapeConfigSelector cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.scrapeConfigSelector))'
+            - message: probeSelector cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.probeSelector))'
           status:
             properties:
               availableReplicas:
@@ -16253,8 +17048,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: prometheuses.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -17194,6 +17989,31 @@ spec:
                     type: string
                   host:
                     type: string
+                  noProxy:
+                    type: string
+                  proxyConnectHeader:
+                    additionalProperties:
+                      items:
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            default: ""
+                            type: string
+                          optional:
+                            type: boolean
+                        required:
+                        - key
+                        type: object
+                        x-kubernetes-map-type: atomic
+                      type: array
+                    type: object
+                    x-kubernetes-map-type: atomic
+                  proxyFromEnvironment:
+                    type: boolean
+                  proxyUrl:
+                    pattern: ^(http|https|socks5)://.+$
+                    type: string
                   tlsConfig:
                     properties:
                       ca:
@@ -17545,6 +18365,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -17991,6 +18813,8 @@ spec:
                   - name
                   type: object
                 type: array
+              convertClassicHistogramsToNHCB:
+                type: boolean
               disableCompaction:
                 type: boolean
               dnsConfig:
@@ -18127,6 +18951,8 @@ spec:
                 - ip
                 x-kubernetes-list-type: map
               hostNetwork:
+                type: boolean
+              hostUsers:
                 type: boolean
               ignoreNamespaceSelectors:
                 type: boolean
@@ -18382,6 +19208,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -18862,7 +19690,15 @@ spec:
                 type: integer
               minReadySeconds:
                 format: int32
+                minimum: 0
                 type: integer
+              nameEscapingScheme:
+                enum:
+                - AllowUTF8
+                - Underscores
+                - Dots
+                - Values
+                type: string
               nameValidationScheme:
                 enum:
                 - UTF8
@@ -18874,7 +19710,18 @@ spec:
                 type: object
               otlp:
                 properties:
+                  convertHistogramsToNHCB:
+                    type: boolean
+                  ignoreResourceAttributes:
+                    items:
+                      minLength: 1
+                      type: string
+                    minItems: 1
+                    type: array
+                    x-kubernetes-list-type: set
                   keepIdentifyingResourceAttributes:
+                    type: boolean
+                  promoteAllResourceAttributes:
                     type: boolean
                   promoteResourceAttributes:
                     items:
@@ -18887,6 +19734,7 @@ spec:
                     enum:
                     - NoUTF8EscapingWithSuffixes
                     - UnderscoreEscapingWithSuffixes
+                    - NoTranslation
                     type: string
                 type: object
               overrideHonorLabels:
@@ -20374,6 +21222,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - name
                 x-kubernetes-list-type: map
+              scrapeClassicHistograms:
+                type: boolean
               scrapeConfigNamespaceSelector:
                 properties:
                   matchExpressions:
@@ -22404,8 +23254,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: prometheusrules.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -22502,8 +23352,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: scrapeconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -23820,6 +24670,7 @@ spec:
                       minLength: 1
                       type: string
                     hostNetworkingHost:
+                      minLength: 1
                       type: string
                     matchFirstNetwork:
                       type: boolean
@@ -24003,6 +24854,9 @@ spec:
                       - tokenUrl
                       type: object
                     port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 0
                       type: integer
                     proxyConnectHeader:
                       additionalProperties:
@@ -25171,6 +26025,9 @@ spec:
                       type: boolean
                     followRedirects:
                       type: boolean
+                    labelSelector:
+                      minLength: 1
+                      type: string
                     noProxy:
                       type: string
                     oauth2:
@@ -27739,6 +28596,18 @@ spec:
               metricsPath:
                 minLength: 1
                 type: string
+              nameEscapingScheme:
+                enum:
+                - AllowUTF8
+                - Underscores
+                - Dots
+                - Values
+                type: string
+              nameValidationScheme:
+                enum:
+                - UTF8
+                - Legacy
+                type: string
               nativeHistogramBucketLimit:
                 format: int64
                 type: integer
@@ -29311,8 +30180,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -29474,6 +30343,8 @@ spec:
                             type: string
                         type: object
                       type: array
+                    noProxy:
+                      type: string
                     oauth2:
                       properties:
                         clientId:
@@ -29661,7 +30532,28 @@ spec:
                       type: string
                     port:
                       type: string
+                    proxyConnectHeader:
+                      additionalProperties:
+                        items:
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              default: ""
+                              type: string
+                            optional:
+                              type: boolean
+                          required:
+                          - key
+                          type: object
+                          x-kubernetes-map-type: atomic
+                        type: array
+                      type: object
+                      x-kubernetes-map-type: atomic
+                    proxyFromEnvironment:
+                      type: boolean
                     proxyUrl:
+                      pattern: ^(http|https|socks5)://.+$
                       type: string
                     relabelings:
                       items:
@@ -29930,18 +30822,78 @@ spec:
             - endpoints
             - selector
             type: object
+          status:
+            properties:
+              bindings:
+                items:
+                  properties:
+                    conditions:
+                      items:
+                        properties:
+                          lastTransitionTime:
+                            format: date-time
+                            type: string
+                          message:
+                            type: string
+                          observedGeneration:
+                            format: int64
+                            type: integer
+                          reason:
+                            type: string
+                          status:
+                            minLength: 1
+                            type: string
+                          type:
+                            enum:
+                            - Accepted
+                            minLength: 1
+                            type: string
+                        required:
+                        - lastTransitionTime
+                        - status
+                        - type
+                        type: object
+                      type: array
+                      x-kubernetes-list-map-keys:
+                      - type
+                      x-kubernetes-list-type: map
+                    group:
+                      enum:
+                      - monitoring.coreos.com
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    namespace:
+                      minLength: 1
+                      type: string
+                    resource:
+                      enum:
+                      - prometheuses
+                      - prometheusagents
+                      type: string
+                  required:
+                  - group
+                  - name
+                  - namespace
+                  - resource
+                  type: object
+                type: array
+            type: object
         required:
         - spec
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.2
-    operator.prometheus.io/version: 0.82.2
+    controller-gen.kubebuilder.io/version: v0.18.0
+    operator.prometheus.io/version: 0.85.0
   name: thanosrulers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -30714,6 +31666,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -31197,6 +32151,12 @@ spec:
                 - Default
                 - None
                 type: string
+              enableFeatures:
+                items:
+                  minLength: 1
+                  type: string
+                type: array
+                x-kubernetes-list-type: set
               enableServiceLinks:
                 type: boolean
               enforcedNamespaceLabel:
@@ -31348,6 +32308,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - ip
                 x-kubernetes-list-type: map
+              hostUsers:
+                type: boolean
               image:
                 type: string
               imagePullPolicy:
@@ -31600,6 +32562,8 @@ spec:
                               - port
                               type: object
                           type: object
+                        stopSignal:
+                          type: string
                       type: object
                     livenessProbe:
                       properties:
@@ -32068,6 +33032,7 @@ spec:
                 type: string
               minReadySeconds:
                 format: int32
+                minimum: 0
                 type: integer
               nodeSelector:
                 additionalProperties:
@@ -32697,6 +33662,9 @@ spec:
               replicas:
                 format: int32
                 type: integer
+              resendDelay:
+                pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                type: string
               resources:
                 properties:
                   claims:
@@ -32736,6 +33704,13 @@ spec:
                 type: string
               routePrefix:
                 type: string
+              ruleConcurrentEval:
+                format: int32
+                minimum: 1
+                type: integer
+              ruleGracePeriod:
+                pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                type: string
               ruleNamespaceSelector:
                 properties:
                   matchExpressions:
@@ -32762,6 +33737,12 @@ spec:
                     type: object
                 type: object
                 x-kubernetes-map-type: atomic
+              ruleOutageTolerance:
+                pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                type: string
+              ruleQueryOffset:
+                pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                type: string
               ruleSelector:
                 properties:
                   matchExpressions:

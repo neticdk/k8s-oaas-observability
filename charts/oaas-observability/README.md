@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.3.24](https://img.shields.io/badge/Version-2.3.24-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.3.35](https://img.shields.io/badge/Version-2.3.35-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -33,10 +33,10 @@ $ helm install my-release netic-oaas/oaas-observability
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
 | https://grafana.github.io/helm-charts | grafana | 9.0.0 |
-| https://grafana.github.io/helm-charts | promtail | 6.16.6 |
+| https://grafana.github.io/helm-charts | promtail | 6.17.6 |
 | https://helm.vector.dev | vector-agent | 0.21.3 |
-| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.88.6 |
-| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 5.33.1 |
+| https://open-telemetry.github.io/opentelemetry-helm-charts | opentelemetry-operator | 0.93.0 |
+| https://prometheus-community.github.io/helm-charts | kube-state-metrics | 6.1.5 |
 
 ## Configuration
 
@@ -365,7 +365,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
 | opentelemetry-operator | object | `{"enabled":true,"kubeRBACProxy":{"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}},"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}},"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
 | opentelemetryCollector.annotations | object | `{}` | Annotations for OpenTelemetry Collector  |
-| opentelemetryCollector.config | object | `{"exporters":{"debug":{}},"extensions":{"health_check":{"endpoint":"${MY_POD_IP}:13133"}},"processors":{"batch":{},"memory_limiter":{"check_interval":"5s","limit_percentage":80,"spike_limit_percentage":25}},"receivers":{"jaeger":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:14250"},"thrift_compact":{"endpoint":"${MY_POD_IP}:6831"},"thrift_http":{"endpoint":"${MY_POD_IP}:14268"}}},"otlp":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:4317"},"http":{"endpoint":"${MY_POD_IP}:4318"}}}},"service":{"extensions":["health_check"],"pipelines":{"traces":{"exporters":["debug"],"processors":["memory_limiter","batch"],"receivers":["otlp","jaeger"]}},"telemetry":{"metrics":{"address":"${MY_POD_IP}:8888"}}}}` | Base collector configuration. Supports templating. To escape existing instances of {{ }}, use {{` <original content> `}}. For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.  |
+| opentelemetryCollector.config | object | `{"exporters":{"debug":{}},"extensions":{"health_check":{"endpoint":"${MY_POD_IP}:13133"}},"processors":{"batch":{},"memory_limiter":{"check_interval":"5s","limit_percentage":80,"spike_limit_percentage":25}},"receivers":{"jaeger":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:14250"},"thrift_compact":{"endpoint":"${MY_POD_IP}:6831"},"thrift_http":{"endpoint":"${MY_POD_IP}:14268"}}},"otlp":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:4317"},"http":{"endpoint":"${MY_POD_IP}:4318"}}}},"service":{"extensions":["health_check"],"pipelines":{"traces":{"exporters":["debug"],"processors":["memory_limiter","batch"],"receivers":["otlp","jaeger"]}},"telemetry":{"metrics":{"readers":[{"pull":{"exporter":{"prometheus":{"host":"${MY_POD_IP}","port":8888}}}}]}}}}` | Base collector configuration. Supports templating. To escape existing instances of {{ }}, use {{` <original content> `}}. For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.  |
 | opentelemetryCollector.enabled | bool | `false` |  |
 | opentelemetryCollector.extraArgs | list | `[]` | extraArgs for the OpenTelemetry Collector  |
 | opentelemetryCollector.extraVolumeMounts | list | `[]` | Additional VolumeMounts on the output StatefulSet definition. |
@@ -414,7 +414,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.externalLabels.cluster | string | `"dummy"` |  |
 | prometheus.prometheusSpec.externalUrl | string | `""` |  |
 | prometheus.prometheusSpec.image.repository | string | `"quay.io/prometheus/prometheus"` |  |
-| prometheus.prometheusSpec.image.tag | string | `"v3.3.1"` |  |
+| prometheus.prometheusSpec.image.tag | string | `"v3.4.2"` |  |
 | prometheus.prometheusSpec.initContainers | list | `[]` |  |
 | prometheus.prometheusSpec.listenLocal | bool | `false` |  |
 | prometheus.prometheusSpec.logFormat | string | `"logfmt"` |  |
@@ -456,7 +456,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheus.prometheusSpec.thanos | object | `{}` |  |
 | prometheus.prometheusSpec.tolerations | list | `[]` |  |
-| prometheus.prometheusSpec.version | string | `"v3.3.1"` |  |
+| prometheus.prometheusSpec.version | string | `"v3.4.2"` |  |
 | prometheus.prometheusSpec.volumeMounts | list | `[]` |  |
 | prometheus.prometheusSpec.volumes | list | `[]` |  |
 | prometheus.prometheusSpec.walCompression | bool | `false` |  |

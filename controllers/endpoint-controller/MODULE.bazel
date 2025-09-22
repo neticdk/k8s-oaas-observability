@@ -3,11 +3,11 @@ module(
     version = "1.0.0",
 )
 
-bazel_dep(name = "rules_go", version = "0.54.0")
+bazel_dep(name = "rules_go", version = "0.55.1")
 bazel_dep(name = "rules_pkg", version = "1.1.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
-bazel_dep(name = "rules_python", version = "1.4.1")
-bazel_dep(name = "gazelle", version = "0.43.0")
+bazel_dep(name = "rules_python", version = "1.6.3")
+bazel_dep(name = "gazelle", version = "0.44.0")
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.download(version = "1.24.3")
@@ -27,7 +27,7 @@ use_repo(
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
     name = "distroless_base",
-    digest = "sha256:c9bf6ca0c801a004aaed66d257acffece0eae4b15a080d40fd127b20749fa104",
+    digest = "sha256:fa15492938650e1a5b87e34d47dc7d99a2b4e8aefd81b931b3f3eb6bb4c1d2f6",
     image = "gcr.io/distroless/base",  # gcr.io/distroless/base:nonroot
     platforms = [
         "linux/amd64",
