@@ -8871,6 +8871,29 @@ entries:
     version: 1.0.5
   promtail-forwarding:
   - apiVersion: v2
+    created: "2025-09-22T08:21:25.076223708Z"
+    dependencies:
+    - name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.17.0
+    - name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.134.0
+    description: A Helm chart to install promtail together with OpenTelemetry Collector
+      for receiving and forwarding logs
+    digest: 591d75155be88d4e1ccaca93df6c89112e63d717e7d2417822e4b45abdf0b9dd
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    name: promtail-forwarding
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.31/promtail-forwarding-0.1.31.tgz
+    version: 0.1.31
+  - apiVersion: v2
     created: "2025-06-23T08:30:32.824331339Z"
     dependencies:
     - name: promtail
@@ -9560,4 +9583,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-02T08:07:22.003735934Z"
+generated: "2025-09-22T08:21:25.076738143Z"
