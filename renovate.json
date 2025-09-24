@@ -46,7 +46,15 @@
       "matchFileNames": [
         "charts/oaas-observability/**"
       ],
-      "groupName": "oaas-observability"
+      "groupName": "oaas-observability",
+      "postUpgradeTasks": {
+        "commands": [
+          "helm template -n netic-observability-system oaas-observability --repo https://open-telemetry.github.io/opentelemetry-helm-charts opentelemetry-operator  --version $(yq '.dependencies[] | select(.name == \"opentelemetry-operator\") | .version' charts/oaas-observability/Chart.yaml) | yq 'select(.kind == \"CustomResourceDefinition\")' > charts/oaas-observability/charts/otel-crds/crds/combined-crds.yaml",
+          ".github/bump-versions",
+          "helm-docs"
+        ],
+        "executionMode": "branch"
+      }
     },
     {
       "matchFileNames": [

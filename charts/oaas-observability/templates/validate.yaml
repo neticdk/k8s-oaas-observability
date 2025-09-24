@@ -1,0 +1,4 @@
+{{/* validate crds.installOtel and opentelemetry-operator.crds.create are not both true */}}
+{{- if and .Values.crds.installOtel (index .Values "opentelemetry-operator" "crds").create }}
+  {{- fail "INVALID CONFIGURATION: Both 'crds.installOtel' and 'opentelemetry-operator.crds.create' are set to true. Only one can be responsible for managing the OpenTelemetry CRDs. Please set one of them to false." }}
+{{- end -}}

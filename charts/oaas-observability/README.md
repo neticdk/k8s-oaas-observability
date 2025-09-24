@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.3.36](https://img.shields.io/badge/Version-2.3.36-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.4.0](https://img.shields.io/badge/Version-2.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -30,6 +30,7 @@ $ helm install my-release netic-oaas/oaas-observability
 
 | Repository | Name | Version |
 |------------|------|---------|
+|  | otel-crds | 0.0.0 |
 | file://../prometheus-node-exporter | prometheus-node-exporter | * |
 | file://../prometheus-operator | prometheus-operator | * |
 | https://grafana.github.io/helm-charts | grafana | 8.15.0 |
@@ -130,6 +131,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | coreDns.serviceMonitor.interval | string | `""` |  |
 | coreDns.serviceMonitor.metricRelabelings | list | `[]` |  |
 | coreDns.serviceMonitor.relabelings | list | `[]` |  |
+| crds.installOtel | bool | `false` |  |
 | endpointController.enabled | bool | `false` | Enable endpoint controller to expose external endpoints |
 | endpointController.etcdService | bool | `true` | Expose etcd on nodes based on labels |
 | endpointController.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -363,7 +365,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
-| opentelemetry-operator | object | `{"enabled":true,"kubeRBACProxy":{"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}},"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}},"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
+| opentelemetry-operator | object | `{"crds":{"create":true},"enabled":true,"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
 | opentelemetryCollector.annotations | object | `{}` | Annotations for OpenTelemetry Collector  |
 | opentelemetryCollector.config | object | `{"exporters":{"debug":{}},"extensions":{"health_check":{"endpoint":"${MY_POD_IP}:13133"}},"processors":{"batch":{},"memory_limiter":{"check_interval":"5s","limit_percentage":80,"spike_limit_percentage":25}},"receivers":{"jaeger":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:14250"},"thrift_compact":{"endpoint":"${MY_POD_IP}:6831"},"thrift_http":{"endpoint":"${MY_POD_IP}:14268"}}},"otlp":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:4317"},"http":{"endpoint":"${MY_POD_IP}:4318"}}}},"service":{"extensions":["health_check"],"pipelines":{"traces":{"exporters":["debug"],"processors":["memory_limiter","batch"],"receivers":["otlp","jaeger"]}},"telemetry":{"metrics":{"readers":[{"pull":{"exporter":{"prometheus":{"host":"${MY_POD_IP}","port":8888}}}}]}}}}` | Base collector configuration. Supports templating. To escape existing instances of {{ }}, use {{` <original content> `}}. For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.  |
 | opentelemetryCollector.enabled | bool | `false` |  |

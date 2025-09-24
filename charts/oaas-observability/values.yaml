@@ -23,6 +23,11 @@ alerts:
   # -- Should alerting rules be enabled
   enabled: true
 
+# Should the CRDs be installed by this chart.
+crds:
+  # opentelemetry-operator.crds.create must be false when this is true.
+  installOtel: false
+
 ##
 ## Configuration for exporters
 ##
@@ -1859,20 +1864,9 @@ grafana:
 # -- Values for included otel-operator chart
 opentelemetry-operator:
   enabled: true
-  manager:
-    collectorImage:
-      repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
-  kubeRBACProxy:
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
+  crds:
+    # This must be false when crds.installOtel is true
+    create: true
   priorityClassName: "secure-cloud-stack-technical-operations-critical"
 
 # -- Promtail is designed for Grafana Loki and is an alternative to Vector for log ingestion
