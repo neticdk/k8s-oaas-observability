@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.4.1](https://img.shields.io/badge/Version-2.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.4.2](https://img.shields.io/badge/Version-2.4.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -365,24 +365,28 @@ $ helm install my-release netic-oaas/oaas-observability
 | nodeExporter.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"job"` |  |
 | nodeExporter.serviceMonitor.relabelings[0].targetLabel | string | `"job"` |  |
 | nodeExporter.serviceMonitor.scrapeTimeout | string | `""` |  |
-| opentelemetry-operator | object | `{"crds":{"create":true},"enabled":true,"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
+| opentelemetry-operator | object | `{"crds":{"create":true},"enabled":true,"manager":{"collectorImage":{"repository":"ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s"}},"priorityClassName":"secure-cloud-stack-technical-operations-critical"}` | Values for included otel-operator chart |
 | opentelemetryCollector.annotations | object | `{}` | Annotations for OpenTelemetry Collector  |
-| opentelemetryCollector.config | object | `{"exporters":{"debug":{}},"extensions":{"health_check":{"endpoint":"${MY_POD_IP}:13133"}},"processors":{"batch":{},"memory_limiter":{"check_interval":"5s","limit_percentage":80,"spike_limit_percentage":25}},"receivers":{"jaeger":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:14250"},"thrift_compact":{"endpoint":"${MY_POD_IP}:6831"},"thrift_http":{"endpoint":"${MY_POD_IP}:14268"}}},"otlp":{"protocols":{"grpc":{"endpoint":"${MY_POD_IP}:4317"},"http":{"endpoint":"${MY_POD_IP}:4318"}}}},"service":{"extensions":["health_check"],"pipelines":{"traces":{"exporters":["debug"],"processors":["memory_limiter","batch"],"receivers":["otlp","jaeger"]}},"telemetry":{"metrics":{"readers":[{"pull":{"exporter":{"prometheus":{"host":"${MY_POD_IP}","port":8888}}}}]}}}}` | Base collector configuration. Supports templating. To escape existing instances of {{ }}, use {{` <original content> `}}. For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.  |
+| opentelemetryCollector.config | object | `{"exporters":{},"extensions":{"health_check":{"endpoint":"${env:OTEL_K8S_POD_IP}:13133"}},"processors":{"batch":{},"memory_limiter":{"check_interval":"2s","limit_percentage":80,"spike_limit_percentage":25}},"receivers":{"jaeger":{"protocols":{"grpc":{"endpoint":"${env:OTEL_K8S_POD_IP}:14250"},"thrift_compact":{"endpoint":"${env:OTEL_K8S_POD_IP}:6831"},"thrift_http":{"endpoint":"${env:OTEL_K8S_POD_IP}:14268"}}},"otlp":{"protocols":{"grpc":{"endpoint":"${env:OTEL_K8S_POD_IP}:4317"},"http":{"endpoint":"${env:OTEL_K8S_POD_IP}:4318"}}}},"service":{"extensions":["health_check"],"pipelines":{"traces":{"exporters":["debug"],"processors":["memory_limiter","batch"],"receivers":["otlp","jaeger"]}},"telemetry":{"metrics":{"readers":[{"pull":{"exporter":{"prometheus":{"host":"${env:OTEL_K8S_POD_IP}","port":8888}}}}]}}}}` | Base collector configuration. Supports templating. To escape existing instances of {{ }}, use {{` <original content> `}}. For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.  |
 | opentelemetryCollector.enabled | bool | `false` |  |
 | opentelemetryCollector.extraArgs | list | `[]` | extraArgs for the OpenTelemetry Collector  |
 | opentelemetryCollector.extraVolumeMounts | list | `[]` | Additional VolumeMounts on the output StatefulSet definition. |
 | opentelemetryCollector.extraVolumes | list | `[]` | Additional volumes on the output StatefulSet definition. |
 | opentelemetryCollector.fullnameOverride | string | `""` | override the fullname for the OpenTelemetry Collector  |
 | opentelemetryCollector.image | object | `{"pullPolicy":"Always","registry":"docker.io","repository":"otel/opentelemetry-collector-k8s"}` | Image of OpenTelemetry Collector, the opentelmetry operator version will determine the version of the collector  |
+| opentelemetryCollector.livenessProbe.failureThreshold | int | `3` |  |
+| opentelemetryCollector.livenessProbe.periodSeconds | int | `10` |  |
+| opentelemetryCollector.livenessProbe.successThreshold | int | `1` |  |
+| opentelemetryCollector.livenessProbe.timeoutSeconds | int | `1` |  |
 | opentelemetryCollector.mode | string | `"deployment"` | Valid values are "daemonset", "deployment", and "statefulset".  |
 | opentelemetryCollector.podDisruptionBudget | object | `{"enabled":false,"maxUnavailable":"","minAvailable":1}` | Configure pod disruption budgets for OpenTelemetry Collector ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget This configuration is immutable once created and will require the PDB to be deleted to be changed https://github.com/kubernetes/kubernetes/issues/45398  |
-| opentelemetryCollector.podSecurityContext | object | `{"fsGroup":10001,"runAsGroup":10001,"runAsNonRoot":true,"runAsUser":10001,"seccompProfile":{"type":"RuntimeDefault"}}` | The podsecuritycontext for the OpenTelemetry Collector  |
-| opentelemetryCollector.presets | object | `{"kubernetesAttributes":{"enabled":false,"extractAllPodAnnotations":false,"extractAllPodLabels":false},"kubernetesEvents":{"enabled":false}}` | configuration presets for the OpenTelemetry Collector, currently only "kubernetesAttributes" and "kubernetesEvents" are supported creates the config and the required roles needed  |
+| opentelemetryCollector.podSecurityContext | object | `{"fsGroup":65532,"runAsGroup":65532,"runAsNonRoot":true,"runAsUser":65532}` | The podsecuritycontext for the OpenTelemetry Collector  |
+| opentelemetryCollector.presets | object | `{"kubernetesAttributes":{"enabled":true,"extractAllPodAnnotations":false,"extractAllPodLabels":false},"kubernetesEvents":{"enabled":false}}` | configuration presets for the OpenTelemetry Collector, currently only "kubernetesAttributes" and "kubernetesEvents" are supported creates the config and the required roles needed  |
 | opentelemetryCollector.priorityClassName | string | `""` | Priority class assigned to the opentelemetry collector  |
 | opentelemetryCollector.rbac | object | `{"clusterRole":{"rules":[]}}` | additional rules to be added to the OpenTelemetry Collector clusterRole |
 | opentelemetryCollector.replicas | int | `1` | The number of replicas for the OpenTelemetry Collector  |
 | opentelemetryCollector.resources | object | `{}` | Resource limits & requests  |
-| opentelemetryCollector.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}` | The securitycontext for the OpenTelemetry Collector container  |
+| opentelemetryCollector.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true}` | The securitycontext for the OpenTelemetry Collector container  |
 | opentelemetryCollector.serviceAccount | object | `{"annotations":{},"name":"opentelemetry-collector"}` | Service account for Prometheuses to use. ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/  |
 | opentelemetryCollector.serviceMonitor | object | `{"enabled":true,"labels":{"netic.dk/monitoring":"true"}}` | If true, create a serviceMonitor for OpenTelemetry Collector  |
 | opentelemetryCollector.tolerations | list | `[]` | Define the tolerations for the OpenTelemetry Collector  |
