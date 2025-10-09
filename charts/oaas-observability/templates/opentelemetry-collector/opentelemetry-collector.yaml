@@ -45,7 +45,7 @@ spec:
           apiVersion: v1
           fieldPath: status.podIP
 {{- if .Values.opentelemetryCollector.livenessProbe }}
-  podSecurityContext:
+  livenessProbe:
 {{ toYaml .Values.opentelemetryCollector.livenessProbe | indent 4 }}
 {{- end }}
 {{- if .Values.opentelemetryCollector.podDisruptionBudget.enabled }}
