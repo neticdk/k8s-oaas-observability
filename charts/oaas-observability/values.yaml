@@ -1541,7 +1541,7 @@ opentelemetryCollector:
     timeoutSeconds: 1
 
 
-  # -- Image of OpenTelemetry Collector
+  # -- Image of OpenTelemetry Collector. If tag and digest are empty, the operator will use a default version compatible with itself.
   #
   image:
     registry: "ghcr.io"
