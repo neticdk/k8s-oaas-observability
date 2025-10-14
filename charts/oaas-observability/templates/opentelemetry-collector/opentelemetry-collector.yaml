@@ -11,11 +11,11 @@ metadata:
 spec:
   config:
 {{- include "opentelemetryCollector.genconfig" . | nindent 4 }}
-  {{- if .Values.opentelemetryCollector.image.digest }}
+{{- if .Values.opentelemetryCollector.image.digest }}
   image: "{{ .Values.opentelemetryCollector.image.registry }}/{{ .Values.opentelemetryCollector.image.repository }}@{{ .Values.opentelemetryCollector.image.digest }}"
-  {{- else if .Values.opentelemetryCollector.image.tag }}
+{{- else if .Values.opentelemetryCollector.image.tag }}
   image: "{{ .Values.opentelemetryCollector.image.registry }}/{{ .Values.opentelemetryCollector.image.repository }}:{{ .Values.opentelemetryCollector.image.tag }}"
-  {{- end }}
+{{- end }}
   imagePullPolicy: {{ .Values.opentelemetryCollector.image.pullPolicy }}
 {{- if .Values.opentelemetryCollector.mode }}
   mode: {{ .Values.opentelemetryCollector.mode }}
