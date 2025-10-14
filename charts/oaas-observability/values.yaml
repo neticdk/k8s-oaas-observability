@@ -1544,9 +1544,9 @@ opentelemetryCollector:
   # -- Image of OpenTelemetry Collector
   #
   image:
-    registry: ghcr.io
-    repository: open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s
-    pullPolicy: Always
+    registry: "ghcr.io"
+    repository: "open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s"
+    pullPolicy: "Always"
     # By default, the version set for the collector will match the version of the operator being run.
     tag: ""
     # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
