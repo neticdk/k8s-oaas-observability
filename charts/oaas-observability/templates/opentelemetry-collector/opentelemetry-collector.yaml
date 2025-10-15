@@ -11,21 +11,47 @@ metadata:
 spec:
   config:
 {{- include "opentelemetryCollector.genconfig" . | nindent 4 }}
-  image: "{{ .Values.opentelemetryCollector.image.registry }}/{{ .Values.opentelemetryCollector.image.repository }}"
+{{- if .Values.opentelemetryCollector.image.digest }}
+  image: "{{ .Values.opentelemetryCollector.image.registry }}/{{ .Values.opentelemetryCollector.image.repository }}@{{ .Values.opentelemetryCollector.image.digest }}"
+{{- else if .Values.opentelemetryCollector.image.tag }}
+  image: "{{ .Values.opentelemetryCollector.image.registry }}/{{ .Values.opentelemetryCollector.image.repository }}:{{ .Values.opentelemetryCollector.image.tag }}"
+{{- end }}
   imagePullPolicy: {{ .Values.opentelemetryCollector.image.pullPolicy }}
 {{- if .Values.opentelemetryCollector.mode }}
   mode: {{ .Values.opentelemetryCollector.mode }}
 {{- end }}
-{{- if .Values.opentelemetryCollector.extraArgs }}  
+{{- if .Values.opentelemetryCollector.extraArgs }}
   args:
 {{ toYaml .Values.opentelemetryCollector.extraArgs | indent 4 }}
 {{- end }}
   env:
-    - name: MY_POD_IP
+    - name: OTEL_K8S_NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: OTEL_K8S_NODE_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_K8S_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: OTEL_K8S_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: OTEL_K8S_POD_IP
       valueFrom:
         fieldRef:
           apiVersion: v1
           fieldPath: status.podIP
+{{- if .Values.opentelemetryCollector.livenessProbe }}
+  livenessProbe:
+{{ toYaml .Values.opentelemetryCollector.livenessProbe | indent 4 }}
+{{- end }}
 {{- if .Values.opentelemetryCollector.podDisruptionBudget.enabled }}
   podDisruptionBudget:
     minAvailable: {{ .Values.opentelemetryCollector.podDisruptionBudget.minAvailable }}

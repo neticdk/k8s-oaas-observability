@@ -46,9 +46,10 @@ processors:
   k8sattributes:
   {{- if eq .Values.opentelemetryCollector.mode "daemonset" }}
     filter:
-      node_from_env_var: K8S_NODE_NAME
+      node_from_env_var: OTEL_K8S_NODE_NAME
   {{- end }}
     passthrough: false
+    wait_for_metadata: true
     pod_association:
     - sources:
       - from: resource_attribute
@@ -57,19 +58,30 @@ processors:
       - from: resource_attribute
         name: k8s.pod.uid
     - sources:
+      - from: resource_attribute
+        name: k8s.pod.name
+      - from: resource_attribute
+        name: k8s.namespace.name
+    - sources:
       - from: connection
     extract:
       metadata:
-        - "k8s.namespace.name"
-        - "k8s.deployment.name"
-        - "k8s.statefulset.name"
-        - "k8s.daemonset.name"
-        - "k8s.cronjob.name"
-        - "k8s.job.name"
-        - "k8s.node.name"
-        - "k8s.pod.name"
-        - "k8s.pod.uid"
-        - "k8s.pod.start_time"
+        - k8s.node.name
+        - k8s.namespace.name
+        - k8s.pod.name
+        - k8s.pod.uid
+        - k8s.deployment.name
+        - k8s.replicaset.name
+        - k8s.daemonset.name
+        - k8s.statefulset.name
+        - k8s.job.name
+        - k8s.cronjob.name
+        - k8s.container.name
+        - container.image.tag
+        - container.image.name
+        - service.name
+        - service.instance.id
+        - service.namespace
       {{- if .Values.opentelemetryCollector.presets.kubernetesAttributes.extractAllPodLabels }}
       labels:
         - tag_name: $$1
