@@ -71,11 +71,6 @@ jobs:
         with:
           version: 10.1.1
 
-      - name: Debug chart-testing
-        run: |
-          helm dependency build $GITHUB_WORKSPACE/charts/oaas-observability
-          helm template $GITHUB_WORKSPACE/charts/oaas-observability -s templates/prometheus/rules.yaml
-
       - name: Run chart-testing (lint)
         run: |
           export PATH=$GITHUB_WORKSPACE/polaris:$PATH
