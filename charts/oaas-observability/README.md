@@ -373,7 +373,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | opentelemetryCollector.extraVolumeMounts | list | `[]` | Additional VolumeMounts on the output StatefulSet definition. |
 | opentelemetryCollector.extraVolumes | list | `[]` | Additional volumes on the output StatefulSet definition. |
 | opentelemetryCollector.fullnameOverride | string | `""` | override the fullname for the OpenTelemetry Collector  |
-| opentelemetryCollector.image | object | `{"pullPolicy":"Always","registry":"docker.io","repository":"otel/opentelemetry-collector-k8s"}` | Image of OpenTelemetry Collector, the opentelmetry operator version will determine the version of the collector  |
+| opentelemetryCollector.image | object | `{"digest":"","pullPolicy":"Always","registry":"ghcr.io","repository":"open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s","tag":""}` | Image of OpenTelemetry Collector. If tag and digest are empty, the operator will use a default version compatible with itself.  |
 | opentelemetryCollector.livenessProbe.failureThreshold | int | `3` |  |
 | opentelemetryCollector.livenessProbe.periodSeconds | int | `10` |  |
 | opentelemetryCollector.livenessProbe.successThreshold | int | `1` |  |

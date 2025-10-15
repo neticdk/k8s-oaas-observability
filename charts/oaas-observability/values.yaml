@@ -1541,12 +1541,16 @@ opentelemetryCollector:
     timeoutSeconds: 1
 
 
-  # -- Image of OpenTelemetry Collector, the opentelmetry operator version will determine the version of the collector
+  # -- Image of OpenTelemetry Collector. If tag and digest are empty, the operator will use a default version compatible with itself.
   #
   image:
-    registry: "docker.io"
-    repository: "otel/opentelemetry-collector-k8s"
+    registry: "ghcr.io"
+    repository: "open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s"
     pullPolicy: "Always"
+    # By default, the version set for the collector will match the version of the operator being run.
+    tag: ""
+    # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
+    digest: ""
 
   # -- Valid values are "daemonset", "deployment", and "statefulset".
   #
