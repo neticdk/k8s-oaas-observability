@@ -71,6 +71,11 @@ jobs:
         with:
           version: 9.2.1
 
+      - name: Debug chart-testing
+        run: |
+          ls $GITHUB_WORKSPACE/charts/oaas-observability
+          ls -R $GITHUB_WORKSPACE/charts/oaas-observability/files
+
       - name: Run chart-testing (lint)
         run: |
           export PATH=$GITHUB_WORKSPACE/polaris:$PATH
