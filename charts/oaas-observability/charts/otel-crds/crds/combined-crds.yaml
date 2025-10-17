@@ -4357,6 +4357,8 @@ spec:
                       - whenUnsatisfiable
                     type: object
                   type: array
+                trafficDistribution:
+                  type: string
                 volumeMounts:
                   items:
                     properties:
@@ -8702,6 +8704,8 @@ spec:
                       - whenUnsatisfiable
                     type: object
                   type: array
+                trafficDistribution:
+                  type: string
                 updateStrategy:
                   properties:
                     rollingUpdate:
@@ -13491,6 +13495,8 @@ spec:
                       - whenUnsatisfiable
                     type: object
                   type: array
+                trafficDistribution:
+                  type: string
                 upgradeStrategy:
                   enum:
                     - automatic
