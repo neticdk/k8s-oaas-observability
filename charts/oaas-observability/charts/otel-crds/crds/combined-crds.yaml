@@ -2950,6 +2950,8 @@ spec:
                   default: 30s
                   format: duration
                   type: string
+                dnsPolicy:
+                  type: string
                 env:
                   items:
                     properties:
@@ -4357,6 +4359,8 @@ spec:
                       - whenUnsatisfiable
                     type: object
                   type: array
+                trafficDistribution:
+                  type: string
                 volumeMounts:
                   items:
                     properties:
@@ -8702,6 +8706,8 @@ spec:
                       - whenUnsatisfiable
                     type: object
                   type: array
+                trafficDistribution:
+                  type: string
                 updateStrategy:
                   properties:
                     rollingUpdate:
@@ -11174,6 +11180,8 @@ spec:
                     type:
                       type: string
                   type: object
+                dnsPolicy:
+                  type: string
                 env:
                   items:
                     properties:
@@ -12474,6 +12482,27 @@ spec:
                   type: string
                 shareProcessNamespace:
                   type: boolean
+                startupProbe:
+                  properties:
+                    failureThreshold:
+                      format: int32
+                      type: integer
+                    initialDelaySeconds:
+                      format: int32
+                      type: integer
+                    periodSeconds:
+                      format: int32
+                      type: integer
+                    successThreshold:
+                      format: int32
+                      type: integer
+                    terminationGracePeriodSeconds:
+                      format: int64
+                      type: integer
+                    timeoutSeconds:
+                      format: int32
+                      type: integer
+                  type: object
                 targetAllocator:
                   properties:
                     affinity:
@@ -13491,6 +13520,8 @@ spec:
                       - whenUnsatisfiable
                     type: object
                   type: array
+                trafficDistribution:
+                  type: string
                 upgradeStrategy:
                   enum:
                     - automatic
