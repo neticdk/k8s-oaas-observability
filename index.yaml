@@ -1328,6 +1328,55 @@ entries:
     version: 1.0.4
   oaas-observability:
   - apiVersion: v2
+    created: "2025-10-29T07:25:12.970245851Z"
+    dependencies:
+    - condition: crds.installOtel
+      name: otel-crds
+      repository: ""
+      version: 0.0.0
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.15.0
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 6.3.0
+    - condition: nodeExporter.enabled
+      name: prometheus-node-exporter
+      repository: file://../prometheus-node-exporter
+      version: '*'
+    - condition: prometheus-operator.enabled
+      name: prometheus-operator
+      repository: file://../prometheus-operator
+      version: '*'
+    - condition: opentelemetry-operator.enabled
+      name: opentelemetry-operator
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.95.1
+    - condition: vector-agent.enabled
+      name: vector-agent
+      repository: https://helm.vector.dev
+      version: 0.21.3
+    - condition: promtail.enabled
+      name: promtail
+      repository: https://grafana.github.io/helm-charts
+      version: 6.17.0
+    description: A Helm chart to deploy obeservability stack on Kubernetes
+    digest: 99a579d75f0ae00ffabdbdeef1401e79865450db1292817591f60c90761fe577
+    home: https://github.com/neticdk/k8s-oaas-observability
+    maintainers:
+    - email: tal@netic.dk
+      name: langecode
+    - email: kn@netic.dk
+      name: KimNorgaard
+    name: oaas-observability
+    sources:
+    - https://github.com/neticdk/k8s-oaas-observability
+    type: application
+    urls:
+    - https://github.com/neticdk/k8s-oaas-observability/releases/download/oaas-observability-2.4.5/oaas-observability-2.4.5.tgz
+    version: 2.4.5
+  - apiVersion: v2
     created: "2025-10-15T08:26:39.197824559Z"
     dependencies:
     - condition: crds.installOtel
@@ -9909,4 +9958,4 @@ entries:
     urls:
     - https://github.com/neticdk/k8s-oaas-observability/releases/download/promtail-forwarding-0.1.0/promtail-forwarding-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-15T08:26:39.198281836Z"
+generated: "2025-10-29T07:25:12.970764296Z"
