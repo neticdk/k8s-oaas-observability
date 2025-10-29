@@ -1540,6 +1540,8 @@ opentelemetryCollector:
     successThreshold: 1
     timeoutSeconds: 1
 
+  # -- Extra env variables to pass to the OpenTelemetry Collector
+  extraEnv: []
 
   # -- Image of OpenTelemetry Collector. If tag and digest are empty, the operator will use a default version compatible with itself.
   #
