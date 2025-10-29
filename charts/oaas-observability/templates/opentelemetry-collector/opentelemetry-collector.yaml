@@ -48,6 +48,9 @@ spec:
         fieldRef:
           apiVersion: v1
           fieldPath: status.podIP
+    {{- with .Values.opentelemetryCollector.extraEnv }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 {{- if .Values.opentelemetryCollector.livenessProbe }}
   livenessProbe:
 {{ toYaml .Values.opentelemetryCollector.livenessProbe | indent 4 }}
