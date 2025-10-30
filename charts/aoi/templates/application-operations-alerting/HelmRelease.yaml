@@ -59,6 +59,8 @@ spec:
           securityContext:
             {{- toYaml $.Values.alerting.helmRelease.values.server.configReloader.securityContext | nindent 12 }}
           env:
+            - name: UNIQUE_FILENAMES
+              value: "true"
             - name: IGNORE_ALREADY_PROCESSED
               value: "true"
             - name: METHOD
@@ -117,7 +119,7 @@ spec:
           mountPath: /etc/email-password
       extraVolumes:
         - name: email-password
-          secret: 
+          secret:
             optional: true
             secretName: aoi-alertmanager-email-password
       {{- end }}
