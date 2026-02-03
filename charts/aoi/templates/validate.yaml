@@ -1,10 +1,10 @@
 {{/* validate flux CRDs */}}
 {{- if .Values.alerting.enabled }}
-  {{- if not (.Capabilities.APIVersions.Has "source.toolkit.fluxcd.io/v1beta2") }}
-          {{ fail "alerting requires source.toolkit.fluxcd.io/v1beta2 CRDs." }}
+  {{- if not (.Capabilities.APIVersions.Has "source.toolkit.fluxcd.io/v1") }}
+          {{ fail "alerting requires source.toolkit.fluxcd.io/v1 CRDs." }}
   {{- end }}
-  {{- if not (.Capabilities.APIVersions.Has "helm.toolkit.fluxcd.io/v2beta1") }}
-          {{ fail "alerting requires helm.toolkit.fluxcd.io/v2beta1 CRDs." }}
+  {{- if not (.Capabilities.APIVersions.Has "helm.toolkit.fluxcd.io/v2") }}
+          {{ fail "alerting requires helm.toolkit.fluxcd.io/v2 CRDs." }}
   {{- end }}
 {{- end }}
 
