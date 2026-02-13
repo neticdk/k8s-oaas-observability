@@ -1,8 +1,9 @@
+---
 apiVersion: v2
 name: aoi
 description: A Helm chart for Netic application operations infrastructure
 type: application
-version: 0.1.58
+version: 0.1.59
 home: https://github.com/neticdk/k8s-oaas-observability
 sources:
   - https://github.com/neticdk/k8s-oaas-observability
