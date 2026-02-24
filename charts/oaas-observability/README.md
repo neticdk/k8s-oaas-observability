@@ -183,7 +183,7 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeApiServer.serviceMonitor.metricRelabelings[10].regex | string | `"apiserver_admission_step_admission_latencies_seconds_.*"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[10].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[11].action | string | `"drop"` |  |
-| kubeApiServer.serviceMonitor.metricRelabelings[11].regex | string | `"apiserver_request_duration_seconds_bucket;(0.15|0.25|0.3|0.35|0.4|0.45|0.6|0.7|0.8|0.9|1.25|1.5|1.75|2.5|3|3.5|4.5|6|7|8|9|15|25|30|50)"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[11].regex | string | `"(etcd_request|apiserver_request_slo|apiserver_request_sli|apiserver_request)_duration_seconds_bucket;(0\\.15|0\\.2|0\\.3|0\\.35|0\\.4|0\\.45|0\\.6|0\\.7|0\\.8|0\\.9|1\\.25|1\\.5|1\\.75|2|3|3\\.5|4|4\\.5|6|7|8|9|15|20|40|45|50)(\\.0)?"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[11].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[11].sourceLabels[1] | string | `"le"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[1].action | string | `"drop"` |  |
