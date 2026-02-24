@@ -179,7 +179,7 @@ kubeControllerManager:
     ## Enable scraping kube-controller-manager over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
     ##
-    https: true # default false
+    https: true  # default false
 
     # Skip TLS certificate validation when scraping
     insecureSkipVerify: true
@@ -299,8 +299,8 @@ kubeEtcd:
 
   # -- Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
   service:
-    port: 2381 # default 2379
-    targetPort: 2381 # default 2379
+    port: 2381  # default 2379
+    targetPort: 2381  # default 2379
     selector: {}
     #   component: etcd
 
@@ -410,7 +410,7 @@ kubeScheduler:
     ## Enable scraping kube-scheduler over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
     ##
-    https: true # default false
+    https: true  # default false
 
     ## Skip TLS certificate validation when scraping
     insecureSkipVerify: true
