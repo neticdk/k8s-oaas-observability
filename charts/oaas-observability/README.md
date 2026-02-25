@@ -1,6 +1,6 @@
 # oaas-observability
 
-![Version: 2.4.6](https://img.shields.io/badge/Version-2.4.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 2.4.7](https://img.shields.io/badge/Version-2.4.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart to deploy obeservability stack on Kubernetes
 
@@ -183,9 +183,12 @@ $ helm install my-release netic-oaas/oaas-observability
 | kubeApiServer.serviceMonitor.metricRelabelings[10].regex | string | `"apiserver_admission_step_admission_latencies_seconds_.*"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[10].sourceLabels[0] | string | `"__name__"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[11].action | string | `"drop"` |  |
-| kubeApiServer.serviceMonitor.metricRelabelings[11].regex | string | `"(etcd_request|apiserver_request_slo|apiserver_request_sli|apiserver_request)_duration_seconds_bucket;(0\\.15|0\\.2|0\\.3|0\\.35|0\\.4|0\\.45|0\\.6|0\\.7|0\\.8|0\\.9|1\\.25|1\\.5|1\\.75|2|3|3\\.5|4|4\\.5|6|7|8|9|15|20|40|45|50)(\\.0)?"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[11].regex | string | `"apiserver_(request_body_size_bytes_bucket|response_sizes_bucket|watch_cache_read_wait_seconds_bucket|watch_list_duration_seconds_bucket|watch_events_sizes_bucket)"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[11].sourceLabels[0] | string | `"__name__"` |  |
-| kubeApiServer.serviceMonitor.metricRelabelings[11].sourceLabels[1] | string | `"le"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[12].action | string | `"drop"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[12].regex | string | `"(etcd_request|apiserver_request_slo|apiserver_request_sli|apiserver_request)_duration_seconds_bucket;(0\\.15|0\\.2|0\\.3|0\\.35|0\\.4|0\\.45|0\\.6|0\\.7|0\\.8|0\\.9|1\\.25|1\\.5|1\\.75|2|3|3\\.5|4|4\\.5|6|7|8|9|15|20|40|45|50)(\\.0)?"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[12].sourceLabels[0] | string | `"__name__"` |  |
+| kubeApiServer.serviceMonitor.metricRelabelings[12].sourceLabels[1] | string | `"le"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[1].action | string | `"drop"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[1].regex | string | `"scheduler_(e2e_scheduling_latency_microseconds|scheduling_algorithm_predicate_evaluation|scheduling_algorithm_priority_evaluation|scheduling_algorithm_preemption_evaluation|scheduling_algorithm_latency_microseconds|binding_latency_microseconds|scheduling_latency_seconds)"` |  |
 | kubeApiServer.serviceMonitor.metricRelabelings[1].sourceLabels[0] | string | `"__name__"` |  |
