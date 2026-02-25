@@ -183,7 +183,7 @@ kubeControllerManager:
     ## Enable scraping kube-controller-manager over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
     ##
-    https: true # default false
+    https: true  # default false
 
     # Skip TLS certificate validation when scraping
     insecureSkipVerify: true
