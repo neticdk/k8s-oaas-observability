@@ -97,7 +97,7 @@ prometheus:
   image:
     registry: docker.io
     repository: victoriametrics/vmagent
-    tag: v1.124.0@sha256:9f0cfd832f28aa1a52618bad201d9363d5b62682f56e08fed0db6356c5104be7
+    tag: v1.136.0@sha256:30efe54696dfb352fe89a1a8b0c977cfce5507f81b85741632bd810fa3e4fe86
     pullPolicy: Always
   resources:
     limits:
@@ -269,7 +269,7 @@ grafana:
     image:
       registry: docker.io
       repository: kiwigrid/k8s-sidecar
-      tag: "1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338"
+      tag: "1.30.11@sha256:91b49e5b6d2fb03e7a9014f8b072d0de199987845b02d96ce458dd9f14e753f5"
     securityContext:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
@@ -443,7 +443,7 @@ alerting:
           image:
             registry: docker.io
             repository: kiwigrid/k8s-sidecar
-            tag: "1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338"
+            tag: "1.30.11@sha256:91b49e5b6d2fb03e7a9014f8b072d0de199987845b02d96ce458dd9f14e753f5"
             pullPolicy: Always
           resources:
             limits:
@@ -469,7 +469,7 @@ alerting:
         image:
           registry: docker.io
           repository: prom/alertmanager
-          tag: "v0.28.1"
+          tag: "v0.31.1"
         resources:
           limits:
             memory: 64Mi
