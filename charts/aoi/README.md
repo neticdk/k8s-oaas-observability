@@ -166,6 +166,8 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.resources.limits.memory | string | `"768Mi"` |  |
 | prometheus.resources.requests.cpu | string | `"100m"` |  |
 | prometheus.resources.requests.memory | string | `"256Mi"` |  |
+| prometheus.serviceMonitor.interval | string | `"60s"` |  |
+| prometheus.serviceMonitor.selfMonitor | bool | `true` |  |
 | prometheus.serviceMonitorNamespaceSelector | object | `{"matchLabels":{}}` | selectors for serviceMonitor, podMonitor and probe Default is to match all objects |
 | prometheus.serviceMonitorSelector.matchLabels | object | `{}` |  |
 | promxy.affinity | list | `[]` |  |
