@@ -5,24 +5,23 @@ kind: ServiceMonitor
 metadata:
   name: {{ template "aoi.prometheusFullname" . }}
   labels:
-    app.kubernetes.io/name: prometheus
+    {{- include "aoi.prometheusSelectorLabels" . | nindent 4 }}
+    {{- with .Values.global.podLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.prometheus.podLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.prometheus.selectorLabels }}
+    {{- tpl (toYaml .) $ | nindent 4 }}
+    {{- end }}
 {{- if .Values.global.serviceMonitor.labels }}
 {{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
 {{- end }}
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: prometheus
-      {{- include "aoi.prometheusSelectorLabels" . | nindent 6 }}
-      {{- with .Values.global.podLabels }}
-      {{- toYaml . | nindent 6 }}
-      {{- end }}
-      {{- with .Values.prometheus.podLabels }}
-      {{- toYaml . | nindent 6 }}
-      {{- end }}
-      {{- with .Values.prometheus.selectorLabels }}
-      {{- tpl (toYaml .) $ | nindent 6 }}
-      {{- end }}
+      app.kubernetes.io/managed-by: prometheus-operator
   namespaceSelector:
     matchNames:
       - {{ .Release.Namespace | quote }}
