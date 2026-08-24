@@ -15,8 +15,8 @@ metadata:
     {{- with .Values.prometheus.selectorLabels }}
     {{- tpl (toYaml .) $ | nindent 4 }}
     {{- end }}
-{{- if .Values.global.serviceMonitor.labels }}
-{{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
+{{- if .Values.global.serviceLabels }}
+{{ toYaml .Values.global.serviceLabels | indent 4}}
 {{- end }}
 spec:
   selector:
@@ -42,4 +42,6 @@ spec:
 {{- if .Values.prometheus.serviceMonitor.relabelings }}
     relabelings:
 {{ toYaml .Values.prometheus.serviceMonitor.relabelings | indent 6 }}
+{{- end }}
+{{- end }}
 {{- end }}
