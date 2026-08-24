@@ -135,6 +135,11 @@ prometheus:
 
   serviceMonitor:
     selfMonitor: true
+    interval: 60s
+    # scheme: http
+    # tlsConfig: {}
+    # metricRelabelings: {}
+    # relabelings: {}
 
   # -- labels to add to all metrics.
   # externalLabels:
