@@ -1,0 +1,46 @@
+---
+{{- if .Values.prometheus.serviceMonitor.selfMonitor }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "aoi.prometheusFullname" . }}
+  labels:
+    app.kubernetes.io/name: prometheus
+{{- if .Values.global.serviceMonitor.labels }}
+{{ toYaml .Values.global.serviceMonitor.labels | indent 4}}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prometheus
+      {{- include "aoi.prometheusSelectorLabels" . | nindent 6 }}
+      {{- with .Values.global.podLabels }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- with .Values.prometheus.podLabels }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- with .Values.prometheus.selectorLabels }}
+      {{- tpl (toYaml .) $ | nindent 6 }}
+      {{- end }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace | quote }}
+  endpoints:
+  - port: web
+    {{- if .Values.prometheus.serviceMonitor.interval }}
+    interval: {{ .Values.prometheus.serviceMonitor.interval }}
+    {{- end }}
+    {{- if .Values.prometheus.serviceMonitor.scheme }}
+    scheme: {{ .Values.prometheus.serviceMonitor.scheme }}
+    {{- end }}
+    {{- if .Values.prometheus.serviceMonitor.tlsConfig }}
+    path: "/metrics"
+{{- if .Values.prometheus.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+{{ tpl (toYaml .Values.prometheus.serviceMonitor.metricRelabelings | indent 6) . }}
+{{- end }}
+{{- if .Values.prometheus.serviceMonitor.relabelings }}
+    relabelings:
+{{ toYaml .Values.prometheus.serviceMonitor.relabelings | indent 6 }}
+{{- end }}

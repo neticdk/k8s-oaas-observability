@@ -133,6 +133,9 @@ prometheus:
   probeSelector:
     matchLabels: {}
 
+  serviceMonitor:
+    selfMonitor: true
+
   # -- labels to add to all metrics.
   # externalLabels:
   #   cluster_id: "${cluster_provider}_${cluster_name}"
