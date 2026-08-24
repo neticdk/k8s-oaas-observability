@@ -15,9 +15,12 @@ metadata:
     {{- with .Values.prometheus.selectorLabels }}
     {{- tpl (toYaml .) $ | nindent 4 }}
     {{- end }}
-{{- if .Values.global.serviceLabels }}
-{{ toYaml .Values.global.serviceLabels | indent 4}}
-{{- end }}
+    {{- if .Values.global.serviceLabels }}
+    {{ toYaml .Values.global.serviceLabels | indent 4}}
+    {{- end }}
+    {{- with .Values.prometheus.serviceMonitor.extraLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   selector:
     matchLabels:

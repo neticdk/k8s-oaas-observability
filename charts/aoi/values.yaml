@@ -136,6 +136,8 @@ prometheus:
   serviceMonitor:
     selfMonitor: true
     interval: 60s
+    extraLabels:
+      netic.dk/monitoring: "true"
     # scheme: http
     # tlsConfig: {}
     # metricRelabelings: {}

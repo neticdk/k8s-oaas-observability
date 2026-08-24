@@ -1,6 +1,6 @@
 # aoi
 
-![Version: 0.1.60](https://img.shields.io/badge/Version-0.1.60-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.61](https://img.shields.io/badge/Version-0.1.61-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Netic application operations infrastructure
 
@@ -166,6 +166,7 @@ $ helm install my-release netic-oaas/aoi
 | prometheus.resources.limits.memory | string | `"768Mi"` |  |
 | prometheus.resources.requests.cpu | string | `"100m"` |  |
 | prometheus.resources.requests.memory | string | `"256Mi"` |  |
+| prometheus.serviceMonitor.extraLabels."netic.dk/monitoring" | string | `"true"` |  |
 | prometheus.serviceMonitor.interval | string | `"60s"` |  |
 | prometheus.serviceMonitor.selfMonitor | bool | `true` |  |
 | prometheus.serviceMonitorNamespaceSelector | object | `{"matchLabels":{}}` | selectors for serviceMonitor, podMonitor and probe Default is to match all objects |
